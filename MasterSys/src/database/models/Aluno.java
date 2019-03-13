@@ -122,5 +122,6 @@ public class Aluno {
 		this.email, this.observacao, this.endereco, this.numero, this.complemento, this.bairro,
 		this.cidade, this.estado, this.pais, this.cep);
 	}
-	
+	/*Teste de alteração
+	*/
 }

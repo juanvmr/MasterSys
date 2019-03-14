@@ -15,9 +15,7 @@ public class Aluno {
 	private String numero;
 	private String complemento;
 	private String bairro;
-	private String cidade;
-	private String estado;
-	private String pais;
+	private Local local;
 	private String cep;
 	
 	/* Constructor: */
@@ -90,23 +88,11 @@ public class Aluno {
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
-	public String getCidade() {
-		return cidade;
+	public Local getLocal() {
+		return this.local;
 	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	public String getPais() {
-		return pais;
-	}
-	public void setPais(String pais) {
-		this.pais = pais;
+	public void setLocal(Local local) {
+		this.local = local;
 	}
 	public String getCep() {
 		return cep;
@@ -115,13 +101,11 @@ public class Aluno {
 		this.cep = cep;
 	}
 	
-	/* methods: */
+	/* Methods: */
 	public String toString() {
-		return String.format("%s, %s, %c, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
+		return String.format("%s, %s, %c, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
 		this.aluno, this.data_nascimento.toString(), this.sexo, this.telefone, this.celular,
 		this.email, this.observacao, this.endereco, this.numero, this.complemento, this.bairro,
-		this.cidade, this.estado, this.pais, this.cep);
+		this.local.toString(), this.cep);
 	}
-	/*Teste de alteração
-	*/
 }

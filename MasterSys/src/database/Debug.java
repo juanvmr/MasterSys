@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import database.dao.AlunoDAO;
-import database.models.Aluno;
+import database.models.*;
 import image.MasterImage;
 
 public class Debug {
@@ -47,9 +47,7 @@ public class Debug {
 			tmp.setNumero("100");
 			tmp.setComplemento("apto 100");
 			tmp.setBairro("Centro");
-			tmp.setCidade("CRICIUMA");
-			tmp.setEstado("SC");
-			tmp.setPais("Brasil");
+			tmp.setLocal(new Local("CRICIUMA", "SC","Brasil"));
 			tmp.setCep("88811-510");
 			
 			dao.Insert(tmp);

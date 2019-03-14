@@ -8,7 +8,7 @@ public class Planos {
 	private float valor;
 	
 	/* Constructor: */
-	public Planos(String modalidade, String plano, float valor) {
+	public Planos(String plano, float valor, String modalidade) {
 		this.modalidade = new Modalidades(modalidade);
 		this.plano = plano;
 		this.valor = valor;

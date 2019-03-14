@@ -7,12 +7,12 @@ public class Graduacoes {
 	private String graduacao;
 	
 	/* Constructor: */
-	public Graduacoes(String modalidade, String graduacao) {
+	public Graduacoes(String graduacao, String modalidade) {
 		this.modalidade = new Modalidades(modalidade);
 		this.graduacao = graduacao;
 	}
 	
-	public Graduacoes(Modalidades modalidade, String graduacao) {
+	public Graduacoes(String graduacao, Modalidades modalidade) {
 		this.modalidade = modalidade;
 		this.graduacao = graduacao;
 	}

@@ -6,7 +6,9 @@ public class Modalidades {
 	private String modalidade;
 	
 	/* Constructor: */
-	public Modalidades() {}
+	public Modalidades(String modalidade) {
+		this.modalidade = modalidade;
+	}
 
 	public String getModalidade() {
 		return modalidade;

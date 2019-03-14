@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.models.Aluno;
+import database.models.*;
 
 public class AlunoDAO extends MasterDAO {
 	
@@ -46,6 +46,7 @@ public class AlunoDAO extends MasterDAO {
 		
 		while (rst.next()) {
 			Aluno tmp = new Aluno();
+			
 			tmp.setAluno(rst.getString("aluno"));
 			tmp.setDataNascimento(rst.getDate("data_nascimento"));
 			tmp.setSexo(rst.getString("sexo").charAt(0));
@@ -57,9 +58,7 @@ public class AlunoDAO extends MasterDAO {
 			tmp.setNumero(rst.getString("numero"));
 			tmp.setComplemento(rst.getString("complemento"));
 			tmp.setBairro(rst.getString("bairro"));
-			tmp.setCidade(rst.getString("cidade"));
-			tmp.setEstado(rst.getString("estado"));
-			tmp.setPais(rst.getString("pais"));
+			tmp.setLocal(new Local(rst.getString("cidade"), rst.getString("estado"), rst.getString("pais")));
 			tmp.setCep(rst.getString("cep"));
 			
 			list.add(tmp);
@@ -94,10 +93,7 @@ public class AlunoDAO extends MasterDAO {
 			tmp.setEndereco(rst.getString("endereco"));
 			tmp.setNumero(rst.getString("numero"));
 			tmp.setComplemento(rst.getString("complemento"));
-			tmp.setBairro(rst.getString("bairro"));
-			tmp.setCidade(rst.getString("cidade"));
-			tmp.setEstado(rst.getString("estado"));
-			tmp.setPais(rst.getString("pais"));
+			tmp.setLocal(new Local(rst.getString("cidade"), rst.getString("estado"), rst.getString("pais")));
 			tmp.setCep(rst.getString("cep"));
 		}
 		
@@ -121,9 +117,9 @@ public class AlunoDAO extends MasterDAO {
 		Set(pst_update,  8, tmp.getNumero());
 		Set(pst_update,  9, tmp.getComplemento());
 		Set(pst_update, 10, tmp.getBairro());
-		Set(pst_update, 11, tmp.getCidade());
-		Set(pst_update, 12, tmp.getEstado());
-		Set(pst_update, 13, tmp.getPais());
+		Set(pst_update, 11, tmp.getLocal().getCidade());
+		Set(pst_update, 12, tmp.getLocal().getEstado());
+		Set(pst_update, 13, tmp.getLocal().getPais());
 		Set(pst_update, 14, tmp.getCep());
 		Set(pst_update, 15, tmp.getAluno());
 		
@@ -152,9 +148,9 @@ public class AlunoDAO extends MasterDAO {
 		Set(pst_insert,  9, tmp.getNumero());
 		Set(pst_insert, 10, tmp.getComplemento());
 		Set(pst_insert, 11, tmp.getBairro());
-		Set(pst_insert, 12, tmp.getCidade());
-		Set(pst_insert, 13, tmp.getEstado());
-		Set(pst_insert, 14, tmp.getPais());
+		Set(pst_insert, 12, tmp.getLocal().getCidade());
+		Set(pst_insert, 13, tmp.getLocal().getEstado());
+		Set(pst_insert, 14, tmp.getLocal().getPais());
 		Set(pst_insert, 15, tmp.getCep());
 		
 		pst_insert.execute();

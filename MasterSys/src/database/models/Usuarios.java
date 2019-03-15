@@ -7,8 +7,8 @@ public class Usuarios {
 	private String perfil;
 	
 	/* Constructor: */
-	public Usuarios (String name, String perfil) {
-		this.usuario = name;
+	public Usuarios (String usuario, String perfil) {
+		this.usuario = usuario;
 		this.perfil = perfil;
 	}
 

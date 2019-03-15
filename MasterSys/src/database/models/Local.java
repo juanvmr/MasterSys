@@ -8,6 +8,8 @@ public class Local {
 	private String pais;
 	
 	/* Constructor */
+	public Local() {}
+	
 	public Local(String cidade, String estado, String pais) {
 		this.cidade = cidade;
 		this.estado = estado;

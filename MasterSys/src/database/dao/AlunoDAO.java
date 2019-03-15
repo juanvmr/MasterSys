@@ -11,21 +11,24 @@ import database.models.*;
 
 public class AlunoDAO extends MasterDAO {
 	
-	/* create variables with select statement. */
-	private String is_selectAll = "SELECT * FROM alunos ORDER BY aluno";
-	private String is_select = "SELECT * FROM alunos WHERE aluno = ? ORDER BY aluno";
-	private String is_insert = "INSERT INTO alunos (codigo_aluno, aluno, data_nascimento, sexo, telefone, celular, " + 
-		"email, observacao, endereco, numero, complemento, bairro, cidade, estado, pais, cep) " + 
-		"VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private String is_update = "UPDATE alunos SET data_nascimento = ?, sexo = ?, telefone = ?, " + 
-		"celular = ?, email = ?, observacao = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, estado = ?, pais = ?, cep = ? " + 
-		"WHERE aluno = ?";
-	private String is_delete = "DELETE FROM alunos WHERE aluno = ?";
-	
-	private PreparedStatement pst_selectAll, pst_select, pst_insert, pst_update, pst_delete;
-	
+	/* attributes: */
 	private Connection conn;
 	
+	/* query: */
+	private String is_selectAll = "SELECT * FROM alunos ORDER BY aluno";
+	private String is_select = "SELECT * FROM alunos WHERE aluno = ? ORDER BY aluno";
+	private String is_insert = "INSERT INTO alunos (codigo_aluno, aluno, data_nascimento, sexo, "
+			+ "telefone, celular, email, observacao, endereco, numero, complemento, bairro, cidade, "
+			+ "estado, pais, cep) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private String is_update = "UPDATE alunos SET data_nascimento = ?, sexo = ?, telefone = ?, "
+			+ "celular = ?, email = ?, observacao = ?, endereco = ?, numero = ?, complemento = ?, "
+			+ "bairro = ?, cidade = ?, estado = ?, pais = ?, cep = ? WHERE aluno = ?";
+	private String is_delete = "DELETE FROM alunos WHERE aluno = ?";
+	
+	/* statements: */
+	private PreparedStatement pst_selectAll, pst_select, pst_insert, pst_update, pst_delete;
+	
+	/* constructor: */
 	public AlunoDAO(Connection conn) throws SQLException {
 		
 		this.conn = conn;
@@ -36,7 +39,8 @@ public class AlunoDAO extends MasterDAO {
 		pst_update = conn.prepareStatement(is_update);
 		pst_delete = conn.prepareStatement(is_delete);
 	}
-
+	
+	/* methods: */
 	@Override
 	public List<Object> SelectAll() throws SQLException {
 		

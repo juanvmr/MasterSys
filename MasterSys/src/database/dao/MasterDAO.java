@@ -25,7 +25,6 @@ public abstract class MasterDAO {
 		} else if (parameter instanceof String) {
 			pst.setString(position,  (String) parameter);
 		} else if (parameter instanceof Date) {
-//			pst.setDate(position,  new java.sql.Date(((Date) parameter).getTime()));
 			pst.setTimestamp(position, new Timestamp(((java.util.Date)parameter).getTime()));
 		} else if (parameter instanceof Character) {
 			pst.setString(position,  ((Character) parameter).toString());

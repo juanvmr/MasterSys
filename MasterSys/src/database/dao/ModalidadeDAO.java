@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.models.Modalidades;
+import database.models.Modalidade;
 
-public class ModalidadesDAO extends MasterDAO {
+public class ModalidadeDAO extends MasterDAO {
 	
 	/* attributes: */
 	private Connection conn;
@@ -23,7 +23,7 @@ public class ModalidadesDAO extends MasterDAO {
 	private PreparedStatement pst_selectAll, pst_insert, pst_delete;
 	
 	/* constructor: */
-	public ModalidadesDAO(Connection conn) throws SQLException {
+	public ModalidadeDAO(Connection conn) throws SQLException {
 		
 		this.conn = conn;
 		
@@ -41,7 +41,7 @@ public class ModalidadesDAO extends MasterDAO {
 		ResultSet rst = pst_selectAll.executeQuery();
 		
 		while (rst.next()) {
-			Modalidades tmp = new Modalidades(rst.getString("modalidade"));
+			Modalidade tmp = new Modalidade(rst.getString("modalidade"));
 			list.add(tmp);
 		}
 		
@@ -53,7 +53,7 @@ public class ModalidadesDAO extends MasterDAO {
 		
 		pst_insert.clearParameters();
 		
-		Modalidades tmp = (Modalidades) obj;
+		Modalidade tmp = (Modalidade) obj;
 		
 		Set(pst_insert,  1, tmp.getModalidade());
 		
@@ -67,7 +67,7 @@ public class ModalidadesDAO extends MasterDAO {
 	@Override
 	public void Delete(Object obj) throws SQLException {
 		
-		Modalidades tmp = (Modalidades) obj;
+		Modalidade tmp = (Modalidade) obj;
 		
 		Set(pst_delete, 1, tmp.getModalidade());
 		

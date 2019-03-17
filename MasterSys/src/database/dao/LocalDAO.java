@@ -17,7 +17,7 @@ public class LocalDAO extends MasterDAO {
 	
 	/* query: */
 	private String is_selectAll = "SELECT * FROM cidades ORDER BY estado DESC, pais DESC";
-	private String is_select = "SELECT * FROM cidades WHERE estado = ? AND pais = ? ORDER BY estado DESC, pais DESC";
+	private String is_select = "SELECT * FROM cidades WHERE estado = ? AND pais = ? ORDER BY cidade";
 	private String is_selectPais = "SELECT DISTINCT pais FROM cidades ORDER BY pais";
 	private String is_selectEstado = "SELECT DISTINCT estado FROM cidades WHERE pais = ? ORDER BY estado";
 	private String is_insert = "INSERT INTO cidades (cidade, estado, pais) VALUES (?, ?, ?)";
@@ -43,37 +43,6 @@ public class LocalDAO extends MasterDAO {
 	}
 	
 	/* methods: */
-	
-	/* returns a list of string with all different 'paises'. */
-	public List<Object> SelectPais() throws SQLException {
-		
-		List<Object> list = new ArrayList<Object>();
-		
-		ResultSet rst = pst_selectPais.executeQuery();
-		
-		while (rst.next()) {
-			list.add(rst.getString("pais"));
-		}
-		
-		return list;
-	}
-	
-	/* returns a list of strings with all the different 'estados' */
-	public List<Object> SelectEstado(String parameter) throws SQLException {
-		
-		List<Object> list = new ArrayList<Object>();
-		
-		Set(pst_selectEstado, 1, parameter);
-		
-		ResultSet rst = pst_selectEstado.executeQuery();
-		
-		while (rst.next()) {
-			list.add(rst.getString("estado"));
-		}
-		
-		return list;
-	}
-	
 	@Override
 	public List<Object> SelectAll() throws SQLException {
 		
@@ -94,8 +63,8 @@ public class LocalDAO extends MasterDAO {
 		
 		Object tmp = null;
 		
-		Set(pst_select, 1, ((Local) obj).getEstado());
-		Set(pst_select, 2, ((Local) obj).getPais());
+		Set(pst_select, 1, ((Local) obj).getPais());
+		Set(pst_select, 2, ((Local) obj).getEstado());
 		
 		ResultSet rst = pst_select.executeQuery();
 		
@@ -138,6 +107,36 @@ public class LocalDAO extends MasterDAO {
 		if (pst_delete.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
+	}
+	
+	/* returns a list of string with all different 'paises'. */
+	public List<Object> SelectPais() throws SQLException {
+		
+		List<Object> list = new ArrayList<Object>();
+		
+		ResultSet rst = pst_selectPais.executeQuery();
+		
+		while (rst.next()) {
+			list.add(rst.getString("pais"));
+		}
+		
+		return list;
+	}
+	
+	/* returns a list of strings with all the different 'estados' */
+	public List<Object> SelectEstado(String parameter) throws SQLException {
+		
+		List<Object> list = new ArrayList<Object>();
+		
+		Set(pst_selectEstado, 1, parameter);
+		
+		ResultSet rst = pst_selectEstado.executeQuery();
+		
+		while (rst.next()) {
+			list.add(rst.getString("estado"));
+		}
+		
+		return list;
 	}
 	
 	/************************************************************

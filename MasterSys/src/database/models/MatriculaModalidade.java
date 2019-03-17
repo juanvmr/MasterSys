@@ -6,16 +6,16 @@ public class MatriculaModalidade {
 	
 	/* Attributes: */
 	private int cod_matricula;
-	private Graduacoes graduacao;	// contém uma modalidade e uma string
-	private Planos plano;			// contém uma modalidade, um plano e um valor
+	private Graduacao graduacao;	// contém uma modalidade e uma string
+	private Plano plano;			// contém uma modalidade, um plano e um valor
 	private Date dt_inicio;
 	private Date dt_fim;
 	
 	/* Constructor: */
 	public MatriculaModalidade(int cod_matricula, String modalidade, String graduacao, String plano, Date dt_inicio, Date dt_fim) {
 		this.cod_matricula = cod_matricula;
-		this.graduacao = new Graduacoes(graduacao, modalidade);
-		this.plano = new Planos(plano, 0, modalidade);
+		this.graduacao = new Graduacao(modalidade, graduacao);
+		this.plano = new Plano(modalidade, plano, 0);
 		this.dt_inicio = dt_inicio;
 		this.dt_fim = dt_fim;
 	}
@@ -29,19 +29,19 @@ public class MatriculaModalidade {
 		this.cod_matricula = cod_matricula;
 	}
 
-	public Graduacoes getGraduacao() {
+	public Graduacao getGraduacao() {
 		return this.graduacao;
 	}
 
-	public void setGraduacao(Graduacoes graduacao) {
+	public void setGraduacao(Graduacao graduacao) {
 		this.graduacao = graduacao;
 	}
 
-	public Planos getPlano() {
+	public Plano getPlano() {
 		return this.plano;
 	}
 
-	public void setPlano(Planos plano) {
+	public void setPlano(Plano plano) {
 		this.plano = plano;
 	}
 

@@ -20,9 +20,9 @@ public class Debug {
 			conn.setAutoCommit(false);
 			System.out.println("Connectado com sucesso!");
 			
-			ModalidadesDAO dao = new ModalidadesDAO(conn);
+			ModalidadeDAO dao = new ModalidadeDAO(conn);
 			
-			Modalidades mod = new Modalidades("Ciências da Computação");
+			Modalidade mod = new Modalidade("Ciências da Computação");
 			
 			dao.Insert(mod);
 			

@@ -1,25 +1,25 @@
 package database.models;
 
-public class Planos {
+public class Plano {
 	
 	/* Attributes: */
-	private Modalidades modalidade;
+	private Modalidade modalidade;
 	private String plano;
-	private float valor;
+	private double valor;
 	
 	/* Constructor: */
-	public Planos(String plano, float valor, String modalidade) {
-		this.modalidade = new Modalidades(modalidade);
+	public Plano(String modalidade, String plano, double valor) {
+		this.modalidade = new Modalidade(modalidade);
 		this.plano = plano;
 		this.valor = valor;
 	}
 	
 	/* Getter and Setter: */
-	public Modalidades getModalidade() {
-		return this.modalidade;
+	public String getModalidade() {
+		return this.modalidade.getModalidade();
 	}
 
-	public void setModalidade(Modalidades modalidade) {
+	public void setModalidade(Modalidade modalidade) {
 		this.modalidade = modalidade;
 	}
 
@@ -31,11 +31,11 @@ public class Planos {
 		this.plano = plano;
 	}
 
-	public float getValor() {
+	public double getValor() {
 		return this.valor;
 	}
 
-	public void setValor(float valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 	

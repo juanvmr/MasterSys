@@ -1,13 +1,13 @@
 package database.models;
 
-public class Usuarios {
+public class Usuario {
 	
 	/* Attributes: */
 	private String usuario;
 	private String perfil;
 	
 	/* Constructor: */
-	public Usuarios (String usuario, String perfil) {
+	public Usuario (String usuario, String perfil) {
 		this.usuario = usuario;
 		this.perfil = perfil;
 	}

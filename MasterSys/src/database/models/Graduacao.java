@@ -1,28 +1,28 @@
 package database.models;
 
-public class Graduacoes {
+public class Graduacao {
 	
 	/* Attributes: */
-	private Modalidades modalidade;
+	private Modalidade modalidade;
 	private String graduacao;
 	
 	/* Constructor: */
-	public Graduacoes(String graduacao, String modalidade) {
-		this.modalidade = new Modalidades(modalidade);
+	public Graduacao(String modalidade, String graduacao) {
+		this.modalidade = new Modalidade(modalidade);
 		this.graduacao = graduacao;
 	}
 	
-	public Graduacoes(String graduacao, Modalidades modalidade) {
+	public Graduacao(String graduacao, Modalidade modalidade) {
 		this.modalidade = modalidade;
 		this.graduacao = graduacao;
 	}
 	
 	/* Getter and Setter: */
-	public Modalidades getModalidade() {
+	public Modalidade getModalidade() {
 		return this.modalidade;
 	}
 
-	public void setModalidade(Modalidades modalidade) {
+	public void setModalidade(Modalidade modalidade) {
 		this.modalidade = modalidade;
 	}
 

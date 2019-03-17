@@ -1,12 +1,12 @@
 package database.models;
 
-public class Modalidades {
+public class Modalidade {
 	
 	/* Attributes: */
 	private String modalidade;
 	
 	/* Constructor: */
-	public Modalidades(String modalidade) {
+	public Modalidade(String modalidade) {
 		this.modalidade = modalidade;
 	}
 

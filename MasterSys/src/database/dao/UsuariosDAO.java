@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.models.Usuarios;
+import database.models.Usuario;
 
 public class UsuariosDAO extends MasterDAO {
 	
@@ -45,7 +45,7 @@ public class UsuariosDAO extends MasterDAO {
 		ResultSet rst = pst_selectAll.executeQuery();
 		
 		while (rst.next()) {
-			Usuarios tmp = new Usuarios(rst.getString("usuario"), rst.getString("perfil"));
+			Usuario tmp = new Usuario(rst.getString("usuario"), rst.getString("perfil"));
 			list.add(tmp);
 		}
 		
@@ -55,14 +55,14 @@ public class UsuariosDAO extends MasterDAO {
 	@Override
 	public Object Select(Object parameter) throws SQLException {
 		
-		Usuarios tmp = null;
+		Usuario tmp = null;
 		
-		Set(pst_select, 1, ((Usuarios) parameter).getUsuario());
+		Set(pst_select, 1, ((Usuario) parameter).getUsuario());
 		
 		ResultSet rst = pst_select.executeQuery();
 		
 		if (rst.next()) {
-			tmp = new Usuarios(rst.getString("usuario"), rst.getString("perfil"));
+			tmp = new Usuario(rst.getString("usuario"), rst.getString("perfil"));
 		}
 		
 		return tmp;
@@ -73,7 +73,7 @@ public class UsuariosDAO extends MasterDAO {
 		
 		pst_insert.clearParameters();
 		
-		Usuarios tmp = (Usuarios) obj;
+		Usuario tmp = (Usuario) obj;
 		
 		Set(pst_insert,  1, tmp.getUsuario());
 		Set(pst_insert,  2, tmp.getPerfil());
@@ -90,7 +90,7 @@ public class UsuariosDAO extends MasterDAO {
 		
 		pst_update.clearParameters();
 		
-		Usuarios tmp = (Usuarios) obj;
+		Usuario tmp = (Usuario) obj;
 		
 		Set(pst_update,  1, tmp.getPerfil());
 		Set(pst_update,  2, tmp.getUsuario());
@@ -105,7 +105,7 @@ public class UsuariosDAO extends MasterDAO {
 	@Override
 	public void Delete(Object obj) throws SQLException {
 		
-		Usuarios tmp = (Usuarios) obj;
+		Usuario tmp = (Usuario) obj;
 		
 		Set(pst_delete, 1, tmp.getUsuario());
 		

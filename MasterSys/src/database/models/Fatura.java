@@ -2,7 +2,7 @@ package database.models;
 
 import java.util.Date;
 
-public class Faturas {
+public class Fatura {
 	
 	/* Attributes: */
 	private int cod_matricula;
@@ -12,7 +12,7 @@ public class Faturas {
 	private Date dt_cancelamento;
 	
 	/* Constructor: */
-	public Faturas(int cod_matricula, float valor, Date dt_vencimento, Date dt_pagamento, Date dt_cancelamento) {
+	public Fatura(int cod_matricula, float valor, Date dt_vencimento, Date dt_pagamento, Date dt_cancelamento) {
 		this.cod_matricula = cod_matricula;
 		this.valor = valor;
 		this.dt_vencimento = dt_vencimento;

@@ -2,7 +2,7 @@ package database.models;
 
 import java.util.Date;
 
-public class Matriculas {
+public class Matricula {
 	
 	/* Attributes: */
 	private int cod_matricula;
@@ -12,7 +12,7 @@ public class Matriculas {
 	private Date dt_encerramento;
 	
 	/* Constructor: */
-	public Matriculas(int cod_matricula, int cod_aluno, int dia_vencimento, Date dt_matricula, Date dt_encerramento) {
+	public Matricula(int cod_matricula, int cod_aluno, Date dt_matricula, int dia_vencimento, Date dt_encerramento) {
 		this.cod_matricula = cod_matricula;
 		this.cod_aluno = cod_aluno;
 		this.dia_vencimento = dia_vencimento;
@@ -20,48 +20,48 @@ public class Matriculas {
 		this.dt_encerramento = dt_encerramento;
 	}
 	
-	public Matriculas(int cod_aluno, int dia_vencimento, Date dt_matricula, Date dt_encerramento) {
-		this(0, cod_aluno, dia_vencimento, dt_matricula, dt_encerramento);
+	public Matricula(int cod_aluno, Date dt_matricula, int dia_vencimento, Date dt_encerramento) {
+		this(0, cod_aluno, dt_matricula, dia_vencimento, dt_encerramento);
 	}
 	
 	/* Getter and Setter: */
-	public int getCod_matricula() {
+	public int getCodigoMatricula() {
 		return this.cod_matricula;
 	}
 
-	public void setCod_matricula(int cod_matricula) {
+	public void setCodigoMatricula(int cod_matricula) {
 		this.cod_matricula = cod_matricula;
 	}
 
-	public int getCod_aluno() {
+	public int getCodigoAluno() {
 		return this.cod_aluno;
 	}
 
-	public void setCod_aluno(int cod_aluno) {
+	public void setCodigoAluno(int cod_aluno) {
 		this.cod_aluno = cod_aluno;
 	}
 
-	public int getDia_vencimento() {
+	public int getDiaVencimento() {
 		return this.dia_vencimento;
 	}
 
-	public void setDia_vencimento(int dia_vencimento) {
+	public void setDiaVencimento(int dia_vencimento) {
 		this.dia_vencimento = dia_vencimento;
 	}
 
-	public Date getDt_matricula() {
+	public Date getDataMatricula() {
 		return this.dt_matricula;
 	}
 
-	public void setDt_matricula(Date dt_matricula) {
+	public void setDataMatricula(Date dt_matricula) {
 		this.dt_matricula = dt_matricula;
 	}
 
-	public Date getDt_encerramento() {
+	public Date getDataEncerramento() {
 		return this.dt_encerramento;
 	}
 
-	public void setDt_encerramento(Date dt_encerramento) {
+	public void setDataEncerramento(Date dt_encerramento) {
 		this.dt_encerramento = dt_encerramento;
 	}
 	

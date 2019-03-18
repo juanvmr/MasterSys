@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.models.Aluno;
 import database.models.Local;
 
 public class LocalDAO extends MasterDAO {
@@ -17,7 +16,7 @@ public class LocalDAO extends MasterDAO {
 	
 	/* query: */
 	private String is_selectAll = "SELECT * FROM cidades ORDER BY estado DESC, pais DESC";
-	private String is_select = "SELECT * FROM cidades WHERE estado = ? AND pais = ? ORDER BY cidade";
+	private String is_select = "SELECT * FROM cidades WHERE cidade = ? AND estado = ? AND pais = ?";
 	private String is_selectPais = "SELECT DISTINCT pais FROM cidades ORDER BY pais";
 	private String is_selectEstado = "SELECT DISTINCT estado FROM cidades WHERE pais = ? ORDER BY estado";
 	private String is_insert = "INSERT INTO cidades (cidade, estado, pais) VALUES (?, ?, ?)";
@@ -37,7 +36,7 @@ public class LocalDAO extends MasterDAO {
 		this.pst_selectPais = conn.prepareStatement(is_selectPais);
 		this.pst_selectEstado = conn.prepareStatement(is_selectEstado);
 		this.pst_insert = conn.prepareStatement(is_insert);
-		// this.pst_update = conn.prepareStatement(is_update);
+		this.pst_update = conn.prepareStatement(is_update);
 		this.pst_delete = conn.prepareStatement(is_delete);
 		
 	}
@@ -48,6 +47,7 @@ public class LocalDAO extends MasterDAO {
 		
 		List<Object> list = new ArrayList<Object>();
 		
+		// run query and store the result
 		ResultSet rst = pst_selectAll.executeQuery();
 		
 		while (rst.next()) {
@@ -63,11 +63,18 @@ public class LocalDAO extends MasterDAO {
 		
 		Object tmp = null;
 		
-		Set(pst_select, 1, ((Local) obj).getPais());
-		Set(pst_select, 2, ((Local) obj).getEstado());
+		// clear previous query
+		pst_select.clearParameters();
 		
+		// fill query
+		Set(pst_select, 1, ((Local) obj).getCidade());
+		Set(pst_select, 2, ((Local) obj).getEstado());
+		Set(pst_select, 3, ((Local) obj).getPais());
+		
+		// run query and store the result
 		ResultSet rst = pst_select.executeQuery();
 		
+		// check if query return a result
 		if (rst.next()) {
 			tmp = new Local(rst.getString("cidade"), rst.getString("estado"), rst.getString("pais"));
 		}
@@ -78,16 +85,20 @@ public class LocalDAO extends MasterDAO {
 	@Override
 	public void Insert(Object obj) throws SQLException {
 		
-		pst_insert.clearParameters();
-		
 		Local tmp = (Local) obj;
 		
+		// clear previous query
+		pst_insert.clearParameters();
+		
+		// fill query
 		Set(pst_insert,  1, tmp.getCidade());
 		Set(pst_insert,  2, tmp.getEstado());
 		Set(pst_insert,  3, tmp.getPais());
 		
+		// run query
 		pst_insert.execute();
-				
+
+		// check if query worked
 		if (pst_insert.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
@@ -98,12 +109,18 @@ public class LocalDAO extends MasterDAO {
 		
 		Local tmp = (Local) obj;
 		
+		// clear previous query
+		pst_delete.clearParameters();
+		
+		// fill query
 		Set(pst_delete, 1, tmp.getCidade());
 		Set(pst_delete, 2, tmp.getEstado());
 		Set(pst_delete, 3, tmp.getPais());
 		
+		// run query
 		pst_delete.execute();
 		
+		// check if query worked
 		if (pst_delete.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
@@ -114,6 +131,10 @@ public class LocalDAO extends MasterDAO {
 		
 		List<Object> list = new ArrayList<Object>();
 		
+		// clear previous query
+		pst_selectPais.clearParameters();
+		
+		// run query and store the result
 		ResultSet rst = pst_selectPais.executeQuery();
 		
 		while (rst.next()) {
@@ -128,8 +149,13 @@ public class LocalDAO extends MasterDAO {
 		
 		List<Object> list = new ArrayList<Object>();
 		
+		// clear previous query
+		pst_selectEstado.clearParameters();
+		
+		// fill query
 		Set(pst_selectEstado, 1, parameter);
 		
+		// run query and store the result
 		ResultSet rst = pst_selectEstado.executeQuery();
 		
 		while (rst.next()) {
@@ -140,12 +166,22 @@ public class LocalDAO extends MasterDAO {
 	}
 	
 	/************************************************************
-	 * O QUE FAZER NESTES METODOS ??
+	 * DUVIDAS ???
 	 ************************************************************/
 	@Override
 	public void Update(Object obj) throws SQLException {
 		
-		// ?????
+		// clear previous statement parameters
+		pst_update.clearParameters();
+		
+		// ???
+		Local tmp = (Local) obj;
+		
+		Set(pst_update, 1, tmp.getCidade());
+		Set(pst_update, 2, tmp.getEstado());
+		Set(pst_update, 3, tmp.getPais());
+		
+		System.out.println(pst_update.toString());
 
 	}
 }

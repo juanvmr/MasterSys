@@ -46,11 +46,12 @@ public class AlunoDAO extends MasterDAO {
 		
 		List<Object> list = new ArrayList<Object>();
 		
+		// receive query result
 		ResultSet rst = pst_selectAll.executeQuery();
 		
+		// check what query returned
 		while (rst.next()) {
 			Aluno tmp = new Aluno();
-			
 			tmp.setAluno(rst.getString("aluno"));
 			tmp.setDataNascimento(rst.getDate("data_nascimento"));
 			tmp.setSexo(rst.getString("sexo").charAt(0));
@@ -77,14 +78,17 @@ public class AlunoDAO extends MasterDAO {
 		/* initialize a new object */
 		Aluno tmp = null;
 		
-		/* set query parameters */
+		// clear previous statement parameters
+		pst_select.clearParameters();
+		
+		// fill statement
 		Set(pst_select, 1, ((Aluno) parameter).getAluno());
 		Set(pst_select, 2, ((Aluno) parameter).getEmail());
 		
-		/* receive query result */
+		// receive query result
 		ResultSet rst = pst_select.executeQuery();
 		
-		/* check if query returned something */
+		// check if query returned something
 		if (rst.next()) {
 			tmp = new Aluno();
 			tmp.setAluno(rst.getString("aluno"));
@@ -107,10 +111,12 @@ public class AlunoDAO extends MasterDAO {
 	@Override
 	public void Update(Object obj) throws SQLException {
 		
-		pst_update.clearParameters();
-		
 		Aluno tmp = (Aluno) obj;
 		
+		// clear previous statement parameters
+		pst_update.clearParameters();
+		
+		// fill statement
 		Set(pst_update,  1, tmp.getDataNascimento());
 		Set(pst_update,  2, tmp.getSexo());
 		Set(pst_update,  3, tmp.getTelefone());
@@ -127,8 +133,10 @@ public class AlunoDAO extends MasterDAO {
 		Set(pst_update, 14, tmp.getCep());
 		Set(pst_update, 15, tmp.getAluno());
 		
+		// run query
 		pst_update.execute();
 		
+		// check if query worked
 		if (pst_update.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
@@ -137,10 +145,12 @@ public class AlunoDAO extends MasterDAO {
 	@Override
 	public void Insert(Object obj) throws SQLException {
 		
-		pst_insert.clearParameters();
-		
 		Aluno tmp = (Aluno) obj;
 		
+		// clear previous statement parameters
+		pst_insert.clearParameters();
+		
+		// fill statement
 		Set(pst_insert,  1, tmp.getAluno());
 		Set(pst_insert,  2, tmp.getDataNascimento());
 		Set(pst_insert,  3, tmp.getSexo());
@@ -157,8 +167,10 @@ public class AlunoDAO extends MasterDAO {
 		Set(pst_insert, 14, tmp.getLocal().getPais());
 		Set(pst_insert, 15, tmp.getCep());
 		
+		// run query
 		pst_insert.execute();
-				
+		
+		// check if query worked
 		if (pst_insert.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
@@ -169,10 +181,16 @@ public class AlunoDAO extends MasterDAO {
 		
 		Aluno tmp = (Aluno) obj;
 		
+		// clear previous statement parameters
+		pst_delete.clearParameters();
+		
+		// fill statement
 		Set(pst_delete, 1, tmp.getAluno());
 		
+		// run query
 		pst_delete.execute();
 		
+		// check if query worked
 		if (pst_delete.getUpdateCount() > 0) {
 			this.conn.commit();
 		}

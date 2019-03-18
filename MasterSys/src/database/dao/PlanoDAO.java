@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.models.Aluno;
 import database.models.Plano;
 
 public class PlanoDAO extends MasterDAO {
@@ -59,6 +58,10 @@ public class PlanoDAO extends MasterDAO {
 		
 		Object tmp = null;
 		
+		// clear previous query
+		pst_select.clearParameters();
+		
+		// fill query
 		Set(pst_select, 1, ((Plano) obj).getModalidade());
 		
 		ResultSet rst = pst_select.executeQuery();
@@ -73,17 +76,43 @@ public class PlanoDAO extends MasterDAO {
 	@Override
 	public void Insert(Object obj) throws SQLException {
 		
-		pst_insert.clearParameters();
-		
 		Plano tmp = (Plano) obj;
 		
+		// clear previous query
+		pst_insert.clearParameters();
+		
+		// fill query
 		Set(pst_insert,  1, tmp.getModalidade());
 		Set(pst_insert,  2, tmp.getPlano());
 		Set(pst_insert,  3, tmp.getValor());
 		
+		// run query
 		pst_insert.execute();
-				
+			
+		// check if query worked
 		if (pst_insert.getUpdateCount() > 0) {
+			this.conn.commit();
+		}
+	}
+	
+	@Override
+	public void Update(Object obj) throws SQLException {
+		
+		Plano tmp = (Plano) obj;
+		
+		// clear previous query
+		pst_update.clearParameters();
+		
+		// fill query
+		Set(pst_update, 1, tmp.getModalidade());
+		Set(pst_update, 2, tmp.getPlano());
+		Set(pst_update, 3, tmp.getValor());
+		
+		// run query 
+		pst_update.execute();
+		
+		// check if query worked
+		if (pst_update.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
 	}
@@ -93,32 +122,19 @@ public class PlanoDAO extends MasterDAO {
 		
 		Plano tmp = (Plano) obj;
 		
+		// clear previous query
+		pst_update.clearParameters();
+		
+		// fill query
 		Set(pst_delete, 1, tmp.getModalidade());
 		Set(pst_delete, 2, tmp.getPlano());
 		
+		// run query
 		pst_delete.execute();
 		
+		// check if query worked
 		if (pst_delete.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
-	}
-	
-	@Override
-	public void Update(Object obj) throws SQLException {
-		
-		pst_update.clearParameters();
-		
-		Plano tmp = (Plano) obj;
-		
-		Set(pst_update, 1, tmp.getModalidade());
-		Set(pst_update, 2, tmp.getPlano());
-		Set(pst_update, 3, tmp.getValor());
-		
-		pst_update.execute();
-		
-		if (pst_update.getUpdateCount() > 0) {
-			this.conn.commit();
-		}
-
 	}
 }

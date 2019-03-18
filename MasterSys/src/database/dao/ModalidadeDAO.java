@@ -16,11 +16,13 @@ public class ModalidadeDAO extends MasterDAO {
 	
 	/* query: */
 	private String is_selectAll = "SELECT * FROM modalidades ORDER BY modalidade";
+	private String is_select = "SELECT * FROM modalidades WHERE modalidade = ?";
 	private String is_insert = "INSERT INTO modalidades (modalidade) VALUES (?)";
+	private String is_update = "UPDATE modalidades SET modalidade = ? WHERE modalidade = ?";
 	private String is_delete = "DELETE FROM modalidades WHERE modalidades = ?";
 	
 	/* statements: */
-	private PreparedStatement pst_selectAll, pst_insert, pst_delete;
+	private PreparedStatement pst_selectAll, pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
 	public ModalidadeDAO(Connection conn) throws SQLException {
@@ -28,7 +30,9 @@ public class ModalidadeDAO extends MasterDAO {
 		this.conn = conn;
 		
 		pst_selectAll = conn.prepareStatement(is_selectAll);
+		pst_select = conn.prepareStatement(is_select);
 		pst_insert = conn.prepareStatement(is_insert);
+		pst_update = conn.prepareStatement(is_update);
 		pst_delete = conn.prepareStatement(is_delete);
 	}
 	
@@ -51,14 +55,18 @@ public class ModalidadeDAO extends MasterDAO {
 	@Override
 	public void Insert(Object obj) throws SQLException {
 		
-		pst_insert.clearParameters();
-		
 		Modalidade tmp = (Modalidade) obj;
 		
+		// clear previous query
+		pst_insert.clearParameters();
+		
+		// fill query
 		Set(pst_insert,  1, tmp.getModalidade());
 		
+		// run query
 		pst_insert.execute();
-				
+		
+		// check if query worked
 		if (pst_insert.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
@@ -69,31 +77,59 @@ public class ModalidadeDAO extends MasterDAO {
 		
 		Modalidade tmp = (Modalidade) obj;
 		
+		// clear previous query
+		pst_insert.clearParameters();
+		
+		// fill query
 		Set(pst_delete, 1, tmp.getModalidade());
 		
+		// run query
 		pst_delete.execute();
 		
+		// check if query worked
 		if (pst_delete.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
 	}
 	
 	/************************************************************
-	 * O QUE FAZER NESTES METODOS ??
+	 * DUVIDAS ???
 	 ************************************************************/
 	@Override
-	public Object Select(Object parameter) throws SQLException {
+	public Object Select(Object obj) throws SQLException {
 		
-		// ???
+		Modalidade tmp = null;
 		
-		return null;
+		// clear previous query
+		pst_select.clearParameters();
+		
+		// fill query
+		Set(pst_select, 1, ((Modalidade) obj).getModalidade());
+		
+		// run query and store the result
+		ResultSet rst = pst_select.executeQuery();
+		
+		// check if query return a result
+		if (rst.next()) {
+			tmp = new Modalidade(rst.getString("modalidade"));
+		}
+		
+		return tmp;
 	}
 	
 	@Override
 	public void Update(Object obj) throws SQLException {
 		
-		// ???
+		Modalidade tmp = (Modalidade) obj;
 		
+		// clear previous query
+		pst_update.clearParameters();
+		
+		// fill query
+		Set(pst_update, 1, tmp.getModalidade());
+		Set(pst_update, 2, tmp.getModalidade());
+		
+		System.out.println(pst_update.toString());
 	}
 	
 }

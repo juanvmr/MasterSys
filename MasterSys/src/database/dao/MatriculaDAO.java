@@ -16,11 +16,9 @@ public class MatriculaDAO extends MasterDAO {
 	
 	/* query: */
 	private String is_selectAll = "SELECT * FROM matriculas ORDER BY codigo_matricula";
-	private String is_select = "SELECT m.* FROM matriculas m JOIN alunos a ON (m.codigo_aluno = a.codigo_aluno) WHERE m.codigo_matricula = ? AND codigo_aluno = ";
-	private String is_insert = "INSERT INTO matriculas(codigo_matricula, codigo_aluno, data_matricula, "
-			+ "dia_vencimento, data_encerramento) VALUES (DEFAULT, ?, ?, ?, ?)";
-	private String is_update = "UPDATE matriculas SET data_matricula = ?, dia_vencimento = ?, data_encerramento = ? "
-			+ "WHERE codigo_matricula = ? AND codigo_aluno = ?";
+	private String is_select = "SELECT m.* FROM matriculas m JOIN alunos a ON (m.codigo_aluno = a.codigo_aluno) WHERE m.codigo_matricula = ? AND m.codigo_aluno = ?";
+	private String is_insert = "INSERT INTO matriculas(codigo_matricula, codigo_aluno, data_matricula, dia_vencimento, data_encerramento) VALUES (DEFAULT, ?, ?, ?, ?)";
+	private String is_update = "UPDATE matriculas SET data_matricula = ?, dia_vencimento = ?, data_encerramento = ? WHERE codigo_matricula = ? AND codigo_aluno = ?";
 	private String is_delete = "DELETE FROM matriculas WHERE codigo_matricula = ? AND codigo_aluno = ?";
 	
 	/* statements: */
@@ -74,6 +72,7 @@ public class MatriculaDAO extends MasterDAO {
 		
 		// fill query
 		Set(pst_select, 1, ((Matricula) obj).getCodigoMatricula());
+		Set(pst_select, 2, ((Matricula) obj).getCodigoAluno());
 		
 		ResultSet rst = pst_select.executeQuery();
 		if (rst.next() ) {
@@ -121,7 +120,6 @@ public class MatriculaDAO extends MasterDAO {
 		pst_insert.clearParameters();
 		
 		// fill query
-		// Set(pst_insert, 1, tmp.getCodigoMatricula());
 		Set(pst_insert, 1, tmp.getCodigoAluno());
 		Set(pst_insert, 2, tmp.getDataMatricula());
 		Set(pst_insert, 3, tmp.getDiaVencimento());

@@ -165,18 +165,16 @@ public class LocalDAO extends MasterDAO {
 		return list;
 	}
 	
-	/************************************************************
-	 * DUVIDAS ???
-	 ************************************************************/
 	@Override
 	public void Update(Object obj) throws SQLException {
 		
-		// clear previous statement parameters
-		pst_update.clearParameters();
-		
-		// ???
+		// we are note using this method
 		Local tmp = (Local) obj;
 		
+		// clear previous query
+		pst_update.clearParameters();
+		
+		// fill query
 		Set(pst_update, 1, tmp.getCidade());
 		Set(pst_update, 2, tmp.getEstado());
 		Set(pst_update, 3, tmp.getPais());

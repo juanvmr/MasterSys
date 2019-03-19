@@ -20,10 +20,10 @@ public class AlunoDAO extends MasterDAO {
 	private String is_insert = "INSERT INTO alunos (codigo_aluno, aluno, data_nascimento, sexo, "
 			+ "telefone, celular, email, observacao, endereco, numero, complemento, bairro, cidade, "
 			+ "estado, pais, cep) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private String is_update = "UPDATE alunos SET data_nascimento = ?, sexo = ?, telefone = ?, "
+	private String is_update = "UPDATE alunos SET aluno = ?, data_nascimento = ?, sexo = ?, telefone = ?, "
 			+ "celular = ?, email = ?, observacao = ?, endereco = ?, numero = ?, complemento = ?, "
-			+ "bairro = ?, cidade = ?, estado = ?, pais = ?, cep = ? WHERE aluno = ?";
-	private String is_delete = "DELETE FROM alunos WHERE aluno = ?";
+			+ "bairro = ?, cidade = ?, estado = ?, pais = ?, cep = ? WHERE codigo_aluno = ?";
+	private String is_delete = "DELETE FROM alunos WHERE codigo_aluno = ?";
 	
 	/* statements: */
 	private PreparedStatement pst_selectAll, pst_select, pst_insert, pst_update, pst_delete;
@@ -41,6 +41,13 @@ public class AlunoDAO extends MasterDAO {
 	}
 	
 	/* methods: */
+	public Object findAluno(Object obj) throws SQLException {
+		
+		Aluno tmp = null;
+		
+		return tmp;
+	}
+	
 	@Override
 	public List<Object> SelectAll() throws SQLException {
 		
@@ -52,6 +59,7 @@ public class AlunoDAO extends MasterDAO {
 		// check what query returned
 		while (rst.next()) {
 			Aluno tmp = new Aluno();
+			tmp.setCodigoAluno(rst.getInt("codigo_aluno"));
 			tmp.setAluno(rst.getString("aluno"));
 			tmp.setDataNascimento(rst.getDate("data_nascimento"));
 			tmp.setSexo(rst.getString("sexo").charAt(0));
@@ -91,6 +99,7 @@ public class AlunoDAO extends MasterDAO {
 		// check if query returned something
 		if (rst.next()) {
 			tmp = new Aluno();
+			tmp.setCodigoAluno(rst.getInt("codigo_aluno"));
 			tmp.setAluno(rst.getString("aluno"));
 			tmp.setDataNascimento(rst.getDate("data_nascimento"));
 			tmp.setSexo(rst.getString("sexo").charAt(0));
@@ -117,21 +126,22 @@ public class AlunoDAO extends MasterDAO {
 		pst_update.clearParameters();
 		
 		// fill statement
-		Set(pst_update,  1, tmp.getDataNascimento());
-		Set(pst_update,  2, tmp.getSexo());
-		Set(pst_update,  3, tmp.getTelefone());
-		Set(pst_update,  4, tmp.getCelular());
-		Set(pst_update,  5, tmp.getEmail());
-		Set(pst_update,  6, tmp.getObs());
-		Set(pst_update,  7, tmp.getEndereco());
-		Set(pst_update,  8, tmp.getNumero());
-		Set(pst_update,  9, tmp.getComplemento());
-		Set(pst_update, 10, tmp.getBairro());
-		Set(pst_update, 11, tmp.getLocal().getCidade());
-		Set(pst_update, 12, tmp.getLocal().getEstado());
-		Set(pst_update, 13, tmp.getLocal().getPais());
-		Set(pst_update, 14, tmp.getCep());
-		Set(pst_update, 15, tmp.getAluno());
+		Set(pst_update,  1, tmp.getAluno());
+		Set(pst_update,  2, tmp.getDataNascimento());
+		Set(pst_update,  3, tmp.getSexo());
+		Set(pst_update,  4, tmp.getTelefone());
+		Set(pst_update,  5, tmp.getCelular());
+		Set(pst_update,  6, tmp.getEmail());
+		Set(pst_update,  7, tmp.getObs());
+		Set(pst_update,  8, tmp.getEndereco());
+		Set(pst_update,  9, tmp.getNumero());
+		Set(pst_update, 10, tmp.getComplemento());
+		Set(pst_update, 11, tmp.getBairro());
+		Set(pst_update, 12, tmp.getLocal().getCidade());
+		Set(pst_update, 13, tmp.getLocal().getEstado());
+		Set(pst_update, 14, tmp.getLocal().getPais());
+		Set(pst_update, 15, tmp.getCep());
+		Set(pst_update, 16, tmp.getCodigoAluno());
 		
 		// run query
 		pst_update.execute();
@@ -185,7 +195,7 @@ public class AlunoDAO extends MasterDAO {
 		pst_delete.clearParameters();
 		
 		// fill statement
-		Set(pst_delete, 1, tmp.getAluno());
+		Set(pst_delete, 1, tmp.getCodigoAluno());
 		
 		// run query
 		pst_delete.execute();

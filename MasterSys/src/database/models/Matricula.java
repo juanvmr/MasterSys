@@ -5,40 +5,44 @@ import java.util.Date;
 public class Matricula {
 	
 	/* Attributes: */
-	private int cod_matricula;
-	private int cod_aluno;
+	private int codigo_matricula;
+	private int codigo_aluno;
 	private int dia_vencimento;
-	private Date dt_matricula;
-	private Date dt_encerramento;
+	private Date data_matricula;
+	private Date data_encerramento;
 	
 	/* Constructor: */
-	public Matricula(int cod_matricula, int cod_aluno, Date dt_matricula, int dia_vencimento, Date dt_encerramento) {
-		this.cod_matricula = cod_matricula;
-		this.cod_aluno = cod_aluno;
+	public Matricula(int codigo_matricula, int codigo_aluno, Date data_matricula, int dia_vencimento, Date data_encerramento) {
+		this.codigo_matricula = codigo_matricula;
+		this.codigo_aluno = codigo_aluno;
 		this.dia_vencimento = dia_vencimento;
-		this.dt_matricula = dt_matricula;
-		this.dt_encerramento = dt_encerramento;
+		this.data_matricula = data_matricula;
+		this.data_encerramento = data_encerramento;
 	}
 	
-	public Matricula(int cod_aluno, Date dt_matricula, int dia_vencimento, Date dt_encerramento) {
-		this(0, cod_aluno, dt_matricula, dia_vencimento, dt_encerramento);
+	public Matricula(int codigo_matricula, int codigo_aluno) {
+		this(codigo_matricula, codigo_aluno, null, 0, null);
+	}
+	
+	public Matricula() {
+		this(0, 0, null, 0, null);
 	}
 	
 	/* Getter and Setter: */
 	public int getCodigoMatricula() {
-		return this.cod_matricula;
+		return this.codigo_matricula;
 	}
 
-	public void setCodigoMatricula(int cod_matricula) {
-		this.cod_matricula = cod_matricula;
+	public void setCodigoMatricula(int codigo_matricula) {
+		this.codigo_matricula = codigo_matricula;
 	}
 
 	public int getCodigoAluno() {
-		return this.cod_aluno;
+		return this.codigo_aluno;
 	}
 
-	public void setCodigoAluno(int cod_aluno) {
-		this.cod_aluno = cod_aluno;
+	public void setCodigoAluno(int codigo_aluno) {
+		this.codigo_aluno = codigo_aluno;
 	}
 
 	public int getDiaVencimento() {
@@ -50,24 +54,24 @@ public class Matricula {
 	}
 
 	public Date getDataMatricula() {
-		return this.dt_matricula;
+		return this.data_matricula;
 	}
 
-	public void setDataMatricula(Date dt_matricula) {
-		this.dt_matricula = dt_matricula;
+	public void setDataMatricula(Date data_matricula) {
+		this.data_matricula = data_matricula;
 	}
 
 	public Date getDataEncerramento() {
-		return this.dt_encerramento;
+		return this.data_encerramento;
 	}
 
-	public void setDataEncerramento(Date dt_encerramento) {
-		this.dt_encerramento = dt_encerramento;
+	public void setDataEncerramento(Date data_encerramento) {
+		this.data_encerramento = data_encerramento;
 	}
 	
 	/* Methods: */
 	public String toString() {
-		return String.format("%d, %d, %d, %s, %s", this.cod_matricula, this.cod_aluno, this.dia_vencimento,
-		this.dt_matricula, this.dt_encerramento);
+		return String.format("%d, %d, %d, %s, %s", this.codigo_matricula, this.codigo_aluno, this.dia_vencimento,
+		this.data_matricula, this.data_encerramento);
 	}
 }

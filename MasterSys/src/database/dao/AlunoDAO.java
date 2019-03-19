@@ -16,7 +16,7 @@ public class AlunoDAO extends MasterDAO {
 	
 	/* query: */
 	private String is_selectAll = "SELECT * FROM alunos ORDER BY aluno";
-	private String is_select = "SELECT * FROM alunos WHERE aluno = ? ORDER BY aluno";
+	private String is_select = "SELECT * FROM alunos WHERE aluno = ?";
 	private String is_insert = "INSERT INTO alunos (codigo_aluno, aluno, data_nascimento, sexo, "
 			+ "telefone, celular, email, observacao, endereco, numero, complemento, bairro, cidade, "
 			+ "estado, pais, cep) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -41,13 +41,6 @@ public class AlunoDAO extends MasterDAO {
 	}
 	
 	/* methods: */
-	public Object findAluno(Object obj) throws SQLException {
-		
-		Aluno tmp = null;
-		
-		return tmp;
-	}
-	
 	@Override
 	public List<Object> SelectAll() throws SQLException {
 		
@@ -81,7 +74,7 @@ public class AlunoDAO extends MasterDAO {
 	}
 
 	@Override
-	public Object Select(Object parameter) throws SQLException {
+	public Object Select(Object obj) throws SQLException {
 		
 		/* initialize a new object */
 		Aluno tmp = null;
@@ -90,8 +83,7 @@ public class AlunoDAO extends MasterDAO {
 		pst_select.clearParameters();
 		
 		// fill statement
-		Set(pst_select, 1, ((Aluno) parameter).getAluno());
-		Set(pst_select, 2, ((Aluno) parameter).getEmail());
+		Set(pst_select, 1, ((Aluno) obj).getAluno());
 		
 		// receive query result
 		ResultSet rst = pst_select.executeQuery();

@@ -5,66 +5,70 @@ import java.util.Date;
 public class Fatura {
 	
 	/* Attributes: */
-	private int cod_matricula;
-	private float valor;
-	private Date dt_vencimento;
-	private Date dt_pagamento;
-	private Date dt_cancelamento;
+	private int codigo_matricula;
+	private double valor;
+	private Date data_vencimento;
+	private Date data_pagamento;
+	private Date data_cancelamento;
 	
 	/* Constructor: */
-	public Fatura(int cod_matricula, float valor, Date dt_vencimento, Date dt_pagamento, Date dt_cancelamento) {
-		this.cod_matricula = cod_matricula;
+	public Fatura(int codigo_matricula, Date data_vencimento, double valor, Date data_pagamento, Date data_cancelamento) {
+		this.codigo_matricula = codigo_matricula;
 		this.valor = valor;
-		this.dt_vencimento = dt_vencimento;
-		this.dt_pagamento = dt_pagamento;
-		this.dt_cancelamento = dt_cancelamento;
+		this.data_vencimento = data_vencimento;
+		this.data_pagamento = data_pagamento;
+		this.data_cancelamento = data_cancelamento;
+	}
+	
+	public Fatura() {
+		this(0, null, 0, null, null);
 	}
 	
 	/* Getter and Setter: */
-	public int getCod_matricula() {
-		return cod_matricula;
+	public int getCodigoMatricula() {
+		return codigo_matricula;
 	}
 
-	public void setCod_matricula(int cod_matricula) {
-		this.cod_matricula = cod_matricula;
+	public void setCodigoMatricula(int codigo_matricula) {
+		this.codigo_matricula = codigo_matricula;
 	}
 
-	public float getValor() {
+	public double getValor() {
 		return valor;
 	}
 
-	public void setValor(float valor) {
+	public void setValor(double valor) {
 		this.valor = valor;
 	}
 
-	public Date getDt_vencimento() {
-		return dt_vencimento;
+	public Date getDataVencimento() {
+		return data_vencimento;
 	}
 
-	public void setDt_vencimento(Date dt_vencimento) {
-		this.dt_vencimento = dt_vencimento;
+	public void setDataVencimento(Date data_vencimento) {
+		this.data_vencimento = data_vencimento;
 	}
 
-	public Date getDt_pagamento() {
-		return dt_pagamento;
+	public Date getDataPagamento() {
+		return data_pagamento;
 	}
 
-	public void setDt_pagamento(Date dt_pagamento) {
-		this.dt_pagamento = dt_pagamento;
+	public void setDataPagamento(Date data_pagamento) {
+		this.data_pagamento = data_pagamento;
 	}
 
-	public Date getDt_cancelamento() {
-		return dt_cancelamento;
+	public Date getDataCancelamento() {
+		return data_cancelamento;
 	}
 
-	public void setDt_cancelamento(Date dt_cancelamento) {
-		this.dt_cancelamento = dt_cancelamento;
+	public void setDataCancelamento(Date data_cancelamento) {
+		this.data_cancelamento = data_cancelamento;
 	}
 	
 	/* Methods: */
 	public String toString() {
-		return String.format("%d, R$ %.2f, %s, %s, %s", this.cod_matricula, this.valor, this.dt_vencimento,
-		this.dt_pagamento, this.dt_cancelamento);
+		return String.format("%d, R$ %.2f, %s, %s, %s", this.codigo_matricula, this.valor, this.data_vencimento,
+		this.data_pagamento, this.data_cancelamento);
 	}
 	
 }

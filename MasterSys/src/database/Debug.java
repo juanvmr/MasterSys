@@ -11,14 +11,14 @@ public class Debug {
 
 	public static void main(String[] args) {
 		
+		// new Login();
+		
 		new Menu();
 		
 		Connection conn = ConnectionFactory.getConnection("master", "admin", "admin");
 		try {
 			conn.setAutoCommit(false);
 			System.out.println("Connectado com sucesso!");
-			
-			
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

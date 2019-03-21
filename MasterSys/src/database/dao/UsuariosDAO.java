@@ -21,8 +21,13 @@ public class UsuariosDAO extends MasterDAO {
 	private String is_update = "UPDATE usuarios SET perfil = ? WHERE usuario = ?";
 	private String is_delete = "DELETE FROM usuarios WHERE usuario = ?";
 	
+	private String is_create_role = "CREATE ROLE ? WITH LOGIN ENCRYPTED PASSWORD ? IN ROLE admin";
+	private String is_alter_role = "ALTER ROLE ? WITH LOGIN ENCRYPTED PASSWORD ?";
+	private String is_drop_role = "DROP ROLE ?";
+	
 	/* statements: */
 	private PreparedStatement pst_selectAll, pst_select, pst_insert, pst_update, pst_delete;
+	private PreparedStatement pst_create_role, pst_alter_role, pst_drop_role;
 	
 	/* constructor: */
 	public UsuariosDAO(Connection conn) throws SQLException {
@@ -34,9 +39,54 @@ public class UsuariosDAO extends MasterDAO {
 		pst_insert = conn.prepareStatement(is_insert);
 		pst_update = conn.prepareStatement(is_update);
 		pst_delete = conn.prepareStatement(is_delete);
+		
+		pst_create_role = conn.prepareStatement(is_create_role);
+		pst_alter_role = conn.prepareStatement(is_alter_role);
+		pst_drop_role = conn.prepareStatement(is_drop_role);
 	}
 	
 	/* methods: */
+	public void CreateUser(String username, String password) throws SQLException {
+		
+		pst_create_role.clearParameters();
+		
+		Set(pst_create_role, 1, username);
+		Set(pst_create_role, 2, password);
+		
+		pst_create_role.execute();
+		
+		if (pst_create_role.getUpdateCount() > 0) {
+			conn.commit();
+		}
+	}
+	
+	public void ChangeUserPassword(String username, String new_password) throws SQLException {
+		
+		pst_alter_role.clearParameters();
+		
+		Set(pst_alter_role, 1, username);
+		Set(pst_alter_role, 2, new_password);
+		
+		pst_alter_role.execute();
+		
+		if (pst_alter_role.getUpdateCount() > 0) {
+			conn.commit();
+		}
+	}
+	
+	public void DeleteUser(String username) throws SQLException {
+		
+		pst_drop_role.clearParameters();
+		
+		Set(pst_drop_role, 1, username);
+		
+		pst_drop_role.execute();
+		
+		if (pst_drop_role.getUpdateCount() > 0) {
+			conn.commit();
+		}
+	}
+	
 	@Override
 	public List<Object> SelectAll() throws SQLException {
 		

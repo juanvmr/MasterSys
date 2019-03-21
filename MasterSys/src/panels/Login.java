@@ -17,29 +17,24 @@ import java.awt.EventQueue;
 
 public class Login extends JFrame {
 
-    private javax.swing.JTextField UsuarioTextField;
-    private javax.swing.JButton OKJButton;
-    private javax.swing.JPasswordField SenhaField;
-    private javax.swing.JLabel UsuarioLabel;
-    private javax.swing.JLabel SenhaLabel;
+    private JTextField UsuarioField;
+    private JPasswordField SenhaField;
+    private JLabel UsuarioLabel = new JLabel("Usuario:");
+    private JLabel SenhaLabel = new JLabel("Senha:");
+    private JButton OKJButton = new JButton("OK");
 
-    public Login() {
+    public Login(String title) {
+    	super(title);
         initComponents();
     }
 
     private void initComponents() {
 
-        UsuarioLabel = new JLabel();
-        SenhaLabel = new JLabel();
-        UsuarioTextField = new JTextField();
-        OKJButton = new JButton();
+        UsuarioField = new JTextField();
         SenhaField = new JPasswordField();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        UsuarioLabel.setText("Usuário:");
-        SenhaField.setText("Código:");
-        OKJButton.setText("OK");
         OKJButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 OKJButtonActionPerformed(evt);
@@ -57,7 +52,7 @@ public class Login extends JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(SenhaLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(UsuarioTextField, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
+                        .addComponent(UsuarioField, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(SenhaField)))
                 .addContainerGap(83, Short.MAX_VALUE))
@@ -66,6 +61,7 @@ public class Login extends JFrame {
                 .addComponent(OKJButton)
                 .addContainerGap())
         );
+        
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -74,7 +70,7 @@ public class Login extends JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(SenhaLabel)
-                    .addComponent(UsuarioTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UsuarioField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(SenhaField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
@@ -94,7 +90,8 @@ public class Login extends JFrame {
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                Login login = new Login("Login");
+                login.setVisible(true);
             }
         });
     }

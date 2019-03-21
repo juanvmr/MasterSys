@@ -5,66 +5,76 @@ import java.util.Date;
 public class MatriculaModalidade {
 	
 	/* Attributes: */
-	private int cod_matricula;
-	private Graduacao graduacao;	// contém uma modalidade e uma string
-	private Plano plano;			// contém uma modalidade, um plano e um valor
-	private Date dt_inicio;
-	private Date dt_fim;
+	private int codigo_matricula;
+	private String modalidade;
+	private String graduacao;
+	private String plano;
+	private Date data_inicio;
+	private Date data_fim;
 	
 	/* Constructor: */
-	public MatriculaModalidade(int cod_matricula, String modalidade, String graduacao, String plano, Date dt_inicio, Date dt_fim) {
-		this.cod_matricula = cod_matricula;
-		this.graduacao = new Graduacao(modalidade, graduacao);
-		this.plano = new Plano(modalidade, plano, 0);
-		this.dt_inicio = dt_inicio;
-		this.dt_fim = dt_fim;
+	public MatriculaModalidade(int codigo_matricula, String modalidade, String graduacao, String plano, Date data_inicio, Date data_fim) {
+		this.codigo_matricula = codigo_matricula;
+		this.modalidade = modalidade;
+		this.graduacao = graduacao;
+		this.plano = plano;
+		this.data_inicio = data_inicio;
+		this.data_fim = data_fim;
 	}
 	
 	/* Getter and Setter: */
-	public int getCod_matricula() {
-		return this.cod_matricula;
+	public int getCodigoMatricula() {
+		return this.codigo_matricula;
 	}
 
-	public void setCod_matricula(int cod_matricula) {
-		this.cod_matricula = cod_matricula;
+	public void setCodigoMatricula(int codigo_matricula) {
+		this.codigo_matricula = codigo_matricula;
+	}
+	
+	public String getModalidade() {
+		return this.modalidade;
 	}
 
-	public Graduacao getGraduacao() {
+	public void setModalidade(String modalidade) {
+		this.modalidade = modalidade;
+	}
+
+	public String getGraduacao() {
 		return this.graduacao;
 	}
 
-	public void setGraduacao(Graduacao graduacao) {
+	public void setGraduacao(String graduacao) {
 		this.graduacao = graduacao;
 	}
 
-	public Plano getPlano() {
+	public String getPlano() {
 		return this.plano;
 	}
 
-	public void setPlano(Plano plano) {
+	public void setPlano(String plano) {
 		this.plano = plano;
 	}
 
-	public Date getDt_inicio() {
-		return this.dt_inicio;
+	public Date getDataInicio() {
+		return this.data_inicio;
 	}
 
-	public void setDt_inicio(Date dt_inicio) {
-		this.dt_inicio = dt_inicio;
+	public void setDataInicio(Date data_inicio) {
+		this.data_inicio = data_inicio;
 	}
 
-	public Date getDt_fim() {
-		return this.dt_fim;
+	public Date getDataFim() {
+		return this.data_fim;
 	}
 
-	public void setDt_fim(Date dt_fim) {
-		this.dt_fim = dt_fim;
+	public void setDataFim(Date data_fim) {
+		this.data_fim = data_fim;
 	}
 	
 	/* Methods: */
 	public String toString() {
-		return String.format("%d, %s, %s, %s, %s", this.cod_matricula, this.graduacao.getGraduacao(), this.plano.toString(),
-		this.dt_inicio.toString(), this.dt_fim.toString());
+		return String.format("%d, %s, %s, %s, %s, %s", this.codigo_matricula, this.modalidade, this.graduacao, this.plano,
+		this.data_inicio.toString(), this.data_fim.toString());
 	}
 	
 }

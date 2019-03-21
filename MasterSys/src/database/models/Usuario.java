@@ -11,6 +11,10 @@ public class Usuario {
 		this.usuario = usuario;
 		this.perfil = perfil;
 	}
+	
+	public Usuario () {
+		this(null, null);
+	}
 
 	/* Getter and Setter: */
 	public String getUsuario() {

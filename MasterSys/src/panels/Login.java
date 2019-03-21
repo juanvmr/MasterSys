@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import java.awt.event.*;
 import java.awt.EventQueue;
+import database.ConnectionFactory;
+import java.sql.Connection;
 
 
 public class Login extends JFrame {
@@ -83,7 +85,19 @@ public class Login extends JFrame {
     }                    
 
     private void OKJButtonActionPerformed(ActionEvent evt) {
+        Connection conn;
 
+        if(!UsuarioField.getText().isEmpty()){
+            if(!SenhaField.getText().isEmpty()){
+                conn = ConnectionFactory.getConnection("Master",UsuarioField.getText(), SenhaField.getText());
+            }
+            else{
+                SenhaField.setText("*");
+            }
+        }
+        else{
+            UsuarioField.setText("*");
+        }
     }
 
     public static void main(String args[]) {

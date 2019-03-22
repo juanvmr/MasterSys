@@ -1,21 +1,12 @@
 package panels;
 
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.GroupLayout;
-import javax.swing.LayoutStyle;
-import javax.swing.WindowConstants;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import java.awt.event.*;
-import java.awt.EventQueue;
-import database.ConnectionFactory;
 import java.sql.Connection;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+import database.*;
 
 public class Login extends JFrame {
 
@@ -23,28 +14,26 @@ public class Login extends JFrame {
     private JPasswordField SenhaField;
     private JLabel UsuarioLabel = new JLabel("Usuario:");
     private JLabel SenhaLabel = new JLabel("Senha:");
-    private JButton OKJButton = new JButton("OK");
+    private JButton okButton = new JButton("OK");
 
     public Login(String title) {
     	super(title);
-        initComponents();
     }
 
-    private void initComponents() {
-
+    private void initComponents(Container pane) {
+    	
+    	// fields
         UsuarioField = new JTextField();
         SenhaField = new JPasswordField();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        OKJButton.addActionListener(new ActionListener() {
+        okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                OKJButtonActionPerformed(evt);
+                okButtonActionPerformed(evt);
             }
         });
-
+        
+        // layout
         GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -60,10 +49,9 @@ public class Login extends JFrame {
                 .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(OKJButton)
+                .addComponent(okButton)
                 .addContainerGap())
         );
-        
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -77,25 +65,26 @@ public class Login extends JFrame {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(SenhaField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(OKJButton)
+                .addComponent(okButton)
                 .addContainerGap())
         );
-
-        pack();
+        
+        // container
+        pane.setLayout(layout);
     }                    
 
-    private void OKJButtonActionPerformed(ActionEvent evt) {
-        Connection conn;
+    private void okButtonActionPerformed(ActionEvent evt) {
+    	Connection conn;
+        String username = UsuarioField.getText();
+        String password = SenhaField.getPassword().toString();
 
-        if(!UsuarioField.getText().isEmpty()){
-            if(!SenhaField.getText().isEmpty()){
-                conn = ConnectionFactory.getConnection("Master",UsuarioField.getText(), SenhaField.getText());
-            }
-            else{
+        if (!username.isEmpty()) {
+            if (!password.isEmpty()) {
+                conn = ConnectionFactory.getConnection("master", username, password);
+            } else {
                 SenhaField.setText("*");
             }
-        }
-        else{
+        } else {
             UsuarioField.setText("*");
         }
     }
@@ -104,7 +93,11 @@ public class Login extends JFrame {
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Login login = new Login("Login");
+            	Login login = new Login("Login");
+                login.setSize(300, 300);
+                login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                login.initComponents(login.getContentPane());
+                login.pack();
                 login.setVisible(true);
             }
         });

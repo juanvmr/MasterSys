@@ -2,37 +2,36 @@ package database.models;
 
 public class Usuario {
 	
-	/* attributes: */
+	/* Attributes: */
 	private String usuario;
 	private String perfil;
 	
-	/* constructor: */
-	public Usuario () {}
-
+	/* Constructor: */
 	public Usuario (String usuario, String perfil) {
 		this.usuario = usuario;
 		this.perfil = perfil;
 	}
-
-	/* getter and setter: */
-	public String getUsuario() {
-		return this.usuario;
+	
+	public Usuario () {
+		this(null, null);
 	}
 
+	/* Getter and Setter: */
+	public String getUsuario() {
+		return usuario;
+	}
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-
 	public String getPerfil() {
-		return this.perfil;
+		return perfil;
 	}
-
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
 	
-	/* methods: */
+	/* Methods: */
 	public String toString() {
-		return String.format("%s, %s", this.usuario, this.perfil);
+		return String.format("%s, %s",  this.usuario, this.perfil);
 	}
 }

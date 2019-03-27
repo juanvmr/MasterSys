@@ -2,19 +2,19 @@ package database.models;
 
 public class Plano {
 	
-	/* attributes: */
+	/* Attributes: */
 	private Modalidade modalidade;
 	private String plano;
 	private double valor;
 	
-	/* constructor: */
+	/* Constructor: */
 	public Plano(String modalidade, String plano, double valor) {
 		this.modalidade = new Modalidade(modalidade);
 		this.plano = plano;
 		this.valor = valor;
 	}
 	
-	/* getter and setter: */
+	/* Getter and Setter: */
 	public String getModalidade() {
 		return this.modalidade.getModalidade();
 	}
@@ -39,7 +39,7 @@ public class Plano {
 		this.valor = valor;
 	}
 	
-	/* methods: */
+	/* Methods: */
 	public String toString() {
 		return String.format("%s, %s, %.2f", this.modalidade.toString(), this.plano, this.valor);
 	}

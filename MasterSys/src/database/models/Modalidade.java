@@ -2,15 +2,14 @@ package database.models;
 
 public class Modalidade {
 	
-	/* attributes: */
+	/* Attributes: */
 	private String modalidade;
 	
-	/* constructor: */
+	/* Constructor: */
 	public Modalidade(String modalidade) {
 		this.modalidade = modalidade;
 	}
 
-	/* getter and setter: */
 	public String getModalidade() {
 		return modalidade;
 	}
@@ -19,7 +18,7 @@ public class Modalidade {
 		this.modalidade = modalidade;
 	}
 	
-	/* methods: */
+	/* Methods: */
 	public String toString() {
 		return String.format("%s", this.modalidade);
 	}

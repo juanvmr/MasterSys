@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class MatriculaModalidade {
 	
-	/* attributes: */
+	/* Attributes: */
 	private int codigo_matricula;
 	private String modalidade;
 	private String graduacao;
@@ -12,7 +12,7 @@ public class MatriculaModalidade {
 	private Date data_inicio;
 	private Date data_fim;
 	
-	/* constructor: */
+	/* Constructor: */
 	public MatriculaModalidade(int codigo_matricula, String modalidade, String graduacao, String plano, Date data_inicio, Date data_fim) {
 		this.codigo_matricula = codigo_matricula;
 		this.modalidade = modalidade;
@@ -22,8 +22,10 @@ public class MatriculaModalidade {
 		this.data_fim = data_fim;
 	}
 	
-	/* getter and setter: */
-	public int getCodigoMatricula() { return this.codigo_matricula; }
+	/* Getter and Setter: */
+	public int getCodigoMatricula() {
+		return this.codigo_matricula;
+	}
 
 	public void setCodigoMatricula(int codigo_matricula) {
 		this.codigo_matricula = codigo_matricula;

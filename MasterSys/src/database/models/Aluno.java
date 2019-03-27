@@ -19,13 +19,7 @@ public class Aluno {
 	private Local local;
 	private String cep;
 	
-	/* constructor: */
-	public Aluno() {}
-
-	public Aluno(String aluno) {
-		this.aluno = aluno;
-	}
-
+	/* Constructor: */
 	public Aluno(int codigo_aluno, String aluno, Date data_nascimento, char sexo, String telefone, String celular,
 	String email, String observacao, String endereco, String numero, String complemento, String bairro, Local local, String cep) {
 		this.codigo_aluno = codigo_aluno;
@@ -44,67 +38,119 @@ public class Aluno {
 		this.cep = cep;
 	}
 	
-	/* getter and setter: */
-	public int getCodigoAluno() { return this.codigo_aluno; }
-
-	public void setCodigoAluno(int codigo_aluno) { this.codigo_aluno = codigo_aluno; }
+	public Aluno(String aluno) {
+		this();
+		this.aluno = aluno;
+	}
 	
-	public String getAluno() { return this.aluno; }
-
-	public void setAluno(String aluno) { this.aluno = aluno; }
+	public Aluno() {
+		this(0, null, null, '0', null, null, null, null, null, null, null, null, new Local(), null);
+	}
 	
-	public Date getDataNascimento() { return this.data_nascimento; }
-
-	public void setDataNascimento(Date data_nascimento) { this.data_nascimento = data_nascimento; }
+	/* Getter and Setter: */
+	public int getCodigoAluno() {
+		return codigo_aluno;
+	}
+	public void setCodigoAluno(int codigo_aluno) {
+		this.codigo_aluno = codigo_aluno;
+	}
 	
-	public char getSexo() { return this.sexo; }
-
-	public void setSexo(char sexo) { this.sexo = sexo; }
+	public String getAluno() {
+		return aluno;
+	}
+	public void setAluno(String aluno) {
+		this.aluno = aluno;
+	}
 	
-	public String getTelefone() { return this.telefone; }
-
-	public void setTelefone(String telefone) { this.telefone = telefone; }
+	public Date getDataNascimento() {
+		return data_nascimento;
+	}
+	public void setDataNascimento(Date data_nascimento) {
+		this.data_nascimento = data_nascimento;
+	}
 	
-	public String getCelular() { return this.celular; }
-
-	public void setCelular(String celular) { this.celular = celular; }
+	public char getSexo() {
+		return sexo;
+	}
+	public void setSexo(char sexo) {
+		this.sexo = sexo;
+	}
 	
-	public String getEmail() { return this.email; }
-
-	public void setEmail(String email) { this.email = email; }
+	public String getTelefone() {
+		return telefone;
+	}
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 	
-	public String getObs() { return this.observacao; }
-
-	public void setObs(String observacao) { this.observacao = observacao; }
+	public String getCelular() {
+		return celular;
+	}
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
 	
-	public String getEndereco() { return this.endereco; }
-
-	public void setEndereco(String endereco) { this.endereco = endereco; }
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
-	public String getNumero() { return this.numero; }
-
-	public void setNumero(String numero) { this.numero = numero; }
+	public String getObs() {
+		return observacao;
+	}
+	public void setObs(String observacao) {
+		this.observacao = observacao;
+	}
 	
-	public String getComplemento() { return this.complemento; }
-
-	public void setComplemento(String complemento) { this.complemento = complemento; }
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 	
-	public String getBairro() { return this.bairro; }
-
-	public void setBairro(String bairro) { this.bairro = bairro; }
+	public String getNumero() {
+		return numero;
+	}
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
 	
-	public Local getLocal() { return this.local; }
-
-	public void setLocal(Local local) { this.local = local; }
+	public String getComplemento() {
+		return complemento;
+	}
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
 	
-	public String getCEP() { return cep; }
-
-	public void setCEP(String cep) { this.cep = cep; }
+	public String getBairro() {
+		return bairro;
+	}
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 	
-	/* methods: */
+	public Local getLocal() {
+		return this.local;
+	}
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+	
+	public String getCep() {
+		return cep;
+	}
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	
+	/* Methods: */
 	public String toString() {
 		return String.format("%d, %s, %s, %c, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s", this.codigo_aluno,
-		this.aluno, this.data_nascimento.toString(), this.sexo, this.telefone, this.celular, this.email,
-		this.observacao, this.endereco, this.numero, this.complemento, this.bairro, this.local.toString(), this.cep);
+		this.aluno, this.data_nascimento.toString(), this.sexo, this.telefone, this.celular,
+		this.email, this.observacao, this.endereco, this.numero, this.complemento, this.bairro,
+		this.local.toString(), this.cep);
 	}
 }

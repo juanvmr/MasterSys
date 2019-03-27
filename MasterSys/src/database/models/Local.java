@@ -2,12 +2,12 @@ package database.models;
 
 public class Local {
 	
-	/* Attributes: */
+	/* attributes: */
 	private String cidade;
 	private String estado;
 	private String pais;
 	
-	/* Constructor */
+	/* constructor */
 	public Local() {}
 	
 	public Local(String cidade, String estado, String pais) {
@@ -16,26 +16,16 @@ public class Local {
 		this.pais = pais;
 	}
 	
-	/* Getter and Setter: */
-	public String getCidade() {
-		return cidade;
-	}
+	/* getter and setter: */
+	public String getCidade() { return this.cidade; }
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
+	public void setCidade(String cidade) { this.cidade = cidade; }
 
-	public String getEstado() {
-		return estado;
-	}
+	public String getEstado() { return this.estado; }
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
+	public void setEstado(String estado) { this.estado = estado; }
 
-	public String getPais() {
-		return pais;
-	}
+	public String getPais() { return this.pais; }
 
 	public void setPais(String pais) {
 		this.pais = pais;

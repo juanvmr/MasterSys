@@ -11,10 +11,6 @@ public class Debug {
 
 	public static void main(String[] args) {
 		
-		// new Login();
-		
-		new Menu();
-		
 		Connection conn = ConnectionFactory.getConnection("master", "admin", "admin");
 		try {
 			conn.setAutoCommit(false);

@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.models.*;
+import database.models.Aluno;
+import database.models.Local;
 
 public class AlunoDAO extends MasterDAO {
 	
@@ -65,7 +66,7 @@ public class AlunoDAO extends MasterDAO {
 			tmp.setComplemento(rst.getString("complemento"));
 			tmp.setBairro(rst.getString("bairro"));
 			tmp.setLocal(new Local(rst.getString("cidade"), rst.getString("estado"), rst.getString("pais")));
-			tmp.setCep(rst.getString("cep"));
+			tmp.setCEP(rst.getString("cep"));
 			
 			list.add(tmp);
 		}
@@ -103,7 +104,7 @@ public class AlunoDAO extends MasterDAO {
 			tmp.setNumero(rst.getString("numero"));
 			tmp.setComplemento(rst.getString("complemento"));
 			tmp.setLocal(new Local(rst.getString("cidade"), rst.getString("estado"), rst.getString("pais")));
-			tmp.setCep(rst.getString("cep"));
+			tmp.setCEP(rst.getString("cep"));
 		}
 		
 		return tmp;
@@ -132,7 +133,7 @@ public class AlunoDAO extends MasterDAO {
 		Set(pst_update, 12, tmp.getLocal().getCidade());
 		Set(pst_update, 13, tmp.getLocal().getEstado());
 		Set(pst_update, 14, tmp.getLocal().getPais());
-		Set(pst_update, 15, tmp.getCep());
+		Set(pst_update, 15, tmp.getCEP());
 		Set(pst_update, 16, tmp.getCodigoAluno());
 		
 		// run query
@@ -167,7 +168,7 @@ public class AlunoDAO extends MasterDAO {
 		Set(pst_insert, 12, tmp.getLocal().getCidade());
 		Set(pst_insert, 13, tmp.getLocal().getEstado());
 		Set(pst_insert, 14, tmp.getLocal().getPais());
-		Set(pst_insert, 15, tmp.getCep());
+		Set(pst_insert, 15, tmp.getCEP());
 		
 		// run query
 		pst_insert.execute();

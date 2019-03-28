@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e3730e8-0fcc-488b-88bf-f88f9c09b8c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/frames/PlanosFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/frames/UsuariosFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/PlanosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/PlanosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/UsuariosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UsuariosFrame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,20 +18,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/frames/PlanosFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="15" selection-start-column="15" selection-end-column="15" />
+            <state relative-caret-position="2380">
+              <caret line="140" column="78" lean-forward="true" selection-start-line="140" selection-start-column="78" selection-end-line="140" selection-end-column="78" />
               <folding>
-                <element signature="e#153#154#0" expanded="true" />
-                <element signature="e#185#186#0" expanded="true" />
-                <element signature="method#initComponents#0;class#framePlanos#0" />
-                <element signature="e#1418#1597#0" expanded="true" />
-                <element signature="e#1596#1597#0" expanded="true" />
-                <element signature="e#1639#1806#0" expanded="true" />
-                <element signature="e#1805#1806#0" expanded="true" />
-                <element signature="e#7630#7631#0" expanded="true" />
-                <element signature="e#7673#7674#0" expanded="true" />
-                <element signature="e#8839#8840#0" expanded="true" />
-                <element signature="e#8905#8906#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#587#588#0" expanded="true" />
+                <element signature="e#607#608#0" expanded="true" />
+                <element signature="e#1265#1414#0" expanded="true" />
+                <element signature="e#1413#1414#0" expanded="true" />
+                <element signature="e#1445#1582#0" expanded="true" />
+                <element signature="e#1581#1582#0" expanded="true" />
+                <element signature="e#6851#6852#0" expanded="true" />
+                <element signature="e#6894#6895#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -41,11 +38,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/frames/UsuariosFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+            <state relative-caret-position="1921">
+              <caret line="113" column="64" lean-forward="true" selection-start-line="113" selection-start-column="64" selection-end-line="113" selection-end-column="64" />
               <folding>
-                <element signature="e#408#409#0" expanded="true" />
-                <element signature="e#476#477#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,6 +55,17 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>newjava.awt.event.</find>
+      <find>ava.util.logging.</find>
+      <find>java.util.logging.</find>
+      <find>javax.swing.</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>new</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
@@ -87,8 +94,8 @@
         <option value="$PROJECT_DIR$/src/panels/MasterLogin.java" />
         <option value="$PROJECT_DIR$/src/Utility.java" />
         <option value="$PROJECT_DIR$/src/frames/MasterLogin.java" />
-        <option value="$PROJECT_DIR$/src/frames/PlanosFrame.java" />
         <option value="$PROJECT_DIR$/src/frames/UsuariosFrame.java" />
+        <option value="$PROJECT_DIR$/src/frames/PlanosFrame.java" />
       </list>
     </option>
   </component>
@@ -105,7 +112,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -128,17 +134,25 @@
               <item name="MasterSys" type="b2602c69:ProjectViewProjectNode" />
               <item name="MasterSys" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MasterSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="frames" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553734274334" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553747641763" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -158,7 +172,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MasterLogin">
+  <component name="RunManager" selected="Application.PlanosFrame">
     <configuration name="Debug" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="database.Debug" />
       <module name="MasterSys" />
@@ -192,8 +206,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PanelTemplate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="frames.PanelTemplate" />
+    <configuration name="PlanosFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="frames.PlanosFrame" />
+      <module name="MasterSys" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="frames.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UsuariosFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="frames.UsuariosFrame" />
       <module name="MasterSys" />
       <extension name="coverage">
         <pattern>
@@ -207,10 +234,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PlanosFrame" />
+        <item itemvalue="Application.UsuariosFrame" />
         <item itemvalue="Application.MasterLogin" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Debug" />
-        <item itemvalue="Application.PanelTemplate" />
       </list>
     </recent_temporary>
   </component>
@@ -228,10 +256,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24563758" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24840085" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -240,7 +268,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32681563" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32960895" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3290461" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39944133" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -435,13 +463,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Utility.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Utility.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/JPasswordField.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
@@ -513,31 +535,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/frames/PlanosFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="15" selection-start-column="15" selection-end-column="15" />
+        <state relative-caret-position="2380">
+          <caret line="140" column="78" lean-forward="true" selection-start-line="140" selection-start-column="78" selection-end-line="140" selection-end-column="78" />
           <folding>
-            <element signature="e#153#154#0" expanded="true" />
-            <element signature="e#185#186#0" expanded="true" />
-            <element signature="method#initComponents#0;class#framePlanos#0" />
-            <element signature="e#1418#1597#0" expanded="true" />
-            <element signature="e#1596#1597#0" expanded="true" />
-            <element signature="e#1639#1806#0" expanded="true" />
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#7630#7631#0" expanded="true" />
-            <element signature="e#7673#7674#0" expanded="true" />
-            <element signature="e#8839#8840#0" expanded="true" />
-            <element signature="e#8905#8906#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#607#608#0" expanded="true" />
+            <element signature="e#1265#1414#0" expanded="true" />
+            <element signature="e#1413#1414#0" expanded="true" />
+            <element signature="e#1445#1582#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+            <element signature="e#6851#6852#0" expanded="true" />
+            <element signature="e#6894#6895#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/frames/UsuariosFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+        <state relative-caret-position="1921">
+          <caret line="113" column="64" lean-forward="true" selection-start-line="113" selection-start-column="64" selection-end-line="113" selection-end-column="64" />
           <folding>
-            <element signature="e#408#409#0" expanded="true" />
-            <element signature="e#476#477#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

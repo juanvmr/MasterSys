@@ -18,7 +18,7 @@ Repositorio para manter atualualizado um trabalho da graduaçao de ciências da 
 
 + Pedro
 + Juan
-+ Juliano
++ (Juliano)[https://github.com/JAT5]
 
 ## License:
 

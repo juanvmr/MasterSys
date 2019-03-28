@@ -1,4 +1,4 @@
-package panels;
+package frames;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +38,8 @@ public class MasterMenu extends JFrame {
         this.setJMenuBar(menu_bar);
         this.setContentPane(CreateContentPane());
         this.setVisible(true);
+
+        desktop.add(new MasterLogin("teste"));
     }
 
     public Container CreateContentPane() {

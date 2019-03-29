@@ -22,13 +22,16 @@ public class Aluno {
 	/* constructor: */
 	public Aluno() {}
 
+	public Aluno(int codigo_aluno) {
+		this.codigo_aluno = codigo_aluno;
+	}
+
 	public Aluno(String aluno) {
 		this.aluno = aluno;
 	}
 
-	public Aluno(int codigo_aluno, String aluno, Date data_nascimento, char sexo, String telefone, String celular,
-	String email, String observacao, String endereco, String numero, String complemento, String bairro, Local local, String cep) {
-		this.codigo_aluno = codigo_aluno;
+	public Aluno(String aluno, Date data_nascimento, char sexo, String telefone, String celular, String email,
+	 String observacao, String endereco, String numero, String complemento, String bairro, Local local, String cep) {
 		this.aluno = aluno;
 		this.data_nascimento = data_nascimento;
 		this.sexo = sexo;
@@ -42,6 +45,12 @@ public class Aluno {
 		this.bairro = bairro;
 		this.local = local;
 		this.cep = cep;
+	}
+
+	public Aluno(int codigo_aluno, String aluno, Date data_nascimento, char sexo, String telefone, String celular,
+	String email, String observacao, String endereco, String numero, String complemento, String bairro, Local local, String cep) {
+		this(aluno, data_nascimento, sexo, telefone, celular, email, observacao, endereco, numero, complemento, bairro, local, cep);
+		this.codigo_aluno = codigo_aluno;
 	}
 	
 	/* getter and setter: */

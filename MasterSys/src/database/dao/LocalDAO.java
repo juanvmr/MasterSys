@@ -42,6 +42,10 @@ public class LocalDAO extends MasterDAO {
 	}
 	
 	/* methods: */
+
+	/*
+	 *	@role: método inutil, pois returna uma lista de tamanho 9845.
+	 */
 	@Override
 	public List<Object> SelectAll() throws SQLException {
 		
@@ -57,7 +61,10 @@ public class LocalDAO extends MasterDAO {
 		
 		return list;
 	}
-	
+
+	/*
+	 *	@role: método inutil, pois procura pelo mesmo objeto informado.
+	 */
 	@Override
 	public Object Select(Object obj) throws SQLException {
 		
@@ -81,7 +88,10 @@ public class LocalDAO extends MasterDAO {
 		
 		return tmp;
 	}
-	
+
+	/*
+	 * @role: insere um novo local no banco de dados.
+	 */
 	@Override
 	public void Insert(Object obj) throws SQLException {
 		
@@ -103,7 +113,10 @@ public class LocalDAO extends MasterDAO {
 			this.conn.commit();
 		}
 	}
-	
+
+	/*
+	 *	@role: delete o local informado do banco de dados.
+	 */
 	@Override
 	public void Delete(Object obj) throws SQLException {
 		
@@ -126,7 +139,9 @@ public class LocalDAO extends MasterDAO {
 		}
 	}
 	
-	/* returns a list of string with all different 'paises'. */
+	/*
+	 *	@role: Retorna uma lista com todos os países.
+	 */
 	public List<Object> SelectPais() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
@@ -143,8 +158,10 @@ public class LocalDAO extends MasterDAO {
 		
 		return list;
 	}
-	
-	/* returns a list of strings with all the different 'estados' */
+
+	/*
+	 *	@role: Retorna uma lista com todos os estados de dado pais.
+	 */
 	public List<Object> SelectEstado(String parameter) throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
@@ -164,7 +181,10 @@ public class LocalDAO extends MasterDAO {
 		
 		return list;
 	}
-	
+
+	/*
+	 *	@role: método inutil.
+	 */
 	@Override
 	public void Update(Object obj) throws SQLException {
 		

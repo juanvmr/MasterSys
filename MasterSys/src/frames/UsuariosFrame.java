@@ -10,18 +10,18 @@ public class UsuariosFrame extends JFrame {
 
     private String[] listaPerfil;
 
-    private JButton jButtonAdicionar;
-    private JButton jButtonBuscar;
-    private JButton jButtonRemover;
-    private JButton jButtonSalvar;
-    private JComboBox<String> jComboBoxPerfil;
-    private JLabel jLabelConfirmaSenha;
-    private JLabel jLabelPerfil;
-    private JLabel jLabelSenha;
-    private JLabel jLabelUsuario;
-    private JPasswordField jPasswordConfirma;
-    private JPasswordField jPasswordSenha;
-    private JTextField jTextFieldUsuario;
+    private JButton adicionarButton;
+    private JButton buscarButton;
+    private JButton removerButton;
+    private JButton salvarButton;
+    private JComboBox<String> perfilComboBox;
+    private JLabel confirmaSenhaLabel;
+    private JLabel perfilLabel;
+    private JLabel senhaLabel;
+    private JLabel usuarioLabel;
+    private JPasswordField passwordConfirmaField;
+    private JPasswordField passwordField;
+    private JTextField usuarioField;
 
     public UsuariosFrame(String title) {
         super(title);
@@ -30,21 +30,21 @@ public class UsuariosFrame extends JFrame {
 
     private void initComponents(Container pane) {
 
-        jButtonBuscar = new JButton("Buscar");
-        jButtonAdicionar = new JButton("Adicionar");
-        jButtonRemover = new JButton("Remover");
-        jButtonSalvar = new JButton("Salvar");
-        jLabelUsuario = new JLabel("Usuário:");
-        jLabelSenha = new JLabel("Senha:");
-        jLabelConfirmaSenha = new JLabel("Confirmar Senha:");
-        jLabelPerfil = new JLabel("Perfil");
-        jTextFieldUsuario = new JTextField();
-        jPasswordSenha = new JPasswordField();
-        jPasswordConfirma = new JPasswordField();
-        jComboBoxPerfil = new JComboBox<>();
+        buscarButton = new JButton("Buscar");
+        adicionarButton = new JButton("Adicionar");
+        removerButton = new JButton("Remover");
+        salvarButton = new JButton("Salvar");
+        usuarioLabel = new JLabel("Usuário:");
+        senhaLabel = new JLabel("Senha:");
+        confirmaSenhaLabel = new JLabel("Confirmar Senha:");
+        perfilLabel = new JLabel("Perfil");
+        usuarioField = new JTextField();
+        passwordField = new JPasswordField();
+        passwordConfirmaField = new JPasswordField();
+        perfilComboBox = new JComboBox<>();
 
-        jComboBoxPerfil.setModel(new DefaultComboBoxModel<>(listaPerfil));
-        jComboBoxPerfil.addActionListener(new ActionListener() {
+        perfilComboBox.setModel(new DefaultComboBoxModel<>(listaPerfil));
+        perfilComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
 
             }
@@ -57,23 +57,23 @@ public class UsuariosFrame extends JFrame {
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabelPerfil, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabelConfirmaSenha, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                                        .addComponent(jLabelSenha, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabelUsuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButtonBuscar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(perfilLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(confirmaSenhaLabel, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                                        .addComponent(senhaLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(usuarioLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(buscarButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jButtonAdicionar, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(adicionarButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButtonRemover, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(removerButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jButtonSalvar, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jTextFieldUsuario)
-                                        .addComponent(jPasswordSenha)
-                                        .addComponent(jPasswordConfirma)
-                                        .addComponent(jComboBoxPerfil, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(salvarButton, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(usuarioField)
+                                        .addComponent(passwordField)
+                                        .addComponent(passwordConfirmaField)
+                                        .addComponent(perfilComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -82,27 +82,27 @@ public class UsuariosFrame extends JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(jButtonBuscar, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButtonAdicionar, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButtonRemover, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jButtonSalvar, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(buscarButton, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(adicionarButton, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(removerButton, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(salvarButton, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabelUsuario, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldUsuario, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                                        .addComponent(usuarioLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(usuarioField, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabelSenha, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jPasswordSenha, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                                        .addComponent(senhaLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabelConfirmaSenha, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(confirmaSenhaLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jPasswordConfirma)
+                                                .addComponent(passwordConfirmaField)
                                                 .addGap(5, 5, 5)))
                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabelPerfil, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBoxPerfil, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                                        .addComponent(perfilLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(perfilComboBox, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                                 .addContainerGap(21, Short.MAX_VALUE))
         );
     }

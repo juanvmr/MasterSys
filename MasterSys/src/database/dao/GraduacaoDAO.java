@@ -36,10 +36,15 @@ public class GraduacaoDAO extends MasterDAO {
 		this.pst_delete = conn.prepareStatement(is_delete);
 		
 	}
-	
+
+	@Override
+	public int count() throws SQLException {
+		return 0;
+	}
+
 	/* methods: */
 	@Override
-	public List<Object> SelectAll() throws SQLException {
+	public List<Object> selectAll() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
 		
@@ -54,7 +59,7 @@ public class GraduacaoDAO extends MasterDAO {
 	}
 	
 	@Override
-	public Object Select(Object obj) throws SQLException {
+	public Object select(Object obj) throws SQLException {
 		
 		Object tmp = null;
 		
@@ -68,9 +73,14 @@ public class GraduacaoDAO extends MasterDAO {
 		
 		return tmp;
 	}
-	
+
 	@Override
-	public void Insert(Object obj) throws SQLException {
+	public Object selectByName(String name) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public void insert(Object obj) throws SQLException {
 		
 		pst_insert.clearParameters();
 		
@@ -87,7 +97,7 @@ public class GraduacaoDAO extends MasterDAO {
 	}
 	
 	@Override
-	public void Update(Object obj) throws SQLException {
+	public void update(Object obj) throws SQLException {
 		
 		pst_update.clearParameters();
 		
@@ -105,7 +115,7 @@ public class GraduacaoDAO extends MasterDAO {
 	}
 	
 	@Override
-	public void Delete(Object obj) throws SQLException {
+	public void delete(Object obj) throws SQLException {
 		
 		Graduacao tmp = (Graduacao) obj;
 		

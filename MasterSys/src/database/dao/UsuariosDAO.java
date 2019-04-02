@@ -46,7 +46,7 @@ public class UsuariosDAO extends MasterDAO {
 	}
 	
 	/* methods: */
-	public void CreateUser(String username, String password) throws SQLException {
+	public void createUser(String username, String password) throws SQLException {
 		
 		pst_create_role.clearParameters();
 		
@@ -60,7 +60,7 @@ public class UsuariosDAO extends MasterDAO {
 		}
 	}
 	
-	public void ChangeUserPassword(String username, String new_password) throws SQLException {
+	public void changeUserPassword(String username, String new_password) throws SQLException {
 		
 		pst_alter_role.clearParameters();
 		
@@ -74,7 +74,7 @@ public class UsuariosDAO extends MasterDAO {
 		}
 	}
 	
-	public void DeleteUser(String username) throws SQLException {
+	public void deleteUser(String username) throws SQLException {
 		
 		pst_drop_role.clearParameters();
 		
@@ -86,9 +86,14 @@ public class UsuariosDAO extends MasterDAO {
 			conn.commit();
 		}
 	}
-	
+
 	@Override
-	public List<Object> SelectAll() throws SQLException {
+	public int count() throws SQLException {
+		return 0;
+	}
+
+	@Override
+	public List<Object> selectAll() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
 		
@@ -103,7 +108,7 @@ public class UsuariosDAO extends MasterDAO {
 	}
 
 	@Override
-	public Object Select(Object parameter) throws SQLException {
+	public Object select(Object parameter) throws SQLException {
 		
 		Usuario tmp = null;
 		
@@ -119,7 +124,12 @@ public class UsuariosDAO extends MasterDAO {
 	}
 
 	@Override
-	public void Insert(Object obj) throws SQLException {
+	public Object selectByName(String name) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public void insert(Object obj) throws SQLException {
 		
 		pst_insert.clearParameters();
 		
@@ -136,7 +146,7 @@ public class UsuariosDAO extends MasterDAO {
 	}
 	
 	@Override
-	public void Update(Object obj) throws SQLException {
+	public void update(Object obj) throws SQLException {
 		
 		pst_update.clearParameters();
 		
@@ -153,7 +163,7 @@ public class UsuariosDAO extends MasterDAO {
 	}
 
 	@Override
-	public void Delete(Object obj) throws SQLException {
+	public void delete(Object obj) throws SQLException {
 		
 		Usuario tmp = (Usuario) obj;
 		

@@ -12,10 +12,10 @@ public class Debug {
 			conn.setAutoCommit(false);
 			System.out.println("Connectado com sucesso!");
 
-			System.out.println("connection is closed: " + conn.isClosed());
-			
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+		} catch (NullPointerException e) {
+			System.err.println("Database not found.");
 		}
 
 	}

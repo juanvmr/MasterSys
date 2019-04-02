@@ -15,6 +15,7 @@ public class LocalDAO extends MasterDAO {
 	private Connection conn;
 	
 	/* query: */
+	private String is_count = "SELECT COUNT(cidade) FROM cidades";
 	private String is_selectAll = "SELECT * FROM cidades ORDER BY estado DESC, pais DESC";
 	private String is_select = "SELECT * FROM cidades WHERE cidade = ? AND estado = ? AND pais = ?";
 	private String is_selectPais = "SELECT DISTINCT pais FROM cidades ORDER BY pais";
@@ -24,13 +25,14 @@ public class LocalDAO extends MasterDAO {
 	private String is_delete = "DELETE FROM cidades WHERE cidade = ? AND estado = ? AND pais = ?";
 	
 	/* statements: */
-	private PreparedStatement pst_selectAll, pst_select, pst_selectPais, pst_selectEstado, pst_insert, pst_update, pst_delete;
+	private PreparedStatement pst_count, pst_selectAll, pst_select, pst_selectPais, pst_selectEstado, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
 	public LocalDAO(Connection conn) throws SQLException {
 		
 		this.conn = conn;
-		
+
+		this.pst_count = conn.prepareStatement(is_count);
 		this.pst_select = conn.prepareStatement(is_select);
 		this.pst_selectAll = conn.prepareStatement(is_selectAll);
 		this.pst_selectPais = conn.prepareStatement(is_selectPais);
@@ -42,12 +44,26 @@ public class LocalDAO extends MasterDAO {
 	}
 	
 	/* methods: */
+	@Override
+	public int count() throws SQLException {
+
+		pst_count = conn.prepareStatement(is_count);
+
+		ResultSet rst = pst_count.executeQuery();
+
+		int count = -1;
+		if (rst.next()) {
+			count = rst.getInt(1);
+		}
+		
+		return count;
+	}
 
 	/*
-	 *	@role: método inutil, pois returna uma lista de tamanho 9845.
+	 *	@note: método inutil, pois returna uma lista de tamanho 9845.
 	 */
 	@Override
-	public List<Object> SelectAll() throws SQLException {
+	public List<Object> selectAll() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
 		
@@ -63,10 +79,10 @@ public class LocalDAO extends MasterDAO {
 	}
 
 	/*
-	 *	@role: método inutil, pois procura pelo mesmo objeto informado.
+	 *	@note: método inutil, pois procura pelo mesmo objeto informado.
 	 */
 	@Override
-	public Object Select(Object obj) throws SQLException {
+	public Object select(Object obj) throws SQLException {
 		
 		Object tmp = null;
 		
@@ -89,11 +105,13 @@ public class LocalDAO extends MasterDAO {
 		return tmp;
 	}
 
-	/*
-	 * @role: insere um novo local no banco de dados.
-	 */
 	@Override
-	public void Insert(Object obj) throws SQLException {
+	public Object selectByName(String name) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public void insert(Object obj) throws SQLException {
 		
 		Local tmp = (Local) obj;
 		
@@ -115,10 +133,13 @@ public class LocalDAO extends MasterDAO {
 	}
 
 	/*
-	 *	@role: delete o local informado do banco de dados.
+	 *	@note: método inutil.
 	 */
 	@Override
-	public void Delete(Object obj) throws SQLException {
+	public void update(Object obj) throws SQLException {}
+
+	@Override
+	public void delete(Object obj) throws SQLException {
 		
 		Local tmp = (Local) obj;
 		
@@ -142,7 +163,7 @@ public class LocalDAO extends MasterDAO {
 	/*
 	 *	@role: Retorna uma lista com todos os países.
 	 */
-	public List<Object> SelectPais() throws SQLException {
+	public List<Object> selectPais() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
 		
@@ -162,7 +183,7 @@ public class LocalDAO extends MasterDAO {
 	/*
 	 *	@role: Retorna uma lista com todos os estados de dado pais.
 	 */
-	public List<Object> SelectEstado(String parameter) throws SQLException {
+	public List<Object> selectEstado(String parameter) throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
 		
@@ -180,26 +201,5 @@ public class LocalDAO extends MasterDAO {
 		}
 		
 		return list;
-	}
-
-	/*
-	 *	@role: método inutil.
-	 */
-	@Override
-	public void Update(Object obj) throws SQLException {
-		
-		// we are note using this method
-		Local tmp = (Local) obj;
-		
-		// clear previous query
-		pst_update.clearParameters();
-		
-		// fill query
-		Set(pst_update, 1, tmp.getCidade());
-		Set(pst_update, 2, tmp.getEstado());
-		Set(pst_update, 3, tmp.getPais());
-		
-		System.out.println(pst_update.toString());
-
 	}
 }

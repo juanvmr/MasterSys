@@ -35,10 +35,15 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 		pst_update = conn.prepareStatement(is_update);
 		pst_delete = conn.prepareStatement(is_delete);
 	}
-	
+
+	@Override
+	public int count() throws SQLException {
+		return 0;
+	}
+
 	/* methods: */
 	@Override
-	public List<Object> SelectAll() throws SQLException {
+	public List<Object> selectAll() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
 		
@@ -60,7 +65,7 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 	}
 	
 	@Override
-	public Object Select(Object obj) throws SQLException {
+	public Object select(Object obj) throws SQLException {
 		
 		MatriculaModalidade tmp = null;
 		
@@ -90,7 +95,12 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public void Insert(Object obj) throws SQLException {
+	public Object selectByName(String name) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public void insert(Object obj) throws SQLException {
 		
 		MatriculaModalidade tmp = (MatriculaModalidade) obj;
 		
@@ -114,7 +124,12 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public void Delete(Object obj) throws SQLException {
+	public void update(Object obj) throws SQLException {
+		/* DUVIDAS ??? */
+	}
+
+	@Override
+	public void delete(Object obj) throws SQLException {
 		
 		MatriculaModalidade tmp = (MatriculaModalidade) obj;
 		
@@ -132,26 +147,6 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 		if (pst_delete.getUpdateCount() > 0) {
 			this.conn.commit();
 		}
-	}
-	
-	/************************************************************
-	 * DUVIDAS ???
-	 ************************************************************/
-	
-	
-	@Override
-	public void Update(Object obj) throws SQLException {
-		
-		MatriculaModalidade tmp = (MatriculaModalidade) obj;
-		
-		// clear previous query
-		pst_update.clearParameters();
-		
-		// fill query
-		Set(pst_update, 1, tmp.getCodigoMatricula());
-		Set(pst_update, 2, tmp.getModalidade());
-		
-		System.out.println(pst_update.toString());
 	}
 	
 }

@@ -35,10 +35,15 @@ public class ModalidadeDAO extends MasterDAO {
 		pst_update = conn.prepareStatement(is_update);
 		pst_delete = conn.prepareStatement(is_delete);
 	}
-	
+
+	@Override
+	public int count() throws SQLException {
+		return 0;
+	}
+
 	/* methods: */
 	@Override
-	public List<Object> SelectAll() throws SQLException {
+	public List<Object> selectAll() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
 		
@@ -53,7 +58,7 @@ public class ModalidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public void Insert(Object obj) throws SQLException {
+	public void insert(Object obj) throws SQLException {
 		
 		Modalidade tmp = (Modalidade) obj;
 		
@@ -73,7 +78,7 @@ public class ModalidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public void Delete(Object obj) throws SQLException {
+	public void delete(Object obj) throws SQLException {
 		
 		Modalidade tmp = (Modalidade) obj;
 		
@@ -96,7 +101,7 @@ public class ModalidadeDAO extends MasterDAO {
 	 * DUVIDAS ???
 	 ************************************************************/
 	@Override
-	public Object Select(Object obj) throws SQLException {
+	public Object select(Object obj) throws SQLException {
 		
 		Modalidade tmp = null;
 		
@@ -116,9 +121,14 @@ public class ModalidadeDAO extends MasterDAO {
 		
 		return tmp;
 	}
-	
+
 	@Override
-	public void Update(Object obj) throws SQLException {
+	public Object selectByName(String name) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public void update(Object obj) throws SQLException {
 		
 		Modalidade tmp = (Modalidade) obj;
 		

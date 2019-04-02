@@ -36,10 +36,15 @@ public class AssiduidadeDAO extends MasterDAO {
 		this.pst_delete = conn.prepareStatement(is_delete);
 		
 	}
-	
+
+	@Override
+	public int count() throws SQLException {
+		return 0;
+	}
+
 	/* methods: */
 	@Override
-	public List<Object> SelectAll() throws SQLException {
+	public List<Object> selectAll() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
 		
@@ -55,7 +60,7 @@ public class AssiduidadeDAO extends MasterDAO {
 	}
 	
 	@Override
-	public Object Select(Object obj) throws SQLException {
+	public Object select(Object obj) throws SQLException {
 		
 		Object tmp = null;
 		
@@ -75,9 +80,14 @@ public class AssiduidadeDAO extends MasterDAO {
 		
 		return tmp;
 	}
-	
+
 	@Override
-	public void Insert(Object obj) throws SQLException {
+	public Object selectByName(String name) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public void insert(Object obj) throws SQLException {
 
 		Assiduidade tmp = (Assiduidade) obj;
 		
@@ -98,7 +108,7 @@ public class AssiduidadeDAO extends MasterDAO {
 	}
 	
 	@Override
-	public void Update(Object obj) throws SQLException {
+	public void update(Object obj) throws SQLException {
 
 		Assiduidade tmp = (Assiduidade) obj;
 		
@@ -119,7 +129,7 @@ public class AssiduidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public void Delete(Object obj) throws SQLException {
+	public void delete(Object obj) throws SQLException {
 		
 		Assiduidade tmp = (Assiduidade) obj;
 		

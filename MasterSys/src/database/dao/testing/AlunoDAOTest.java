@@ -21,35 +21,35 @@ public class AlunoDAOTest {
         "(47) 9707-0799", "pedro@gmail.com", "none", "Rua Mario da Cunha Carneiro", "34",
         "apto 401", "Pio Correa", new Local("CRICIUMA", "SC", "Brasil"), "88811-510");
 
-        dao.Insert(aluno);
+        dao.insert(aluno);
     }
 
     private static void runUpdate(boolean enable) throws SQLException {
         if (!enable) return;
 
-        Aluno aluno = (Aluno) dao.Select(new Aluno("Pedro"));
+        Aluno aluno = (Aluno) dao.select(new Aluno("Pedro"));
         aluno.setCEP("99898-010");
 
-        dao.Update(aluno);
+        dao.update(aluno);
     }
 
     private static void runSelect(boolean enable) throws SQLException {
         if (!enable) return;
 
-        Aluno aluno = (Aluno) dao.Select(new Aluno("Pedro"));
+        Aluno aluno = (Aluno) dao.select(new Aluno("Pedro"));
         System.out.println(aluno.toString());
     }
 
     private static void runDelete(boolean enable) throws SQLException {
         if (!enable) return;
 
-        dao.Delete(new Aluno(2));
+        dao.delete(new Aluno(2));
     }
 
     private static void runSelectAll(boolean enable) throws SQLException {
         if (!enable) return;
 
-        List<Object> list = dao.SelectAll();
+        List<Object> list = dao.selectAll();
 
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
@@ -73,7 +73,9 @@ public class AlunoDAOTest {
             runSelectAll(false);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+        } catch (NullPointerException e) {
+            System.err.println("Database not found.");
         }
 
     }

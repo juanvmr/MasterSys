@@ -29,7 +29,7 @@ public class LocalDAOTest {
     private static void runSelectAll(boolean enable) throws SQLException {
         if (!enable) return;
 
-        List<Object> list = local_dao.SelectAll();
+        List<Object> list = local_dao.selectAll();
 
         printList(list, 5);
 
@@ -44,7 +44,7 @@ public class LocalDAOTest {
 
         Local x = new Local("CRICIUMA", "SC", "Brasil");
 
-        Local y = (Local) local_dao.Select(x);
+        Local y = (Local) local_dao.select(x);
 
         System.out.println(y.toString());
     }
@@ -52,7 +52,7 @@ public class LocalDAOTest {
     private static void runSelectPais(boolean enable) throws SQLException {
         if (!enable) return;
 
-        List<Object> list = local_dao.SelectPais();
+        List<Object> list = local_dao.selectPais();
 
         printList(list, 10);
 
@@ -62,7 +62,7 @@ public class LocalDAOTest {
     private static void runSelectEstado(boolean enable) throws SQLException {
         if (!enable) return;
 
-        List<Object> list = local_dao.SelectEstado("Brasil");
+        List<Object> list = local_dao.selectEstado("Brasil");
 
         printList(list, 30);
 
@@ -73,21 +73,21 @@ public class LocalDAOTest {
         if (!enable) return;
 
         Local t = new Local("Cidade", "AB", "Pais");
-        local_dao.Insert(t);
+        local_dao.insert(t);
     }
 
     private static void runUpdate(boolean enable) throws SQLException {
         if (!enable) return;
 
         Local t = new Local("Cidade", "AB", "Pais");
-        local_dao.Update(t);
+        local_dao.update(t);
     }
 
     private static void runDelete(boolean enable) throws SQLException {
         if (!enable) return;
 
         Local t = new Local("Cidade", "AB", "Pais");
-        local_dao.Delete(t);
+        local_dao.delete(t);
     }
 
     public static void main(String[] args) {
@@ -107,7 +107,9 @@ public class LocalDAOTest {
             runDelete(false);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+        } catch (NullPointerException e) {
+            System.err.println("Database not found.");
         }
 
     }

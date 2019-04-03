@@ -1,20 +1,18 @@
 package image;
 
-public class MasterImage {
+import javax.swing.*;
 
-	/* attributes: */
-	private String img;
+public class MasterImage extends ImageIcon {
 
-	/* constructor: */
-	public MasterImage() {}
+	public static final MasterImage alterar_16x16 = LoadImage("16x16/alterar.png");
+	public static final MasterImage aplicacao_16x16 = LoadImage("16x16/aplicacao.png");
 
-	public MasterImage(String img) {
-		this.img = img;
+	private MasterImage (final String iconTitle) {
+		super(MasterImage.class.getResource(iconTitle));
 	}
 
-	/* getter and setter: */
+	public static MasterImage LoadImage(final String iconTitle) {
+		return new MasterImage(iconTitle);
+	}
 
-	public String getImg() { return this.img; }
-
-	public void setImg(String img) { this.img = img; }
 }

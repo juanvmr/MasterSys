@@ -36,11 +36,6 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 		pst_delete = conn.prepareStatement(is_delete);
 	}
 
-	@Override
-	public int count() throws SQLException {
-		return 0;
-	}
-
 	/* methods: */
 	@Override
 	public List<Object> selectAll() throws SQLException {
@@ -92,11 +87,6 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 		}
 		
 		return tmp;
-	}
-
-	@Override
-	public Object selectByName(String name) throws SQLException {
-		return null;
 	}
 
 	@Override

@@ -6,13 +6,14 @@ import java.util.List;
 
 public abstract class MasterDAO {
 
-	public abstract int count() throws SQLException;
+	/* methods: */
+
+	// public abstract int count() throws SQLException;
+	// public abstract Object selectByName(String name) throws SQLException;
 
 	public abstract List<Object> selectAll() throws SQLException;
 	
 	public abstract Object select(Object obj) throws SQLException;
-
-	public abstract Object selectByName(String name) throws SQLException;
 
 	public abstract void insert(Object obj) throws SQLException;
 

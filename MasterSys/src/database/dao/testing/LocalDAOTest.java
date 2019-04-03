@@ -99,7 +99,7 @@ public class LocalDAOTest {
             local_dao = new LocalDAO(connection);
 
             runSelect(false);
-            runSelectAll(true);
+            runSelectAll(false);
             runSelectPais(false);
             runSelectEstado(true);
             runInsert(false);

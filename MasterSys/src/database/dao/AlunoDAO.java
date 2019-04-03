@@ -14,52 +14,14 @@ public class AlunoDAO extends MasterDAO {
 	
 	/* attributes: */
 	private Connection conn;
-	
-	/* query: */
-	private String is_count = "SELECT COUNT(codigo_aluno) FROM alunos";
-	private String is_selectByName = "SELECT * FROM alunos WHERE aluno = ?";
-	private String is_selectAll = "SELECT * FROM alunos ORDER BY aluno";
-	private String is_select = "SELECT * FROM alunos WHERE codigo_aluno = ?";
-	private String is_insert = "INSERT INTO alunos (codigo_aluno, aluno, data_nascimento, sexo, "
-			+ "telefone, celular, email, observacao, endereco, numero, complemento, bairro, cidade, "
-			+ "estado, pais, cep) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private String is_update = "UPDATE alunos SET aluno = ?, data_nascimento = ?, sexo = ?, telefone = ?, "
-			+ "celular = ?, email = ?, observacao = ?, endereco = ?, numero = ?, complemento = ?, "
-			+ "bairro = ?, cidade = ?, estado = ?, pais = ?, cep = ? WHERE codigo_aluno = ?";
-	private String is_delete = "DELETE FROM alunos WHERE codigo_aluno = ?";
-
-	/* statements: */
-	private PreparedStatement pst_count, pst_selectByName, pst_selectAll, pst_select, pst_insert, pst_update, pst_delete;
+	private PreparedStatement pst_select;
+	private PreparedStatement pst_insert;
+	private PreparedStatement pst_update;
+	private PreparedStatement pst_delete;
 	
 	/* constructor: */
 	public AlunoDAO(Connection conn) throws SQLException {
-
 		this.conn = conn;
-
-		pst_count = conn.prepareStatement(is_count);
-		pst_selectByName = conn.prepareStatement(is_selectByName);
-		pst_selectAll = conn.prepareStatement(is_selectAll);
-		pst_select = conn.prepareStatement(is_select);
-		pst_insert = conn.prepareStatement(is_insert);
-		pst_update = conn.prepareStatement(is_update);
-		pst_delete = conn.prepareStatement(is_delete);
-	}
-
-	@Override
-	public int count() throws SQLException {
-		// clear previous statement parameters
-		pst_count.clearParameters();
-
-		// receive query result
-		ResultSet rst = pst_count.executeQuery();
-
-		// check if query returned something
-		int count = -1;
-		if (rst.next()) {
-			count = rst.getInt(1);
-		}
-
-		return count;
 	}
 
 	/* methods: */
@@ -85,12 +47,15 @@ public class AlunoDAO extends MasterDAO {
 	@Override
 	public List<Object> selectAll() throws SQLException {
 
-		List<Object> list = new ArrayList<Object>();
-		
+		String query = "SELECT * FROM alunos ORDER BY aluno";
+
+		pst_select = conn.prepareStatement(query);
+
 		// receive query result
-		ResultSet rst = pst_selectAll.executeQuery();
+		ResultSet rst = pst_select.executeQuery();
 
 		// check what query returned
+		List<Object> list = new ArrayList<>();
 		while (rst.next()) {
 			Aluno tmp = getData(rst);
 			list.add(tmp);
@@ -102,9 +67,10 @@ public class AlunoDAO extends MasterDAO {
 	@Override
 	public Object select(Object obj) throws SQLException {
 
-		// clear previous statement parameters
-		pst_select.clearParameters();
-		
+		String query = "SELECT * FROM alunos WHERE codigo_aluno = ?";
+
+		pst_select = conn.prepareStatement(query);
+
 		// fill statement
 		Set(pst_select, 1, ((Aluno) obj).getCodigoAluno());
 		
@@ -121,36 +87,18 @@ public class AlunoDAO extends MasterDAO {
 	}
 
 	@Override
-	public Object selectByName(String name) throws SQLException {
-
-		// clear previous statement parameters
-		pst_selectByName.clearParameters();
-
-		// fill statement
-		Set(pst_selectByName, 1, name);
-
-		// receive query result
-		ResultSet rst = pst_selectByName.executeQuery();
-
-		// check if query returned something
-		Aluno tmp = null;
-		if (rst.next()) {
-			tmp = getData(rst);
-		}
-
-		return tmp;
-	}
-
-
-	@Override
 	public void insert(Object obj) throws SQLException {
 
-		Aluno tmp = (Aluno) obj;
+		String query = "INSERT INTO alunos (codigo_aluno, aluno, data_nascimento, sexo, "
+			+ "telefone, celular, email, observacao, endereco, numero, complemento, bairro, cidade, "
+			+ "estado, pais, cep) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		// clear previous statement parameters
-		pst_insert.clearParameters();
+		// build statement
+		pst_insert = conn.prepareStatement(query);
 
 		// fill statement
+		Aluno tmp = (Aluno) obj;
+
 		Set(pst_insert,  1, tmp.getAluno());
 		Set(pst_insert,  2, tmp.getDataNascimento());
 		Set(pst_insert,  3, tmp.getSexo());
@@ -178,13 +126,17 @@ public class AlunoDAO extends MasterDAO {
 
 	@Override
 	public void update(Object obj) throws SQLException {
+
+		String query = "UPDATE alunos SET aluno = ?, data_nascimento = ?, sexo = ?, telefone = ?, "
+			+ "celular = ?, email = ?, observacao = ?, endereco = ?, numero = ?, complemento = ?, "
+			+ "bairro = ?, cidade = ?, estado = ?, pais = ?, cep = ? WHERE codigo_aluno = ?";
 		
-		Aluno tmp = (Aluno) obj;
-		
-		// clear previous statement parameters
-		pst_update.clearParameters();
+		// build statement
+		pst_update = conn.prepareStatement(query);
 		
 		// fill statement
+		Aluno tmp = (Aluno) obj;
+
 		Set(pst_update,  1, tmp.getAluno());
 		Set(pst_update,  2, tmp.getDataNascimento());
 		Set(pst_update,  3, tmp.getSexo());
@@ -213,13 +165,15 @@ public class AlunoDAO extends MasterDAO {
 
 	@Override
 	public void delete(Object obj) throws SQLException {
-		
-		Aluno tmp = (Aluno) obj;
-		
-		// clear previous statement parameters
-		pst_delete.clearParameters();
+
+		String query = "DELETE FROM alunos WHERE codigo_aluno = ?";
+
+		// build statement
+		pst_delete = conn.prepareStatement(query);
 		
 		// fill statement
+		Aluno tmp = (Aluno) obj;
+
 		Set(pst_delete, 1, tmp.getCodigoAluno());
 		
 		// run query

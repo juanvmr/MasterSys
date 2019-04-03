@@ -69,8 +69,8 @@ public class AlunoDAOTest {
             runInsert(false);
             runSelect(false);
             runUpdate(false);
-            runDelete(true);
-            runSelectAll(false);
+            runDelete(false);
+            runSelectAll(true);
 
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());

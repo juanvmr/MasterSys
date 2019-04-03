@@ -88,11 +88,6 @@ public class UsuariosDAO extends MasterDAO {
 	}
 
 	@Override
-	public int count() throws SQLException {
-		return 0;
-	}
-
-	@Override
 	public List<Object> selectAll() throws SQLException {
 		
 		List<Object> list = new ArrayList<Object>();
@@ -121,11 +116,6 @@ public class UsuariosDAO extends MasterDAO {
 		}
 		
 		return tmp;
-	}
-
-	@Override
-	public Object selectByName(String name) throws SQLException {
-		return null;
 	}
 
 	@Override

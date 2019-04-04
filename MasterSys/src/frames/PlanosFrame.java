@@ -1,16 +1,25 @@
 package  frames;
 
-
 import database.dao.ModalidadeDAO;
 import database.models.Modalidade;
 
-import javax.swing.*;
-//import java.awt.*;
 import java.awt.Container;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
 
 public class PlanosFrame extends JFrame {
 

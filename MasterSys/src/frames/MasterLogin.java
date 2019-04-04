@@ -1,11 +1,22 @@
 package frames;
 
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
 import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import database.ConnectionFactory;
 
@@ -29,8 +40,7 @@ public class MasterLogin extends JFrame {
         usernameField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                String password = new String(passwordField.getPassword());
-                if ((e.getKeyCode() == KeyEvent.VK_ENTER) && !password.isEmpty()) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     okButtonActionPerformed(null);
                 }
             }
@@ -39,15 +49,14 @@ public class MasterLogin extends JFrame {
         passwordField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                String username = usernameField.getText();
-                if ((e.getKeyCode() == KeyEvent.VK_ENTER) && !username.isEmpty()) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     okButtonActionPerformed(null);
                 }
             }
         });
 
         // button
-        loginButton.addActionListener(new ActionListener() {
+        loginButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event) {
                 okButtonActionPerformed(event);
             }
@@ -115,6 +124,7 @@ public class MasterLogin extends JFrame {
 
                         // close login window
                         this.dispose();
+                        new MasterJFrame("MasterSys");
                     }
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());

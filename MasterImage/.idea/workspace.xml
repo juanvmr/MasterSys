@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dc523aa-d49c-4616-8c17-67fee7364140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MasterSys/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/Debug.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/frames/PlanosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/frames/PlanosFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/frames/UsuariosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/frames/UsuariosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/PlanoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/PlanoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/UsuariosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/UsuariosDAO.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

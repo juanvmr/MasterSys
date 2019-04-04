@@ -2,27 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e3730e8-0fcc-488b-88bf-f88f9c09b8c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../MasterImage/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterImage/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MasterImage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterImage/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterImage/src/image/MasterImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterImage/src/image/MasterImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/database/ConnectionFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/database/ConnectionFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/database/dao/AlunoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/database/dao/AlunoDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/database/dao/MasterDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/database/dao/MasterDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/AlunoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/FaturaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/FaturaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/LocalDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/LocalDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/MasterDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/MasterDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/PlanoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/PlanoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/UsuariosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/UsuariosDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/testing/AlunoDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/testing/AlunoDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/testing/LocalDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/testing/LocalDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/Debug.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frames/PlanosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/PlanosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/UsuariosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/UsuariosFrame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,12 +19,12 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database/Debug.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="18" selection-end-column="9" />
+            <state relative-caret-position="144">
+              <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -49,10 +33,44 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/frames/UsuariosFrame.java">
+        <entry file="file://$PROJECT_DIR$/src/database/ConnectionFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+            <state relative-caret-position="306">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#849#850#0" expanded="true" />
+                <element signature="e#896#897#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/database/dao/AlunoDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+              <folding>
+                <element signature="method#getData#0;class#AlunoDAO#0" />
+                <element signature="method#selectAll#0;class#AlunoDAO#0" />
+                <element signature="method#select#0;class#AlunoDAO#0" />
+                <element signature="method#insert#0;class#AlunoDAO#0" />
+                <element signature="method#update#0;class#AlunoDAO#0" />
+                <element signature="method#delete#0;class#AlunoDAO#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/database/dao/testing/AlunoDAOTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="867">
+              <caret line="51" column="12" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -60,32 +78,26 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/frames/PlanosFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="143" column="33" selection-start-line="143" selection-start-column="33" selection-end-line="143" selection-end-column="33" />
+            <state relative-caret-position="314">
+              <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
               <folding>
-                <element signature="e#100#101#0" expanded="true" />
-                <element signature="e#132#133#0" expanded="true" />
-                <element signature="e#1365#1544#0" expanded="true" />
-                <element signature="e#1543#1544#0" expanded="true" />
-                <element signature="e#1586#1753#0" expanded="true" />
-                <element signature="e#1752#1753#0" expanded="true" />
-                <element signature="e#7577#7578#0" expanded="true" />
-                <element signature="e#7620#7621#0" expanded="true" />
-                <element signature="e#8818#8819#0" expanded="true" />
-                <element signature="e#8892#8893#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1743#1892#0" expanded="true" />
+                <element signature="e#1891#1892#0" expanded="true" />
+                <element signature="e#1898#2035#0" expanded="true" />
+                <element signature="e#2034#2035#0" expanded="true" />
+                <element signature="e#7185#7186#0" expanded="true" />
+                <element signature="e#7228#7229#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/frames/MasterLogin.java">
+        <entry file="file://$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="17" column="31" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="368">
+              <caret line="47" column="12" lean-forward="true" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -104,9 +116,9 @@
       <find>newjava.awt.event.</find>
       <find>ava.util.logging.</find>
       <find>java.util.logging.</find>
-      <find>javax.swing.</find>
-      <find>javax.swing.</find>
       <find>testesjanelas</find>
+      <find>javax.swing.</find>
+      <find>java.awt.event.</find>
     </findStrings>
     <replaceStrings>
       <replace>new</replace>
@@ -133,13 +145,11 @@
         <option value="$PROJECT_DIR$/src/panels/Login.java" />
         <option value="$PROJECT_DIR$/src/panels/PanelTemplate.java" />
         <option value="$PROJECT_DIR$/src/panels/Menu.java" />
-        <option value="$PROJECT_DIR$/src/database/Debug.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/panels/MasterMenu.java" />
         <option value="$PROJECT_DIR$/src/panels/MasterLogin.java" />
         <option value="$PROJECT_DIR$/src/Utility.java" />
         <option value="$PROJECT_DIR$/src/frames/MasterLogin.java" />
-        <option value="$PROJECT_DIR$/src/frames/UsuariosFrame.java" />
         <option value="$PROJECT_DIR$/src/database/dao/DebugLocalDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/testing/DebugLocalDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/AlunoDAOTest.java" />
@@ -158,14 +168,16 @@
         <option value="$PROJECT_DIR$/src/database/dao/UsuariosDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/testing/LocalDAOTest.java" />
         <option value="$PROJECT_DIR$/src/frames/Design.form" />
+        <option value="$PROJECT_DIR$/src/frames/UsuariosFrame.java" />
+        <option value="$PROJECT_DIR$/src/database/Debug.java" />
         <option value="$PROJECT_DIR$/src/frames/PlanosFrame.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
+    <option name="x" value="951" />
     <option name="width" value="975" />
-    <option name="height" value="1058" />
+    <option name="height" value="1059" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -206,6 +218,14 @@
               <item name="MasterSys" type="b2602c69:ProjectViewProjectNode" />
               <item name="MasterSys" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="testing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MasterSys" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MasterSys" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="frames" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -219,8 +239,8 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553815233293" />
     <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
-    <property name="project.structure.last.edited" value="SDKs" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -242,13 +262,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.PlanosFrame">
-    <configuration name="AlunoDAOTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="database.dao.testing.AlunoDAOTest" />
+  <component name="RunManager" selected="Application.Debug">
+    <configuration name="Debug" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="database.Debug" />
       <module name="MasterSys" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="database.dao.testing.*" />
+          <option name="PATTERN" value="database.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -310,11 +330,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PlanosFrame" />
+        <item itemvalue="Application.Debug" />
         <item itemvalue="Application.UsuariosFrame" />
+        <item itemvalue="Application.PlanosFrame" />
         <item itemvalue="Application.MasterLogin" />
         <item itemvalue="Application.LocalDAOTest" />
-        <item itemvalue="Application.AlunoDAOTest" />
       </list>
     </recent_temporary>
   </component>
@@ -333,8 +353,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17919463" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1818792" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -343,7 +364,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32583067" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32681563" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32681563" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39944133" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -362,7 +383,7 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17919463" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1818792" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -371,7 +392,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32583067" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32681563" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32681563" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39944133" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -547,33 +568,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/ConnectionFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#849#850#0" expanded="true" />
-            <element signature="e#896#897#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/AlunoDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-          <folding>
-            <element signature="method#getData#0;class#AlunoDAO#0" />
-            <element signature="method#selectAll#0;class#AlunoDAO#0" />
-            <element signature="method#select#0;class#AlunoDAO#0" />
-            <element signature="method#insert#0;class#AlunoDAO#0" />
-            <element signature="method#update#0;class#AlunoDAO#0" />
-            <element signature="method#delete#0;class#AlunoDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/database/dao/MasterDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -628,13 +622,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="117" column="5" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/database/dao/PlanoDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -666,26 +653,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/testing/AlunoDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="71" column="27" selection-start-line="71" selection-start-column="27" selection-end-line="71" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/Debug.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="18" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frames/Design.form" />
+    <entry file="file://$PROJECT_DIR$/src/frames/Design.java" />
     <entry file="file://$PROJECT_DIR$/src/frames/MasterLogin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -696,38 +665,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/frames/Design.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/frames/Design.java">
+    <entry file="file://$PROJECT_DIR$/src/frames/UsuariosFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="323">
+          <caret line="89" column="42" selection-start-line="89" selection-start-column="42" selection-end-line="89" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/frames/UsuariosFrame.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/JComboBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        <state relative-caret-position="179">
+          <caret line="306" column="48" selection-start-line="306" selection-start-column="42" selection-end-line="306" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/DefaultComboBoxModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="74" column="39" lean-forward="true" selection-start-line="74" selection-start-column="39" selection-end-line="74" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="47" column="12" lean-forward="true" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/AlunoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+          <folding>
+            <element signature="method#getData#0;class#AlunoDAO#0" />
+            <element signature="method#selectAll#0;class#AlunoDAO#0" />
+            <element signature="method#select#0;class#AlunoDAO#0" />
+            <element signature="method#insert#0;class#AlunoDAO#0" />
+            <element signature="method#update#0;class#AlunoDAO#0" />
+            <element signature="method#delete#0;class#AlunoDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/testing/AlunoDAOTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="12" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/ConnectionFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#849#850#0" expanded="true" />
+            <element signature="e#896#897#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/Debug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/frames/PlanosFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="143" column="33" selection-start-line="143" selection-start-column="33" selection-end-line="143" selection-end-column="33" />
+        <state relative-caret-position="314">
+          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
           <folding>
-            <element signature="e#100#101#0" expanded="true" />
-            <element signature="e#132#133#0" expanded="true" />
-            <element signature="e#1365#1544#0" expanded="true" />
-            <element signature="e#1543#1544#0" expanded="true" />
-            <element signature="e#1586#1753#0" expanded="true" />
-            <element signature="e#1752#1753#0" expanded="true" />
-            <element signature="e#7577#7578#0" expanded="true" />
-            <element signature="e#7620#7621#0" expanded="true" />
-            <element signature="e#8818#8819#0" expanded="true" />
-            <element signature="e#8892#8893#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1743#1892#0" expanded="true" />
+            <element signature="e#1891#1892#0" expanded="true" />
+            <element signature="e#1898#2035#0" expanded="true" />
+            <element signature="e#2034#2035#0" expanded="true" />
+            <element signature="e#7185#7186#0" expanded="true" />
+            <element signature="e#7228#7229#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -789,6 +813,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

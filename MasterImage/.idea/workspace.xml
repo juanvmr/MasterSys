@@ -2,25 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dc523aa-d49c-4616-8c17-67fee7364140" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/image/MasterImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/image/MasterImage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MasterSys/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/bin/database/ConnectionFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/bin/database/ConnectionFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/bin/database/dao/AlunoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/bin/database/dao/AlunoDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/bin/database/dao/MasterDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/bin/database/dao/MasterDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/AlunoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/AssiduidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/AssiduidadeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/FaturaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/FaturaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/GraduacaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/GraduacaoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/LocalDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/LocalDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/MasterDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/MasterDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/MatriculaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/MatriculaDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/MatriculaModalidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/MatriculaModalidadeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/ModalidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/ModalidadeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/PlanoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/PlanoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/UsuariosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/UsuariosDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/testing/AlunoDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/testing/AlunoDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/dao/testing/LocalDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/dao/testing/LocalDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MasterSys/src/database/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/database/Debug.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MasterSys/src/frames/PlanosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/frames/PlanosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MasterSys/src/frames/UsuariosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MasterSys/src/frames/UsuariosFrame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,12 +22,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="83" selection-start-line="6" selection-start-column="83" selection-end-line="6" selection-end-column="83" />
-              <folding>
-                <element signature="e#300#301#0" expanded="true" />
-                <element signature="e#351#352#0" expanded="true" />
-                <element signature="e#410#411#0" expanded="true" />
-                <element signature="e#434#435#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -59,9 +39,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
+    <option name="x" value="951" />
     <option name="width" value="975" />
-    <option name="height" value="1058" />
+    <option name="height" value="1059" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -69,6 +49,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -91,8 +73,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -130,7 +110,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12416107" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12550336" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -162,18 +142,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="83" selection-start-line="6" selection-start-column="83" selection-end-line="6" selection-end-column="83" />
-          <folding>
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#351#352#0" expanded="true" />
-            <element signature="e#410#411#0" expanded="true" />
-            <element signature="e#434#435#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
   </component>
   <component name="masterDetails">
     <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
           <splitter-proportions>
@@ -188,6 +185,17 @@
       <state key="JdkListConfigurable.UI">
         <settings>
           <last-edited>JDK-1.8.0-201</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

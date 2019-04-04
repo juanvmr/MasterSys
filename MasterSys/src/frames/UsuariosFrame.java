@@ -50,7 +50,7 @@ public class UsuariosFrame extends JFrame {
             }
         });
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(pane);
         pane.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)

@@ -13,18 +13,8 @@ public class UsuariosDAO extends MasterDAO {
 
 	/* attributes: */
 	private Connection conn;
-	private PreparedStatement pst_select;
-	private PreparedStatement pst_insert;
-	private PreparedStatement pst_update;
-	private PreparedStatement pst_delete;
-
-	private PreparedStatement pst_create;
-	private PreparedStatement pst_alter;
-	private PreparedStatement pst_drop;
-	
-	private String is_create_role = "CREATE ROLE ? WITH LOGIN ENCRYPTED PASSWORD ? IN ROLE admin";
-	private String is_alter_role = "ALTER ROLE ? WITH LOGIN ENCRYPTED PASSWORD ?";
-	private String is_drop_role = "DROP ROLE ?";
+	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
+	private PreparedStatement pst_create, pst_alter, pst_drop;
 	
 	/* constructor: */
 	public UsuariosDAO(Connection conn) throws SQLException {
@@ -33,8 +23,10 @@ public class UsuariosDAO extends MasterDAO {
 	
 	/* methods: */
 	private void createUser(String username, String password) throws SQLException {
-		
-		pst_create = conn.prepareStatement(is_create_role);
+
+		String query = "CREATE ROLE ? WITH LOGIN ENCRYPTED PASSWORD ? IN ROLE admin";
+
+		pst_create = conn.prepareStatement(query);
 		
 		Set(pst_create, 1, username);
 		Set(pst_create, 2, password);
@@ -47,8 +39,10 @@ public class UsuariosDAO extends MasterDAO {
 	}
 	
 	private void alterUser(String username, String new_password) throws SQLException {
-		
-		pst_alter = conn.prepareStatement(is_alter_role);
+
+		String query = "ALTER ROLE ? WITH LOGIN ENCRYPTED PASSWORD ?";
+
+		pst_alter = conn.prepareStatement(query);
 		
 		Set(pst_alter, 1, username);
 		Set(pst_alter, 2, new_password);
@@ -61,8 +55,10 @@ public class UsuariosDAO extends MasterDAO {
 	}
 	
 	private void dropUser(String username) throws SQLException {
-		
-		pst_drop = conn.prepareStatement(is_drop_role);
+
+		String query = "DROP ROLE ?";
+
+		pst_drop = conn.prepareStatement(query);
 		
 		Set(pst_drop, 1, username);
 		
@@ -78,10 +74,13 @@ public class UsuariosDAO extends MasterDAO {
 
 		String query = "SELECT * FROM usuarios ORDER BY usuario";
 
+		// build statement
 		pst_select = conn.prepareStatement(query);
 
+		// run query
 		ResultSet rst = pst_select.executeQuery();
 
+		// check result
 		List<Object> list = new ArrayList<Object>();
 		while (rst.next()) {
 			Usuario tmp = new Usuario(
@@ -99,12 +98,16 @@ public class UsuariosDAO extends MasterDAO {
 
 		String query = "SELECT * FROM usuarios WHERE usuario = ?";
 
+		// build statement
 		pst_select = conn.prepareStatement(query);
-		
+
+		// fill query
 		Set(pst_select, 1, ((Usuario) parameter).getUsuario());
-		
+
+		// run query
 		ResultSet rst = pst_select.executeQuery();
 
+		// check result
 		Usuario tmp = null;
 		if (rst.next()) {
 			tmp = new Usuario(
@@ -146,15 +149,19 @@ public class UsuariosDAO extends MasterDAO {
 
 		String query = "UPDATE usuarios SET perfil = ? WHERE usuario = ?";
 
+		// build statement
 		pst_update = conn.prepareStatement(query);
-		
+
+		// fill statement
 		Usuario tmp = (Usuario) obj;
 		
 		Set(pst_update,  1, tmp.getPerfil());
 		Set(pst_update,  2, tmp.getUsuario());
-		
+
+		// run query
 		pst_update.execute();
 
+		// change user password
 		alterUser(tmp.getUsuario(), tmp.getPassword());
 
 		if (pst_update.getUpdateCount() > 0) {

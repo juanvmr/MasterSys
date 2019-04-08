@@ -14,10 +14,7 @@ public class AlunoDAO extends MasterDAO {
 	
 	/* attributes: */
 	private Connection conn;
-	private PreparedStatement pst_select;
-	private PreparedStatement pst_insert;
-	private PreparedStatement pst_update;
-	private PreparedStatement pst_delete;
+	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
 	public AlunoDAO(Connection conn) throws SQLException {

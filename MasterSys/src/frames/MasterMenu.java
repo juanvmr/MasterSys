@@ -13,10 +13,12 @@ import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
 
-public class MasterJFrame extends JFrame {
+public class MasterMenu extends JFrame {
 
     /* elements: */
+    private Connection conn;
     private JMenuBar menuBar;
     private JMenu menuSistema, menuCadastro, menuProcessos, menuRelatorios, menuAjuda;
     private JMenuItem itemSistemaSair, itemSistemaUsuarios, itemCadastroAlunos, itemCadastroModalidades, itemCadastroPlanos;
@@ -27,7 +29,7 @@ public class MasterJFrame extends JFrame {
     private JDesktopPane desktop;
 
     /* constructor: */
-    public MasterJFrame(String title) {
+    public MasterMenu(String title, Connection conn) {
         super(title);
         this.setSize(800, 600);
 
@@ -37,6 +39,8 @@ public class MasterJFrame extends JFrame {
         this.setJMenuBar(menuBar);
         this.setContentPane(CreateContentPane());
         this.setVisible(true);
+
+        this.conn = conn;
     }
 
     private void createMenu(){
@@ -44,6 +48,9 @@ public class MasterJFrame extends JFrame {
 
         menuSistema = new JMenu("Sistema");
         menuCadastro = new JMenu("Cadastro");
+        menuProcessos = new JMenu("Processos");
+        menuRelatorios = new JMenu("Relatórios");
+        menuAjuda = new JMenu("Ajuda");
 
         itemSistemaSair = new JMenuItem("Sair");
         itemSistemaUsuarios = new JMenuItem("Usuários");
@@ -60,13 +67,7 @@ public class MasterJFrame extends JFrame {
         itemRelatorioFaturaAberto = new JMenuItem("Em aberto");
         itemRelatorioFaturaPago = new JMenuItem("Pagas");
         itemRelatorioMatricula = new JMenuItem("Matrículas");
-
-        itemProcessoFaturamento.add(itemProcessoFaturamentoGerar);
-        itemProcessoFaturamento.add(itemProcessoFaturamentoPagar);
-        itemProcessoFaturamento.add(itemProcessoFaturamentoConsultar);
-        itemProcessoMatricula.add(itemProcessoMatriculaAluno);
-        itemRelatorioFatura.add(itemRelatorioFaturaAberto);
-        itemRelatorioFatura.add(itemRelatorioFaturaPago);
+        itemAjudaSobre = new JMenuItem("Info");
 
         menuSistema.add(itemSistemaUsuarios);
         menuSistema.add(itemSistemaSair);
@@ -78,6 +79,13 @@ public class MasterJFrame extends JFrame {
         menuRelatorios.add(itemRelatorioMatricula);
         menuRelatorios.add(itemRelatorioFatura);
         menuAjuda.add(itemAjudaSobre);
+
+        itemProcessoFaturamento.add(itemProcessoFaturamentoGerar);
+        itemProcessoFaturamento.add(itemProcessoFaturamentoPagar);
+        itemProcessoFaturamento.add(itemProcessoFaturamentoConsultar);
+        itemProcessoMatricula.add(itemProcessoMatriculaAluno);
+        itemRelatorioFatura.add(itemRelatorioFaturaAberto);
+        itemRelatorioFatura.add(itemRelatorioFaturaPago);
 
         menuBar.add(menuSistema);
         menuBar.add(menuCadastro);

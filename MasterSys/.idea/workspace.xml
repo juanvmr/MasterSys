@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e3730e8-0fcc-488b-88bf-f88f9c09b8c9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/MasterImage.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MasterSys.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MasterSys.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frames/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/database/Debug.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/database/Debug.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/database/dao/AlunoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/database/dao/AlunoDAO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/Debug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/MasterJFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/MasterMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frames/MasterLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/frames/MasterLogin.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,11 +74,44 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database/Debug.java">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/frames/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+              <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/frames/MasterMenu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/frames/MasterLogin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="379">
+              <caret line="126" column="58" lean-forward="true" selection-start-line="126" selection-start-column="58" selection-end-line="126" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -128,7 +165,6 @@
         <option value="$PROJECT_DIR$/src/panels/MasterMenu.java" />
         <option value="$PROJECT_DIR$/src/panels/MasterLogin.java" />
         <option value="$PROJECT_DIR$/src/Utility.java" />
-        <option value="$PROJECT_DIR$/src/frames/MasterLogin.java" />
         <option value="$PROJECT_DIR$/src/database/dao/DebugLocalDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/testing/DebugLocalDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/AlunoDAOTest.java" />
@@ -151,6 +187,9 @@
         <option value="$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" />
         <option value="$PROJECT_DIR$/src/database/Debug.java" />
+        <option value="$PROJECT_DIR$/src/frames/Main.java" />
+        <option value="$PROJECT_DIR$/src/frames/MasterLogin.java" />
+        <option value="$PROJECT_DIR$/src/frames/MasterMenu.java" />
       </list>
     </option>
   </component>
@@ -249,7 +288,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Debug">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Debug" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="database.Debug" />
       <module name="MasterSys" />
@@ -263,12 +302,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LocalDAOTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="database.dao.testing.LocalDAOTest" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="frames.Main" />
       <module name="MasterSys" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="database.dao.testing.*" />
+          <option name="PATTERN" value="frames.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -317,11 +356,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Debug" />
         <item itemvalue="Application.UsuariosFrame" />
         <item itemvalue="Application.PlanosFrame" />
         <item itemvalue="Application.MasterLogin" />
-        <item itemvalue="Application.LocalDAOTest" />
       </list>
     </recent_temporary>
   </component>
@@ -369,34 +408,6 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1818792" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32583067" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32681563" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39944133" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32960895" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32960895" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32681563" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/database/models/Assiduidade.java">
@@ -598,16 +609,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/frames/Design.form" />
     <entry file="file://$PROJECT_DIR$/src/frames/Design.java" />
-    <entry file="file://$PROJECT_DIR$/src/frames/MasterLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/frames/UsuariosFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -741,8 +742,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/Debug.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frames/MasterLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="126" column="58" lean-forward="true" selection-start-line="126" selection-start-column="58" selection-end-line="126" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frames/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/frames/MasterMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

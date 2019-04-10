@@ -124,7 +124,7 @@ public class MasterLogin extends JFrame {
 
                         // close login window
                         this.dispose();
-                        new MasterJFrame("MasterSys");
+                        new MasterMenu("MasterSys", conn);
                     }
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());
@@ -136,20 +136,6 @@ public class MasterLogin extends JFrame {
             usernameField.setText("*");
         }
 
-    }
-
-    public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                // create login window
-                MasterLogin login = new MasterLogin("Login");
-                login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                login.initComponents(login.getContentPane());
-                login.pack();
-                login.setVisible(true);
-            }
-        });
     }
     
 }

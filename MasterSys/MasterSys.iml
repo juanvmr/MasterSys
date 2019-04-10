@@ -23,6 +23,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="MasterImage" />
+    <orderEntry type="library" name="MasterImage" level="project" />
   </component>
 </module>

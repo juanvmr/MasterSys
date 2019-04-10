@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e3730e8-0fcc-488b-88bf-f88f9c09b8c9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/MasterImage.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MasterSys.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MasterSys.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/Debug.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,13 +39,12 @@
         <entry file="file://$PROJECT_DIR$/src/database/dao/UsuariosDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="612">
-              <caret line="172" column="55" lean-forward="true" selection-start-line="172" selection-start-column="55" selection-end-line="172" selection-end-column="55" />
+              <caret line="172" column="55" selection-start-line="172" selection-start-column="55" selection-end-line="172" selection-end-column="55" />
               <folding>
                 <element signature="method#createUser#0;class#UsuariosDAO#0" />
                 <element signature="method#alterUser#0;class#UsuariosDAO#0" />
                 <element signature="method#dropUser#0;class#UsuariosDAO#0" />
                 <element signature="method#selectAll#0;class#UsuariosDAO#0" />
-                <element signature="e#1883#1891#0" expanded="true" />
                 <element signature="method#select#0;class#UsuariosDAO#0" />
                 <element signature="method#insert#0;class#UsuariosDAO#0" />
                 <element signature="method#update#0;class#UsuariosDAO#0" />
@@ -53,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database/dao/MatriculaDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
@@ -64,6 +65,18 @@
                 <element signature="method#insert#0;class#MatriculaDAO#0" />
                 <element signature="method#update#0;class#MatriculaDAO#0" />
                 <element signature="method#delete#0;class#MatriculaDAO#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/database/Debug.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -131,20 +144,20 @@
         <option value="$PROJECT_DIR$/src/frames/Design.form" />
         <option value="$PROJECT_DIR$/src/frames/UsuariosFrame.java" />
         <option value="$PROJECT_DIR$/src/frames/PlanosFrame.java" />
-        <option value="$PROJECT_DIR$/src/database/Debug.java" />
         <option value="$PROJECT_DIR$/src/database/dao/PlanoDAO.java" />
         <option value="$PROJECT_DIR$/src/database/models/Usuario.java" />
         <option value="$PROJECT_DIR$/src/database/dao/UsuariosDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/AlunoDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" />
+        <option value="$PROJECT_DIR$/src/database/Debug.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1057" />
+    <option name="x" value="952" />
+    <option name="width" value="975" />
+    <option name="height" value="1058" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -155,6 +168,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -205,15 +219,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553815233293" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../MasterImage" />
+    <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -329,7 +342,7 @@
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18724832" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18993288" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -680,16 +693,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/Debug.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/database/dao/AlunoDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -708,13 +711,12 @@
     <entry file="file://$PROJECT_DIR$/src/database/dao/UsuariosDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
-          <caret line="172" column="55" lean-forward="true" selection-start-line="172" selection-start-column="55" selection-end-line="172" selection-end-column="55" />
+          <caret line="172" column="55" selection-start-line="172" selection-start-column="55" selection-end-line="172" selection-end-column="55" />
           <folding>
             <element signature="method#createUser#0;class#UsuariosDAO#0" />
             <element signature="method#alterUser#0;class#UsuariosDAO#0" />
             <element signature="method#dropUser#0;class#UsuariosDAO#0" />
             <element signature="method#selectAll#0;class#UsuariosDAO#0" />
-            <element signature="e#1883#1891#0" expanded="true" />
             <element signature="method#select#0;class#UsuariosDAO#0" />
             <element signature="method#insert#0;class#UsuariosDAO#0" />
             <element signature="method#update#0;class#UsuariosDAO#0" />
@@ -733,6 +735,16 @@
             <element signature="method#insert#0;class#MatriculaDAO#0" />
             <element signature="method#update#0;class#MatriculaDAO#0" />
             <element signature="method#delete#0;class#MatriculaDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/Debug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="18" column="48" lean-forward="true" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -794,7 +806,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

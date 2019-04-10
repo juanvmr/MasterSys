@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="MasterImage">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../MasterImage" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../MasterImage/src" />
+    </SOURCES>
+  </library>
+</component>

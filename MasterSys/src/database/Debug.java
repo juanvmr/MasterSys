@@ -1,6 +1,7 @@
 package database;
 
 import frames.PlanosFrame;
+import image.MasterImage;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -14,6 +15,8 @@ public class Debug {
 		try {
 			conn.setAutoCommit(false);
 			System.out.println("Connectado com sucesso!");
+
+			MasterImage img = new MasterImage();
 
 			PlanosFrame frame = new PlanosFrame("Testing", conn);
 			frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

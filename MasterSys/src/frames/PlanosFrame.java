@@ -2,7 +2,6 @@ package  frames;
 
 import database.dao.ModalidadeDAO;
 import database.models.Modalidade;
-
 import java.awt.Container;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -11,17 +10,16 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
-public class PlanosFrame extends JFrame {
+public class PlanosFrame extends JInternalFrame {
 
     private Connection conn;
 
@@ -140,36 +138,4 @@ public class PlanosFrame extends JFrame {
     private void jTextFieldValorMouseClicked(MouseEvent evt) {
         jTextFieldValor.setText("");
     }
-
-/*
-    public static void main(String args[]) {
-
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger( frames.PlanosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger( frames.PlanosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger( frames.PlanosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger( frames.PlanosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                PlanosFrame frame = new  frames.PlanosFrame();
-                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                frame.initComponents(frame.getContentPane());
-                frame.pack();
-                frame.setVisible(true);
-            }
-        });
-    }
-*/
 }

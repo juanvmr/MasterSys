@@ -1,12 +1,20 @@
 package frames;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.EventQueue;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
+import javax.swing.JInternalFrame;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
-public class UsuariosFrame extends JFrame {
+public class UsuariosFrame extends JInternalFrame {
 
     private String[] listaPerfil;
 
@@ -23,8 +31,9 @@ public class UsuariosFrame extends JFrame {
     private JPasswordField passwordField;
     private JTextField usuarioField;
 
-    public UsuariosFrame(String title) {
+    public UsuariosFrame(String title, Connection conn) {
         super(title);
+        this.initComponents(this.getContentPane());
         this.listaPerfil = new String[]{"--Selecione--", "Cadastral", "Matricular", "Financeiro", "Completo"};
     }
 
@@ -106,18 +115,4 @@ public class UsuariosFrame extends JFrame {
                                 .addContainerGap(21, Short.MAX_VALUE))
         );
     }
-
-    public static void main(String args[]) {
-
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                UsuariosFrame frame = new UsuariosFrame("Usuário");
-                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                frame.initComponents(frame.getContentPane());
-                frame.pack();
-                frame.setVisible(true);
-            }
-        });
-    }
-    
 }

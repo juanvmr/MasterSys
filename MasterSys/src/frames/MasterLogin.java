@@ -16,7 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 
 import database.ConnectionFactory;
 
@@ -33,6 +32,10 @@ public class MasterLogin extends JFrame {
         this.setSize(800, 600);
         this.setResizable(true);
         this.setPreferredSize(new Dimension(300, 170));
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.initComponents(this.getContentPane());
+        this.pack();
+        this.setVisible(true);
     }
 
     public void initComponents(Container pane) {
@@ -124,7 +127,7 @@ public class MasterLogin extends JFrame {
 
                         // close login window
                         this.dispose();
-                        new MasterMenu("MasterSys", conn);
+                        new MasterMenu("MasterSys", conn, username);
                     }
                 } catch (SQLException e) {
                     System.out.println(e.getMessage());

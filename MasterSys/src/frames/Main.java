@@ -1,9 +1,6 @@
 package frames;
 
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
+import javax.swing.SwingUtilities;
 
 public class Main {
 
@@ -12,11 +9,7 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 // create login window
-                MasterLogin login = new MasterLogin("Login");
-                login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                login.initComponents(login.getContentPane());
-                login.pack();
-                login.setVisible(true);
+                new MasterLogin("Login");
             }
         });
     }

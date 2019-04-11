@@ -13,10 +13,7 @@ public class PlanoDAO extends MasterDAO {
 
 	/* attributes: */
 	private Connection conn;
-	private PreparedStatement pst_select;
-	private PreparedStatement pst_insert;
-	private PreparedStatement pst_update;
-	private PreparedStatement pst_delete;
+	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
 	public PlanoDAO(Connection conn) throws SQLException {
@@ -124,7 +121,7 @@ public class PlanoDAO extends MasterDAO {
 		String query = "DELETE FROM planos WHERE modalidade = ? AND plano = ?";
 
 		// build statement
-		pst_update = conn.prepareStatement(query);
+		pst_delete = conn.prepareStatement(query);
 		
 		// fill query
 		Plano tmp = (Plano) obj;

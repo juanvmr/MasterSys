@@ -13,40 +13,32 @@ public class GraduacaoDAO extends MasterDAO {
 	
 	/* attributes: */
 	private Connection conn;
-	
-	/* query: */
-	private String is_selectAll = "SELECT * FROM graduacoes ORDER BY modalidade, graduacao";
-	private String is_select = "SELECT * FROM graduacoes WHERE modalidade = ? ORDER BY graduacao";
-	private String is_insert = "INSERT INTO graduacoes(modalidade, graduacao) VALUES (?, ?)";
-	private String is_update = "UPDATE graduacoes SET modalidade = ? WHERE graduacao = ?";
-	private String is_delete = "DELETE FROM graduacoes WHERE modalidade = ? AND graduacao = ?";
-	
-	/* statements: */
-	private PreparedStatement pst_selectAll, pst_select, pst_insert, pst_update, pst_delete;
+	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
 	public GraduacaoDAO(Connection conn) throws SQLException {
-		
 		this.conn = conn;
-		
-		this.pst_selectAll = conn.prepareStatement(is_selectAll);
-		this.pst_select = conn.prepareStatement(is_select);
-		this.pst_insert = conn.prepareStatement(is_insert);
-		this.pst_update = conn.prepareStatement(is_update);
-		this.pst_delete = conn.prepareStatement(is_delete);
-		
 	}
 
 	/* methods: */
 	@Override
 	public List<Object> selectAll() throws SQLException {
-		
-		List<Object> list = new ArrayList<Object>();
-		
-		ResultSet rst = pst_selectAll.executeQuery();
-		
+
+		String query = "SELECT * FROM graduacoes ORDER BY modalidade, graduacao";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check result
+		List<Object> list = new ArrayList<>();
 		while (rst.next()) {
-			Graduacao tmp = new Graduacao(rst.getString("modalidade"), rst.getString("graduacao"));
+			Graduacao tmp = new Graduacao(
+				rst.getString("modalidade"),
+				rst.getString("graduacao")
+			);
 			list.add(tmp);
 		}
 		
@@ -55,15 +47,25 @@ public class GraduacaoDAO extends MasterDAO {
 	
 	@Override
 	public Object select(Object obj) throws SQLException {
-		
-		Object tmp = null;
-		
+
+		String query = "SELECT * FROM graduacoes WHERE modalidade = ? ORDER BY graduacao";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
 		Set(pst_select, 1, ((Graduacao) obj).getModalidade());
-		
+
+		// run query
 		ResultSet rst = pst_select.executeQuery();
-		
+
+		// check result
+		Object tmp = null;
 		if (rst.next()) {
-			tmp = new Graduacao(rst.getString("modalidade"), rst.getString("graduacao"));
+			tmp = new Graduacao(
+				rst.getString("modalidade"),
+				rst.getString("graduacao")
+			);
 		}
 		
 		return tmp;
@@ -71,14 +73,19 @@ public class GraduacaoDAO extends MasterDAO {
 
 	@Override
 	public void insert(Object obj) throws SQLException {
-		
-		pst_insert.clearParameters();
-		
+
+		String query = "INSERT INTO graduacoes(modalidade, graduacao) VALUES (?, ?)";
+
+		// build query
+		pst_insert = conn.prepareStatement(query);
+
+		// fill query
 		Graduacao tmp = (Graduacao) obj;
 		
 		Set(pst_insert,  1, tmp.getModalidade());
 		Set(pst_insert,  2, tmp.getGraduacao());
-		
+
+		// run query
 		pst_insert.execute();
 				
 		if (pst_insert.getUpdateCount() > 0) {
@@ -88,14 +95,19 @@ public class GraduacaoDAO extends MasterDAO {
 	
 	@Override
 	public void update(Object obj) throws SQLException {
-		
-		pst_update.clearParameters();
-		
+
+		String query = "UPDATE graduacoes SET modalidade = ? WHERE graduacao = ?";
+
+		// build query
+		pst_update = conn.prepareStatement(query);
+
+		// fill query
 		Graduacao tmp = (Graduacao) obj;
 		
 		Set(pst_update, 1, tmp.getModalidade());
 		Set(pst_update, 2, tmp.getGraduacao());
-		
+
+		// run query
 		pst_update.execute();
 		
 		if (pst_update.getUpdateCount() > 0) {
@@ -106,12 +118,19 @@ public class GraduacaoDAO extends MasterDAO {
 	
 	@Override
 	public void delete(Object obj) throws SQLException {
-		
+
+		String query = "DELETE FROM graduacoes WHERE modalidade = ? AND graduacao = ?";
+
+		// build query
+		pst_delete = conn.prepareStatement(query);
+
+		// fill query
 		Graduacao tmp = (Graduacao) obj;
 		
 		Set(pst_delete, 1, tmp.getModalidade());
 		Set(pst_delete, 2, tmp.getGraduacao());
-		
+
+		// run query
 		pst_delete.execute();
 		
 		if (pst_delete.getUpdateCount() > 0) {

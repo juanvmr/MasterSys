@@ -10,6 +10,10 @@ public class Usuario {
 	/* constructor: */
 	public Usuario () {}
 
+	public Usuario (String usuario) {
+		this.usuario = usuario;
+	}
+
 	public Usuario (String usuario, String perfil) {
 		this.usuario = usuario;
 		this.perfil = perfil;

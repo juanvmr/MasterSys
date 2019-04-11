@@ -54,13 +54,15 @@ public class ModalidadeDAO extends MasterDAO {
 		// fill query
 		Set(pst_select, 1, ((Modalidade) obj).getModalidade());
 
-		// run query and store the result
+		// run query
 		ResultSet rst = pst_select.executeQuery();
 
 		// check if query return a result
 		Modalidade tmp = null;
 		if (rst.next()) {
-			tmp = new Modalidade(rst.getString("modalidade"));
+			tmp = new Modalidade(
+				rst.getString("modalidade")
+			);
 		}
 
 		return tmp;
@@ -91,6 +93,7 @@ public class ModalidadeDAO extends MasterDAO {
 	@Override
 	public void update(Object obj) throws SQLException {
 		String query = "UPDATE modalidades SET modalidade = ? WHERE modalidade = ?";
+		// NOT POSSIBLE
 	}
 
 	@Override

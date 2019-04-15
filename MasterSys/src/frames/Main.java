@@ -9,7 +9,10 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 // create login window
-                new MasterLogin("Login");
+                LoginFrame frame = new LoginFrame("Login");
+                frame.setSize(320, 180);
+                frame.setVisible(true);
+                frame.debug();
             }
         });
     }

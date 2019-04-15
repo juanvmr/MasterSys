@@ -23,16 +23,16 @@ public class PlanosFrame extends JInternalFrame {
 
     private Connection conn;
 
-    private JButton adicionarButton = new JButton("Buscar");
-    private JButton buscaButton = new JButton("Adicionar");
-    private JButton removerButton = new JButton("Remover");
-    private JButton salvarButton = new JButton("Salvar");
     private JLabel modalidadeLabel = new JLabel("Modalidade:");
     private JLabel jLabelPlano = new JLabel("Plano:");
     private JLabel jLabelValor = new JLabel("Valor:");
     private JTextField jTextFieldPlano = new JTextField();
     private JTextField jTextFieldValor = new JTextField();
     private JComboBox<String> jComboBoxModalidades;
+    private JButton adicionarButton = new JButton("Buscar");
+    private JButton buscaButton = new JButton("Adicionar");
+    private JButton removerButton = new JButton("Remover");
+    private JButton salvarButton = new JButton("Salvar");
 
     public PlanosFrame(String title, Connection conn) {
         super(title);

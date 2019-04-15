@@ -1,23 +1,17 @@
 package frames;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
-import javax.swing.JInternalFrame;
-import java.awt.Container;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 
-public class UsuariosFrame extends JInternalFrame {
+public class UsuariosFrame extends JInternalFrame implements ActionListener {
 
-    private String[] listaPerfil;
+    /* attributes: */
+    private static String[] listaPerfil = new String[] { "--Selecione--", "Cadastral", "Matricular", "Financeiro", "Completo" };
 
+    /* components: */
     private JButton adicionarButton;
     private JButton buscarButton;
     private JButton removerButton;
@@ -31,36 +25,36 @@ public class UsuariosFrame extends JInternalFrame {
     private JPasswordField passwordField;
     private JTextField usuarioField;
 
-    public UsuariosFrame(String title, Connection conn) {
-        super(title);
+    public UsuariosFrame(Connection Connection) {
+        super("Usuários");
+        this.setSize(500, 300);
         this.initComponents(this.getContentPane());
-        this.listaPerfil = new String[]{"--Selecione--", "Cadastral", "Matricular", "Financeiro", "Completo"};
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
     }
 
-    private void initComponents(Container pane) {
+    private void initComponents(Container container) {
+
+        usuarioLabel = new JLabel("Usuário:", JLabel.CENTER);
+        senhaLabel = new JLabel("Senha:", JLabel.CENTER);
+        confirmaSenhaLabel = new JLabel("Confirmar Senha:", JLabel.CENTER);
+        perfilLabel = new JLabel("Perfil", JLabel.CENTER);
+        usuarioField = new JTextField();
+        passwordField = new JPasswordField();
+        passwordConfirmaField = new JPasswordField();
+
+        perfilComboBox = new JComboBox<>();
+        perfilComboBox.setModel(new DefaultComboBoxModel<>(listaPerfil));
+        perfilComboBox.addActionListener(this);
 
         buscarButton = new JButton("Buscar");
         adicionarButton = new JButton("Adicionar");
         removerButton = new JButton("Remover");
         salvarButton = new JButton("Salvar");
-        usuarioLabel = new JLabel("Usuário:");
-        senhaLabel = new JLabel("Senha:");
-        confirmaSenhaLabel = new JLabel("Confirmar Senha:");
-        perfilLabel = new JLabel("Perfil");
-        usuarioField = new JTextField();
-        passwordField = new JPasswordField();
-        passwordConfirmaField = new JPasswordField();
-        perfilComboBox = new JComboBox<>();
 
-        perfilComboBox.setModel(new DefaultComboBoxModel<>(listaPerfil));
-        perfilComboBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-
-            }
-        });
-
-        GroupLayout layout = new GroupLayout(pane);
-        pane.setLayout(layout);
+        GroupLayout layout = new GroupLayout(container);
+        container.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -114,5 +108,12 @@ public class UsuariosFrame extends JInternalFrame {
                                         .addComponent(perfilComboBox, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                                 .addContainerGap(21, Short.MAX_VALUE))
         );
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == perfilComboBox) {
+
+        }
     }
 }

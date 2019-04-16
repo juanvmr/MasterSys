@@ -13,6 +13,13 @@ public class MatriculaModalidade {
 	private Date data_fim;
 	
 	/* constructor: */
+	public MatriculaModalidade() {
+	}
+
+	public MatriculaModalidade(String modalidade, String graduacao, String plano, Date data_inicio, Date data_fim) {
+		this(0, modalidade, graduacao, plano, data_inicio, data_fim);
+	}
+
 	public MatriculaModalidade(int codigo_matricula, String modalidade, String graduacao, String plano, Date data_inicio, Date data_fim) {
 		this.codigo_matricula = codigo_matricula;
 		this.modalidade = modalidade;

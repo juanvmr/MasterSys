@@ -1,4 +1,4 @@
-package frames;
+package app.frames;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -18,8 +18,8 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
     private JButton loginButton;
 
     /* constructor: */
-    public LoginFrame(String title) {
-        super(title);
+    public LoginFrame() {
+        super("MasterSys Login");
         this.setSize(360, 80);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.initComponents();
@@ -77,17 +77,11 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
         content.add(loginButton, c);
     }
 
-    public void debug() {
-//        usernameField.setText("admin");
-//        passwordField.setText("admin");
-//        loginButton.doClick();
-
-        this.dispose();
-        MenuFrame frame = new MenuFrame("MasterSys", null, "Pedro");
-        frame.setVisible(true);
-
-    }
-
+    /**
+     * Sets frame size and position it in the center of the screen.
+     * @param width         -- frame width
+     * @param height        -- frame height
+     */
     @Override
     public void setSize(int width, int height) {
 
@@ -102,23 +96,29 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
         );
     }
 
+    /**
+     * Control frame action performed by buttons and stuff.
+     * Just need to check which component started the event.
+     * @param event         -- action performed event type.
+     */
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == loginButton) {
-            Connection conn = null;
+
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
+            Connection connection = null;
             if (!username.trim().isEmpty()) {
                 if (!password.trim().isEmpty()) {
-                    conn = ConnectionFactory.getConnection("master", username, password);
+                    connection = ConnectionFactory.getConnection("master", username, password);
                     try {
                         // check if connection is open
-                        if ((conn != null) && (!conn.isClosed())) {
+                        if ((connection != null) && (!connection.isClosed())) {
                             // close login frame
                             this.dispose();
                             // open main frame
-                            MenuFrame frame = new MenuFrame("MasterSys", conn, username);
+                            MenuFrame frame = new MenuFrame(connection, username);
                             frame.setVisible(true);
                         }
                     } catch (SQLException e) {

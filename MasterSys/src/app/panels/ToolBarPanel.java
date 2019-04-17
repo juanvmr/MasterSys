@@ -1,14 +1,11 @@
-package frames;
+package app.panels;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class ToolBarPanel extends JPanel {
 
-    private int inset = 2;
+    private static int inset = 2;
 
     /* components: */
     private JButton addButton;

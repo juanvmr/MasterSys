@@ -3,24 +3,19 @@ package database.models;
 public class Graduacao {
 	
 	/* attributes: */
-	private Modalidade modalidade;
+	private String modalidade;
 	private String graduacao;
 	
 	/* constructor: */
 	public Graduacao(String modalidade, String graduacao) {
-		this.modalidade = new Modalidade(modalidade);
-		this.graduacao = graduacao;
-	}
-	
-	public Graduacao(String graduacao, Modalidade modalidade) {
 		this.modalidade = modalidade;
 		this.graduacao = graduacao;
 	}
 	
 	/* getter and setter: */
-	public Modalidade getModalidade() { return this.modalidade; }
+	public String getModalidade() { return this.modalidade; }
 
-	public void setModalidade(Modalidade modalidade) { this.modalidade = modalidade; }
+	public void setModalidade(String modalidade) { this.modalidade = modalidade; }
 
 	public String getGraduacao() { return graduacao; }
 

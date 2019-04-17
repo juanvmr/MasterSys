@@ -1,4 +1,6 @@
-package frames;
+package app;
+
+import app.frames.LoginFrame;
 
 import javax.swing.SwingUtilities;
 
@@ -9,10 +11,9 @@ public class Main {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 // create login window
-                LoginFrame frame = new LoginFrame("Login");
+                LoginFrame frame = new LoginFrame();
                 frame.setSize(320, 180);
                 frame.setVisible(true);
-                frame.debug();
             }
         });
     }

@@ -1,25 +1,26 @@
-package frames.tables;
+package app.tables;
 
-import database.models.*;
+import database.models.Graduacao;
+import database.models.MatriculaModalidade;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class MatriculaTableModel extends AbstractTableModel {
+public class GraduacaoTableModel extends AbstractTableModel {
 
     /* attributes: */
-    private static String[] columnNames = { "Modalidade", "Graduação", "Plano", "Data Início", "Data Fim" };
-    private List<MatriculaModalidade> list;
+    private static String[] columnNames = { "Modalidade", "Graduação" };
+    private List<Graduacao> list;
 
     /* constructor: */
-    public MatriculaTableModel() {
-        list = new ArrayList<MatriculaModalidade>();
+    public GraduacaoTableModel() {
+        list = new ArrayList<Graduacao>();
     }
 
-    public MatriculaTableModel(List<MatriculaModalidade> matriculas) {
-        this.list = matriculas;
+    public GraduacaoTableModel(List<Graduacao> list) {
+        this.list = list;
     }
 
     /* methods: */
@@ -41,8 +42,6 @@ public class MatriculaTableModel extends AbstractTableModel {
     @Override
     public Class getColumnClass(int columnIndex) {
         switch (columnIndex) {
-            case 3: case 4:
-                return Date.class;
             default:
                 return String.class;
         }
@@ -51,7 +50,7 @@ public class MatriculaTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case 1: case 2: case 3: case 4:
+            case 1: case 2:
                 return true;
             default:
                 return false;
@@ -60,20 +59,17 @@ public class MatriculaTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        MatriculaModalidade tmp = this.getRow(rowIndex);
+        Graduacao tmp = this.getRow(rowIndex);
         switch (columnIndex) {
             case 0: return tmp.getModalidade();
             case 1: return tmp.getGraduacao();
-            case 2: return tmp.getPlano();
-            case 3: return tmp.getDataInicio();
-            case 4: return tmp.getDataFim();
             default: return null;
         }
     }
 
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
-        MatriculaModalidade tmp = this.getRow(rowIndex);
+        Graduacao tmp = this.getRow(rowIndex);
         switch (columnIndex) {
             case 0:
                 tmp.setModalidade((String) value);
@@ -81,28 +77,19 @@ public class MatriculaTableModel extends AbstractTableModel {
             case 1:
                 tmp.setGraduacao((String) value);
                 break;
-            case 2:
-                tmp.setPlano((String) value);
-                break;
-            case 3:
-                tmp.setDataInicio((Date) value);
-                break;
-            case 4:
-                tmp.setDataFim((Date) value);
-                break;
         }
         fireTableCellUpdated(rowIndex, columnIndex);
     }
 
-    private MatriculaModalidade getRow(int rowIndex) {
+    private Graduacao getRow(int rowIndex) {
         return list.get(rowIndex);
     }
 
-    public void addMatriculaModalidade(MatriculaModalidade obj) {
+    public void addGraduacao(Graduacao obj) {
         this.insert(obj, getRowCount());
     }
 
-    public void insert(MatriculaModalidade obj, int rowIndex) {
+    public void insert(Graduacao obj, int rowIndex) {
         list.add(rowIndex, obj);
         fireTableRowsInserted(rowIndex, rowIndex);
     }

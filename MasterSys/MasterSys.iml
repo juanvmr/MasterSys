@@ -14,15 +14,15 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="module" module-name="MasterImage" />
     <orderEntry type="module-library">
-      <library name="postgresql-42.2.5.jre7.jar">
+      <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/postgresql-42.2.5.jre7.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/postgresql-42.2.5.jre7.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="MasterImage" />
   </component>
 </module>

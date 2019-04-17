@@ -1,8 +1,6 @@
-package frames.test;
+package app.test;
 
-import database.dao.*;
-import database.models.*;
-import frames.UsuariosFrame;
+import app.frames.UsuariosFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

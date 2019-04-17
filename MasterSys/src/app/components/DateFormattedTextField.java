@@ -1,11 +1,8 @@
-package frames.components;
-
-import javafx.util.converter.DateStringConverter;
+package app.components;
 
 import javax.swing.*;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
-import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.text.ParseException;

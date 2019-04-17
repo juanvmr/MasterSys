@@ -1,5 +1,6 @@
-package  frames;
+package app.frames;
 
+import app.panels.ToolBarPanel;
 import database.dao.ModalidadeDAO;
 
 import java.awt.*;
@@ -10,7 +11,13 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class CadastroPlanosFrame extends JInternalFrame implements ActionListener, KeyListener, MouseListener {
+public class CadastrarPlanosFrame extends JInternalFrame implements ActionListener, KeyListener, MouseListener {
+
+    /* config: */
+    private static boolean isResizable = false;
+    private static boolean isClosable = true;
+    private static boolean isMaximizable = false;
+    private static boolean isIconifiable = false;
 
     /* attributes: */
     private Connection connection;
@@ -22,13 +29,12 @@ public class CadastroPlanosFrame extends JInternalFrame implements ActionListene
     private JComboBox<Object> modalidadeComboBox;
 
     /* constructors: */
-    public CadastroPlanosFrame(Connection conn) {
-        super("Planos");
+    public CadastrarPlanosFrame(Connection conn) {
+        super("Planos", isResizable, isClosable, isMaximizable, isIconifiable);
 
         this.connection = conn;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setResizable(false);
         this.initComponents(this.getContentPane());
         this.pack();
         this.setVisible(true);

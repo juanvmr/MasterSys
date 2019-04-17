@@ -1,4 +1,4 @@
-package frames.test.backup;
+package app.test.backup;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -127,7 +127,7 @@ public class ProcessosRealizarPagamentoFrame extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                frames.ProcessosRealizarPagamentoFrame frame = new frames.ProcessosRealizarPagamentoFrame(null);
+                app.frames.ProcessosRealizarPagamentoFrame frame = new app.frames.ProcessosRealizarPagamentoFrame(null);
                 frame.setVisible(true);
             }
         });

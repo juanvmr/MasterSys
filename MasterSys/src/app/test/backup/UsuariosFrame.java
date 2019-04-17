@@ -1,4 +1,4 @@
-package frames.test.backup;
+package app.test.backup;
 
 import javax.swing.*;
 import java.awt.*;

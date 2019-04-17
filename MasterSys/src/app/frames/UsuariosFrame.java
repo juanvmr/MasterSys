@@ -1,4 +1,6 @@
-package frames;
+package app.frames;
+
+import app.panels.ToolBarPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,9 +11,15 @@ import java.sql.Connection;
 
 public class UsuariosFrame extends JInternalFrame implements ActionListener {
 
+    /* config: */
+    private static String[] perfilList = new String[] { "--Selecione--", "Cadastral", "Matricular", "Financeiro", "Completo" };
+    private static boolean isResizable = false;
+    private static boolean isClosable = true;
+    private static boolean isMaximizable = false;
+    private static boolean isIconifiable = false;
+
     /* attributes: */
     private Connection connection;
-    private static String[] perfilList = new String[] { "--Selecione--", "Cadastral", "Matricular", "Financeiro", "Completo" };
 
     /* components: */
     private ToolBarPanel toolbar;
@@ -22,12 +30,11 @@ public class UsuariosFrame extends JInternalFrame implements ActionListener {
     private JPasswordField passwordField, passwordConfirmaField;
 
     public UsuariosFrame(Connection connection) {
-        super("Usuários");
+        super("Usuários", isResizable, isClosable, isMaximizable, isIconifiable);
 
         this.connection = connection;
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setResizable(false);
         this.initComponents(this.getContentPane());
         this.pack();
         this.setVisible(true);

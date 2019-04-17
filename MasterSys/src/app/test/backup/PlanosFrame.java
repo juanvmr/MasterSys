@@ -1,7 +1,7 @@
-package frames.test.backup;
+package app.test.backup;
 
 import database.dao.ModalidadeDAO;
-import frames.CadastroPlanosFrame;
+import app.frames.CadastrarPlanosFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -137,7 +137,7 @@ public class PlanosFrame extends JInternalFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CadastroPlanosFrame frame = new CadastroPlanosFrame(null);
+                CadastrarPlanosFrame frame = new CadastrarPlanosFrame(null);
                 frame.setVisible(true);
             }
         });

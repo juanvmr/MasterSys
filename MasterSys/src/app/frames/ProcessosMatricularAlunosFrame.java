@@ -1,7 +1,8 @@
-package frames;
+package app.frames;
 
+import app.panels.ToolBarPanel;
 import database.models.*;
-import frames.tables.MatriculaTableModel;
+import app.tables.MatriculaTableModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +14,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ProcessosMatriculaAlunosFrame extends JInternalFrame implements ActionListener {
+public class ProcessosMatricularAlunosFrame extends JInternalFrame implements ActionListener {
+
+    /* config: */
+    private static boolean isResizable = false;
+    private static boolean isClosable = true;
+    private static boolean isMaximizable = false;
+    private static boolean isIconifiable = false;
 
     /* attributes: */
     private Connection connection;
@@ -28,14 +35,13 @@ public class ProcessosMatriculaAlunosFrame extends JInternalFrame implements Act
     private JTable table;
 
     /* constructor: */
-    public ProcessosMatriculaAlunosFrame(Connection connection) {
-        super("Matricular Aluno");
+    public ProcessosMatricularAlunosFrame(Connection connection) {
+        super("Matricular Aluno", isResizable, isClosable, isMaximizable, isIconifiable);
 
         this.connection = connection;
 
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setResizable(false);
         this.initComponents(this.getContentPane());
         this.pack();
         this.setVisible(true);

@@ -1,4 +1,4 @@
-package frames;
+package app.frames;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,20 +19,24 @@ public class MenuFrame extends JFrame {
 
     /* components: */
     private JMenuBar menuBar;
-    private JMenu menuSistema, menuCadastro, menuProcessos, menuRelatorios, menuAjuda;
-    private JMenu menuProcessoFaturamento, menuProcessoMatricula, menuRelatorioFatura;
+    private JMenu menuSistema, menuCadastro, menuProcessos, menuRelatorios, menuUtilitarios, menuAjuda;
+    private JMenu menuProcessoFaturamento, menuProcessoMatricular, menuRelatorioFatura;
     private JMenuItem itemSistemaSair, itemSistemaUsuarios, itemCadastroAlunos, itemCadastroModalidades;
     private JMenuItem itemCadastroPlanos, itemProcessoMatriculaAluno;
     private JMenuItem itemProcessoGerarFaturas, itemProcessoConsultarFaturas, itemProcessoRealizarPagamentos;
     private JMenuItem itemRelatorioMatricula, itemRelatorioFaturaAberto, itemRelatorioFaturaPago, itemAjudaSobre;
     private JDesktopPane desktop;
-    private JInternalFrame frameUsuario, framePlanos, frameCadastroAlunos, frameCadastroModalidades;
-    private JInternalFrame frameCadastroPlanos, frameMatriculaAluno, frameFaturamentoGerar;
-    private JInternalFrame frameFaturamentoConsultar, frameFaturamentoPagar;
+
+    // Sistema
+    private JInternalFrame frameUsuario;
+    // Cadastro
+    private JInternalFrame frameCadastrarAlunos, frameCadastrarModalidades, frameCadastrarPlanos;
+    // Processos
+    private JInternalFrame frameMatricularAluno, frameGerarFaturas, frameConsultarFaturas, frameRealizarPagamentos;
 
     /* constructor: */
-    public MenuFrame(String title, Connection connection, String username) {
-        super(title);
+    public MenuFrame(Connection connection, String username) {
+        super("MasterSys");
 
         this.connection = connection;
         this.username = username;
@@ -59,6 +63,7 @@ public class MenuFrame extends JFrame {
         menuCadastro = new JMenu("Cadastro");
         menuProcessos = new JMenu("Processos");
         menuRelatorios = new JMenu("Relatórios");
+        menuUtilitarios = new JMenu("Utilitários");
         menuAjuda = new JMenu("Ajuda");
 
         // submenus
@@ -74,7 +79,7 @@ public class MenuFrame extends JFrame {
             itemProcessoConsultarFaturas = new JMenuItem("Consultar Faturas");
             itemProcessoRealizarPagamentos = new JMenuItem("Realizar Pagamento");
 
-        menuProcessoMatricula = new JMenu("Matrícula");
+        menuProcessoMatricular = new JMenu("Matrícula");
             itemProcessoMatriculaAluno = new JMenuItem("Aluno");
 
         menuRelatorioFatura = new JMenu("Fatura");
@@ -90,7 +95,7 @@ public class MenuFrame extends JFrame {
         menuCadastro.add(itemCadastroModalidades);
         menuCadastro.add(itemCadastroPlanos);
         menuProcessos.add(menuProcessoFaturamento);
-        menuProcessos.add(menuProcessoMatricula);
+        menuProcessos.add(menuProcessoMatricular);
         menuRelatorios.add(itemRelatorioMatricula);
         menuRelatorios.add(menuRelatorioFatura);
         menuAjuda.add(itemAjudaSobre);
@@ -98,7 +103,7 @@ public class MenuFrame extends JFrame {
         menuProcessoFaturamento.add(itemProcessoGerarFaturas);
         menuProcessoFaturamento.add(itemProcessoConsultarFaturas);
         menuProcessoFaturamento.add(itemProcessoRealizarPagamentos);
-        menuProcessoMatricula.add(itemProcessoMatriculaAluno);
+        menuProcessoMatricular.add(itemProcessoMatriculaAluno);
         menuRelatorioFatura.add(itemRelatorioFaturaAberto);
         menuRelatorioFatura.add(itemRelatorioFaturaPago);
 
@@ -106,6 +111,7 @@ public class MenuFrame extends JFrame {
         menuBar.add(menuCadastro);
         menuBar.add(menuProcessos);
         menuBar.add(menuRelatorios);
+        menuBar.add(menuUtilitarios);
         menuBar.add(menuAjuda);
 
         this.setListeners();
@@ -141,26 +147,38 @@ public class MenuFrame extends JFrame {
         itemCadastroAlunos.setAction(new AbstractAction(itemCadastroAlunos.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                if (checkFrame(CadastrarAlunosFrame.class.getName())) {
+                    focusFrame(frameCadastrarAlunos);
+                } else {
+                    frameCadastrarAlunos = new CadastrarAlunosFrame(connection);
+                    frameCadastrarAlunos.setName(CadastrarAlunosFrame.class.getName());
+                    desktop.add(frameCadastrarAlunos);
+                }
             }
         });
 
         itemCadastroModalidades.setAction(new AbstractAction(itemCadastroModalidades.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                if (checkFrame(CadastrarModalidadeGraduacaoFrame.class.getName())) {
+                    focusFrame(frameCadastrarModalidades);
+                } else {
+                    frameCadastrarModalidades = new CadastrarModalidadeGraduacaoFrame(connection);
+                    frameCadastrarModalidades.setName(CadastrarModalidadeGraduacaoFrame.class.getName());
+                    desktop.add(frameCadastrarModalidades);
+                }
             }
         });
 
         itemCadastroPlanos.setAction(new AbstractAction(itemCadastroPlanos.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkFrame(CadastroPlanosFrame.class.getName())) {
-                    focusFrame(frameCadastroPlanos);
+                if (checkFrame(CadastrarPlanosFrame.class.getName())) {
+                    focusFrame(frameCadastrarPlanos);
                 } else {
-                    frameCadastroPlanos = new CadastroPlanosFrame(connection);
-                    frameCadastroPlanos.setName(CadastroPlanosFrame.class.getName());
-                    desktop.add(frameCadastroPlanos);
+                    frameCadastrarPlanos = new CadastrarPlanosFrame(connection);
+                    frameCadastrarPlanos.setName(CadastrarPlanosFrame.class.getName());
+                    desktop.add(frameCadastrarPlanos);
                 }
             }
         });
@@ -169,19 +187,25 @@ public class MenuFrame extends JFrame {
         itemProcessoGerarFaturas.setAction(new AbstractAction(itemProcessoGerarFaturas.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                if (checkFrame(ProcessosGerarFaturasFrame.class.getName())) {
+                    focusFrame(frameGerarFaturas);
+                } else {
+                    frameGerarFaturas = new ProcessosGerarFaturasFrame(connection);
+                    frameGerarFaturas.setName(ProcessosGerarFaturasFrame.class.getName());
+                    desktop.add(frameGerarFaturas);
+                }
             }
         });
 
         itemProcessoRealizarPagamentos.setAction(new AbstractAction(itemProcessoRealizarPagamentos.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkFrame(CadastroPlanosFrame.class.getName())) {
-                    focusFrame(frameFaturamentoPagar);
+                if (checkFrame(ProcessosRealizarPagamentoFrame.class.getName())) {
+                    focusFrame(frameRealizarPagamentos);
                 } else {
-                    frameFaturamentoPagar = new ProcessosRealizarPagamentoFrame(connection);
-                    frameFaturamentoPagar.setName(ProcessosRealizarPagamentoFrame.class.getName());
-                    desktop.add(frameFaturamentoPagar);
+                    frameRealizarPagamentos = new ProcessosRealizarPagamentoFrame(connection);
+                    frameRealizarPagamentos.setName(ProcessosRealizarPagamentoFrame.class.getName());
+                    desktop.add(frameRealizarPagamentos);
                 }
             }
         });
@@ -189,19 +213,25 @@ public class MenuFrame extends JFrame {
         itemProcessoConsultarFaturas.setAction(new AbstractAction(itemProcessoConsultarFaturas.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                if (checkFrame(ProcessosConsultarFaturasFrame.class.getName())) {
+                    focusFrame(frameConsultarFaturas);
+                } else {
+                    frameConsultarFaturas = new ProcessosConsultarFaturasFrame(connection);
+                    frameConsultarFaturas.setName(ProcessosConsultarFaturasFrame.class.getName());
+                    desktop.add(frameConsultarFaturas);
+                }
             }
         });
 
         itemProcessoMatriculaAluno.setAction(new AbstractAction(itemProcessoMatriculaAluno.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkFrame(CadastroPlanosFrame.class.getName())) {
-                    focusFrame(frameMatriculaAluno);
+                if (checkFrame(ProcessosMatricularAlunosFrame.class.getName())) {
+                    focusFrame(frameMatricularAluno);
                 } else {
-                    frameMatriculaAluno = new ProcessosMatriculaAlunosFrame(connection);
-                    frameMatriculaAluno.setName(ProcessosMatriculaAlunosFrame.class.getName());
-                    desktop.add(frameMatriculaAluno);
+                    frameMatricularAluno = new ProcessosMatricularAlunosFrame(connection);
+                    frameMatricularAluno.setName(ProcessosMatricularAlunosFrame.class.getName());
+                    desktop.add(frameMatricularAluno);
                 }
             }
         });
@@ -269,7 +299,7 @@ public class MenuFrame extends JFrame {
             menuProcessos.setEnabled(false);
         } else if (user.getPerfil().equals("Financeiro")){
             menuCadastro.setEnabled(false);
-            menuProcessoMatricula.setEnabled(false);
+            menuProcessoMatricular.setEnabled(false);
         } else if (user.getPerfil().equals("Matricular")) {
             menuCadastro.setEnabled(false);
             menuProcessoFaturamento.setEnabled(false);
@@ -277,7 +307,7 @@ public class MenuFrame extends JFrame {
     }
 
     /**
-     * Searches opened frames and checks if it's enabled.
+     * Searches opened app and checks if it's enabled.
      * @param name      -- frame name
      * @return boolean
      */
@@ -301,9 +331,12 @@ public class MenuFrame extends JFrame {
 		try {
 			frame.setSelected(true);
 		} catch (PropertyVetoException e) {
-			System.out.printf("focusFrame(): %s\n", e.getMessage());
+			System.err.printf("focusFrame(): %s\n", e.getMessage());
 			e.printStackTrace();
-		}
+		} catch (NullPointerException e) {
+		    System.err.println("Frame " + frame.getTitle() + " not found.");
+		    e.printStackTrace();
+        }
 	}
 
     /**
@@ -320,5 +353,15 @@ public class MenuFrame extends JFrame {
         int y = (int) (screenResolution.getHeight() - height) / 2;
 
         this.setBounds(x, y, width, height);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                MenuFrame frame = new MenuFrame(null, "admin");
+                frame.setVisible(true);
+            }
+        });
     }
 }

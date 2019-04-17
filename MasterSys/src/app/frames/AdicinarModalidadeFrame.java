@@ -1,6 +1,6 @@
-package frames;
+package app.frames;
 
-import frames.components.DateFormattedTextField;
+import app.components.DateFormattedTextField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -29,6 +29,7 @@ public class AdicinarModalidadeFrame extends JFrame implements ActionListener {
         this.connection = connection;
 
         this.setLayout(null);
+        this.setResizable(false);
         this.initComponents();
         this.pack();
         this.setLocationRelativeTo(null);
@@ -97,12 +98,13 @@ public class AdicinarModalidadeFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == addButton) {
             // read input fields
-            //String modalidade = modalidadeComboBox.getName();   // NÃO SEI COMO LER COMBO BOX
+            //String modalidade = modalidadeComboBox.getName();     // NÃO SEI LER COMBO BOX
             String graduacao = graduacaoField.getText();
             String plano = planoField.getText();
-            String dataInicio = dataInicioField.getText();      // TROCAR COMPONENTE PARA ALGUM QUE RETORNE util.Date
-            String dataFim = dataFimField.getText();            // TROCAR COMPONENTE PARA ALGUM QUE RETORNE util.Date
+            String dataInicio = dataInicioField.getText();          // PROBLEMAS PARA LER NO FORMATO util.Date.
+            String dataFim = dataFimField.getText();                // PROBLEMAS PARA LER NO FORMATO util.Date.
 
+            // instanciar um objeto do tipo MatriculaModalidade
             //MatriculaModalidade tmp = new MatriculaModalidade(modalidade, graduacao, plano, dataInicio, dataFim);
 
             //System.out.println("Modalidade: " + modalidade);
@@ -112,6 +114,7 @@ public class AdicinarModalidadeFrame extends JFrame implements ActionListener {
             System.out.println("DataFim...: " + dataFim);
 
             /*
+            // tentar inserir no banco de dados
             try {
                 MatriculaModalidadeDAO dao = new MatriculaModalidadeDAO(connection);
                 dao.insert(new MatriculaModalidade(modalidade, graduacao, plano, dataInicio, dataFim));

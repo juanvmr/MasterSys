@@ -1,11 +1,21 @@
-package frames;
+package app.frames;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 public class RelatoriosMatriculasFrame extends JInternalFrame implements ActionListener {
+
+    /* config: */
+    private static boolean isResizable = false;
+    private static boolean isClosable = true;
+    private static boolean isMaximizable = false;
+    private static boolean isIconifiable = false;
+
+    /* attributes: */
+    private Connection connection;
 
     /* components: */
     private JComboBox<String> boxTipo;
@@ -18,8 +28,11 @@ public class RelatoriosMatriculasFrame extends JInternalFrame implements ActionL
     private JPanel panelPeriodo;
 
     /* constructor: */
-    public RelatoriosMatriculasFrame() {
-        super("Matriculas");
+    public RelatoriosMatriculasFrame(Connection connection) {
+        super("Matriculas", isResizable, isClosable, isMaximizable, isIconifiable);
+
+        this.connection = connection;
+
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
         this.pack();

@@ -1,4 +1,4 @@
-package frames.test;
+package app.test;
 
 import javax.swing.*;
 import java.awt.*;

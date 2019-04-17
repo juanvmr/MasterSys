@@ -1,8 +1,10 @@
-package  frames;
+package frames.test.backup;
 
 import database.dao.ModalidadeDAO;
-import database.models.Modalidade;
-import java.awt.Container;
+import frames.CadastroPlanosFrame;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -10,14 +12,6 @@ import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.LayoutStyle;
 
 public class PlanosFrame extends JInternalFrame {
 
@@ -34,8 +28,8 @@ public class PlanosFrame extends JInternalFrame {
     private JButton removerButton = new JButton("Remover");
     private JButton salvarButton = new JButton("Salvar");
 
-    public PlanosFrame(String title, Connection conn) {
-        super(title);
+    public PlanosFrame(Connection conn) {
+        super("Planos");
         this.setSize(800, 600);
 
         this.conn = conn;
@@ -137,5 +131,15 @@ public class PlanosFrame extends JInternalFrame {
 
     private void jTextFieldValorMouseClicked(MouseEvent evt) {
         jTextFieldValor.setText("");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                CadastroPlanosFrame frame = new CadastroPlanosFrame(null);
+                frame.setVisible(true);
+            }
+        });
     }
 }

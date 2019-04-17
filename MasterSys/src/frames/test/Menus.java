@@ -100,7 +100,7 @@ public class Menus extends JMenuBar {
                 if (checkFrame(UsuariosFrame.class.getName())) {
                     focusFrame(usuarioFrame);
                 } else {
-                    usuarioFrame = new UsuariosFrame(connection);
+                    //usuarioFrame = new UsuariosFrame(connection);
                 }
             }
         });

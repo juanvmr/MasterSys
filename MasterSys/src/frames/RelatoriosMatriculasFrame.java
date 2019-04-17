@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RelatorioMatriculaFrame extends JInternalFrame implements ActionListener {
+public class RelatoriosMatriculasFrame extends JInternalFrame implements ActionListener {
 
     /* components: */
     private JComboBox<String> boxTipo;
@@ -18,7 +18,7 @@ public class RelatorioMatriculaFrame extends JInternalFrame implements ActionLis
     private JPanel panelPeriodo;
 
     /* constructor: */
-    public RelatorioMatriculaFrame() {
+    public RelatoriosMatriculasFrame() {
         super("Matriculas");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());

@@ -1,6 +1,7 @@
 package frames;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,111 +10,103 @@ import java.sql.Connection;
 public class UsuariosFrame extends JInternalFrame implements ActionListener {
 
     /* attributes: */
-    private static String[] listaPerfil = new String[] { "--Selecione--", "Cadastral", "Matricular", "Financeiro", "Completo" };
+    private Connection connection;
+    private static String[] perfilList = new String[] { "--Selecione--", "Cadastral", "Matricular", "Financeiro", "Completo" };
 
     /* components: */
-    private JButton adicionarButton;
-    private JButton buscarButton;
-    private JButton removerButton;
-    private JButton salvarButton;
-    private JComboBox<String> perfilComboBox;
-    private JLabel confirmaSenhaLabel;
-    private JLabel perfilLabel;
-    private JLabel senhaLabel;
-    private JLabel usuarioLabel;
-    private JPasswordField passwordConfirmaField;
-    private JPasswordField passwordField;
-    private JTextField usuarioField;
+    private ToolBarPanel toolbar;
 
-    public UsuariosFrame(Connection Connection) {
+    private JComboBox<String> perfilComboBox;
+    private JLabel usuarioLabel, passwordLabel, passwordConfirmaLabel, perfilLabel;
+    private JTextField usuarioField;
+    private JPasswordField passwordField, passwordConfirmaField;
+
+    public UsuariosFrame(Connection connection) {
         super("Usuários");
-        this.setSize(500, 300);
-        this.initComponents(this.getContentPane());
+
+        this.connection = connection;
+
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setResizable(false);
+        this.initComponents(this.getContentPane());
         this.pack();
         this.setVisible(true);
     }
 
-    private void initComponents(Container container) {
+    private void initComponents(Container content) {
 
-        usuarioLabel = new JLabel("Usuário:", JLabel.CENTER);
-        senhaLabel = new JLabel("Senha:", JLabel.CENTER);
-        confirmaSenhaLabel = new JLabel("Confirmar Senha:", JLabel.CENTER);
-        perfilLabel = new JLabel("Perfil", JLabel.CENTER);
+        toolbar = new ToolBarPanel();
+
+        content.setLayout(new BorderLayout());
+        content.add(toolbar, BorderLayout.NORTH);
+        content.add(createPanel(), BorderLayout.CENTER);
+    }
+
+    private JPanel createPanel() {
+
+        int inset = 5;
+        int border = 10;
+
+        usuarioLabel = new JLabel("Usuário:", JLabel.RIGHT);
+        passwordLabel = new JLabel("Senha:", JLabel.RIGHT);
+        passwordConfirmaLabel = new JLabel("Confirmar Senha:", JLabel.RIGHT);
+        perfilLabel = new JLabel("Perfil", JLabel.RIGHT);
+
         usuarioField = new JTextField();
         passwordField = new JPasswordField();
         passwordConfirmaField = new JPasswordField();
 
         perfilComboBox = new JComboBox<>();
-        perfilComboBox.setModel(new DefaultComboBoxModel<>(listaPerfil));
+        perfilComboBox.setModel(new DefaultComboBoxModel<>(perfilList));
         perfilComboBox.addActionListener(this);
 
-        buscarButton = new JButton("Buscar");
-        adicionarButton = new JButton("Adicionar");
-        removerButton = new JButton("Remover");
-        salvarButton = new JButton("Salvar");
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(new EmptyBorder(border, border, border, border));
 
-        GroupLayout layout = new GroupLayout(container);
-        container.setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(perfilLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(confirmaSenhaLabel, GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                                        .addComponent(senhaLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(usuarioLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(buscarButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(adicionarButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(removerButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(salvarButton, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(usuarioField)
-                                        .addComponent(passwordField)
-                                        .addComponent(passwordConfirmaField)
-                                        .addComponent(perfilComboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addContainerGap(93, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(buscarButton, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(adicionarButton, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(removerButton, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(salvarButton, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(usuarioLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(usuarioField, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(senhaLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(confirmaSenhaLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(passwordConfirmaField)
-                                                .addGap(5, 5, 5)))
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(perfilLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(perfilComboBox, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(inset, inset, inset, inset);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.weightx = 0;
+        panel.add(usuarioLabel, constraints);
+        constraints.gridy++;
+        panel.add(passwordLabel, constraints);
+        constraints.gridy++;
+        panel.add(passwordConfirmaLabel, constraints);
+        constraints.gridy++;
+        panel.add(perfilLabel, constraints);
+
+        constraints.gridx++;
+        constraints.gridy = 0;
+        constraints.gridwidth = 3;
+        constraints.weightx = 1;
+        panel.add(usuarioField, constraints);
+        constraints.gridy++;
+        panel.add(passwordField, constraints);
+        constraints.gridy++;
+        panel.add(passwordConfirmaField, constraints);
+        constraints.gridy++;
+        panel.add(perfilComboBox, constraints);
+
+        return panel;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == perfilComboBox) {
-
+            // code
+        } else if (e.getSource() == toolbar.getAddButton()) {
+            // code
+        } else if (e.getSource() == toolbar.getSaveButton()) {
+            // code
+        } else if (e.getSource() == toolbar.getSearchButton()) {
+            // code
+        } else if (e.getSource() == toolbar.getRemoveButton()) {
+            // code
         }
     }
+
 }

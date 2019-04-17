@@ -11,7 +11,7 @@ import database.models.Usuario;
 import database.dao.UsuariosDAO;
 
 
-public class MainFrame extends JFrame {
+public class MenuFrame extends JFrame {
 
     /* attributes: */
     private Connection connection;
@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
     private JMenu menuProcessoFaturamento, menuProcessoMatricula, menuRelatorioFatura;
     private JMenuItem itemSistemaSair, itemSistemaUsuarios, itemCadastroAlunos, itemCadastroModalidades;
     private JMenuItem itemCadastroPlanos, itemProcessoMatriculaAluno;
-    private JMenuItem itemProcessoFaturamentoGerar, itemProcessoFaturamentoConsultar, itemProcessoFaturamentoPagar;
+    private JMenuItem itemProcessoGerarFaturas, itemProcessoConsultarFaturas, itemProcessoRealizarPagamentos;
     private JMenuItem itemRelatorioMatricula, itemRelatorioFaturaAberto, itemRelatorioFaturaPago, itemAjudaSobre;
     private JDesktopPane desktop;
     private JInternalFrame frameUsuario, framePlanos, frameCadastroAlunos, frameCadastroModalidades;
@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
     private JInternalFrame frameFaturamentoConsultar, frameFaturamentoPagar;
 
     /* constructor: */
-    public MainFrame(String title, Connection connection, String username) {
+    public MenuFrame(String title, Connection connection, String username) {
         super(title);
 
         this.connection = connection;
@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
 
     private JDesktopPane createDesktop() {
         desktop = new JDesktopPane();
-        desktop.setBackground(new Color(210, 210, 210));
+        // desktop.setBackground(new Color(210, 210, 210));
 
         return desktop;
     }
@@ -70,9 +70,9 @@ public class MainFrame extends JFrame {
         itemCadastroPlanos = new JMenuItem("Planos");
 
         menuProcessoFaturamento = new JMenu("Faturamento");
-            itemProcessoFaturamentoConsultar = new JMenuItem("Consultar");
-            itemProcessoFaturamentoGerar = new JMenuItem("Gerar");
-            itemProcessoFaturamentoPagar = new JMenuItem("Pagar");
+            itemProcessoGerarFaturas = new JMenuItem("Gerar Faturas");
+            itemProcessoConsultarFaturas = new JMenuItem("Consultar Faturas");
+            itemProcessoRealizarPagamentos = new JMenuItem("Realizar Pagamento");
 
         menuProcessoMatricula = new JMenu("Matrícula");
             itemProcessoMatriculaAluno = new JMenuItem("Aluno");
@@ -95,9 +95,9 @@ public class MainFrame extends JFrame {
         menuRelatorios.add(menuRelatorioFatura);
         menuAjuda.add(itemAjudaSobre);
 
-        menuProcessoFaturamento.add(itemProcessoFaturamentoGerar);
-        menuProcessoFaturamento.add(itemProcessoFaturamentoPagar);
-        menuProcessoFaturamento.add(itemProcessoFaturamentoConsultar);
+        menuProcessoFaturamento.add(itemProcessoGerarFaturas);
+        menuProcessoFaturamento.add(itemProcessoConsultarFaturas);
+        menuProcessoFaturamento.add(itemProcessoRealizarPagamentos);
         menuProcessoMatricula.add(itemProcessoMatriculaAluno);
         menuRelatorioFatura.add(itemRelatorioFaturaAberto);
         menuRelatorioFatura.add(itemRelatorioFaturaPago);
@@ -155,31 +155,38 @@ public class MainFrame extends JFrame {
         itemCadastroPlanos.setAction(new AbstractAction(itemCadastroPlanos.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkFrame(PlanosFrame.class.getName())) {
-                    focusFrame(framePlanos);
+                if (checkFrame(CadastroPlanosFrame.class.getName())) {
+                    focusFrame(frameCadastroPlanos);
                 } else {
-                    framePlanos = new PlanosFrame("Planos", connection);
-                    desktop.add(framePlanos);
+                    frameCadastroPlanos = new CadastroPlanosFrame(connection);
+                    frameCadastroPlanos.setName(CadastroPlanosFrame.class.getName());
+                    desktop.add(frameCadastroPlanos);
                 }
             }
         });
 
         // Processos
-        itemProcessoFaturamentoGerar.setAction(new AbstractAction(itemProcessoFaturamentoGerar.getText()){
+        itemProcessoGerarFaturas.setAction(new AbstractAction(itemProcessoGerarFaturas.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
                 
             }
         });
 
-        itemProcessoFaturamentoPagar.setAction(new AbstractAction(itemProcessoFaturamentoPagar.getText()){
+        itemProcessoRealizarPagamentos.setAction(new AbstractAction(itemProcessoRealizarPagamentos.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                if (checkFrame(CadastroPlanosFrame.class.getName())) {
+                    focusFrame(frameFaturamentoPagar);
+                } else {
+                    frameFaturamentoPagar = new ProcessosRealizarPagamentoFrame(connection);
+                    frameFaturamentoPagar.setName(ProcessosRealizarPagamentoFrame.class.getName());
+                    desktop.add(frameFaturamentoPagar);
+                }
             }
         });
 
-        itemProcessoFaturamentoConsultar.setAction(new AbstractAction(itemProcessoFaturamentoConsultar.getText()){
+        itemProcessoConsultarFaturas.setAction(new AbstractAction(itemProcessoConsultarFaturas.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
                 
@@ -189,7 +196,13 @@ public class MainFrame extends JFrame {
         itemProcessoMatriculaAluno.setAction(new AbstractAction(itemProcessoMatriculaAluno.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                if (checkFrame(CadastroPlanosFrame.class.getName())) {
+                    focusFrame(frameMatriculaAluno);
+                } else {
+                    frameMatriculaAluno = new ProcessosMatriculaAlunosFrame(connection);
+                    frameMatriculaAluno.setName(ProcessosMatriculaAlunosFrame.class.getName());
+                    desktop.add(frameMatriculaAluno);
+                }
             }
         });
 
@@ -204,7 +217,7 @@ public class MainFrame extends JFrame {
         itemRelatorioFaturaPago.setAction(new AbstractAction(itemRelatorioFaturaPago.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
             }
         });
 
@@ -243,7 +256,7 @@ public class MainFrame extends JFrame {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             return;
         } catch (NullPointerException e) {
-            System.err.printf("WARNING: Connection not found.");
+            System.err.println("WARNING: Connection not found.");
             menuSistema.setEnabled(false);
             menuCadastro.setEnabled(false);
             menuProcessos.setEnabled(false);

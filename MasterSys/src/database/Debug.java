@@ -1,9 +1,5 @@
 package database;
 
-import frames.PlanosFrame;
-import image.MasterImage;
-
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 

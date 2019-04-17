@@ -1,10 +1,14 @@
-package frames;
+package frames.test.backup;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.Connection;
 
-public class RealizaPagamentoFrame extends JInternalFrame {
+public class ProcessosRealizarPagamentoFrame extends JFrame {
+
+    /* attributes: */
+    private Connection connection;
 
     /* components: */
     private JComboBox<String> boxSituacao;
@@ -18,8 +22,11 @@ public class RealizaPagamentoFrame extends JInternalFrame {
     private JLabel labelSituacao;
 
     /* constructor: */
-    public RealizaPagamentoFrame() {
-        super();
+    public ProcessosRealizarPagamentoFrame(Connection connection) {
+        super("Pagamentos");
+
+        this.connection = connection;
+
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
         this.pack();
@@ -114,5 +121,15 @@ public class RealizaPagamentoFrame extends JInternalFrame {
                                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 340, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                frames.ProcessosRealizarPagamentoFrame frame = new frames.ProcessosRealizarPagamentoFrame(null);
+                frame.setVisible(true);
+            }
+        });
     }
 }

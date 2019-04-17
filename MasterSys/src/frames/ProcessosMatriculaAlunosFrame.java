@@ -13,15 +13,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ProcessoMatriculaAlunoFrame extends JFrame implements ActionListener {
+public class ProcessosMatriculaAlunosFrame extends JInternalFrame implements ActionListener {
 
     /* attributes: */
-    private Connection conneciton;
+    private Connection connection;
     private List<MatriculaModalidade> list;
 
     /* components"*/
-    private ToolBarPanel toolbarPanel;
-    private JPanel centralPanel;
+    private ToolBarPanel toolbar;
 
     private JLabel matriculaLabel, alunoLabel, dataMatriculaLabel, diaVencimentoLabel;
     private JTextField matricularField, alunoField, dataMatriculaField, diaVencimentoField;
@@ -29,34 +28,37 @@ public class ProcessoMatriculaAlunoFrame extends JFrame implements ActionListene
     private JTable table;
 
     /* constructor: */
-    public ProcessoMatriculaAlunoFrame() {
+    public ProcessosMatriculaAlunosFrame(Connection connection) {
         super("Matricular Aluno");
+
+        this.connection = connection;
+
         this.setLayout(null);
-        // this.setSize(500,300);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.initComponents(this.getContentPane());
         this.pack();
-        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
     private void initComponents(Container content) {
 
-        toolbarPanel = new ToolBarPanel();
-        centralPanel = createPanel();
+        toolbar = new ToolBarPanel();
 
         content.setLayout(new BorderLayout());
-        content.add(toolbarPanel, BorderLayout.NORTH);
-        content.add(centralPanel, BorderLayout.CENTER);
+        content.add(toolbar, BorderLayout.NORTH);
+        content.add(createPanel(), BorderLayout.CENTER);
     }
 
     private JPanel createPanel() {
 
-        matriculaLabel = new JLabel("Matrícula:", JLabel.CENTER);
-        alunoLabel = new JLabel("Aluno:", JLabel.CENTER);
-        dataMatriculaLabel = new JLabel("Data Matrícula:", JLabel.CENTER);
-        diaVencimentoLabel = new JLabel("Dia do Vencimento da Fatura:", JLabel.CENTER);
+        int border = 10;
+        int inset = 5;
+
+        matriculaLabel = new JLabel("Matrícula:", JLabel.RIGHT);
+        alunoLabel = new JLabel("Aluno:", JLabel.RIGHT);
+        dataMatriculaLabel = new JLabel("Data Matrícula:", JLabel.RIGHT);
+        diaVencimentoLabel = new JLabel("Dia do Vencimento da Fatura:", JLabel.RIGHT);
 
         matricularField = new JTextField(8);
         alunoField = new JTextField(8);
@@ -67,10 +69,10 @@ public class ProcessoMatriculaAlunoFrame extends JFrame implements ActionListene
         adicionarModalidadeButton.addActionListener(this);
 
         JPanel panel = new JPanel(new GridBagLayout());
-        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        panel.setBorder(new EmptyBorder(border, border, border, border));
 
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.insets = new Insets(inset, inset, inset, inset);
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
         constraints.gridx = 0;
@@ -143,15 +145,15 @@ public class ProcessoMatriculaAlunoFrame extends JFrame implements ActionListene
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == adicionarModalidadeButton) {
-            AdicinarModalidadeFrame f = new AdicinarModalidadeFrame(conneciton);
+            AdicinarModalidadeFrame f = new AdicinarModalidadeFrame(connection);
             f.setVisible(true);
-        } else if (e.getSource() == toolbarPanel.getAddButton()) {
+        } else if (e.getSource() == toolbar.getAddButton()) {
             // code
-        } else if (e.getSource() == toolbarPanel.getSaveButton()) {
+        } else if (e.getSource() == toolbar.getSaveButton()) {
             // code
-        } else if (e.getSource() == toolbarPanel.getSearchButton()) {
+        } else if (e.getSource() == toolbar.getSearchButton()) {
             // code
-        } else if (e.getSource() == toolbarPanel.getRemoveButton()) {
+        } else if (e.getSource() == toolbar.getRemoveButton()) {
             // code
         }
     }

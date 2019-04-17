@@ -83,7 +83,7 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 //        loginButton.doClick();
 
         this.dispose();
-        MainFrame frame = new MainFrame("MasterSys", null, "Pedro");
+        MenuFrame frame = new MenuFrame("MasterSys", null, "Pedro");
         frame.setVisible(true);
 
     }
@@ -118,7 +118,7 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
                             // close login frame
                             this.dispose();
                             // open main frame
-                            MainFrame frame = new MainFrame("MasterSys", conn, username);
+                            MenuFrame frame = new MenuFrame("MasterSys", conn, username);
                             frame.setVisible(true);
                         }
                     } catch (SQLException e) {

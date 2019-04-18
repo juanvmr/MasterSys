@@ -24,10 +24,12 @@ public class Aluno {
 
 	public Aluno(int codigo_aluno) {
 		this.codigo_aluno = codigo_aluno;
+		this.local = new Local();
 	}
 
 	public Aluno(String aluno) {
 		this.aluno = aluno;
+		this.local = new Local();
 	}
 
 	public Aluno(String aluno, Date data_nascimento, char sexo, String telefone, String celular, String email,
@@ -113,7 +115,7 @@ public class Aluno {
 	/* methods: */
 	public String toString() {
 		return String.format("%d, %s, %s, %c, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s", this.codigo_aluno,
-		this.aluno, this.data_nascimento.toString(), this.sexo, this.telefone, this.celular, this.email,
-		this.observacao, this.endereco, this.numero, this.complemento, this.bairro, this.local.toString(), this.cep);
+		this.aluno, ((this.data_nascimento != null) ? this.data_nascimento.toString() : "no data"), this.sexo, this.telefone, this.celular, this.email,
+		this.observacao, this.endereco, this.numero, this.complemento, this.bairro, ((this.local != null) ? this.local.toString() : "no local"), this.cep);
 	}
 }

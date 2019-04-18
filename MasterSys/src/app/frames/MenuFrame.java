@@ -7,6 +7,7 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import database.ConnectionFactory;
 import database.models.Usuario;
 import database.dao.UsuariosDAO;
 
@@ -115,7 +116,7 @@ public class MenuFrame extends JFrame {
         menuBar.add(menuAjuda);
 
         this.setListeners();
-        // this.setAccessibleMenus();
+        this.setAccessibleMenus();
 
         return menuBar;
     }
@@ -359,8 +360,9 @@ public class MenuFrame extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MenuFrame frame = new MenuFrame(null, "admin");
-                frame.setVisible(true);
+
+                Connection connection = ConnectionFactory.getConnection("master", "admin", "admin");
+                MenuFrame frame = new MenuFrame(connection, "admin");
             }
         });
     }

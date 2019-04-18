@@ -130,7 +130,7 @@ public class LocalDAO extends MasterDAO {
 		}
 	}
 
-	public List<Object> selectPais() throws SQLException {
+	public List<String> selectPaises() throws SQLException {
 
 		String query = "SELECT DISTINCT pais FROM cidades ORDER BY pais";
 
@@ -139,7 +139,7 @@ public class LocalDAO extends MasterDAO {
 		// run query and store the result
 		ResultSet rst = pst_select.executeQuery();
 
-		List<Object> list = new ArrayList<Object>();
+		List<String> list = new ArrayList<>();
 		while (rst.next()) {
 			list.add(rst.getString("pais"));
 		}
@@ -147,7 +147,7 @@ public class LocalDAO extends MasterDAO {
 		return list;
 	}
 
-	public List<Object> selectEstado(String parameter) throws SQLException {
+	public List<String> selectEstados(String parameter) throws SQLException {
 
 		String query = "SELECT DISTINCT estado FROM cidades WHERE pais = ? ORDER BY estado";
 
@@ -160,11 +160,33 @@ public class LocalDAO extends MasterDAO {
 		// run query and store the result
 		ResultSet rst = pst_select.executeQuery();
 
-		List<Object> list = new ArrayList<>();
+		List<String> list = new ArrayList<>();
 		while (rst.next()) {
 			list.add(rst.getString("estado"));
 		}
 		
+		return list;
+	}
+
+	public List<String> selectCidades(String parameter1, String parameter2) throws SQLException {
+
+		String query = "SELECT cidade FROM cidades WHERE estado = ? AND pais = ? ORDER BY cidade";
+
+		// build statement
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, parameter1);
+		Set(pst_select, 2, parameter2);
+
+		// run query and store the result
+		ResultSet rst = pst_select.executeQuery();
+
+		List<String> list = new ArrayList<>();
+		while (rst.next()) {
+			list.add(rst.getString("cidade"));
+		}
+
 		return list;
 	}
 }

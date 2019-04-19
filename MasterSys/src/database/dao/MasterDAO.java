@@ -8,8 +8,7 @@ public abstract class MasterDAO {
 
 	/* methods: */
 
-	// public abstract int count() throws SQLException;
-	// public abstract Object selectByName(String name) throws SQLException;
+	public abstract int count(Object obj) throws SQLException;
 
 	public abstract List<Object> selectAll() throws SQLException;
 	
@@ -20,6 +19,10 @@ public abstract class MasterDAO {
 	public abstract void update(Object obj) throws SQLException;
 	
 	public abstract void delete(Object obj) throws SQLException;
+
+	public boolean contains(Object obj) throws SQLException {
+		return count(obj) > 0;
+	};
 	
 	public void Set(PreparedStatement pst, int position, Object parameter) throws SQLException {
 		if (parameter == null) {

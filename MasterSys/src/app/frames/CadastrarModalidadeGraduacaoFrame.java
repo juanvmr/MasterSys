@@ -4,18 +4,24 @@ import app.components.DateFormattedTextField;
 import app.panels.ToolBarPanel;
 import app.tables.GraduacaoTableModel;
 import com.sun.scenario.effect.impl.sw.java.JSWBlend_COLOR_BURNPeer;
+import database.dao.GraduacaoDAO;
+import database.dao.ModalidadeDAO;
 import database.models.Graduacao;
+import database.models.Modalidade;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements ActionListener {
+public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements ActionListener, KeyListener {
 
     /* config: */
     private static int inset = 5;
@@ -26,7 +32,8 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private Connection connection;
+    private ModalidadeDAO modalidadeDAO;
+    private GraduacaoDAO graduacaoDAO;
     private List<Graduacao> list;
 
     /* components: */
@@ -40,7 +47,8 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     public CadastrarModalidadeGraduacaoFrame(Connection connection) {
         super("Cadastrar Modalidade e Graduação", isResizable, isClosable, isMaximizable, isIconifiable);
 
-        this.connection = connection;
+        this.modalidadeDAO = new ModalidadeDAO(connection);
+        this.graduacaoDAO = new GraduacaoDAO(connection);
 
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -53,6 +61,13 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     private void initComponents(Container content) {
 
         toolbar = new ToolBarPanel();
+        toolbar.getAddButton().addActionListener(this);
+        toolbar.getSaveButton().addActionListener(this);
+        toolbar.getSearchButton().addActionListener(this);
+
+        toolbar.getRemoveButton().addActionListener(this);
+        toolbar.getRemoveButton().setEnabled(false);
+
         JPanel infoPanel = createInfoPanel();
         JScrollPane tableFrame = createTable();
 
@@ -68,10 +83,15 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         graduacaoLabel = new JLabel("Graduação:", JLabel.RIGHT);
 
         modalidadeField = new JTextField();
+        modalidadeField.addKeyListener(this);
+
         graduacaoField = new JTextField();
 
         okButton = new JButton("OK");
         okButton.addActionListener(this);
+
+        // lock input fields
+        this.lock();
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(new EmptyBorder(border, border, border, border));
@@ -111,10 +131,6 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     private JScrollPane createTable() {
 
         list = new ArrayList<Graduacao>();
-        list.add(new Graduacao("Modalidade 1", "Graduacao A"));
-        list.add(new Graduacao("Modalidade 1", "Graduacao B"));
-        list.add(new Graduacao("Modalidade 2", "Graduacao A"));
-        list.add(new Graduacao("Modalidade 3", "Graduacao A"));
 
         table = new JTable();
         table.setModel(new GraduacaoTableModel(list));
@@ -127,18 +143,153 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         return scrollPane;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == okButton) {
-            // code
-        } else if (e.getSource() == toolbar.getAddButton()) {
-            // code
-        } else if (e.getSource() == toolbar.getSaveButton()) {
-            // code
-        } else if (e.getSource() == toolbar.getSearchButton()) {
-            // code
-        } else if (e.getSource() == toolbar.getRemoveButton()) {
-            // code
+    private void lock() {
+        modalidadeField.setEnabled(false);
+        graduacaoField.setEnabled(false);
+        okButton.setEnabled(false);
+    }
+
+    private void unlock() {
+        modalidadeField.setEnabled(true);
+        graduacaoField.setEnabled(true);
+        okButton.setEnabled(true);
+    }
+
+    private boolean isLocked() {
+        return (!modalidadeField.isEnabled() || !graduacaoField.isEnabled() || !okButton.isEnabled());
+    }
+
+    private void resetTable() {
+        // remove old values
+        list.clear();
+        // display a empty table
+        table.setModel(new GraduacaoTableModel(list));
+    }
+
+    private void updateTable() {
+        if ((list != null) && (list.size() > 0)) {
+            table.setModel(new GraduacaoTableModel(list));
+        } else {
+            resetTable();
         }
+    }
+
+    private Modalidade getModalidade() {
+        if (!modalidadeField.getText().trim().isEmpty()) {
+            return new Modalidade(modalidadeField.getText().trim());
+        }
+        return null;
+    }
+
+    private Graduacao getGraduação() {
+        Modalidade tmp = getModalidade();
+        if (!graduacaoField.getText().trim().isEmpty() && (tmp != null)) {
+            return new Graduacao(tmp.toString(), graduacaoField.getText().trim());
+        }
+        return null;
+    }
+
+    private void getMultipleGraduations() {
+        Modalidade m = getModalidade();
+
+        if ((m != null) && !m.toString().isEmpty()) {
+            String s = graduacaoField.getText().trim();
+            if (!s.isEmpty()) {
+                String[] v = s.split(";");
+                for (String value : v) {
+                    if (!value.trim().isEmpty()) {
+                        Graduacao g = new Graduacao(m.toString(), value.trim());
+                        if (!list.contains(g)) {
+                            list.add(g);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    private boolean isInsert = false;
+    private boolean isUpdate = false;
+    private boolean isSearch = false;
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == okButton) {
+            // CODE
+            if (graduacaoField.getText().contains(";")) {
+                getMultipleGraduations();
+            } else {
+                Graduacao tmp = getGraduação();
+                if (tmp != null) {
+                    list.add(tmp);
+                }
+            }
+            updateTable();      // update table list
+        } else if (event.getSource() == toolbar.getAddButton()) {
+            // CODE
+            this.unlock();
+            this.isInsert = true;
+        } else if (event.getSource() == toolbar.getSaveButton()) {
+            for (Graduacao g: list) {
+                Modalidade m = new Modalidade(g.getModalidade());
+                try {
+                    if (!modalidadeDAO.contains(m)) {
+                        modalidadeDAO.insert(m);
+                    }
+                    graduacaoDAO.insert(g);
+                } catch (SQLException e) {
+                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+                }
+            }
+            this.resetTable();      // clear table content
+        } else if (event.getSource() == toolbar.getSearchButton()) {
+            // CODE
+            if (this.isLocked()) {
+                this.unlock();
+            } else {
+                Modalidade m = this.getModalidade();
+                if (m != null) {
+                    this.resetTable();
+                    Graduacao g = new Graduacao();
+                    g.setModalidade(m.toString());
+                    try {
+                        for (Object x : graduacaoDAO.getList(g)) {
+                            list.add((Graduacao) x);
+                        }
+                    } catch (SQLException e) {
+                        System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+                    }
+                }
+            }
+
+        } else if (event.getSource() == toolbar.getRemoveButton()) {
+            // CODE
+            Graduacao tmp = getGraduação();
+            if (tmp != null) {
+                try {
+                    graduacaoDAO.delete(tmp);
+                } catch (SQLException e) {
+                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if (e.getSource() == modalidadeField) {
+            this.resetTable();
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }

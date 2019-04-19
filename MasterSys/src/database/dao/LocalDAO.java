@@ -16,8 +16,31 @@ public class LocalDAO extends MasterDAO {
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public LocalDAO(Connection conn) throws SQLException {
+	public LocalDAO(Connection conn) {
 		this.conn = conn;
+	}
+
+	/* methods: */
+	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(*) FROM cidades WHERE estado = ? AND pais = ?";
+
+		// clear previous query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Local) obj).getEstado());
+		Set(pst_select, 2, ((Local) obj).getPais());
+
+		// run query and store the result
+		ResultSet rst = pst_select.executeQuery();
+
+		// check if query return a result
+		if (rst.next()) {
+			rst.getInt(1);
+		}
+		return 0;
 	}
 
 	@Override

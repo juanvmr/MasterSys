@@ -11,7 +11,7 @@ import java.util.List;
 public class GraduacaoTableModel extends AbstractTableModel {
 
     /* attributes: */
-    private static String[] columnNames = { "Modalidade", "Graduação" };
+    private static String[] columnNames = { "Graduação" };
     private List<Graduacao> list;
 
     /* constructor: */
@@ -50,8 +50,6 @@ public class GraduacaoTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-            case 1: case 2:
-                return true;
             default:
                 return false;
         }
@@ -61,8 +59,8 @@ public class GraduacaoTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Graduacao tmp = this.getRow(rowIndex);
         switch (columnIndex) {
-            case 0: return tmp.getModalidade();
-            case 1: return tmp.getGraduacao();
+            // case 0: return tmp.getModalidade();
+            case 0: return tmp.getGraduacao();
             default: return null;
         }
     }
@@ -71,10 +69,10 @@ public class GraduacaoTableModel extends AbstractTableModel {
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         Graduacao tmp = this.getRow(rowIndex);
         switch (columnIndex) {
+            // case 0:
+            //     tmp.setModalidade((String) value);
+            //     break;
             case 0:
-                tmp.setModalidade((String) value);
-                break;
-            case 1:
                 tmp.setGraduacao((String) value);
                 break;
         }

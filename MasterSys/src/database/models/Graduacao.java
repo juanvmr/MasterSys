@@ -7,6 +7,8 @@ public class Graduacao {
 	private String graduacao;
 	
 	/* constructor: */
+	public Graduacao() {}
+
 	public Graduacao(String modalidade, String graduacao) {
 		this.modalidade = modalidade;
 		this.graduacao = graduacao;
@@ -23,6 +25,6 @@ public class Graduacao {
 	
 	/* methods: */
 	public String toString() {
-		return String.format("%s, %s", this.modalidade.toString(), this.graduacao);
+		return String.format("%s, %s", this.modalidade, this.graduacao);
 	}
 }

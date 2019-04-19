@@ -1,6 +1,6 @@
 package app.test;
 
-import app.frames.UsuariosFrame;
+import app.frames.SistemaUsuariosFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -95,10 +95,10 @@ public class Menus extends JMenuBar {
         itemSistemaUsuarios.setAction(new AbstractAction(itemSistemaUsuarios.getText()) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkFrame(UsuariosFrame.class.getName())) {
+                if (checkFrame(SistemaUsuariosFrame.class.getName())) {
                     focusFrame(usuarioFrame);
                 } else {
-                    //usuarioFrame = new UsuariosFrame(connection);
+                    //usuarioFrame = new SistemaUsuariosFrame(connection);
                 }
             }
         });

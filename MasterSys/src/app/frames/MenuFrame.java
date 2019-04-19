@@ -7,7 +7,6 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import database.ConnectionFactory;
 import database.models.Usuario;
 import database.dao.UsuariosDAO;
 
@@ -16,7 +15,8 @@ public class MenuFrame extends JFrame {
 
     /* attributes: */
     private Connection connection;
-    private String username;
+    private UsuariosDAO usuariosDAO;
+    private Usuario user;
 
     /* components: */
     private JMenuBar menuBar;
@@ -36,16 +36,31 @@ public class MenuFrame extends JFrame {
     private JInternalFrame frameMatricularAluno, frameGerarFaturas, frameConsultarFaturas, frameRealizarPagamentos;
 
     /* constructor: */
-    public MenuFrame(Connection connection, String username) {
+    public MenuFrame(Connection connection, Usuario user) {
         super("MasterSys");
+        this.setDefaultSize(0.75);
 
         this.connection = connection;
-        this.username = username;
+        this.user = user;
 
-        this.setDefaultSize(0.75);
+        this.updateUser();
         this.setJMenuBar(createMenuBar());
         this.setContentPane(createDesktop());
         this.setVisible(true);
+    }
+
+    private void updateUser() {
+        if (this.user == null) return;
+
+        if (this.user.getPerfil().isEmpty()) {
+            this.usuariosDAO = new UsuariosDAO(connection);
+            try {
+                this.user = (Usuario) usuariosDAO.select(user);
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+        }
+        System.out.println("USER: " + user.toString());
     }
 
     private JDesktopPane createDesktop() {
@@ -116,7 +131,7 @@ public class MenuFrame extends JFrame {
         menuBar.add(menuAjuda);
 
         this.setListeners();
-        this.setAccessibleMenus();
+        this.configMenu();
 
         return menuBar;
     }
@@ -127,11 +142,11 @@ public class MenuFrame extends JFrame {
         itemSistemaUsuarios.setAction(new AbstractAction(itemSistemaUsuarios.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (checkFrame(UsuariosFrame.class.getName())) {
+                if (checkFrame(SistemaUsuariosFrame.class.getName())) {
                     focusFrame(frameUsuario);
                 } else {
-                    frameUsuario = new UsuariosFrame(connection);
-                    frameUsuario.setName(UsuariosFrame.class.getName());
+                    frameUsuario = new SistemaUsuariosFrame(connection);
+                    frameUsuario.setName(SistemaUsuariosFrame.class.getName());
                     desktop.add(frameUsuario);
                 }
             }
@@ -241,7 +256,7 @@ public class MenuFrame extends JFrame {
         itemRelatorioFaturaAberto.setAction(new AbstractAction(itemRelatorioFaturaAberto.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
             }
         });
 
@@ -255,7 +270,7 @@ public class MenuFrame extends JFrame {
         itemRelatorioMatricula.setAction(new AbstractAction(itemRelatorioMatricula.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
             }
         });
 
@@ -263,47 +278,42 @@ public class MenuFrame extends JFrame {
         itemAjudaSobre.setAction(new AbstractAction(itemAjudaSobre.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
             }
         });
     }
 
-    private void setAccessibleMenus() {
-
-        menuRelatorios.setEnabled(false);
-
-        if (username.equalsIgnoreCase("admin")) {
-            System.out.println("Username is equal to ADMIN");
-            return;
-        }
+    private void configMenu() {
 
         itemSistemaUsuarios.setEnabled(false);
+        menuCadastro.setEnabled(false);
+        menuProcessos.setEnabled(false);
+        menuProcessoMatricular.setEnabled(false);
+        menuProcessoFaturamento.setEnabled(false);
+        menuRelatorios.setEnabled(false);
+        menuUtilitarios.setEnabled(false);
 
-        Usuario user = new Usuario(username);
-        try {
-            UsuariosDAO dao = new UsuariosDAO(connection);
-            user = (Usuario) dao.select(user);
-        } catch (SQLException e) {
-            System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            return;
-        } catch (NullPointerException e) {
-            System.err.println("WARNING: Connection not found.");
-            menuSistema.setEnabled(false);
-            menuCadastro.setEnabled(false);
-            menuProcessos.setEnabled(false);
-            menuRelatorios.setEnabled(false);
-            menuAjuda.setEnabled(false);
-            return;
-        }
-        
-        if (user.getPerfil().equals("Cadastral")) {
-            menuProcessos.setEnabled(false);
-        } else if (user.getPerfil().equals("Financeiro")){
-            menuCadastro.setEnabled(false);
-            menuProcessoMatricular.setEnabled(false);
-        } else if (user.getPerfil().equals("Matricular")) {
-            menuCadastro.setEnabled(false);
-            menuProcessoFaturamento.setEnabled(false);
+        switch (this.user.getPerfil()) {
+            case "Cadastral":
+                menuCadastro.setEnabled(true);
+                break;
+            case "Matricular":
+                menuProcessos.setEnabled(true);
+                menuProcessoMatricular.setEnabled(true);
+                break;
+            case "Financeiro":
+                menuProcessos.setEnabled(true);
+                menuProcessoFaturamento.setEnabled(true);
+                break;
+            case "Completo":
+                itemSistemaUsuarios.setEnabled(true);
+                menuCadastro.setEnabled(true);
+                menuProcessos.setEnabled(true);
+                menuProcessoMatricular.setEnabled(true);
+                menuProcessoFaturamento.setEnabled(true);
+                menuRelatorios.setEnabled(true);
+                menuUtilitarios.setEnabled(true);
+                break;
         }
     }
 
@@ -356,14 +366,4 @@ public class MenuFrame extends JFrame {
         this.setBounds(x, y, width, height);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-
-                Connection connection = ConnectionFactory.getConnection("master", "admin", "admin");
-                MenuFrame frame = new MenuFrame(connection, "admin");
-            }
-        });
-    }
 }

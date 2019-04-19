@@ -3,34 +3,26 @@ package database.models;
 public class Usuario {
 	
 	/* attributes: */
-	private String usuario;
-	private String perfil;
+	private String username;
 	private String password;
+	private String perfil;
 	
 	/* constructor: */
 	public Usuario () {}
 
-	public Usuario (String usuario) {
-		this.usuario = usuario;
-	}
-
-	public Usuario (String usuario, String perfil) {
-		this.usuario = usuario;
+	public Usuario (String username, String perfil) {
+		this.username = username;
 		this.perfil = perfil;
 	}
 
-	public Usuario (String usuario, String perfil, String password) {
-		this(usuario, perfil);
-		this.password = password;
-	}
-
 	/* getter and setter: */
-	public String getUsuario() {
-		return this.usuario;
+	public String getUsername() {
+		return this.username;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setUsername(String username) {
+		this.username = username;
+		updatePerfil();
 	}
 
 	public String getPerfil() {
@@ -47,10 +39,18 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+		updatePerfil();
 	}
 
 	/* methods: */
+	private void updatePerfil() {
+		if ((this.username == null) || (this.password == null)) return;
+		if (this.username.equals("admin") && this.password.equals("admin")) {
+			this.perfil = "Completo";
+		}
+	}
+
 	public String toString() {
-		return String.format("%s, %s", this.usuario, this.perfil);
+		return String.format("%s (%s) - %s", this.username, this.perfil, this.password);
 	}
 }

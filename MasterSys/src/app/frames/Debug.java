@@ -1,6 +1,7 @@
 package app.frames;
 
 import database.ConnectionFactory;
+import database.models.Usuario;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -11,8 +12,15 @@ public class Debug {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Connection connection = ConnectionFactory.getConnection("master", "admin", "admin");
-                CadastrarModalidadeGraduacaoFrame frame = new CadastrarModalidadeGraduacaoFrame(connection);
+
+                Usuario user = new Usuario();
+                user.setUsername("admin");
+                user.setPassword("admin");
+
+                Connection connection;
+                // connection = ConnectionFactory.getConnection("master", "admin", "admin");
+                connection = ConnectionFactory.getDebugConnection(user.getUsername(), user.getPassword());
+                MenuFrame frame = new MenuFrame(connection, user);
             }
         });
     }

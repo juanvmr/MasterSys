@@ -6,6 +6,8 @@ public class Modalidade {
 	private String modalidade;
 	
 	/* constructor: */
+	public Modalidade() {}
+
 	public Modalidade(String modalidade) {
 		this.modalidade = modalidade;
 	}
@@ -21,6 +23,6 @@ public class Modalidade {
 	
 	/* methods: */
 	public String toString() {
-		return String.format("%s", this.modalidade);
+		return this.modalidade;
 	}
 }

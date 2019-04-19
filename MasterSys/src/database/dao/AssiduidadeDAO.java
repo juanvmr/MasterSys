@@ -22,6 +22,27 @@ public class AssiduidadeDAO extends MasterDAO {
 
 	/* methods: */
 	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(*) FROM assiduidade WHERE codigo_matricula = ?";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Assiduidade) obj).getCodigoMatricula());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check if query return a result
+		if (rst.next()) {
+			return rst.getInt(1);
+		}
+		return 0;
+	}
+
+	@Override
 	public List<Object> selectAll() throws SQLException {
 
 		String query = "SELECT * FROM assiduidade ORDER BY data_entrada";

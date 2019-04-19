@@ -17,7 +17,7 @@ public class UsuariosDAO extends MasterDAO {
 	private PreparedStatement pst_create, pst_alter, pst_drop;
 	
 	/* constructor: */
-	public UsuariosDAO(Connection conn) throws SQLException {
+	public UsuariosDAO(Connection conn) {
 		this.conn = conn;
 	}
 	
@@ -69,6 +69,28 @@ public class UsuariosDAO extends MasterDAO {
 		}
 	}
 
+
+	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(usuarios) FROM usuarios WHERE usuario = ?";
+
+		// build statement
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Usuario) obj).getUsername());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check result
+		if (rst.next()) {
+			return rst.getInt(1);
+		}
+		return 0;
+	}
+
 	@Override
 	public List<Object> selectAll() throws SQLException {
 
@@ -102,7 +124,7 @@ public class UsuariosDAO extends MasterDAO {
 		pst_select = conn.prepareStatement(query);
 
 		// fill query
-		Set(pst_select, 1, ((Usuario) parameter).getUsuario());
+		Set(pst_select, 1, ((Usuario) parameter).getUsername());
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -130,14 +152,14 @@ public class UsuariosDAO extends MasterDAO {
 		// fill query
 		Usuario tmp = (Usuario) obj;
 		
-		Set(pst_insert,  1, tmp.getUsuario());
+		Set(pst_insert,  1, tmp.getUsername());
 		Set(pst_insert,  2, tmp.getPerfil());
 
 		// run query
 		pst_insert.execute();
 
 		// create database user
-		createUser(tmp.getUsuario(), tmp.getPassword());
+		createUser(tmp.getUsername(), tmp.getPassword());
 
 		if (pst_insert.getUpdateCount() > 0) {
 			this.conn.commit();
@@ -156,13 +178,13 @@ public class UsuariosDAO extends MasterDAO {
 		Usuario tmp = (Usuario) obj;
 		
 		Set(pst_update,  1, tmp.getPerfil());
-		Set(pst_update,  2, tmp.getUsuario());
+		Set(pst_update,  2, tmp.getUsername());
 
 		// run query
 		pst_update.execute();
 
 		// change user password
-		alterUser(tmp.getUsuario(), tmp.getPassword());
+		alterUser(tmp.getUsername(), tmp.getPassword());
 
 		if (pst_update.getUpdateCount() > 0) {
 			this.conn.commit();
@@ -180,13 +202,13 @@ public class UsuariosDAO extends MasterDAO {
 		// fill statement
 		Usuario tmp = (Usuario) obj;
 		
-		Set(pst_delete, 1, tmp.getUsuario());
+		Set(pst_delete, 1, tmp.getUsername());
 
 		// run query
 		pst_delete.execute();
 
 		// drop user from database
-		dropUser(tmp.getUsuario());
+		dropUser(tmp.getUsername());
 		
 		if (pst_delete.getUpdateCount() > 0) {
 			this.conn.commit();

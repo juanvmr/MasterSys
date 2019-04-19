@@ -47,8 +47,8 @@ public class ToolBarPanel extends JPanel {
 
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         this.add(addButton);
-        this.add(saveButton);
         this.add(searchButton);
         this.add(removeButton);
+        this.add(saveButton);
     }
 }

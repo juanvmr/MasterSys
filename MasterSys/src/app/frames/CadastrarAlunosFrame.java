@@ -19,16 +19,17 @@ import java.util.List;
 public class CadastrarAlunosFrame extends JInternalFrame implements ActionListener, ItemListener {
 
     /* config: */
+    private static String[] sexoList = { "M", "F" };
     private static int inset = 5;
     private static int border = 10;
-    private static boolean isResizable = true;
+    private static boolean isResizable = false;
     private static boolean isClosable = true;
     private static boolean isMaximizable = false;
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private Connection connection;
     private LocalDAO localDAO;
+    private AlunoDAO alunoDAO;
     private List<String> cidadeList, estadoList, paisList;
 
     /* components: */
@@ -44,13 +45,8 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
     public CadastrarAlunosFrame(Connection connection) {
         super("Cadastrar Aluno", isResizable, isClosable, isMaximizable, isIconifiable);
 
-        this.connection = connection;
-
-        try {
-            localDAO = new LocalDAO(connection);
-        } catch (SQLException e) {
-            System.out.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-        }
+        this.localDAO = new LocalDAO(connection);
+        this.alunoDAO = new AlunoDAO(connection);
 
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -64,9 +60,9 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
 
         toolbar = new ToolBarPanel();
         toolbar.getAddButton().addActionListener(this);
-        toolbar.getRemoveButton().addActionListener(this);
         toolbar.getSaveButton().addActionListener(this);
         toolbar.getSearchButton().addActionListener(this);
+        toolbar.getRemoveButton().addActionListener(this);
 
         JPanel infoPanel = createInfoPanel();
         JPanel addressPanel = createAddressPanel();
@@ -95,11 +91,9 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
 
         dataNascField = new DateFormattedTextField();
 
-        String[] sexoList = { "M", "F" };
         sexoField = new JComboBox<>(sexoList);
 
         JPanel panel = new JPanel(new GridBagLayout());
-        // panel.setBorder(new EmptyBorder(border, border, border, border));
         panel.setBorder(BorderFactory.createTitledBorder("Informações"));
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -255,101 +249,151 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         try {
             paisList = localDAO.selectPaises();
 
-            if (paisList != null && paisList.size() > 0) {
-                String[] teste = new String[paisList.size()];
-                paisComboBox.setModel(new DefaultComboBoxModel<String>(paisList.toArray(teste)));
+            if ((paisList != null) && (paisList.size() > 0)) {
+                String[] vector = new String[paisList.size()];
+                paisComboBox.setModel(new DefaultComboBoxModel<String>(paisList.toArray(vector)));
             }
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
         } catch (NullPointerException e) {
-            System.err.println("lista de paises está vazia.");
+            System.err.println("NullPointerException: " + e.getMessage());
         }
     }
 
     private void updateEstadoList() {
+        if (paisComboBox.getSelectedItem() == null) return;
 
-        // clear list
-        if (estadoList != null && estadoList.size() > 0) {
+        // remove old list
+        if ((estadoList != null) && (estadoList.size() > 0)) {
             estadoComboBox.removeAllItems();
         }
 
         try {
             estadoList = localDAO.selectEstados(paisComboBox.getSelectedItem().toString());
-
-            if (estadoList != null && estadoList.size() > 0) {
-                String[] estadoVector = new String[estadoList.size()];
-                estadoComboBox.setModel(new DefaultComboBoxModel<>(estadoList.toArray(estadoVector)));
+            if ((estadoList != null) && (estadoList.size() > 0)) {
+                String[] vector = new String[estadoList.size()];
+                estadoComboBox.setModel(new DefaultComboBoxModel<>(estadoList.toArray(vector)));
             }
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
         } catch (NullPointerException e) {
-            System.err.println("lista de estados está vazia.");
+            System.err.println("NullPointerException: " + e.getMessage());
         }
     }
 
     private void updateCidadeList() {
+        if (paisComboBox.getSelectedItem() == null) return;
+        if (estadoComboBox.getSelectedItem() == null) return;
 
-        // clear list
-        if (cidadeList != null && cidadeList.size() > 0) {
+        // remove old list
+        if ((cidadeList != null) && (cidadeList.size() > 0)) {
             cidadeComboBox.removeAllItems();
         }
 
         try {
             cidadeList = localDAO.selectCidades(estadoComboBox.getSelectedItem().toString(), paisComboBox.getSelectedItem().toString());
 
-            if (cidadeList != null && cidadeList.size() > 0) {
-                String[] cidadeVector = new String[cidadeList.size()];
-                cidadeComboBox.setModel(new DefaultComboBoxModel<>(cidadeList.toArray(cidadeVector)));
+            if ((cidadeList != null) && (cidadeList.size() > 0)) {
+                String[] vector = new String[cidadeList.size()];
+                cidadeComboBox.setModel(new DefaultComboBoxModel<>(cidadeList.toArray(vector)));
             }
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
         } catch (NullPointerException e) {
-            System.err.println("lista de cidades está vazia.");
+            System.err.println("NullPointerException: " + e.getMessage());
         }
     }
 
-    private Aluno readInput() {
+    private Aluno readFields() {
 
         Aluno tmp = new Aluno();
 
         if (!alunoField.getText().isEmpty()) tmp.setAluno(alunoField.getText().trim());
         if (dataNascField.getDate() != null) tmp.setDataNascimento(dataNascField.getDate());
-        //tmp.setSexo(sexoField.getSelectedItem().toString());
+        if (sexoField.getSelectedItem() != null) tmp.setSexo(sexoField.getSelectedItem().toString().charAt(0));
         if (!telefoneField.getText().trim().isEmpty()) tmp.setTelefone(telefoneField.getText().trim());
         if (!celularField.getText().trim().isEmpty()) tmp.setCelular(celularField.getText().trim());
         if (!emailField.getText().trim().isEmpty()) tmp.setEmail(emailField.getText().trim());
-        if (obsField.getText().trim().isEmpty()) tmp.setObs(obsField.getText().trim());
+        if (!obsField.getText().trim().isEmpty()) tmp.setObs(obsField.getText().trim());
         if (!enderecoField.getText().trim().isEmpty()) tmp.setEndereco(enderecoField.getText().trim());
         if (!numeroField.getText().trim().isEmpty()) tmp.setNumero(numeroField.getText());
         if (!complementoField.getText().trim().isEmpty()) tmp.setComplemento(complementoField.getText().trim());
         if (!bairroField.getText().trim().isEmpty()) tmp.setBairro(bairroField.getText().trim());
-
-        if (!cidadeComboBox.getSelectedItem().toString().trim().isEmpty() &&
-            !estadoComboBox.getSelectedItem().toString().trim().isEmpty() &&
-            !paisComboBox.getSelectedItem().toString().trim().isEmpty()) {
-            tmp.setLocal(new Local(
-                    cidadeComboBox.getSelectedItem().toString(),
-                    estadoComboBox.getSelectedItem().toString(),
-                    paisComboBox.getSelectedItem().toString()
-            ));
-        }
-
         if (!cepField.getText().trim().isEmpty()) tmp.setCEP(cepField.getText());
+
+        if ((cidadeComboBox.getSelectedItem() != null) && (estadoComboBox.getSelectedItem() != null) && (paisComboBox.getSelectedItem() != null)) {
+            if (!cidadeComboBox.getSelectedItem().toString().trim().isEmpty() &&
+                    !estadoComboBox.getSelectedItem().toString().trim().isEmpty() &&
+                    !paisComboBox.getSelectedItem().toString().trim().isEmpty()) {
+                tmp.setLocal(new Local(
+                        cidadeComboBox.getSelectedItem().toString(),
+                        estadoComboBox.getSelectedItem().toString(),
+                        paisComboBox.getSelectedItem().toString()
+                ));
+            }
+        }
 
         return tmp;
     }
 
+    private void updateFields(Aluno tmp) {
+        if (tmp != null) {
+            if (!tmp.getAluno().isEmpty()) alunoField.setText(tmp.getAluno());
+            if (tmp.getDataNascimento() != null) dataNascField.setValue(tmp.getDataNascimento());
+            if ((tmp.getSexo() == 'M') || (tmp.getSexo() == 'F')) {
+                sexoField.setSelectedItem(String.format("%c", tmp.getSexo()));
+            }
+            if (!tmp.getTelefone().isEmpty()) telefoneField.setText(tmp.getTelefone());
+            if (!tmp.getCelular().isEmpty()) celularField.setText(tmp.getCelular());
+            if (!tmp.getEmail().isEmpty()) emailField.setText(tmp.getEmail());
+            if (!tmp.getObs().isEmpty()) obsField.setText(tmp.getObs());
+            if (!tmp.getEndereco().isEmpty()) enderecoField.setText(tmp.getEndereco());
+            if (!tmp.getNumero().isEmpty()) numeroField.setText(tmp.getNumero());
+            if (!tmp.getComplemento().isEmpty()) complementoField.setText(tmp.getComplemento());
+            if (!tmp.getBairro().isEmpty()) bairroField.setText(tmp.getBairro());
+            if (!tmp.getCEP().isEmpty()) cepField.setText(tmp.getCEP());
+
+            if (tmp.getLocal() != null) {
+                if (!tmp.getLocal().getPais().isEmpty()) paisComboBox.setSelectedItem(tmp.getLocal().getPais());
+                if (!tmp.getLocal().getEstado().isEmpty()) estadoComboBox.setSelectedItem(tmp.getLocal().getEstado());
+                if (!tmp.getLocal().getCidade().isEmpty()) cidadeComboBox.setSelectedItem(tmp.getLocal().getCidade());
+            }
+        }
+    }
+
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == toolbar.getAddButton()) {
-            // code
-            System.out.println(new Aluno());
-        } else if (e.getSource() == toolbar.getSaveButton()) {
-            // code
-        } else if (e.getSource() == toolbar.getSearchButton()) {
-            // code
-        } else if (e.getSource() == toolbar.getRemoveButton()) {
-            // code
+    public void actionPerformed(ActionEvent event) {
+        // INSERT
+        if (event.getSource() == toolbar.getAddButton()) {
+            try {
+                alunoDAO.insert(readFields());
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+        }
+        // UPDATE
+        else if (event.getSource() == toolbar.getSaveButton()) {
+            try {
+                alunoDAO.insert(readFields());
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+        }
+        // SELECT
+        else if (event.getSource() == toolbar.getSearchButton()) {
+            try {
+                updateFields((Aluno) alunoDAO.select(readFields()));
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+        }
+        // DELETE
+        else if (event.getSource() == toolbar.getRemoveButton()) {
+            try {
+                alunoDAO.delete(readFields());
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
         }
     }
 

@@ -16,11 +16,32 @@ public class GraduacaoDAO extends MasterDAO {
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public GraduacaoDAO(Connection conn) throws SQLException {
+	public GraduacaoDAO(Connection conn) {
 		this.conn = conn;
 	}
 
 	/* methods: */
+	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(graduacao) FROM graduacoes WHERE modalidade = ?";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Graduacao) obj).getModalidade());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check result
+		if (rst.next()) {
+			return rst.getInt(1);
+		}
+		return 0;
+	}
+
 	@Override
 	public List<Object> selectAll() throws SQLException {
 
@@ -48,13 +69,14 @@ public class GraduacaoDAO extends MasterDAO {
 	@Override
 	public Object select(Object obj) throws SQLException {
 
-		String query = "SELECT * FROM graduacoes WHERE modalidade = ? ORDER BY graduacao";
+		String query = "SELECT * FROM graduacoes WHERE modalidade = ? AND graduacao = ?";
 
 		// build query
 		pst_select = conn.prepareStatement(query);
 
 		// fill query
 		Set(pst_select, 1, ((Graduacao) obj).getModalidade());
+		Set(pst_select, 2, ((Graduacao) obj).getGraduacao());
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -137,5 +159,29 @@ public class GraduacaoDAO extends MasterDAO {
 			this.conn.commit();
 		}
 	}
-	
+
+	public List<Object> getList(Object obj) throws SQLException {
+
+		String query = "SELECT * FROM graduacoes WHERE modalidade = ? ORDER BY modalidade, graduacao";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		Set(pst_select, 1, ((Graduacao) obj).getModalidade());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check result
+		List<Object> list = new ArrayList<>();
+		while (rst.next()) {
+			Graduacao tmp = new Graduacao(
+					rst.getString("modalidade"),
+					rst.getString("graduacao")
+			);
+			list.add(tmp);
+		}
+
+		return list;
+	}
 }

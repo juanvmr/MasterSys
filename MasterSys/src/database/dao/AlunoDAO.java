@@ -17,7 +17,7 @@ public class AlunoDAO extends MasterDAO {
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public AlunoDAO(Connection conn) throws SQLException {
+	public AlunoDAO(Connection conn) {
 		this.conn = conn;
 	}
 
@@ -39,6 +39,26 @@ public class AlunoDAO extends MasterDAO {
 		tmp.setLocal(new Local(rst.getString("cidade"), rst.getString("estado"), rst.getString("pais")));
 		tmp.setCEP(rst.getString("cep"));
 		return tmp;
+	}
+
+	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(codigo_aluno) FROM alunos WHERE codigo_aluno = ?";
+
+		pst_select = conn.prepareStatement(query);
+
+		// fill statement
+		Set(pst_select, 1, ((Aluno) obj).getCodigoAluno());
+
+		// receive query result
+		ResultSet rst = pst_select.executeQuery();
+
+		// check if query returned something
+		if (rst.next()) {
+			return rst.getInt(1);
+		}
+		return 0;
 	}
 
 	@Override

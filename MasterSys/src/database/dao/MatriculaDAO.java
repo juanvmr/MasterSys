@@ -22,6 +22,27 @@ public class MatriculaDAO extends MasterDAO {
 
 	/* methods: */
 	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(m.codigo_matricula) FROM matriculas m INNER JOIN alunos a ON " +
+			"(m.codigo_aluno = a.codigo_aluno) WHERE m.codigo_aluno = ?";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Matricula) obj).getCodigoAluno());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		if (rst.next() ) {
+			return rst.getInt(1);
+		}
+		return 0;
+	}
+
+	@Override
 	public List<Object> selectAll() throws SQLException {
 
 		String query = "SELECT * FROM matriculas ORDER BY codigo_matricula";

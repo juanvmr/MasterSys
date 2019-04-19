@@ -22,6 +22,28 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 
 	/* methods: */
 	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(codigo_matricula)FROM matriculas_modalidades WHERE modalidade = ? AND graduacao = ?";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((MatriculaModalidade) obj).getModalidade());
+		Set(pst_select, 2, ((MatriculaModalidade) obj).getGraduacao());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check if query return a result
+		if (rst.next()) {
+			return rst.getInt(1);
+		}
+		return 0;
+	}
+
+	@Override
 	public List<Object> selectAll() throws SQLException {
 
 		String query = "SELECT codigo_matricula, modalidade, graduacao, plano, data_inicio, data_fim FROM " +

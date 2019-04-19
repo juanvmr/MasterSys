@@ -19,6 +19,7 @@ public class ConnectionFactory {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:postgresql://" + dbAddress + ":" + dbPort + "/" + dbName, dbUsername, dbPassword);
+			conn.setAutoCommit(false);
 		}catch (SQLException e) {
 			System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
 		}
@@ -36,4 +37,16 @@ public class ConnectionFactory {
 		return getConnection("localhost", "5432", dbName, dbUsername, dbPassword);
 	}
 
+
+	public static Connection getDebugConnection(String username, String password) {
+		String URL = String.format("jdbc:mariadb://%s:%d/%s", "localhost", 3306, "master_sys");
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(URL, username, password);
+			conn.setAutoCommit(false);
+		}catch (SQLException e) {
+			System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+		}
+		return conn;
+	}
 }

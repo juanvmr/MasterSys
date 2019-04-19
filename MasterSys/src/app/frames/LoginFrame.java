@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import database.ConnectionFactory;
+import database.models.Usuario;
 
 public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 
@@ -105,20 +106,21 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == loginButton) {
 
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
+            Usuario user = new Usuario();
+            user.setUsername(usernameField.getText());
+            user.setPassword(new String(passwordField.getPassword()));
 
             Connection connection = null;
-            if (!username.trim().isEmpty()) {
-                if (!password.trim().isEmpty()) {
-                    connection = ConnectionFactory.getConnection("master", username, password);
+            if (!user.getUsername().isEmpty()) {
+                if (!user.getPassword().isEmpty()) {
+                    connection = ConnectionFactory.getConnection("master", user.getUsername(), user.getPassword());
                     try {
                         // check if connection is open
                         if ((connection != null) && (!connection.isClosed())) {
                             // close login frame
                             this.dispose();
                             // open main frame
-                            MenuFrame frame = new MenuFrame(connection, username);
+                            MenuFrame frame = new MenuFrame(connection, user);
                             frame.setVisible(true);
                         }
                     } catch (SQLException e) {

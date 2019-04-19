@@ -21,6 +21,27 @@ public class PlanoDAO extends MasterDAO {
 	}
 
 	/* methods: */
+
+	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(plano) FROM planos WHERE modalidade = ?";
+
+		// build statement
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Plano) obj).getModalidade());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		if (rst.next()) {
+			return rst.getInt(1);
+		}
+		return 0;
+	}
+
 	@Override
 	public List<Object> selectAll() throws SQLException {
 

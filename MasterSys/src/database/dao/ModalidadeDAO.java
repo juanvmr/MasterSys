@@ -16,11 +16,33 @@ public class ModalidadeDAO extends MasterDAO {
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public ModalidadeDAO(Connection conn) throws SQLException {
+	public ModalidadeDAO(Connection conn) {
 		this.conn = conn;
 	}
 
 	/* methods: */
+
+	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(*) FROM modalidades WHERE modalidade = ?";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Modalidade) obj).getModalidade());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check if query return a result
+		if (rst.next()) {
+			return rst.getInt(1);
+		}
+		return 0;
+	}
+
 	@Override
 	public List<Object> selectAll() throws SQLException {
 

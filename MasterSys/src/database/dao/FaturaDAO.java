@@ -23,6 +23,27 @@ public class FaturaDAO extends MasterDAO {
 
 	/* methods: */
 	@Override
+	public int count(Object obj) throws SQLException {
+
+		String query = "SELECT COUNT(*) FROM faturas_matriculas WHERE codigo_matricula = ?";
+
+		// clear previous query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Assiduidade) obj).getCodigoMatricula());
+
+		// run query and store the result
+		ResultSet rst = pst_select.executeQuery();
+
+		// check if query return a result
+		if (rst.next()) {
+			return rst.getInt(1);
+		}
+		return 0;
+	}
+
+	@Override
 	public List<Object> selectAll() throws SQLException {
 
 		String query = "SELECT * FROM faturas_matriculas ORDER BY data_vencimento";

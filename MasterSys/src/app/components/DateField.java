@@ -5,27 +5,31 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.text.ParseException;
+import java.text.*;
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.util.SimpleTimeZone;
 
-public class DateFormattedTextField extends JFormattedTextField implements FocusListener {
+public class DateField extends JFormattedTextField implements FocusListener {
 
     /* attributes: */
-    private static DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    private static DateFormat textFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static final char TOKEN = ' ';
 
     /* constructor: */
-    public DateFormattedTextField() {
+
+    public DateField() {
         super();
-        MaskFormatter mask = null;
+        MaskFormatter dateFormatter = null;
         try {
-            mask = new MaskFormatter("##/##/####");
-            mask.setPlaceholderCharacter('_');
-            this.setFormatterFactory(new DefaultFormatterFactory(mask));
+            dateFormatter = new MaskFormatter("##/##/####");
+            //dateFormatter.setValidCharacters("0123456789");
+            dateFormatter.setPlaceholderCharacter(TOKEN);
+            //dateFormatter.setValueClass(Date.class);
+            this.setFormatterFactory(new DefaultFormatterFactory(dateFormatter));
             this.addFocusListener(this);
         } catch (ParseException e) {
-            e.printStackTrace();
+            System.err.println("Formatter: " + e.getMessage());
         }
     }
 
@@ -39,10 +43,10 @@ public class DateFormattedTextField extends JFormattedTextField implements Focus
     }
 
     private Date toDate(String s) {
-        Date tmp = null;
         if (s == null) return null;
+        Date tmp = null;
         try {
-            tmp = (Date) format.parseObject(s);
+            tmp = (Date) textFormat.parseObject(s);
         } catch (ParseException e) {
             // ignore
         }
@@ -51,7 +55,7 @@ public class DateFormattedTextField extends JFormattedTextField implements Focus
 
     private String toString(Date date) {
         try {
-            return format.format(date);
+            return textFormat.format(date);
         } catch (Exception e) {
             return "";
         }
@@ -59,16 +63,16 @@ public class DateFormattedTextField extends JFormattedTextField implements Focus
 
     @Override
     public void focusGained(FocusEvent e) {
-        if (getFocusLostBehavior() == JFormattedTextField.PERSIST) {
-            setFocusLostBehavior((JFormattedTextField.COMMIT_OR_REVERT));
+        if (this.getFocusLostBehavior() == JFormattedTextField.PERSIST) {
+            this.setFocusLostBehavior((JFormattedTextField.COMMIT_OR_REVERT));
         }
     }
 
     @Override
     public void focusLost(FocusEvent e) {
         try {
-            Date tmp = (Date) format.parseObject(this.getText());
-            this.setValue(format.format(tmp));
+            Date tmp = (Date) textFormat.parseObject(this.getText());
+            this.setValue(textFormat.format(tmp));
         } catch (ParseException ex) {
             this.setFocusLostBehavior((JFormattedTextField.PERSIST));
             this.setText("");

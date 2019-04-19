@@ -51,4 +51,11 @@ public class ToolBarPanel extends JPanel {
         this.add(removeButton);
         this.add(saveButton);
     }
+
+    public void update(boolean x, boolean y) {
+        this.addButton.setEnabled((!x && !y) || (x && !y));
+        this.saveButton.setEnabled((x && !y) || (!x && y));
+        this.searchButton.setEnabled((!x && !y) || (!x && y));
+        this.removeButton.setEnabled(!x && y);
+    }
 }

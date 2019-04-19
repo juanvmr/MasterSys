@@ -8,15 +8,12 @@ import database.models.Local;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CadastrarAlunosFrame extends JInternalFrame implements ActionListener, ItemListener {
+public class CadastrarAlunosFrame extends JInternalFrame implements ActionListener, ItemListener, KeyListener {
 
     /* config: */
     private static String[] sexoList = { "M", "F" };
@@ -30,16 +27,17 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
     /* attributes: */
     private LocalDAO localDAO;
     private AlunoDAO alunoDAO;
+    private Aluno aluno;
     private List<String> cidadeList, estadoList, paisList;
+    private boolean insertEnabled = false;
+    private boolean searchEnabled = false;
 
     /* components: */
     private ToolBarPanel toolbar;
-    private JLabel alunoLabel, dataNascLabel, sexoLabel, telefoneLabel, celularLabel, emailLabel, obsLabel;
-    private JLabel enderecoLabel, numeroLabel, complementoLabel, bairroLabel, cidadeLabel, estadoLabel, paisLabel, cepLabel;
     private JTextField alunoField, telefoneField, celularField, emailField, obsField;
     private JTextField enderecoField, numeroField, complementoField, bairroField, cepField;
-    private DateFormattedTextField dataNascField;
-    private JComboBox<String> sexoField, cidadeComboBox, estadoComboBox, paisComboBox;
+    private DateField dataNascField;
+    private JComboBox<String> sexoComboBox, cidadeComboBox, estadoComboBox, paisComboBox;
 
     /* constructors: */
     public CadastrarAlunosFrame(Connection connection) {
@@ -67,6 +65,8 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         JPanel infoPanel = createInfoPanel();
         JPanel addressPanel = createAddressPanel();
 
+        this.enableInput();
+
         content.setLayout(new BorderLayout());
         content.add(toolbar, BorderLayout.NORTH);
         content.add(infoPanel, BorderLayout.CENTER);
@@ -75,13 +75,13 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
 
     private JPanel createInfoPanel() {
 
-        alunoLabel = new JLabel("Aluno:", JLabel.RIGHT);
-        dataNascLabel = new JLabel("Data de Nascimento:", JLabel.RIGHT);
-        sexoLabel = new JLabel("Sexo:", JLabel.RIGHT);
-        telefoneLabel = new JLabel("Telefone:", JLabel.RIGHT);
-        celularLabel = new JLabel("Celular:", JLabel.RIGHT);
-        emailLabel = new JLabel("E-mail:", JLabel.RIGHT);
-        obsLabel = new JLabel("Obs.:", JLabel.LEFT);
+        JLabel alunoLabel = new JLabel("Aluno:", JLabel.RIGHT);
+        JLabel dataNascLabel = new JLabel("Data de Nascimento:", JLabel.RIGHT);
+        JLabel sexoLabel = new JLabel("Sexo:", JLabel.RIGHT);
+        JLabel telefoneLabel = new JLabel("Telefone:", JLabel.RIGHT);
+        JLabel celularLabel = new JLabel("Celular:", JLabel.RIGHT);
+        JLabel emailLabel = new JLabel("E-mail:", JLabel.RIGHT);
+        JLabel obsLabel = new JLabel("Obs.:", JLabel.LEFT);
 
         alunoField = new JTextField();
         telefoneField = new JTextField();
@@ -89,9 +89,9 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         emailField = new JTextField();
         obsField = new JTextField();
 
-        dataNascField = new DateFormattedTextField();
+        dataNascField = new DateField();
 
-        sexoField = new JComboBox<>(sexoList);
+        sexoComboBox = new JComboBox<>(sexoList);
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createTitledBorder("Informações"));
@@ -148,7 +148,7 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         constraints.gridy = 1;
         constraints.gridwidth = 1;
         constraints.weightx = 1;
-        panel.add(sexoField, constraints);
+        panel.add(sexoComboBox, constraints);
         constraints.gridy++;
         panel.add(celularField, constraints);
 
@@ -157,14 +157,14 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
 
     private JPanel createAddressPanel() {
 
-        enderecoLabel = new JLabel("Endereço:", JLabel.RIGHT);
-        numeroLabel = new JLabel("Número:", JLabel.RIGHT);
-        complementoLabel = new JLabel("Complemento:", JLabel.RIGHT);
-        bairroLabel = new JLabel("Bairro:", JLabel.RIGHT);
-        cidadeLabel = new JLabel("Cidade", JLabel.RIGHT);
-        estadoLabel = new JLabel("Estado:", JLabel.RIGHT);
-        paisLabel = new JLabel("País", JLabel.RIGHT);
-        cepLabel = new JLabel("CEP:", JLabel.RIGHT);
+        JLabel enderecoLabel = new JLabel("Endereço:", JLabel.RIGHT);
+        JLabel numeroLabel = new JLabel("Número:", JLabel.RIGHT);
+        JLabel complementoLabel = new JLabel("Complemento:", JLabel.RIGHT);
+        JLabel bairroLabel = new JLabel("Bairro:", JLabel.RIGHT);
+        JLabel cidadeLabel = new JLabel("Cidade", JLabel.RIGHT);
+        JLabel estadoLabel = new JLabel("Estado:", JLabel.RIGHT);
+        JLabel paisLabel = new JLabel("País", JLabel.RIGHT);
+        JLabel cepLabel = new JLabel("CEP:", JLabel.RIGHT);
 
         enderecoField = new JTextField();
         numeroField = new JTextField();
@@ -174,15 +174,15 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
 
         paisComboBox = new JComboBox<>();
         paisComboBox.addItemListener(this);
-        updatePaisList();
+        updatePaisComboBox();
 
         estadoComboBox = new JComboBox<>();
         estadoComboBox.addItemListener(this);
-        updateEstadoList();
+        updateEstadoComboBox();
 
         cidadeComboBox = new JComboBox<>();
         cidadeComboBox.addItemListener(this);
-        updateCidadeList();
+        updateCidadeComboBox();
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(BorderFactory.createTitledBorder("Endereço"));
@@ -245,11 +245,13 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         return panel;
     }
 
-    private void updatePaisList() {
+    private void updatePaisComboBox() {
         try {
+            // get a distinct list of paises from database
             paisList = localDAO.selectPaises();
-
+            // check database result
             if ((paisList != null) && (paisList.size() > 0)) {
+                // insert result into combobox
                 String[] vector = new String[paisList.size()];
                 paisComboBox.setModel(new DefaultComboBoxModel<String>(paisList.toArray(vector)));
             }
@@ -260,17 +262,20 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         }
     }
 
-    private void updateEstadoList() {
+    private void updateEstadoComboBox() {
         if (paisComboBox.getSelectedItem() == null) return;
 
-        // remove old list
+        // clear estado-list
         if ((estadoList != null) && (estadoList.size() > 0)) {
             estadoComboBox.removeAllItems();
         }
 
         try {
+            // get a distinct list of estados from database
             estadoList = localDAO.selectEstados(paisComboBox.getSelectedItem().toString());
+            // check database result
             if ((estadoList != null) && (estadoList.size() > 0)) {
+                // insert result into combobox
                 String[] vector = new String[estadoList.size()];
                 estadoComboBox.setModel(new DefaultComboBoxModel<>(estadoList.toArray(vector)));
             }
@@ -281,19 +286,21 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         }
     }
 
-    private void updateCidadeList() {
+    private void updateCidadeComboBox() {
         if (paisComboBox.getSelectedItem() == null) return;
         if (estadoComboBox.getSelectedItem() == null) return;
 
-        // remove old list
+        // clear combobox
         if ((cidadeList != null) && (cidadeList.size() > 0)) {
             cidadeComboBox.removeAllItems();
         }
 
         try {
+            // get a list of cidades based on estado and pais.
             cidadeList = localDAO.selectCidades(estadoComboBox.getSelectedItem().toString(), paisComboBox.getSelectedItem().toString());
-
+            // check database result
             if ((cidadeList != null) && (cidadeList.size() > 0)) {
+                // insert result into combobox
                 String[] vector = new String[cidadeList.size()];
                 cidadeComboBox.setModel(new DefaultComboBoxModel<>(cidadeList.toArray(vector)));
             }
@@ -304,13 +311,38 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         }
     }
 
-    private Aluno readFields() {
+    private void enableInput() {
 
-        Aluno tmp = new Aluno();
+        boolean state = (this.insertEnabled || this.searchEnabled);
+
+        toolbar.update(insertEnabled, searchEnabled);
+
+        alunoField.setEditable(state);
+        telefoneField.setEditable(state);
+        celularField.setEditable(state);
+        emailField.setEditable(state);
+        obsField.setEditable(state);
+        enderecoField.setEditable(state);
+        numeroField.setEditable(state);
+        complementoField.setEditable(state);
+        bairroField.setEditable(state);
+        cepField.setEditable(state);
+        dataNascField.setEditable(state);
+        sexoComboBox.setEnabled(state);
+        cidadeComboBox.setEnabled(state);
+        estadoComboBox.setEnabled(state);
+        paisComboBox.setEnabled(state);
+    }
+
+    private Aluno getInput() {
+        return getInput(new Aluno());
+    }
+
+    private Aluno getInput(Aluno tmp) {
 
         if (!alunoField.getText().isEmpty()) tmp.setAluno(alunoField.getText().trim());
         if (dataNascField.getDate() != null) tmp.setDataNascimento(dataNascField.getDate());
-        if (sexoField.getSelectedItem() != null) tmp.setSexo(sexoField.getSelectedItem().toString().charAt(0));
+        if (sexoComboBox.getSelectedItem() != null) tmp.setSexo(sexoComboBox.getSelectedItem().toString().charAt(0));
         if (!telefoneField.getText().trim().isEmpty()) tmp.setTelefone(telefoneField.getText().trim());
         if (!celularField.getText().trim().isEmpty()) tmp.setCelular(celularField.getText().trim());
         if (!emailField.getText().trim().isEmpty()) tmp.setEmail(emailField.getText().trim());
@@ -336,22 +368,20 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         return tmp;
     }
 
-    private void updateFields(Aluno tmp) {
+    private void updateInput(Aluno tmp) {
         if (tmp != null) {
             if (!tmp.getAluno().isEmpty()) alunoField.setText(tmp.getAluno());
             if (tmp.getDataNascimento() != null) dataNascField.setValue(tmp.getDataNascimento());
-            if ((tmp.getSexo() == 'M') || (tmp.getSexo() == 'F')) {
-                sexoField.setSelectedItem(String.format("%c", tmp.getSexo()));
-            }
-            if (!tmp.getTelefone().isEmpty()) telefoneField.setText(tmp.getTelefone());
-            if (!tmp.getCelular().isEmpty()) celularField.setText(tmp.getCelular());
-            if (!tmp.getEmail().isEmpty()) emailField.setText(tmp.getEmail());
-            if (!tmp.getObs().isEmpty()) obsField.setText(tmp.getObs());
-            if (!tmp.getEndereco().isEmpty()) enderecoField.setText(tmp.getEndereco());
-            if (!tmp.getNumero().isEmpty()) numeroField.setText(tmp.getNumero());
-            if (!tmp.getComplemento().isEmpty()) complementoField.setText(tmp.getComplemento());
-            if (!tmp.getBairro().isEmpty()) bairroField.setText(tmp.getBairro());
-            if (!tmp.getCEP().isEmpty()) cepField.setText(tmp.getCEP());
+            sexoComboBox.setSelectedItem(String.format("%c", tmp.getSexo()));
+            if ((tmp.getTelefone() != null) && !tmp.getTelefone().isEmpty()) telefoneField.setText(tmp.getTelefone());
+            if ((tmp.getCelular() != null) && !tmp.getCelular().isEmpty()) celularField.setText(tmp.getCelular());
+            if ((tmp.getEmail() != null) && !tmp.getEmail().isEmpty()) emailField.setText(tmp.getEmail());
+            if ((tmp.getObs() != null) && !tmp.getObs().isEmpty()) obsField.setText(tmp.getObs());
+            if ((tmp.getEndereco() != null) && !tmp.getEndereco().isEmpty()) enderecoField.setText(tmp.getEndereco());
+            if ((tmp.getNumero() != null) && !tmp.getNumero().isEmpty()) numeroField.setText(tmp.getNumero());
+            if ((tmp.getComplemento() != null) && !tmp.getComplemento().isEmpty()) complementoField.setText(tmp.getComplemento());
+            if ((tmp.getBairro() != null) && !tmp.getBairro().isEmpty()) bairroField.setText(tmp.getBairro());
+            if ((tmp.getCEP() != null) && !tmp.getCEP().isEmpty()) cepField.setText(tmp.getCEP());
 
             if (tmp.getLocal() != null) {
                 if (!tmp.getLocal().getPais().isEmpty()) paisComboBox.setSelectedItem(tmp.getLocal().getPais());
@@ -361,53 +391,154 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         }
     }
 
+    private void resetInput() {
+        alunoField.setText("");
+        dataNascField.setText("");
+        sexoComboBox.setSelectedIndex(0);
+        telefoneField.setText("");
+        celularField.setText("");
+        emailField.setText("");
+        obsField.setText("");
+        enderecoField.setText("");
+        numeroField.setText("");
+        complementoField.setText("");
+        bairroField.setText("");
+        cepField.setText("");
+        paisComboBox.setSelectedIndex(0);
+        estadoComboBox.setSelectedIndex(0);
+        cidadeComboBox.setSelectedIndex(0);
+    }
+
+    private void addButtonAction() {
+        this.insertEnabled = true;
+        this.aluno = null;
+        this.enableInput();
+    }
+
+    private void saveButtonAction() {
+        // INSERT INTO DATABASE
+        if (insertEnabled) {
+            aluno = this.getInput();
+            try {
+                if (!alunoDAO.contains(aluno)) {
+                    alunoDAO.insert(aluno);
+                } else {
+                    System.err.println("WARNING: Database contains input.");
+                }
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+            insertEnabled = false;
+        }
+        // UPDATE DATABASE
+        else if (searchEnabled) {
+            // get modification
+            getInput(aluno);
+            try {
+                 alunoDAO.update(aluno);
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+            this.searchEnabled = false;
+            this.aluno = null;
+        }
+
+        //
+        this.enableInput();
+
+        // clear input fields
+        this.resetInput();
+    }
+
+    private void searchButtonAction() {
+        if (!this.searchEnabled) {
+            this.searchEnabled = true;
+            this.enableInput();
+            this.alunoField.addKeyListener(this);
+        } else {
+            this.searchEnabled = false;
+            this.resetInput();
+            this.enableInput();
+            this.alunoField.removeActionListener(this);
+        }
+    }
+
+    private void removeButtonAction() {
+        // get modification
+        getInput(aluno);
+        try {
+            alunoDAO.delete(aluno);
+        } catch (SQLException e) {
+            System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+        }
+        this.searchEnabled = false;
+        this.aluno = null;
+    }
+
     @Override
     public void actionPerformed(ActionEvent event) {
         // INSERT
         if (event.getSource() == toolbar.getAddButton()) {
-            try {
-                alunoDAO.insert(readFields());
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            }
+            this.addButtonAction();
         }
         // UPDATE
         else if (event.getSource() == toolbar.getSaveButton()) {
-            try {
-                alunoDAO.insert(readFields());
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            }
+            this.saveButtonAction();
         }
         // SELECT
         else if (event.getSource() == toolbar.getSearchButton()) {
-            try {
-                updateFields((Aluno) alunoDAO.select(readFields()));
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            }
+            this.searchButtonAction();
         }
         // DELETE
         else if (event.getSource() == toolbar.getRemoveButton()) {
-            try {
-                alunoDAO.delete(readFields());
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            }
+            this.removeButtonAction();
         }
     }
 
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == paisComboBox) {
-            updateEstadoList();
+            updateEstadoComboBox();
             this.pack();
         } else if (e.getSource() == estadoComboBox) {
-            updateCidadeList();
+            updateCidadeComboBox();
             this.pack();
         } else if (e.getSource() == cidadeComboBox) {
             this.pack();
         }
     }
 
+    @Override
+    public void keyTyped(KeyEvent event) {
+        if (event.getSource() == alunoField) {
+            if (alunoField.getText().isEmpty()) {
+                this.resetInput();
+                this.aluno = null;
+            }
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event) {
+        if ((event.getSource() == alunoField) &&
+            (event.getKeyCode() == KeyEvent.VK_ENTER) ||
+            (event.getKeyCode() == KeyEvent.VK_TAB)) {
+            // System.err.println("keyTyped(): "  + getInput(null));
+            aluno = null;
+            try {
+                Aluno tmp = getInput();
+                System.err.println("keyTyped(): " + tmp);
+                aluno = (Aluno) alunoDAO.select(tmp);
+                System.err.println("keyTyped(): " + aluno);
+                this.updateInput(aluno);
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent event) {
+
+    }
 }

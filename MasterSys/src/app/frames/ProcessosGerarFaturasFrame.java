@@ -1,6 +1,6 @@
 package app.frames;
 
-import app.components.DateFormattedTextField;
+import app.components.DateField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,7 +22,7 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
 
     /* components: */
     private JLabel dataLabel;
-    private DateFormattedTextField dataField;
+    private DateField dataField;
     private JButton gerarButton;
 
     /* constructors: */
@@ -43,7 +43,7 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
         int border = 10;
 
         dataLabel = new JLabel("Data da Fatura:", JLabel.RIGHT);
-        dataField = new DateFormattedTextField();
+        dataField = new DateField();
         gerarButton = new JButton("Gerar Faturas");
 
         JPanel content = new JPanel(new GridBagLayout());

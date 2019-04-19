@@ -1,6 +1,6 @@
 package app.panels;
 
-import app.components.DateFormattedTextField;
+import app.components.DateField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ public class SearchBarPanel extends JPanel {
 
     /* components: */
     private JLabel fromLabel, toLabel, statusLabel;
-    private DateFormattedTextField fromField, toField;
+    private DateField fromField, toField;
     private JComboBox<String> statusComboBox;
     private JButton searchButton;
 
@@ -36,8 +36,8 @@ public class SearchBarPanel extends JPanel {
         toLabel = new JLabel("Até:", JLabel.RIGHT);
         statusLabel = new JLabel("Situação:", JLabel.RIGHT);
 
-        fromField = new DateFormattedTextField();
-        toField = new DateFormattedTextField();
+        fromField = new DateField();
+        toField = new DateField();
 
         statusComboBox = new JComboBox<>();
         statusComboBox.setModel(new DefaultComboBoxModel<>(statusList));

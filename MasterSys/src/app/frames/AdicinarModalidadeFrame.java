@@ -1,6 +1,6 @@
 package app.frames;
 
-import app.components.DateFormattedTextField;
+import app.components.DateField;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -18,7 +18,7 @@ public class AdicinarModalidadeFrame extends JFrame implements ActionListener {
     private JLabel modalidadeLabel, graduacaoLabel, planoLabel, dataInicioLabel, dataFimLabel;
     private JComboBox modalidadeComboBox;
     private JTextField graduacaoField, planoField;
-    private DateFormattedTextField dataInicioField, dataFimField;
+    private DateField dataInicioField, dataFimField;
     private JButton addButton;
 
     /* constructor: */
@@ -49,8 +49,8 @@ public class AdicinarModalidadeFrame extends JFrame implements ActionListener {
         modalidadeComboBox = new JComboBox();
         graduacaoField = new JTextField(16);
         planoField = new JTextField(16);
-        dataInicioField = new DateFormattedTextField();
-        dataFimField = new DateFormattedTextField();
+        dataInicioField = new DateField();
+        dataFimField = new DateField();
 
         addButton = new JButton("OK");
         addButton.addActionListener(this);

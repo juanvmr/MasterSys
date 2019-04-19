@@ -69,11 +69,10 @@ public class UsuariosDAO extends MasterDAO {
 		}
 	}
 
-
 	@Override
 	public int count(Object obj) throws SQLException {
 
-		String query = "SELECT COUNT(usuarios) FROM usuarios WHERE usuario = ?";
+		String query = "SELECT COUNT(usuario) FROM usuarios WHERE usuario = ?";
 
 		// build statement
 		pst_select = conn.prepareStatement(query);

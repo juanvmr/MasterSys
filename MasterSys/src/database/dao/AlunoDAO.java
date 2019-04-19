@@ -84,12 +84,12 @@ public class AlunoDAO extends MasterDAO {
 	@Override
 	public Object select(Object obj) throws SQLException {
 
-		String query = "SELECT * FROM alunos WHERE codigo_aluno = ?";
+		String query = "SELECT * FROM alunos WHERE aluno = ?";
 
 		pst_select = conn.prepareStatement(query);
 
 		// fill statement
-		Set(pst_select, 1, ((Aluno) obj).getCodigoAluno());
+		Set(pst_select, 1, ((Aluno) obj).getAluno());
 		
 		// receive query result
 		ResultSet rst = pst_select.executeQuery();

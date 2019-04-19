@@ -23,12 +23,14 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
 
     /* attributes: */
     private UsuariosDAO usuarioDAO;
+    private boolean insertEnabled = false;
+    private boolean searchEnabled = false;
 
     /* components: */
     private ToolBarPanel toolbar;
     private JComboBox<String> perfilComboBox;
     private JTextField usuarioField;
-    private JPasswordField passwordField, passwordConfirmaField;
+    private JPasswordField passwordField, passwordCheckField;
 
     public SistemaUsuariosFrame(Connection connection) {
         super("Usuários", isResizable, isClosable, isMaximizable, isIconifiable);
@@ -45,11 +47,12 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
     private void initComponents(Container content) {
 
         toolbar = new ToolBarPanel();
+        toolbar.update(this.insertEnabled, this.searchEnabled);
+
         toolbar.getAddButton().addActionListener(this);
         toolbar.getSaveButton().addActionListener(this);
         toolbar.getSearchButton().addActionListener(this);
         toolbar.getRemoveButton().addActionListener(this);
-        toolbar.getRemoveButton().setEnabled(false);
 
         content.setLayout(new BorderLayout());
         content.add(toolbar, BorderLayout.NORTH);
@@ -68,7 +71,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
 
         usuarioField = new JTextField();
         passwordField = new JPasswordField();
-        passwordConfirmaField = new JPasswordField();
+        passwordCheckField = new JPasswordField();
 
         perfilComboBox = new JComboBox<>();
         perfilComboBox.setModel(new DefaultComboBoxModel<>(perfilList));
@@ -101,30 +104,38 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         constraints.gridy++;
         panel.add(passwordField, constraints);
         constraints.gridy++;
-        panel.add(passwordConfirmaField, constraints);
+        panel.add(passwordCheckField, constraints);
         constraints.gridy++;
         panel.add(perfilComboBox, constraints);
 
         return panel;
     }
 
-    private Usuario readField() {
+    private boolean checkPasswords(String password, String passwordCheck) {
+        if (!password.isEmpty() && !passwordCheck.isEmpty()) {
+            if (password.equals(passwordCheck)) {
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "WARNNING: Passwords do not match.");
+                passwordField.setText("");
+                passwordCheckField.setText("");
+            }
+        }
+        return false;
+    }
+
+    private Usuario getInputs() {
+
         Usuario tmp = new Usuario();
 
         // read username
         if (!usuarioField.getText().trim().isEmpty()) tmp.setUsername(usuarioField.getText().trim());
 
-        // read password and check if both password match
+        // read passwords
         String password = new String(passwordField.getPassword());
-        String passwordCheck = new String(passwordConfirmaField.getPassword());
-        if (!password.isEmpty() && !passwordCheck.isEmpty()) {
-            if (password.equals(passwordCheck)) {
-                tmp.setPassword(password);
-            } else {
-                JOptionPane.showMessageDialog(null, "Passwords do not match.");
-                passwordField.setText("");
-                passwordConfirmaField.setText("");
-            }
+        String passwordCheck = new String(passwordCheckField.getPassword());
+        if ((this.insertEnabled && checkPasswords(password, passwordCheck)) || this.searchEnabled) {
+            tmp.setPassword(password);
         }
 
         // read perfil
@@ -135,60 +146,117 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         return tmp;
     }
 
-    private void updateFields(Usuario tmp) {
+    private void updateInputs(Usuario tmp) {
         if (tmp != null) {
             if (!tmp.getUsername().isEmpty()) usuarioField.setText(tmp.getUsername());
             if (!tmp.getPassword().isEmpty()) passwordField.setText(tmp.getPassword());
-            if (!tmp.getPerfil().isEmpty()) {
-                perfilComboBox.setSelectedItem(tmp.getPerfil());
+            if (!tmp.getPerfil().isEmpty()) perfilComboBox.setSelectedItem(tmp.getPerfil());
+        }
+    }
+
+    private void clear() {
+        usuarioField.setText("");
+        passwordField.setText("");
+        passwordCheckField.setText("");
+        perfilComboBox.setSelectedIndex(0);
+    }
+
+    private void addButtonAction() {
+        this.insertEnabled = true;
+
+        // enable actions
+        this.toolbar.update(this.insertEnabled, this.searchEnabled);
+    }
+
+    private void searchButtonAction() {
+        if (!usuarioField.getText().trim().isEmpty()) {
+            try {
+
+                Usuario tmp = new Usuario(usuarioField.getText().trim());
+
+                // check if usuário exists
+                if (usuarioDAO.contains(tmp)) {
+
+                    // insert data into fields
+                    this.updateInputs((Usuario) usuarioDAO.select(tmp));
+                    this.searchEnabled = true;
+
+                    // enable actions
+                    this.toolbar.update(this.insertEnabled, this.searchEnabled);
+
+                    this.usuarioField.setEditable(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "WARNNING: Usuário not found.");
+                    this.clear();
+                }
+
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
         }
+    }
+
+    private void removeButtonAction() {
+        if (!usuarioField.getText().trim().isEmpty()) {
+            try {
+                usuarioDAO.delete(new Usuario(usuarioField.getText().trim()));
+                this.clear();
+                this.searchEnabled = false;
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+        }
+
+        // enable actions
+        this.toolbar.update(this.insertEnabled, this.searchEnabled);
+    }
+
+    private void saveButtonAction() {
+        Usuario tmp = this.getInputs();
+
+        // INSERT INTO DATABASE
+        if (this.insertEnabled) {
+            try {
+                usuarioDAO.insert(tmp);
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+            this.insertEnabled = false;
+        }
+        // UPDATE DATABASE
+        else if (searchEnabled) {
+            try {
+                usuarioDAO.update(tmp);
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+            this.searchEnabled = false;
+        }
+
+        // enable actions
+        this.toolbar.update(this.insertEnabled, this.searchEnabled);
+
+        // clear fields
+        this.clear();
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
         // INSERT
         if (event.getSource() == toolbar.getAddButton()) {
-            try {
-                usuarioDAO.insert(readField());
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            } catch (NullPointerException e) {
-                System.err.println("NullPointerException: " + e.getMessage());
-            }
+            this.addButtonAction();
         }
         // UPDATE
         else if (event.getSource() == toolbar.getSaveButton()) {
-            try {
-                usuarioDAO.update(readField());
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            } catch (NullPointerException e) {
-                System.err.println("NullPointerException: " + e.getMessage());
-            }
+            this.saveButtonAction();
         }
         // SELECT
         else if (event.getSource() == toolbar.getSearchButton()) {
-            try {
-                Usuario x = readField();
-                Usuario y = (Usuario) usuarioDAO.select(x);
-                System.out.println("READ: " + x.toString());
-                System.out.println("SELECT: " + y.toString());
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            } catch (NullPointerException e) {
-                System.err.println("NullPointerException: " + e.getMessage());
-            }
+            this.searchButtonAction();
         }
         // DELETE
         else if (event.getSource() == toolbar.getRemoveButton()) {
-            try {
-                usuarioDAO.delete(readField());
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            } catch (NullPointerException e) {
-                System.err.println("NullPointerException: " + e.getMessage());
-            }
+            this.removeButtonAction();
         }
     }
 

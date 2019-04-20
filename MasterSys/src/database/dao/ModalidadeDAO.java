@@ -93,6 +93,8 @@ public class ModalidadeDAO extends MasterDAO {
 	@Override
 	public void insert(Object obj) throws SQLException {
 
+		if (this.contains(obj)) return;
+
 		String query = "INSERT INTO modalidades (modalidade) VALUES (?)";
 
 		// build query

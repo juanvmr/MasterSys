@@ -2,6 +2,9 @@ package app.frames;
 
 import app.panels.ToolBarPanel;
 import database.dao.ModalidadeDAO;
+import database.dao.PlanoDAO;
+import database.models.Modalidade;
+import database.models.Plano;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -20,22 +23,27 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private Connection connection;
+    private ModalidadeDAO modalidadeDAO;
+    private PlanoDAO planoDAO;
+    private List<Object> modalidadeList;
+    private boolean insertEnabled = false;
+    private boolean updateEnabled = false;
 
     /* components: */
     private ToolBarPanel toolbar;
-    private JLabel modalidadeLabel, planoLabel, valorLabel;
     private JTextField planoField , valorField;
     private JComboBox<Object> modalidadeComboBox;
 
     /* constructors: */
-    public CadastrarPlanosFrame(Connection conn) {
+    public CadastrarPlanosFrame(Connection connection) {
         super("Planos", isResizable, isClosable, isMaximizable, isIconifiable);
 
-        this.connection = conn;
+        this.modalidadeDAO = new ModalidadeDAO(connection);
+        this.planoDAO = new PlanoDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
+        this.setupInput();
         this.pack();
         this.setVisible(true);
     }
@@ -44,6 +52,10 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     private void initComponents(Container content) {
 
         toolbar = new ToolBarPanel();
+        toolbar.getAddButton().addActionListener(this);
+        toolbar.getSaveButton().addActionListener(this);
+        toolbar.getSearchButton().addActionListener(this);
+        toolbar.getRemoveButton().addActionListener(this);
 
         content.setLayout(new BorderLayout());
         content.add(toolbar, BorderLayout.NORTH);
@@ -55,9 +67,10 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         int inset = 5;
         int border = 10;
 
-        modalidadeLabel = new JLabel("Modalidade:", JLabel.RIGHT);
-        planoLabel = new JLabel("Plano:", JLabel.RIGHT);
-        valorLabel = new JLabel("Valor:", JLabel.RIGHT);
+        JLabel modalidadeLabel = new JLabel("Modalidade:", JLabel.RIGHT);
+        JLabel planoLabel = new JLabel("Plano:", JLabel.RIGHT);
+        JLabel valorLabel = new JLabel("Valor:", JLabel.RIGHT);
+
         planoField = new JTextField();
 
         valorField = new JTextField();
@@ -66,9 +79,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         valorField.addMouseListener(this);
 
         modalidadeComboBox = new JComboBox<>();
-        loadModalidadeComboBox();
-        // perfilComboBox.setModel(new DefaultComboBoxModel<>(perfilList));
-        // perfilComboBox.addActionListener(this);
+        updateModalidadeComboBox();
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(new EmptyBorder(border, border, border, border));
@@ -100,10 +111,9 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         return panel;
     }
 
-    private void loadModalidadeComboBox() {
+    private void updateModalidadeComboBox() {
         try {
-            ModalidadeDAO modalidadeDAO = new ModalidadeDAO(connection);
-            List<Object> modalidadeList = modalidadeDAO.selectAll();
+            modalidadeList = modalidadeDAO.selectAll();
             modalidadeComboBox.setModel(new DefaultComboBoxModel<>(modalidadeList.toArray()));
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
@@ -112,25 +122,124 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == toolbar.getAddButton()) {
-            // code
-        } else if (e.getSource() == toolbar.getSaveButton()) {
-            // code
-        } else if (e.getSource() == toolbar.getSearchButton()) {
-            // code
-        } else if (e.getSource() == toolbar.getRemoveButton()) {
-            // code
+    private void setupInput() {
+        boolean state = (this.insertEnabled || this.updateEnabled);
+
+        toolbar.setMode(this.insertEnabled, this.updateEnabled);
+
+        modalidadeComboBox.setEnabled(state);
+        if (this.updateEnabled) {
+            modalidadeComboBox.addKeyListener(this);
+        } else {
+            modalidadeComboBox.removeKeyListener(this);
+        }
+
+        planoField.setEnabled(state);
+        if (this.updateEnabled) {
+            planoField.addKeyListener(this);
+        } else {
+            planoField.removeKeyListener(this);
+        }
+
+        valorField.setEnabled(state);
+    }
+
+    private void resetInput() {
+        modalidadeComboBox.setSelectedIndex(0);
+        planoField.setText("");
+        valorField.setText("0.00");
+    }
+
+    private void updateInput(Plano p) {
+        if (p != null) {
+            modalidadeComboBox.setSelectedItem(p.getModalidade());
+            planoField.setText(p.getPlano());
+            valorField.setText(String.format("%.2f", p.getValor()));
         }
     }
 
+    private Plano getPlanoInput() {
+        Plano p = new Plano();
+        Modalidade m = (Modalidade) modalidadeComboBox.getSelectedItem();
+        if (m != null) p.setModalidade(m);
+        if (!planoField.getText().trim().isEmpty()) p.setPlano(planoField.getText().trim());
+        if (!valorField.getText().trim().isEmpty()) p.setValor(Double.parseDouble(valorField.getText().trim()));
+        return p;
+    }
+
+    private void addButtonAction() {
+        this.insertEnabled = true;
+    }
+
+    private void searchButtonAction() {
+        this.updateEnabled = true;
+    }
+
+    private void saveButtonAction() {
+        Plano p = getPlanoInput();
+        // INSERT
+        if (this.insertEnabled) {
+            try {
+                planoDAO.insert(p);
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+            this.insertEnabled = false;
+        }
+        // UPDATE
+        else if (this.updateEnabled) {
+            try {
+                planoDAO.update(p);
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+            this.updateEnabled = false;
+        }
+        // clear fields
+        resetInput();
+    }
+
+    private void removeButtonAction() {
+        Plano p = getPlanoInput();
+        try {
+            planoDAO.delete(p);
+        } catch (SQLException e) {
+            System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+        }
+        this.updateEnabled = false;
+        // clear fields
+        resetInput();
+    }
+
     @Override
-    public void keyTyped(KeyEvent e) {
-        if (e.getSource() == valorField) {
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == toolbar.getAddButton()) {
+            addButtonAction();
+        } else if (e.getSource() == toolbar.getSaveButton()) {
+            saveButtonAction();
+        } else if (e.getSource() == toolbar.getSearchButton()) {
+            searchButtonAction();
+        } else if (e.getSource() == toolbar.getRemoveButton()) {
+            removeButtonAction();
+        }
+        setupInput();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent event) {
+        if ((event.getSource() == modalidadeComboBox) || (event.getSource() == planoField)) {
+            Plano p = getPlanoInput();
+            try {
+                Plano tmp = (Plano) planoDAO.select(p);
+                updateInput(tmp);
+                // event.consume();
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+        } else if (event.getSource() == valorField) {
             String characters = "0987654321";
-            if (!characters.contains(e.getKeyChar() + "")) {
-                e.consume();
+            if (!characters.contains(event.getKeyChar() + "")) {
+                event.consume();
             }
         }
     }

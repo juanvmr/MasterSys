@@ -8,6 +8,10 @@ public class Plano {
 	private double valor;
 	
 	/* constructor: */
+	public  Plano() {
+
+	}
+
 	public Plano(String modalidade, String plano, double valor) {
 		this.modalidade = new Modalidade(modalidade);
 		this.plano = plano;

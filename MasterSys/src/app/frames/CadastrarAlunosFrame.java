@@ -315,7 +315,7 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
 
         boolean state = (this.insertEnabled || this.searchEnabled);
 
-        toolbar.update(insertEnabled, searchEnabled);
+        toolbar.setMode(insertEnabled, searchEnabled);
 
         alunoField.setEditable(state);
         telefoneField.setEditable(state);

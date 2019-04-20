@@ -2,17 +2,9 @@
 
 ## Descriçao:
 
-Repositorio para manter atualualizado um trabalho da graduaçao de ciências da computaçao.
+Repositorio para controlar o trabalho de tópicos especial.
 
 ## To-Do List:
-
-+ LocalDAO
-    + duvida sobre o metodo **Update()**.
-    + duvida sobre o metodo **Select()** -> faze um metodo para diferentes casos.
-+ ModalidadesDAO
-    + duvida sobre os metodos **Select()** e **Update()**.
-+ UsuariosDAO
-    + duvida sobre a falta do campo **senha**.
 
 ## Grupo:
 

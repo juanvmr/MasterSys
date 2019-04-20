@@ -28,11 +28,14 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     private static boolean isClosable = true;
     private static boolean isMaximizable = false;
     private static boolean isIconifiable = false;
+    private static String SPACE_TOKEN = ";";
 
     /* attributes: */
     private ModalidadeDAO modalidadeDAO;
     private GraduacaoDAO graduacaoDAO;
     private List<Graduacao> list;
+    private boolean insertEnabled = false;
+    private boolean updateEnabled = false;
 
     /* components: */
     private ToolBarPanel toolbar;
@@ -51,6 +54,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
+        this.enableInput();
         this.pack();
         this.setVisible(true);
     }
@@ -62,9 +66,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         toolbar.getAddButton().addActionListener(this);
         toolbar.getSaveButton().addActionListener(this);
         toolbar.getSearchButton().addActionListener(this);
-
         toolbar.getRemoveButton().addActionListener(this);
-        toolbar.getRemoveButton().setEnabled(false);
 
         JPanel infoPanel = createInfoPanel();
         JScrollPane tableFrame = createTable();
@@ -87,9 +89,6 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
 
         okButton = new JButton("OK");
         okButton.addActionListener(this);
-
-        // lock input fields
-        this.lock();
 
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBorder(new EmptyBorder(border, border, border, border));
@@ -141,26 +140,54 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         return scrollPane;
     }
 
-    private void lock() {
-        modalidadeField.setEnabled(false);
-        graduacaoField.setEnabled(false);
-        okButton.setEnabled(false);
+    private void enableInput() {
+        boolean enabled = (this.insertEnabled) || (this.updateEnabled);
+        toolbar.setMode(this.insertEnabled, this.updateEnabled);
+        modalidadeField.setEnabled(enabled);
+        if (this.updateEnabled) {
+            modalidadeField.addKeyListener(this);
+        } else {
+            modalidadeField.removeActionListener(this);
+        }
+        graduacaoField.setEnabled(enabled);
+        okButton.setEnabled(enabled);
     }
 
-    private void unlock() {
-        modalidadeField.setEnabled(true);
-        graduacaoField.setEnabled(true);
-        okButton.setEnabled(true);
+    private Modalidade getModalidadeInput() {
+        String m = modalidadeField.getText().trim();
+        if (!m.isEmpty()) {
+            return new Modalidade(m);
+        }
+        return null;
     }
 
-    private boolean isLocked() {
-        return (!modalidadeField.isEnabled() || !graduacaoField.isEnabled() || !okButton.isEnabled());
+    private Graduacao getGraduacaoInput() {
+        String m = modalidadeField.getText().trim();
+        String g = graduacaoField.getText().trim();
+        if (!m.isEmpty() && !g.isEmpty()) {
+            return new Graduacao(m, g);
+        }
+        return null;
+    }
+
+    private void getMultGraducaoInput() {
+        String m = modalidadeField.getText().trim();
+        String g = graduacaoField.getText().trim();
+        if (!m.isEmpty() && !g.isEmpty()) {
+            String[] v = g.split(SPACE_TOKEN);
+            for (String s : v) {
+                if (!s.trim().isEmpty()) {
+                    Graduacao tmp = new Graduacao(m, s.trim());
+                    if (!list.contains(tmp)) {
+                        list.add(tmp);
+                    }
+                }
+            }
+        }
     }
 
     private void resetTable() {
-        // remove old values
         list.clear();
-        // display a empty table
         table.setModel(new GraduacaoTableModel(list));
     }
 
@@ -168,116 +195,103 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         if ((list != null) && (list.size() > 0)) {
             table.setModel(new GraduacaoTableModel(list));
         } else {
+            list = new ArrayList<>();
             resetTable();
         }
     }
 
-    private Modalidade getModalidade() {
-        if (!modalidadeField.getText().trim().isEmpty()) {
-            return new Modalidade(modalidadeField.getText().trim());
-        }
-        return null;
+    private void addButtonAction() {
+        this.insertEnabled = true;
+        enableInput();
     }
 
-    private Graduacao getGraduação() {
-        Modalidade tmp = getModalidade();
-        if (!graduacaoField.getText().trim().isEmpty() && (tmp != null)) {
-            return new Graduacao(tmp.toString(), graduacaoField.getText().trim());
-        }
-        return null;
+    private void searchButtonAction() {
+        this.updateEnabled = true;
+        enableInput();
+        resetTable();
     }
 
-    private void getMultipleGraduations() {
-        Modalidade m = getModalidade();
-
-        if ((m != null) && !m.toString().isEmpty()) {
-            String s = graduacaoField.getText().trim();
-            if (!s.isEmpty()) {
-                String[] v = s.split(";");
-                for (String value : v) {
-                    if (!value.trim().isEmpty()) {
-                        Graduacao g = new Graduacao(m.toString(), value.trim());
-                        if (!list.contains(g)) {
-                            list.add(g);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-    private boolean isInsert = false;
-    private boolean isUpdate = false;
-    private boolean isSearch = false;
-
-    @Override
-    public void actionPerformed(ActionEvent event) {
-        if (event.getSource() == okButton) {
-            // CODE
-            if (graduacaoField.getText().contains(";")) {
-                getMultipleGraduations();
-            } else {
-                Graduacao tmp = getGraduação();
-                if (tmp != null) {
-                    list.add(tmp);
-                }
-            }
-            updateTable();      // update table list
-        } else if (event.getSource() == toolbar.getAddButton()) {
-            // CODE
-            this.unlock();
-            this.isInsert = true;
-        } else if (event.getSource() == toolbar.getSaveButton()) {
-            for (Graduacao g: list) {
+    private void saveButtonAction() {
+        // INSERT
+        if (this.insertEnabled) {
+            for (Graduacao g : list) {
                 Modalidade m = new Modalidade(g.getModalidade());
                 try {
                     if (!modalidadeDAO.contains(m)) {
                         modalidadeDAO.insert(m);
                     }
-                    graduacaoDAO.insert(g);
-                } catch (SQLException e) {
-                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-                }
-            }
-            this.resetTable();      // clear table content
-        } else if (event.getSource() == toolbar.getSearchButton()) {
-            // CODE
-            if (this.isLocked()) {
-                this.unlock();
-            } else {
-                Modalidade m = this.getModalidade();
-                if (m != null) {
-                    this.resetTable();
-                    Graduacao g = new Graduacao();
-                    g.setModalidade(m.toString());
-                    try {
-                        for (Object x : graduacaoDAO.getList(g)) {
-                            list.add((Graduacao) x);
-                        }
-                    } catch (SQLException e) {
-                        System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+                    if (!graduacaoDAO.contains(g)) {
+                        graduacaoDAO.insert(g);
                     }
-                }
-            }
-
-        } else if (event.getSource() == toolbar.getRemoveButton()) {
-            // CODE
-            Graduacao tmp = getGraduação();
-            if (tmp != null) {
-                try {
-                    graduacaoDAO.delete(tmp);
                 } catch (SQLException e) {
                     System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
                 }
             }
+            this.insertEnabled = false;
+        }
+        // UPDATE
+        else if (this.updateEnabled) {
+            Graduacao g = getGraduacaoInput();
+            try {
+                graduacaoDAO.update(g);
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+            this.updateEnabled = false;
+        }
+    }
+
+    private void removeButtonAction() {
+        Modalidade m = getModalidadeInput();
+        Graduacao g = getGraduacaoInput();
+        if (g != null) {
+
+        } else if (m != null) {
+
         }
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        if (e.getSource() == modalidadeField) {
-            this.resetTable();
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == okButton) {
+            if (graduacaoField.getText().contains(SPACE_TOKEN)) {
+                getMultGraducaoInput();
+            } else {
+                Graduacao g = getGraduacaoInput();
+                if ((g != null) && (!list.contains(g))) {
+                    list.add(g);
+                }
+            }
+            updateTable();
+        } else if (event.getSource() == toolbar.getAddButton()) {
+            this.addButtonAction();
+        } else if (event.getSource() == toolbar.getSaveButton()) {
+            this.saveButtonAction();
+        } else if (event.getSource() == toolbar.getSearchButton()) {
+            this.searchButtonAction();
+        } else if (event.getSource() == toolbar.getRemoveButton()) {
+            this.removeButtonAction();
+        }
+
+        enableInput();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent event) {
+        if (event.getSource() == modalidadeField) {
+            Modalidade m = getModalidadeInput();
+            if (m != null) {
+                resetTable();
+                Graduacao g = new Graduacao();
+                g.setModalidade(m.toString());
+                try {
+                    for (Object obj : graduacaoDAO.getList(g)) {
+                        list.add((Graduacao) obj);
+                    }
+                } catch (SQLException e) {
+                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+                }
+            }
         }
     }
 

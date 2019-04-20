@@ -16,7 +16,7 @@ public class PlanoDAO extends MasterDAO {
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public PlanoDAO(Connection conn) throws SQLException {
+	public PlanoDAO(Connection conn) {
 		this.conn = conn;
 	}
 
@@ -69,20 +69,25 @@ public class PlanoDAO extends MasterDAO {
 	@Override
 	public Object select(Object obj) throws SQLException {
 
-		String query = "SELECT * FROM planos WHERE modalidade = ?";
+		String query = "SELECT * FROM planos WHERE modalidade = ? AND plano = ?";
 
 		// build statement
 		pst_select = conn.prepareStatement(query);
 
 		// fill query
 		Set(pst_select, 1, ((Plano) obj).getModalidade());
+		Set(pst_select, 2, ((Plano) obj).getPlano());
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();
 
 		Object tmp = null;
 		if (rst.next()) {
-			tmp = new Plano(rst.getString("modalidade"), rst.getString("plano"), rst.getFloat("valor_mensal"));
+			tmp = new Plano(
+				rst.getString("modalidade"),
+				rst.getString("plano"),
+				rst.getFloat("valor_mensal")
+			);
 		}
 		
 		return tmp;
@@ -126,6 +131,8 @@ public class PlanoDAO extends MasterDAO {
 		Set(pst_update, 1, tmp.getModalidade());
 		Set(pst_update, 2, tmp.getPlano());
 		Set(pst_update, 3, tmp.getValor());
+		Set(pst_update, 4, tmp.getModalidade());
+		Set(pst_update, 5, tmp.getPlano());
 		
 		// run query 
 		pst_update.execute();

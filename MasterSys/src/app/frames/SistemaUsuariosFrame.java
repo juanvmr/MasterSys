@@ -47,7 +47,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
     private void initComponents(Container content) {
 
         toolbar = new ToolBarPanel();
-        toolbar.update(this.insertEnabled, this.searchEnabled);
+        toolbar.setMode(this.insertEnabled, this.searchEnabled);
 
         toolbar.getAddButton().addActionListener(this);
         toolbar.getSaveButton().addActionListener(this);
@@ -165,7 +165,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         this.insertEnabled = true;
 
         // enable actions
-        this.toolbar.update(this.insertEnabled, this.searchEnabled);
+        this.toolbar.setMode(this.insertEnabled, this.searchEnabled);
     }
 
     private void searchButtonAction() {
@@ -182,7 +182,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
                     this.searchEnabled = true;
 
                     // enable actions
-                    this.toolbar.update(this.insertEnabled, this.searchEnabled);
+                    this.toolbar.setMode(this.insertEnabled, this.searchEnabled);
 
                     this.usuarioField.setEditable(false);
                 } else {
@@ -208,7 +208,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         }
 
         // enable actions
-        this.toolbar.update(this.insertEnabled, this.searchEnabled);
+        this.toolbar.setMode(this.insertEnabled, this.searchEnabled);
     }
 
     private void saveButtonAction() {
@@ -234,7 +234,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         }
 
         // enable actions
-        this.toolbar.update(this.insertEnabled, this.searchEnabled);
+        this.toolbar.setMode(this.insertEnabled, this.searchEnabled);
 
         // clear fields
         this.clear();

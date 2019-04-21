@@ -44,7 +44,7 @@ public class LocalDAO extends MasterDAO {
 	}
 
 	@Override
-	public List<Object> selectAll() throws SQLException {
+	public List<Object> select() throws SQLException {
 
 		String query = "SELECT * FROM cidades ORDER BY estado DESC, pais DESC";
 
@@ -67,7 +67,12 @@ public class LocalDAO extends MasterDAO {
 	}
 
 	@Override
-	public Object select(Object obj) throws SQLException {
+	public List<Object> select(Object obj) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public Object find(Object obj) throws SQLException {
 
 		String query = "SELECT * FROM cidades WHERE cidade = ? AND estado = ? AND pais = ?";
 		

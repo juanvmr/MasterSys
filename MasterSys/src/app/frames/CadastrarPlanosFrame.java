@@ -113,7 +113,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
 
     private void updateModalidadeComboBox() {
         try {
-            modalidadeList = modalidadeDAO.selectAll();
+            modalidadeList = modalidadeDAO.select();
             modalidadeComboBox.setModel(new DefaultComboBoxModel<>(modalidadeList.toArray()));
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
@@ -230,7 +230,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         if ((event.getSource() == modalidadeComboBox) || (event.getSource() == planoField)) {
             Plano p = getPlanoInput();
             try {
-                Plano tmp = (Plano) planoDAO.select(p);
+                Plano tmp = (Plano) planoDAO.find(p);
                 updateInput(tmp);
                 // event.consume();
             } catch (SQLException e) {

@@ -19,11 +19,15 @@ public class Matricula {
 		this.codigo_aluno = codigo_aluno;
 	}
 
+	public Matricula(int codigo_aluno, Date data_matricula, int dia_vencimento, Date data_encerramento) {
+		this(0, codigo_aluno, data_matricula, dia_vencimento, data_encerramento);
+	}
+
 	public Matricula(int codigo_matricula, int codigo_aluno, Date data_matricula, int dia_vencimento, Date data_encerramento) {
 		this.codigo_matricula = codigo_matricula;
 		this.codigo_aluno = codigo_aluno;
-		this.dia_vencimento = dia_vencimento;
 		this.data_matricula = data_matricula;
+		this.dia_vencimento = dia_vencimento;
 		this.data_encerramento = data_encerramento;
 	}
 	

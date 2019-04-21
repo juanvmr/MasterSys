@@ -2,13 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e3730e8-0fcc-488b-88bf-f88f9c09b8c9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/components/MonthChooser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/database/dao/AlunoDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/database/dao/AlunoDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/database/dao/MasterDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/database/dao/MasterDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/components/DateField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/components/DateField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/AdicinarModalidadeFrame.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/MenuFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/MenuFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/panels/ToolBarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/panels/ToolBarPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/test/backup/PlanosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/test/backup/PlanosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/AlunoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/AlunoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/FaturaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/FaturaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/LocalDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/LocalDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/MasterDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/MasterDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/dao/PlanoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/PlanoDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/dao/UsuariosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/UsuariosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/models/Graduacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/models/Graduacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/models/Matricula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/models/Matricula.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/models/Plano.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/models/Plano.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -23,11 +44,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/frames/MenuFrame.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="244" column="61" selection-start-line="244" selection-start-column="31" selection-end-line="244" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="159">
+              <caret line="82" column="33" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+              <folding>
+                <element signature="method#initComponents#0;class#ProcessosMatricularAlunosFrame#0" />
+                <element signature="method#createPanel#0;class#ProcessosMatricularAlunosFrame#0" />
+                <element signature="e#5760#6281#0" />
+                <element signature="e#6287#6441#0" />
+                <element signature="e#6264#6362#0" />
+                <element signature="method#enableInput#0;class#ProcessosMatricularAlunosFrame#0" />
+                <element signature="e#7603#8169#0" />
+                <element signature="e#7353#7842#0" />
+                <element signature="e#8306#8491#0" />
+                <element signature="e#8039#8135#0" />
+                <element signature="e#8836#8938#0" />
+                <element signature="e#8228#8257#1" />
+                <element signature="e#8393#8394#0" expanded="true" />
+                <element signature="e#8444#9188#0" />
+                <element signature="e#9445#10432#0" />
+                <element signature="e#10248#11064#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="58" column="30" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -48,7 +105,6 @@
       <find>java.util.logging.</find>
       <find>testesjanelas</find>
       <find>java.awt.event.</find>
-      <find>javax.swing.</find>
       <find>getContentPane()</find>
       <find>JInternalFrame(</find>
       <find>Label</find>
@@ -57,6 +113,11 @@
       <find>.setEditable(state);</find>
       <find>.setText(&quot;&quot;);</find>
       <find>addKeyListener</find>
+      <find>graduacao</find>
+      <find />
+      <find>java.awt.event.</find>
+      <find>(java.awt.event.</find>
+      <find>javax.swing.</find>
     </findStrings>
     <replaceStrings>
       <replace>new</replace>
@@ -69,6 +130,9 @@
       <replace>.setText(&quot;&quot;);</replace>
       <replace>.addKeyListener(this);</replace>
       <replace>addActionListener</replace>
+      <replace>plano</replace>
+      <replace />
+      <replace>(</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -78,17 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/frames/ProcessosMatriculaAlunosFrame.java" />
-        <option value="$PROJECT_DIR$/src/frames/RelatoriosMatriculasFrame.java" />
-        <option value="$PROJECT_DIR$/src/frames/CadastroPlanosFrame.java" />
-        <option value="$PROJECT_DIR$/src/frames/UsuariosFrame.java" />
-        <option value="$PROJECT_DIR$/src/frames/AdicinarModalidadeFrame.java" />
-        <option value="$PROJECT_DIR$/src/frames/ProcessosGerarFaturasFrame.java" />
-        <option value="$PROJECT_DIR$/src/frames/LoginFrame.java" />
-        <option value="$PROJECT_DIR$/src/frames/Main.java" />
-        <option value="$PROJECT_DIR$/src/frames/test/SearchBarPanel.java" />
-        <option value="$PROJECT_DIR$/src/frames/tables/MatriculaTableModel.java" />
-        <option value="$PROJECT_DIR$/src/frames/tables/FaturasTableModel.java" />
         <option value="$PROJECT_DIR$/src/frames/ToolBarPanel.java" />
         <option value="$PROJECT_DIR$/src/frames/CadastrarAlunosFrame.java" />
         <option value="$PROJECT_DIR$/src/frames/MenuFrame.java" />
@@ -104,39 +157,49 @@
         <option value="$PROJECT_DIR$/src/app/frames/MenuFrame.java" />
         <option value="$PROJECT_DIR$/src/database/models/Modalidade.java" />
         <option value="$PROJECT_DIR$/src/app/tables/GraduacaoTableModel.java" />
-        <option value="$PROJECT_DIR$/src/database/models/Graduacao.java" />
-        <option value="$PROJECT_DIR$/src/database/dao/MasterDAO.java" />
-        <option value="$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java" />
-        <option value="$PROJECT_DIR$/src/database/dao/LocalDAO.java" />
-        <option value="$PROJECT_DIR$/src/database/dao/FaturaDAO.java" />
-        <option value="$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java" />
         <option value="$PROJECT_DIR$/src/database/models/Usuario.java" />
-        <option value="$PROJECT_DIR$/src/database/dao/UsuariosDAO.java" />
         <option value="$PROJECT_DIR$/src/app/components/DateFormattedTextField.java" />
         <option value="$PROJECT_DIR$/src/app/components/Debug.java" />
         <option value="$PROJECT_DIR$/src/app/components/EmailField.java" />
         <option value="$PROJECT_DIR$/src/app/components/PhoneField.java" />
         <option value="$PROJECT_DIR$/src/app/components/ZipCodeField.java" />
         <option value="$PROJECT_DIR$/src/app/components/Test.java" />
-        <option value="$PROJECT_DIR$/src/database/dao/AlunoDAO.java" />
         <option value="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" />
         <option value="$PROJECT_DIR$/src/app/panels/ToolBarPanel.java" />
-        <option value="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/components/DateField.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" />
+        <option value="$PROJECT_DIR$/src/database/dao/MasterDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" />
-        <option value="$PROJECT_DIR$/src/database/models/Plano.java" />
+        <option value="$PROJECT_DIR$/src/database/dao/LocalDAO.java" />
+        <option value="$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java" />
+        <option value="$PROJECT_DIR$/src/database/dao/UsuariosDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/PlanoDAO.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" />
+        <option value="$PROJECT_DIR$/src/database/models/Plano.java" />
+        <option value="$PROJECT_DIR$/src/database/models/Graduacao.java" />
+        <option value="$PROJECT_DIR$/src/database/dao/AlunoDAO.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/AdicinarModalidadeFrame.java" />
+        <option value="$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/AdicinarModalidadesFrame.java" />
+        <option value="$PROJECT_DIR$/src/database/models/Matricula.java" />
+        <option value="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/components/DateChooser.java" />
+        <option value="$PROJECT_DIR$/src/app/components/MasterMonthChooser.java" />
+        <option value="$PROJECT_DIR$/src/app/components/MonthChooser.java" />
+        <option value="$PROJECT_DIR$/src/app/components/MonthChooser2.java" />
+        <option value="$PROJECT_DIR$/src/database/dao/FaturaDAO.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1066" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -146,7 +209,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -218,6 +280,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -246,10 +309,10 @@
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="app.components" />
+      <recent name="app.frames" />
       <recent name="app.tables" />
       <recent name="frames.test.backup" />
       <recent name="frames.test" />
-      <recent name="frames" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -265,6 +328,19 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Debug">
+    <configuration name="AdicionarModalidadesDialog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.frames.AdicionarModalidadesDialog" />
+      <module name="MasterSys" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="app.frames.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Debug" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.frames.Debug" />
       <module name="MasterSys" />
@@ -291,12 +367,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="app.Main" />
+    <configuration name="MenuFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.frames.MenuFrame" />
       <module name="MasterSys" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="app.test.backup.*" />
+          <option name="PATTERN" value="app.panels.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -304,12 +380,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MenuFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="app.frames.MenuFrame" />
+    <configuration name="MonthChooser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.components.MonthChooser" />
       <module name="MasterSys" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="app.panels.*" />
+          <option name="PATTERN" value="app.components.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -333,9 +409,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Debug" />
+        <item itemvalue="Application.MasterMonthChooser" />
+        <item itemvalue="Application.AdicionarModalidadesDialog" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.MenuFrame" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -363,9 +440,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22707888" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21588486" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -375,14 +451,14 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3226152" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.24973205" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39764202" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3965702" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3290461" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3290461" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3290461" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.31939977" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.31618434" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -393,7 +469,7 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19829424" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21588486" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -402,15 +478,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3226152" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25937834" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39871383" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.24973205" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3965702" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3290461" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3290461" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3290461" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32047158" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.31618434" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -422,45 +498,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/database/models/Fatura.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/tables/MatriculaTableModel.java" />
-    <entry file="file://$PROJECT_DIR$/src/app/panels/SearchBarPanel.java" />
-    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" />
-    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" />
-    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/BorderFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5773">
-          <caret line="380" column="31" selection-start-line="380" selection-start-column="31" selection-end-line="380" selection-end-column="31" />
-          <folding>
-            <element signature="e#14194#14195#0" expanded="true" />
-            <element signature="e#14240#14241#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java" />
-    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosRealizarPagamentoFrame.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3799">
-          <caret line="110" column="17" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/JComboBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="619" column="18" selection-start-line="619" selection-start-column="18" selection-end-line="619" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/ObjectComboBox.java" />
     <entry file="file://$PROJECT_DIR$/src/app/tables/FaturasTableModel.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -531,73 +568,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="24" column="53" selection-start-line="24" selection-start-column="53" selection-end-line="24" selection-end-column="53" />
-          <folding>
-            <element signature="method#select#0;class#MatriculaModalidadeDAO#0" />
-            <element signature="method#selectAll#0;class#MatriculaModalidadeDAO#0" />
-            <element signature="method#insert#0;class#MatriculaModalidadeDAO#0" />
-            <element signature="method#update#0;class#MatriculaModalidadeDAO#0" />
-            <element signature="method#delete#0;class#MatriculaModalidadeDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/MasterDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="10" column="62" selection-start-line="10" selection-start-column="62" selection-end-line="10" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/FaturaDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-          <folding>
-            <element signature="method#select#0;class#FaturaDAO#0" />
-            <element signature="method#selectAll#0;class#FaturaDAO#0" />
-            <element signature="method#select#0;class#FaturaDAO#0" />
-            <element signature="method#update#0;class#FaturaDAO#0" />
-            <element signature="method#insert#0;class#FaturaDAO#0" />
-            <element signature="method#delete#0;class#FaturaDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/LocalDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#446#447#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="method#select#0;class#LocalDAO#0" />
-            <element signature="method#selectAll#0;class#LocalDAO#0" />
-            <element signature="method#select#0;class#LocalDAO#0" />
-            <element signature="method#insert#0;class#LocalDAO#0" />
-            <element signature="method#update#0;class#LocalDAO#0" />
-            <element signature="method#delete#0;class#LocalDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-          <folding>
-            <element signature="method#selectAll#0;class#AssiduidadeDAO#0" />
-            <element signature="method#select#0;class#AssiduidadeDAO#0" />
-            <element signature="method#insert#0;class#AssiduidadeDAO#0" />
-            <element signature="method#update#0;class#AssiduidadeDAO#0" />
-            <element signature="method#delete#0;class#AssiduidadeDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/database/ConnectionFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
@@ -608,39 +578,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/Debug.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/database/models/Usuario.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
           <folding>
             <element signature="method#Usuario#1;class#Usuario#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/UsuariosDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="72" column="53" lean-forward="true" selection-start-line="72" selection-start-column="53" selection-end-line="72" selection-end-column="53" />
-          <folding>
-            <element signature="e#513#514#0" expanded="true" />
-            <element signature="e#536#537#0" expanded="true" />
-            <element signature="method#createUser#0;class#UsuariosDAO#0" />
-            <element signature="method#alterUser#0;class#UsuariosDAO#0" />
-            <element signature="method#dropUser#0;class#UsuariosDAO#0" />
-            <element signature="method#count#0;class#UsuariosDAO#0" />
-            <element signature="method#selectAll#0;class#UsuariosDAO#0" />
-            <element signature="method#select#0;class#UsuariosDAO#0" />
-            <element signature="method#insert#0;class#UsuariosDAO#0" />
-            <element signature="method#update#0;class#UsuariosDAO#0" />
-            <element signature="method#delete#0;class#UsuariosDAO#0" />
           </folding>
         </state>
       </provider>
@@ -670,53 +613,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/models/Aluno.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/Debug.java" />
     <entry file="file://$PROJECT_DIR$/src/app/components/PhoneField.java" />
     <entry file="file://$PROJECT_DIR$/src/app/components/ZipCodeField.java" />
-    <entry file="file://$PROJECT_DIR$/src/app/components/DateField.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-          <folding>
-            <element signature="e#1263#1264#0" expanded="true" />
-            <element signature="e#1289#1290#0" expanded="true" />
-            <element signature="e#1344#1345#0" expanded="true" />
-            <element signature="e#1390#1391#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/components/Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
           <caret line="31" column="30" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/AlunoDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="84" column="57" selection-start-line="84" selection-start-column="57" selection-end-line="84" selection-end-column="57" />
-          <folding>
-            <element signature="e#476#477#0" expanded="true" />
-            <element signature="e#499#500#0" expanded="true" />
-            <element signature="method#getData#0;class#AlunoDAO#0" />
-            <element signature="method#count#0;class#AlunoDAO#0" />
-            <element signature="method#selectAll#0;class#AlunoDAO#0" />
-            <element signature="method#select#0;class#AlunoDAO#0" />
-            <element signature="method#insert#0;class#AlunoDAO#0" />
-            <element signature="method#update#0;class#AlunoDAO#0" />
-            <element signature="method#delete#0;class#AlunoDAO#0" />
           </folding>
         </state>
       </provider>
@@ -748,62 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/MatriculaDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="104" column="56" selection-start-line="104" selection-start-column="56" selection-end-line="104" selection-end-column="56" />
-          <folding>
-            <element signature="method#count#0;class#MatriculaDAO#0" />
-            <element signature="method#selectAll#0;class#MatriculaDAO#0" />
-            <element signature="method#select#0;class#MatriculaDAO#0" />
-            <element signature="method#update#0;class#MatriculaDAO#0" />
-            <element signature="method#delete#0;class#MatriculaDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="95" column="39" selection-start-line="95" selection-start-column="39" selection-end-line="95" selection-end-column="39" />
-          <folding>
-            <element signature="e#461#462#0" expanded="true" />
-            <element signature="e#484#485#0" expanded="true" />
-            <element signature="method#count#0;class#ModalidadeDAO#0" />
-            <element signature="method#selectAll#0;class#ModalidadeDAO#0" />
-            <element signature="method#select#0;class#ModalidadeDAO#0" />
-            <element signature="method#delete#0;class#ModalidadeDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/models/Graduacao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="78" lean-forward="true" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
-          <folding>
-            <element signature="e#637#638#0" expanded="true" />
-            <element signature="e#707#708#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1148">
-          <caret line="162" column="64" selection-start-line="162" selection-start-column="64" selection-end-line="162" selection-end-column="64" />
-          <folding>
-            <element signature="e#458#459#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="method#select#0;class#GraduacaoDAO#0" />
-            <element signature="method#insert#0;class#GraduacaoDAO#0" />
-            <element signature="method#update#0;class#GraduacaoDAO#0" />
-            <element signature="method#delete#0;class#GraduacaoDAO#0" />
-            <element signature="method#getList#0;class#GraduacaoDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
@@ -819,10 +668,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/DateField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+          <folding>
+            <element signature="method#setupFormater#0;class#DateField#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="428" column="95" lean-forward="true" selection-start-line="428" selection-start-column="16" selection-end-line="428" selection-end-column="95" />
+        <state relative-caret-position="1057">
+          <caret line="463" column="38" selection-start-line="463" selection-start-column="38" selection-end-line="463" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1369#1840#0" />
@@ -832,47 +691,33 @@
             <element signature="e#8597#9337#0" />
             <element signature="e#9343#10343#0" />
             <element signature="e#10349#11456#0" />
+            <element signature="e#11462#12230#0" />
             <element signature="e#12312#14237#0" />
             <element signature="e#14243#15997#0" />
             <element signature="e#16003#16575#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/models/Plano.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-          <folding>
-            <element signature="method#Plano#0;class#Plano#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/PlanoDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-96">
-          <caret line="89" column="12" selection-start-line="89" selection-start-column="12" selection-end-line="89" selection-end-column="12" />
-          <folding>
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#468#469#0" expanded="true" />
-            <element signature="method#selectAll#0;class#PlanoDAO#0" />
-            <element signature="method#insert#0;class#PlanoDAO#0" />
-            <element signature="method#delete#0;class#PlanoDAO#0" />
+            <element signature="e#16581#16709#0" />
+            <element signature="e#16715#17786#0" />
+            <element signature="e#17792#18175#0" />
+            <element signature="e#18181#18525#0" />
+            <element signature="e#18531#19120#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1043">
-          <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
+        <state relative-caret-position="675">
+          <caret line="116" column="92" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="92" />
           <folding>
             <element signature="method#initComponents#0;class#CadastrarPlanosFrame#0" />
             <element signature="method#createPanel#0;class#CadastrarPlanosFrame#0" />
-            <element signature="e#5190#5232#1" />
+            <element signature="method#setupInput#0;class#CadastrarPlanosFrame#0" />
+            <element signature="method#resetInput#0;class#CadastrarPlanosFrame#0" />
+            <element signature="method#updateInput#0;class#CadastrarPlanosFrame#0" />
+            <element signature="method#getPlanoInput#0;class#CadastrarPlanosFrame#0" />
+            <element signature="e#5590#5591#0" expanded="true" />
             <element signature="e#5631#5632#0" expanded="true" />
-            <element signature="e#5272#5314#1" />
+            <element signature="e#5672#5673#0" expanded="true" />
             <element signature="e#5713#5714#0" expanded="true" />
             <element signature="method#saveButtonAction#0;class#CadastrarPlanosFrame#0" />
             <element signature="method#removeButtonAction#0;class#CadastrarPlanosFrame#0" />
@@ -882,10 +727,331 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/LocalDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+          <folding>
+            <element signature="e#446#447#0" expanded="true" />
+            <element signature="e#469#470#0" expanded="true" />
+            <element signature="method#count#0;class#LocalDAO#0" />
+            <element signature="method#select#0;class#LocalDAO#0" />
+            <element signature="method#find#0;class#LocalDAO#0" />
+            <element signature="method#insert#0;class#LocalDAO#0" />
+            <element signature="method#update#0;class#LocalDAO#0" />
+            <element signature="method#delete#0;class#LocalDAO#0" />
+            <element signature="method#selectPaises#0;class#LocalDAO#0" />
+            <element signature="method#selectEstados#0;class#LocalDAO#0" />
+            <element signature="method#selectCidades#0;class#LocalDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="68" column="63" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
+          <folding>
+            <element signature="method#count#0;class#AssiduidadeDAO#0" />
+            <element signature="method#select#0;class#AssiduidadeDAO#0" />
+            <element signature="method#select#1;class#AssiduidadeDAO#0" />
+            <element signature="method#find#0;class#AssiduidadeDAO#0" />
+            <element signature="method#insert#0;class#AssiduidadeDAO#0" />
+            <element signature="method#update#0;class#AssiduidadeDAO#0" />
+            <element signature="method#delete#0;class#AssiduidadeDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/UsuariosDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="118" column="20" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="20" />
+          <folding>
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#536#537#0" expanded="true" />
+            <element signature="method#createUser#0;class#UsuariosDAO#0" />
+            <element signature="method#alterUser#0;class#UsuariosDAO#0" />
+            <element signature="method#dropUser#0;class#UsuariosDAO#0" />
+            <element signature="method#count#0;class#UsuariosDAO#0" />
+            <element signature="method#select#0;class#UsuariosDAO#0" />
+            <element signature="method#find#0;class#UsuariosDAO#0" />
+            <element signature="method#insert#0;class#UsuariosDAO#0" />
+            <element signature="method#update#0;class#UsuariosDAO#0" />
+            <element signature="method#delete#0;class#UsuariosDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/MasterDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="72" lean-forward="true" selection-start-line="14" selection-start-column="72" selection-end-line="14" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="70" column="63" lean-forward="true" selection-start-line="70" selection-start-column="63" selection-end-line="70" selection-end-column="63" />
+          <folding>
+            <element signature="method#count#0;class#GraduacaoDAO#0" />
+            <element signature="method#select#0;class#GraduacaoDAO#0" />
+            <element signature="method#find#0;class#GraduacaoDAO#0" />
+            <element signature="method#insert#0;class#GraduacaoDAO#0" />
+            <element signature="method#update#0;class#GraduacaoDAO#0" />
+            <element signature="method#delete#0;class#GraduacaoDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/PlanoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="71" column="61" selection-start-line="71" selection-start-column="51" selection-end-line="71" selection-end-column="61" />
+          <folding>
+            <element signature="method#count#0;class#PlanoDAO#0" />
+            <element signature="method#select#0;class#PlanoDAO#0" />
+            <element signature="method#find#0;class#PlanoDAO#0" />
+            <element signature="method#insert#0;class#PlanoDAO#0" />
+            <element signature="method#update#0;class#PlanoDAO#0" />
+            <element signature="method#delete#0;class#PlanoDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/models/Graduacao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="29" lean-forward="true" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+          <folding>
+            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#665#666#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/models/Plano.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="46" column="30" selection-start-line="46" selection-start-column="30" selection-end-line="46" selection-end-column="30" />
+          <folding>
+            <element signature="method#Plano#0;class#Plano#0" />
+            <element signature="e#846#847#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/models/MatriculaModalidade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-187">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/models/Aluno.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/AlunoDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="113" lean-forward="true" selection-start-line="113" selection-end-line="113" />
+          <folding>
+            <element signature="e#476#477#0" expanded="true" />
+            <element signature="e#499#500#0" expanded="true" />
+            <element signature="method#getData#0;class#AlunoDAO#0" />
+            <element signature="method#count#0;class#AlunoDAO#0" />
+            <element signature="method#select#0;class#AlunoDAO#0" />
+            <element signature="method#insert#0;class#AlunoDAO#0" />
+            <element signature="method#update#0;class#AlunoDAO#0" />
+            <element signature="method#delete#0;class#AlunoDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/util/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8678">
+          <caret line="163" column="11" selection-start-line="163" selection-start-column="11" selection-end-line="163" selection-end-column="11" />
+          <folding>
+            <element signature="e#6390#6391#0" expanded="true" />
+            <element signature="e#6438#6439#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/frames/MenuFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="244" column="61" selection-start-line="244" selection-start-column="31" selection-end-line="244" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/tables/MatriculaTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-748">
+          <caret line="12" column="101" lean-forward="true" selection-start-line="12" selection-start-column="101" selection-end-line="12" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/JDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2685">
+          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="34" column="46" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+          <folding>
+            <element signature="method#initComponents#0;class#AdicionarModalidadesDialog#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/models/Matricula.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="45" lean-forward="true" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="113" column="20" selection-start-line="113" selection-start-column="20" selection-end-line="113" selection-end-column="20" />
+          <folding>
+            <element signature="method#count#0;class#MatriculaModalidadeDAO#0" />
+            <element signature="method#select#0;class#MatriculaModalidadeDAO#0" />
+            <element signature="method#select#1;class#MatriculaModalidadeDAO#0" />
+            <element signature="method#insert#0;class#MatriculaModalidadeDAO#0" />
+            <element signature="method#update#0;class#MatriculaModalidadeDAO#0" />
+            <element signature="method#delete#0;class#MatriculaModalidadeDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="101" column="59" selection-start-line="101" selection-start-column="49" selection-end-line="101" selection-end-column="59" />
+          <folding>
+            <element signature="method#count#0;class#ModalidadeDAO#0" />
+            <element signature="method#select#0;class#ModalidadeDAO#0" />
+            <element signature="method#find#0;class#ModalidadeDAO#0" />
+            <element signature="method#delete#0;class#ModalidadeDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="48" column="60" selection-start-line="48" selection-start-column="60" selection-end-line="48" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initComponents#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#updateModalidadeComboBox#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#updateGraduacaoComboBox#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#updatePlanoComboBox#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#readInput#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="e#6993#6994#0" expanded="true" />
+            <element signature="e#7041#7042#0" expanded="true" />
+            <element signature="method#actionPerformed#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#itemStateChanged#0;class#AdicionarModalidadesDialog#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/MatriculaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
+          <folding>
+            <element signature="method#count#0;class#MatriculaDAO#0" />
+            <element signature="method#select#0;class#MatriculaDAO#0" />
+            <element signature="method#find#0;class#MatriculaDAO#0" />
+            <element signature="method#update#0;class#MatriculaDAO#0" />
+            <element signature="method#delete#0;class#MatriculaDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/Debug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="22" column="50" lean-forward="true" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="82" column="33" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+          <folding>
+            <element signature="method#initComponents#0;class#ProcessosMatricularAlunosFrame#0" />
+            <element signature="method#createPanel#0;class#ProcessosMatricularAlunosFrame#0" />
+            <element signature="e#5760#6281#0" />
+            <element signature="e#6287#6441#0" />
+            <element signature="e#6264#6362#0" />
+            <element signature="method#enableInput#0;class#ProcessosMatricularAlunosFrame#0" />
+            <element signature="e#7603#8169#0" />
+            <element signature="e#7353#7842#0" />
+            <element signature="e#8306#8491#0" />
+            <element signature="e#8039#8135#0" />
+            <element signature="e#8836#8938#0" />
+            <element signature="e#8228#8257#1" />
+            <element signature="e#8393#8394#0" expanded="true" />
+            <element signature="e#8444#9188#0" />
+            <element signature="e#9445#10432#0" />
+            <element signature="e#10248#11064#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/MonthChooser2.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/components/MonthChooser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="90" column="25" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8483#8484#0" expanded="true" />
+            <element signature="e#8518#8519#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/FaturaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <element signature="e#485#486#0" expanded="true" />
+            <element signature="e#508#509#0" expanded="true" />
+            <element signature="method#count#0;class#FaturaDAO#0" />
+            <element signature="method#select#0;class#FaturaDAO#0" />
+            <element signature="method#select#1;class#FaturaDAO#0" />
+            <element signature="method#find#0;class#FaturaDAO#0" />
+            <element signature="method#update#0;class#FaturaDAO#0" />
+            <element signature="method#insert#0;class#FaturaDAO#0" />
+            <element signature="method#delete#0;class#FaturaDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="58" column="30" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="30" />
         </state>
       </provider>
     </entry>

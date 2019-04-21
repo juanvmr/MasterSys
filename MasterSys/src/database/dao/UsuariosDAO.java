@@ -91,7 +91,7 @@ public class UsuariosDAO extends MasterDAO {
 	}
 
 	@Override
-	public List<Object> selectAll() throws SQLException {
+	public List<Object> select() throws SQLException {
 
 		String query = "SELECT * FROM usuarios ORDER BY usuario";
 
@@ -115,7 +115,12 @@ public class UsuariosDAO extends MasterDAO {
 	}
 
 	@Override
-	public Object select(Object parameter) throws SQLException {
+	public List<Object> select(Object obj) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public Object find(Object parameter) throws SQLException {
 
 		String query = "SELECT * FROM usuarios WHERE usuario = ?";
 

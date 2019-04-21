@@ -13,12 +13,12 @@ import database.models.Fatura;
 public class FaturaDAO extends MasterDAO {
 	
 	/* attributes: */
-	private Connection conn;
+	private Connection connection;
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public FaturaDAO(Connection conn) throws SQLException {
-		this.conn = conn;
+	public FaturaDAO(Connection connection) {
+		this.connection = connection;
 	}
 
 	/* methods: */
@@ -28,7 +28,7 @@ public class FaturaDAO extends MasterDAO {
 		String query = "SELECT COUNT(*) FROM faturas_matriculas WHERE codigo_matricula = ?";
 
 		// clear previous query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 
 		// fill query
 		Set(pst_select, 1, ((Assiduidade) obj).getCodigoMatricula());
@@ -44,12 +44,12 @@ public class FaturaDAO extends MasterDAO {
 	}
 
 	@Override
-	public List<Object> selectAll() throws SQLException {
+	public List<Object> select() throws SQLException {
 
 		String query = "SELECT * FROM faturas_matriculas ORDER BY data_vencimento";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 		
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -69,14 +69,44 @@ public class FaturaDAO extends MasterDAO {
 		
 		return list;
 	}
-	
+
 	@Override
-	public Object select(Object obj) throws SQLException {
+	public List<Object> select(Object obj) throws SQLException {
+
+		String query = "SELECT * FROM faturas_matriculas WHERE codigo_matricula = ? ORDER BY data_vencimento";
+
+		// build query
+		pst_select = connection.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Fatura) obj).getCodigoMatricula());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check result
+		List<Object> list = new ArrayList<Object>();
+		while (rst.next()) {
+			Fatura tmp = new Fatura(
+					rst.getInt("codigo_matricula"),
+					rst.getDate("data_vencimento"),
+					rst.getDouble("valor"),
+					rst.getDate("data_pagamento"),
+					rst.getDate("data_cancelamento")
+			);
+			list.add(tmp);
+		}
+
+		return list;
+	}
+
+	@Override
+	public Object find(Object obj) throws SQLException {
 
 		String query = "SELECT * FROM faturas_matriculas WHERE codigo_matricula = ?";
 
 		// clear previous query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 		
 		// fill query
 		Set(pst_select, 1, ((Assiduidade) obj).getCodigoMatricula());
@@ -106,7 +136,7 @@ public class FaturaDAO extends MasterDAO {
 			"data_pagamento, data_cancelamento) VALUES (?, ?, ?, ?, ?)";
 		
 		// build query
-		pst_update = conn.prepareStatement(query);
+		pst_update = connection.prepareStatement(query);
 		
 		// fill query
 		Fatura tmp = (Fatura) obj;
@@ -122,7 +152,7 @@ public class FaturaDAO extends MasterDAO {
 
 		// check if query worked
 		if (pst_update.getUpdateCount() > 0) {
-			this.conn.commit();
+			this.connection.commit();
 		}
 	}
 
@@ -133,7 +163,7 @@ public class FaturaDAO extends MasterDAO {
 			"data_cancelamento = ? WHERE codigo_matricula = ?";
 		
 		// build query
-		pst_insert = conn.prepareStatement(query);
+		pst_insert = connection.prepareStatement(query);
 		
 		// fill query
 		Fatura tmp = (Fatura) obj;
@@ -149,7 +179,7 @@ public class FaturaDAO extends MasterDAO {
 
 		// check if query worked
 		if (pst_insert.getUpdateCount() > 0) {
-			this.conn.commit();
+			this.connection.commit();
 		}
 	}
 
@@ -159,7 +189,7 @@ public class FaturaDAO extends MasterDAO {
 		String query = "DELETE FROM faturas_matriculas WHERE codigo_matricula = ?";
 
 		// build query
-		pst_delete = conn.prepareStatement(query);
+		pst_delete = connection.prepareStatement(query);
 		
 		// fill query
 		Fatura tmp = (Fatura) obj;
@@ -171,7 +201,7 @@ public class FaturaDAO extends MasterDAO {
 
 		// check if query worked
 		if (pst_delete.getUpdateCount() > 0) {
-			this.conn.commit();
+			this.connection.commit();
 		}
 	}
 	

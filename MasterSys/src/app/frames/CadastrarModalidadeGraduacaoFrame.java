@@ -285,7 +285,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
                 Graduacao g = new Graduacao();
                 g.setModalidade(m.toString());
                 try {
-                    for (Object obj : graduacaoDAO.getList(g)) {
+                    for (Object obj : graduacaoDAO.select(g)) {
                         list.add((Graduacao) obj);
                     }
                 } catch (SQLException e) {

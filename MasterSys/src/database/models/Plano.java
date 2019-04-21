@@ -45,7 +45,7 @@ public class Plano {
 	
 	/* methods: */
 	public String toString() {
-		return String.format("%s, %s, %.2f", this.modalidade.toString(), this.plano, this.valor);
+		return this.plano;
 	}
 
 }

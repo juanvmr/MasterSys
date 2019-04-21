@@ -443,11 +443,9 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
             this.aluno = null;
         }
 
-        //
-        this.enableInput();
-
         // clear input fields
         this.resetInput();
+        this.enableInput();
     }
 
     private void searchButtonAction() {
@@ -528,7 +526,7 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
             try {
                 Aluno tmp = getInput();
                 System.err.println("keyTyped(): " + tmp);
-                aluno = (Aluno) alunoDAO.select(tmp);
+                aluno = (Aluno) alunoDAO.find(tmp);
                 System.err.println("keyTyped(): " + aluno);
                 this.updateInput(aluno);
             } catch (SQLException e) {

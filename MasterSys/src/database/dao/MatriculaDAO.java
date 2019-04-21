@@ -7,17 +7,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.models.Aluno;
 import database.models.Matricula;
 
 public class MatriculaDAO extends MasterDAO {
 	
 	/* attributes: */
-	private Connection conn;
+	private Connection connection;
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public MatriculaDAO(Connection conn) throws SQLException {
-		this.conn = conn;
+	public MatriculaDAO(Connection connection) {
+		this.connection = connection;
 	}
 
 	/* methods: */
@@ -28,7 +29,7 @@ public class MatriculaDAO extends MasterDAO {
 			"(m.codigo_aluno = a.codigo_aluno) WHERE m.codigo_aluno = ?";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 
 		// fill query
 		Set(pst_select, 1, ((Matricula) obj).getCodigoAluno());
@@ -43,12 +44,12 @@ public class MatriculaDAO extends MasterDAO {
 	}
 
 	@Override
-	public List<Object> selectAll() throws SQLException {
+	public List<Object> select() throws SQLException {
 
 		String query = "SELECT * FROM matriculas ORDER BY codigo_matricula";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 		
 		// receive query result
 		ResultSet rst = pst_select.executeQuery();
@@ -72,17 +73,26 @@ public class MatriculaDAO extends MasterDAO {
 	}
 
 	@Override
-	public Object select(Object obj) throws SQLException {
+	public List<Object> select(Object obj) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public Object find(Object obj) throws SQLException {
 
 		String query = "SELECT m.*, a.* FROM matriculas m INNER JOIN alunos a ON (m.codigo_aluno = a.codigo_aluno) " +
-			"WHERE m.codigo_matricula = ? AND m.codigo_aluno = ?";
+			"WHERE a.codigo_aluno = ?";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 		
 		// fill query
-		Set(pst_select, 1, ((Matricula) obj).getCodigoMatricula());
-		Set(pst_select, 2, ((Matricula) obj).getCodigoAluno());
+		int pos = 0;
+		if (obj instanceof Matricula) {
+			Set(pst_select, ++pos, ((Matricula) obj).getCodigoAluno());
+		} else if (obj instanceof Aluno) {
+			Set(pst_select, ++pos, ((Aluno) obj).getCodigoAluno());
+		}
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -108,21 +118,22 @@ public class MatriculaDAO extends MasterDAO {
 			" dia_vencimento, data_encerramento) VALUES (DEFAULT, ?, ?, ?, ?)";
 
 		// build query
-		pst_insert = conn.prepareStatement(query);
+		pst_insert = connection.prepareStatement(query);
 
 		// fill query
 		Matricula tmp = (Matricula) obj;
 
-		Set(pst_insert, 1, tmp.getCodigoAluno());
-		Set(pst_insert, 2, tmp.getDataMatricula());
-		Set(pst_insert, 3, tmp.getDiaVencimento());
-		Set(pst_insert, 4, tmp.getDataEncerramento());
+		int pos = 0;
+		Set(pst_insert, ++pos, tmp.getCodigoAluno());
+		Set(pst_insert, ++pos, tmp.getDataMatricula());
+		Set(pst_insert, ++pos, tmp.getDiaVencimento());
+		Set(pst_insert, ++pos, tmp.getDataEncerramento());
 
 		// run query
 		pst_insert.execute();
 
 		if (pst_insert.getUpdateCount() > 0) {
-			conn.commit();
+			connection.commit();
 		}
 	}
 
@@ -133,7 +144,7 @@ public class MatriculaDAO extends MasterDAO {
 			"WHERE codigo_matricula = ? AND codigo_aluno = ?";
 		
 		// build query
-		pst_update = conn.prepareStatement(query);
+		pst_update = connection.prepareStatement(query);
 		
 		// fill query
 		Matricula tmp = (Matricula) obj;
@@ -148,7 +159,7 @@ public class MatriculaDAO extends MasterDAO {
 		pst_update.execute();
 		
 		if (pst_update.getUpdateCount() > 0) {
-			conn.commit();
+			connection.commit();
 		}
 	}
 
@@ -158,7 +169,7 @@ public class MatriculaDAO extends MasterDAO {
 		String query = "DELETE FROM matriculas WHERE codigo_matricula = ? AND codigo_aluno = ?";
 
 		// clear previous query
-		pst_delete = conn.prepareStatement(query);
+		pst_delete = connection.prepareStatement(query);
 		
 		// fill query
 		Matricula tmp = (Matricula) obj;
@@ -171,7 +182,7 @@ public class MatriculaDAO extends MasterDAO {
 		
 		// check if query worked
 		if (pst_delete.getUpdateCount() > 0) {
-			conn.commit();
+			connection.commit();
 		}
 	}
 }

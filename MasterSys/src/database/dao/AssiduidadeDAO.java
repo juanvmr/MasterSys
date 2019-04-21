@@ -43,7 +43,7 @@ public class AssiduidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public List<Object> selectAll() throws SQLException {
+	public List<Object> select() throws SQLException {
 
 		String query = "SELECT * FROM assiduidade ORDER BY data_entrada";
 
@@ -64,9 +64,35 @@ public class AssiduidadeDAO extends MasterDAO {
 		
 		return list;
 	}
-	
+
 	@Override
-	public Object select(Object obj) throws SQLException {
+	public List<Object> select(Object obj) throws SQLException {
+
+		String query = "SELECT * FROM assiduidade WHERE codigo_matricula = ? ORDER BY data_entrada";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		Set(pst_select, 1, ((Assiduidade) obj).getCodigoMatricula());
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		List<Object> list = new ArrayList<>();
+		while (rst.next()) {
+			Assiduidade tmp = new Assiduidade(
+					rst.getInt("codigo_matricula"),
+					rst.getDate("data_entrada")
+			);
+			list.add(tmp);
+		}
+
+		return list;
+	}
+
+	@Override
+	public Object find(Object obj) throws SQLException {
 
 		String query = "SELECT * FROM assiduidade WHERE codigo_matricula = ?";
 

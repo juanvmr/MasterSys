@@ -62,7 +62,7 @@ public class AlunoDAO extends MasterDAO {
 	}
 
 	@Override
-	public List<Object> selectAll() throws SQLException {
+	public List<Object> select() throws SQLException {
 
 		String query = "SELECT * FROM alunos ORDER BY aluno";
 
@@ -82,14 +82,46 @@ public class AlunoDAO extends MasterDAO {
 	}
 
 	@Override
-	public Object select(Object obj) throws SQLException {
+	public List<Object> select(Object obj) throws SQLException {
+
+		String query = "SELECT * FROM alunos WHERE aluno = ? ORDER BY aluno";
+
+		// build query
+		pst_select = conn.prepareStatement(query);
+
+		// fill query
+		if (obj instanceof Aluno) {
+			Set(pst_select, 1, ((Aluno) obj).getAluno());
+		} else if (obj instanceof String) {
+			Set(pst_select, 1, (String) obj);
+		}
+
+		// receive query result
+		ResultSet rst = pst_select.executeQuery();
+
+		// check what query returned
+		List<Object> list = new ArrayList<>();
+		while (rst.next()) {
+			Aluno tmp = getData(rst);
+			list.add(tmp);
+		}
+
+		return list;
+	}
+
+	@Override
+	public Object find(Object obj) throws SQLException {
 
 		String query = "SELECT * FROM alunos WHERE aluno = ?";
 
 		pst_select = conn.prepareStatement(query);
 
 		// fill statement
-		Set(pst_select, 1, ((Aluno) obj).getAluno());
+		if (obj instanceof Aluno) {
+			Set(pst_select, 1, ((Aluno) obj).getAluno());
+		} else if (obj instanceof String) {
+			Set(pst_select, 1, (String) obj);
+		}
 		
 		// receive query result
 		ResultSet rst = pst_select.executeQuery();

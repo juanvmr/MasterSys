@@ -12,23 +12,22 @@ import database.models.Modalidade;
 public class ModalidadeDAO extends MasterDAO {
 	
 	/* attributes: */
-	private Connection conn;
+	private Connection connection;
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public ModalidadeDAO(Connection conn) {
-		this.conn = conn;
+	public ModalidadeDAO(Connection connection) {
+		this.connection = connection;
 	}
 
 	/* methods: */
-
 	@Override
 	public int count(Object obj) throws SQLException {
 
 		String query = "SELECT COUNT(*) FROM modalidades WHERE modalidade = ?";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 
 		// fill query
 		Set(pst_select, 1, ((Modalidade) obj).getModalidade());
@@ -44,12 +43,12 @@ public class ModalidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public List<Object> selectAll() throws SQLException {
+	public List<Object> select() throws SQLException {
 
 		String query = "SELECT * FROM modalidades ORDER BY modalidade";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -66,12 +65,17 @@ public class ModalidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public Object select(Object obj) throws SQLException {
+	public List<Object> select(Object obj) throws SQLException {
+		return null;
+	}
+
+	@Override
+	public Object find(Object obj) throws SQLException {
 
 		String query = "SELECT * FROM modalidades WHERE modalidade = ?";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 
 		// fill query
 		Set(pst_select, 1, ((Modalidade) obj).getModalidade());
@@ -98,7 +102,7 @@ public class ModalidadeDAO extends MasterDAO {
 		String query = "INSERT INTO modalidades (modalidade) VALUES (?)";
 
 		// build query
-		pst_insert = conn.prepareStatement(query);
+		pst_insert = connection.prepareStatement(query);
 		
 		// fill query
 		Modalidade tmp = (Modalidade) obj;
@@ -110,14 +114,13 @@ public class ModalidadeDAO extends MasterDAO {
 		
 		// check if query worked
 		if (pst_insert.getUpdateCount() > 0) {
-			this.conn.commit();
+			this.connection.commit();
 		}
 	}
 
 	@Override
 	public void update(Object obj) throws SQLException {
-		String query = "UPDATE modalidades SET modalidade = ? WHERE modalidade = ?";
-		// NOT POSSIBLE
+		String query = "UPDATE modalidades SET modalidade = ? WHERE x = ?";
 	}
 
 	@Override
@@ -126,7 +129,7 @@ public class ModalidadeDAO extends MasterDAO {
 		String query = "DELETE FROM modalidades WHERE modalidades = ?";
 
 		// build query
-		pst_delete = conn.prepareStatement(query);
+		pst_delete = connection.prepareStatement(query);
 		
 		// fill query
 		Modalidade tmp = (Modalidade) obj;
@@ -138,7 +141,7 @@ public class ModalidadeDAO extends MasterDAO {
 		
 		// check if query worked
 		if (pst_delete.getUpdateCount() > 0) {
-			this.conn.commit();
+			this.connection.commit();
 		}
 	}
 	

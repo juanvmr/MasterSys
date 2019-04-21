@@ -20,17 +20,9 @@ public class DateField extends JFormattedTextField implements FocusListener {
 
     public DateField() {
         super();
-        MaskFormatter dateFormatter = null;
-        try {
-            dateFormatter = new MaskFormatter("##/##/####");
-            //dateFormatter.setValidCharacters("0123456789");
-            dateFormatter.setPlaceholderCharacter(TOKEN);
-            //dateFormatter.setValueClass(Date.class);
-            this.setFormatterFactory(new DefaultFormatterFactory(dateFormatter));
-            this.addFocusListener(this);
-        } catch (ParseException e) {
-            System.err.println("Formatter: " + e.getMessage());
-        }
+        this.setColumns(16);
+        this.setHorizontalAlignment(SwingConstants.CENTER);
+        this.setupFormater();
     }
 
     /* methods: */
@@ -58,6 +50,20 @@ public class DateField extends JFormattedTextField implements FocusListener {
             return textFormat.format(date);
         } catch (Exception e) {
             return "";
+        }
+    }
+
+    private void setupFormater() {
+        MaskFormatter dateFormatter = null;
+        try {
+            dateFormatter = new MaskFormatter("##/##/####");
+            //dateFormatter.setValidCharacters("0123456789");
+            dateFormatter.setPlaceholderCharacter(TOKEN);
+            //dateFormatter.setValueClass(Date.class);
+            this.setFormatterFactory(new DefaultFormatterFactory(dateFormatter));
+            this.addFocusListener(this);
+        } catch (ParseException e) {
+            System.err.println("Formatter: " + e.getMessage());
         }
     }
 

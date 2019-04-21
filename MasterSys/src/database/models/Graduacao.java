@@ -25,6 +25,6 @@ public class Graduacao {
 	
 	/* methods: */
 	public String toString() {
-		return String.format("%s, %s", this.modalidade, this.graduacao);
+		return this.graduacao;
 	}
 }

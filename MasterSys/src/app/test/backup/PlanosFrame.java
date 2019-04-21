@@ -43,7 +43,7 @@ public class PlanosFrame extends JInternalFrame {
         try {
             ModalidadeDAO modalidadeDAO = new ModalidadeDAO(conn);
 
-            List<Object> list = modalidadeDAO.selectAll();
+            List<Object> list = modalidadeDAO.select();
             String[] vetor = new String[list.size()];
             for (int i = 0; i < list.size(); i++) {
                 vetor[i] = list.get(i).toString();

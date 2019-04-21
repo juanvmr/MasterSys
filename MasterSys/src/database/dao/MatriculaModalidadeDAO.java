@@ -12,12 +12,12 @@ import database.models.MatriculaModalidade;
 public class MatriculaModalidadeDAO extends MasterDAO {
 	
 	/* attributes: */
-	private Connection conn;
+	private Connection connection;
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public MatriculaModalidadeDAO(Connection conn) throws SQLException {
-		this.conn = conn;
+	public MatriculaModalidadeDAO(Connection connection) {
+		this.connection = connection;
 	}
 
 	/* methods: */
@@ -27,7 +27,7 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 		String query = "SELECT COUNT(codigo_matricula)FROM matriculas_modalidades WHERE modalidade = ? AND graduacao = ?";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 
 		// fill query
 		Set(pst_select, 1, ((MatriculaModalidade) obj).getModalidade());
@@ -44,13 +44,13 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 	}
 
 	@Override
-	public List<Object> selectAll() throws SQLException {
+	public List<Object> select() throws SQLException {
 
 		String query = "SELECT codigo_matricula, modalidade, graduacao, plano, data_inicio, data_fim FROM " +
 			"matriculas_modalidades ORDER BY data_inicio";
 
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -71,19 +71,50 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 		
 		return list;
 	}
-	
+
 	@Override
-	public Object select(Object obj) throws SQLException {
+	public List<Object> select(Object obj) throws SQLException {
 
 		String query = "SELECT codigo_matricula, modalidade, graduacao, plano, data_inicio, data_fim FROM " +
-			"matriculas_modalidades WHERE codigo_matricula = ? AND modalidade = ?";
+				"matriculas_modalidades WHERE modalidade = ? AND graduacao = ? AND plano = ? ORDER BY data_inicio";
+
+		// build query
+		pst_select = connection.prepareStatement(query);
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check result
+		List<Object> list = new ArrayList<>();
+		while (rst.next()) {
+			MatriculaModalidade tmp = new MatriculaModalidade(
+					rst.getInt("codigo_matricula"),
+					rst.getString("modalidade"),
+					rst.getString("graduacao"),
+					rst.getString("plano"),
+					rst.getDate("data_inicio"),
+					rst.getDate("data_fim")
+			);
+			list.add(tmp);
+		}
+
+		return list;
+	}
+
+	@Override
+	public Object find(Object obj) throws SQLException {
+
+		String query = "SELECT codigo_matricula, modalidade, graduacao, plano, data_inicio, data_fim FROM " +
+			"matriculas_modalidades WHERE codigo_aluno = ?";
 		
 		// build query
-		pst_select = conn.prepareStatement(query);
+		pst_select = connection.prepareStatement(query);
 		
 		// fill query
-		Set(pst_select, 1, ((MatriculaModalidade) obj).getCodigoMatricula());
-		Set(pst_select, 2, ((MatriculaModalidade) obj).getModalidade());
+		int pos = 0;
+		if (obj instanceof MatriculaModalidade) {
+			Set(pst_select, ++pos, ((MatriculaModalidade) obj).getCodigoMatricula());
+		}
 		
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -111,24 +142,25 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 			"plano, data_inicio, data_fim) VALUES (?, ?, ?, ?, ?, ?)";
 		
 		// build query
-		pst_insert = conn.prepareStatement(query);
+		pst_insert = connection.prepareStatement(query);
 		
 		// fill query
 		MatriculaModalidade tmp = (MatriculaModalidade) obj;
 
-		Set(pst_insert, 1, tmp.getCodigoMatricula());
-		Set(pst_insert, 2, tmp.getModalidade());
-		Set(pst_insert, 3, tmp.getGraduacao());
-		Set(pst_insert, 3, tmp.getPlano());
-		Set(pst_insert, 4, tmp.getDataInicio());
-		Set(pst_insert, 5, tmp.getDataFim());
+		int pos = 0;
+		Set(pst_insert, ++pos, tmp.getCodigoMatricula());
+		Set(pst_insert, ++pos, tmp.getModalidade());
+		Set(pst_insert, ++pos, tmp.getGraduacao());
+		Set(pst_insert, ++pos, tmp.getPlano());
+		Set(pst_insert, ++pos, tmp.getDataInicio());
+		Set(pst_insert, ++pos, tmp.getDataFim());
 		
 		// run query
 		pst_insert.execute();
 		
 		// check if query worked
 		if (pst_insert.getUpdateCount() > 0) {
-			this.conn.commit();
+			this.connection.commit();
 		}
 	}
 
@@ -139,7 +171,7 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 			"WHERE codigo_matricula = ? AND modalidade = ?";
 
 		// build query
-		pst_update = conn.prepareStatement(query);
+		pst_update = connection.prepareStatement(query);
 
 		// fill query
 		MatriculaModalidade tmp = (MatriculaModalidade) obj;
@@ -156,7 +188,7 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 
 		// check if query worked
 		if (pst_update.getUpdateCount() > 0) {
-			this.conn.commit();
+			this.connection.commit();
 		}
 	}
 
@@ -166,7 +198,7 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 		String query = "DELETE FROM matriculas_modalidades WHERE codigo_matricula = ? AND modalidade = ?";
 		
 		// build query
-		pst_delete = conn.prepareStatement(query);
+		pst_delete = connection.prepareStatement(query);
 		
 		// fill query
 		MatriculaModalidade tmp = (MatriculaModalidade) obj;
@@ -179,7 +211,7 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 		
 		// check if query worked
 		if (pst_delete.getUpdateCount() > 0) {
-			this.conn.commit();
+			this.connection.commit();
 		}
 	}
 	

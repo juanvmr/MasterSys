@@ -55,7 +55,7 @@ public class MenuFrame extends JFrame {
         if (this.user.getPerfil().isEmpty()) {
             this.usuariosDAO = new UsuariosDAO(connection);
             try {
-                this.user = (Usuario) usuariosDAO.select(user);
+                this.user = (Usuario) usuariosDAO.find(user);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }

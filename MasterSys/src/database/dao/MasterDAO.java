@@ -10,9 +10,11 @@ public abstract class MasterDAO {
 
 	public abstract int count(Object obj) throws SQLException;
 
-	public abstract List<Object> selectAll() throws SQLException;
+	public abstract List<Object> select() throws SQLException;
+
+	public abstract List<Object> select(Object obj) throws SQLException;
 	
-	public abstract Object select(Object obj) throws SQLException;
+	public abstract Object find(Object obj) throws SQLException;
 
 	public abstract void insert(Object obj) throws SQLException;
 

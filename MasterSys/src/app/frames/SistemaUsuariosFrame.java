@@ -178,7 +178,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
                 if (usuarioDAO.contains(tmp)) {
 
                     // insert data into fields
-                    this.updateInputs((Usuario) usuarioDAO.select(tmp));
+                    this.updateInputs((Usuario) usuarioDAO.find(tmp));
                     this.searchEnabled = true;
 
                     // enable actions

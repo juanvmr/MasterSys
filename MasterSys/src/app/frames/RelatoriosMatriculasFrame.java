@@ -1,131 +1,151 @@
 package app.frames;
 
+import app.components.DateField;
+import database.dao.MatriculaDAO;
+import database.models.Matricula;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class RelatoriosMatriculasFrame extends JInternalFrame implements ActionListener {
 
     /* config: */
+    private static int inset = 5;
+    private static int border = 10;
+    private static String[] typeList = new String[] { ".HTML", ".TXT", ".DOC" };
     private static boolean isResizable = false;
     private static boolean isClosable = true;
     private static boolean isMaximizable = false;
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private Connection connection;
+    private MatriculaDAO matriculaDAO;
 
     /* components: */
-    private JComboBox<String> boxTipo;
-    private JButton buttonProcessar;
-    private JFormattedTextField formattedDate1;
-    private JFormattedTextField formattedDate2;
-    private JLabel labelAte;
-    private JLabel labelDe;
-    private JLabel labelPeriodo;
-    private JPanel panelPeriodo;
+    private DateField fromDateField;
+    private DateField toDateField;
+    private JButton submitButton;
+    private JComboBox<String> typeComboBox;
 
     /* constructor: */
     public RelatoriosMatriculasFrame(Connection connection) {
-        super("Matriculas", isResizable, isClosable, isMaximizable, isIconifiable);
+        super("Relatório de Matriculas", isResizable, isClosable, isMaximizable, isIconifiable);
 
-        this.connection = connection;
+        this.matriculaDAO = new MatriculaDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.initComponents(this.getContentPane());
+        this.initComponents();
         this.pack();
         this.setVisible(true);
     }
 
     /* methods: */
-    private void initComponents(Container container) {
+    private void initComponents() {
 
-        labelPeriodo = new JLabel("Período");
-        labelDe = new JLabel("De:");
-        labelAte = new JLabel("Até:");
+        typeComboBox = new JComboBox<>();
+        typeComboBox.setModel(new DefaultComboBoxModel<>(typeList));
 
-        panelPeriodo = new JPanel();
+        submitButton = new JButton("Processar");
+        submitButton.addActionListener(this);
 
-        formattedDate1 = new JFormattedTextField("jFormattedTextField1");
-        formattedDate1.addActionListener(this);
+        JPanel content = new JPanel(new GridBagLayout());
+        content.setBorder(new EmptyBorder(border, border, border, border));
+        this.setContentPane(content);
 
-        formattedDate2 = new JFormattedTextField("jFormattedTextField2");
-        formattedDate2.addActionListener(this);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(inset, inset, inset, inset);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
 
-        buttonProcessar = new JButton("Processar");
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 2;
+        constraints.weightx = 1;
+        constraints.gridheight = 4;
+        constraints.weighty = 1;
+        content.add(createPeriodPanel(), constraints);
 
-        boxTipo = new JComboBox<>();
-        boxTipo.setModel(new DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        constraints.gridx = 0;
+        constraints.gridy = 5;
+        constraints.gridwidth = 1;
+        constraints.weightx = 1;
+        constraints.gridheight = 1;
+        constraints.weighty = 0;
+        content.add(typeComboBox, constraints);
+        constraints.gridx++;
+        content.add(submitButton, constraints);
+    }
 
-        GroupLayout panelPeriodoLayout = new GroupLayout(panelPeriodo);
-        panelPeriodo.setLayout(panelPeriodoLayout);
-        panelPeriodoLayout.setHorizontalGroup(
-                panelPeriodoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(panelPeriodoLayout.createSequentialGroup()
-                                .addGroup(panelPeriodoLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(labelDe, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(labelAte, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelPeriodoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(formattedDate2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(formattedDate1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 46, Short.MAX_VALUE))
-                        .addGroup(GroupLayout.Alignment.TRAILING, panelPeriodoLayout.createSequentialGroup()
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelPeriodo, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23))
-        );
-        panelPeriodoLayout.setVerticalGroup(
-                panelPeriodoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(panelPeriodoLayout.createSequentialGroup()
-                                .addComponent(labelPeriodo, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panelPeriodoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(labelDe, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(formattedDate1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelPeriodoLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(labelAte, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(formattedDate2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 15, Short.MAX_VALUE))
-        );
+    private JPanel createPeriodPanel() {
 
-        GroupLayout layout = new GroupLayout(container);
-        container.setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(panelPeriodo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(30, Short.MAX_VALUE))
-                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(boxTipo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonProcessar, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(panelPeriodo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                        .addComponent(buttonProcessar, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                                        .addComponent(boxTipo))
-                                .addContainerGap())
-        );
+        JLabel fromLabel = new JLabel("De:");
+        JLabel toLabel = new JLabel("Até:");
+
+        fromDateField = new DateField();
+        fromDateField.setValue(new Date());
+        fromDateField.setHorizontalAlignment(SwingConstants.CENTER);
+
+        toDateField = new DateField();
+        toDateField.setValue(new Date());
+        toDateField.setHorizontalAlignment(SwingConstants.CENTER);
+
+        JPanel panel = new JPanel(new GridBagLayout());
+        panel.setBorder(BorderFactory.createTitledBorder("Período"));
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(inset, inset, inset, inset);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.weightx = 0;
+        panel.add(fromLabel, constraints);
+        constraints.gridy++;
+        panel.add(toLabel, constraints);
+
+        constraints.gridx++;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        constraints.weightx = 1;
+        panel.add(fromDateField, constraints);
+        constraints.gridy++;
+        panel.add(toDateField, constraints);
+
+        return panel;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == formattedDate1) {
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == submitButton) {
 
-        } else if (e.getSource() == formattedDate2) {
+            try {
+                Date fromDate = fromDateField.getDate();
+                Date toDate = toDateField.getDate();
+                String type = typeComboBox.getSelectedItem().toString();
 
+                System.out.println("from: " + fromDate + ", to: " + toDate + ", type: " + type);
+
+                List<Object> matriculaList = new ArrayList<Object>();
+
+                matriculaList = matriculaDAO.select();
+
+                for (Object obj : matriculaList) {
+                    System.out.println((Matricula) obj);
+                }
+
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+
+            this.dispose();
         }
     }
 }

@@ -25,13 +25,15 @@ public class GraduacaoDAO extends MasterDAO {
 	@Override
 	public int count(Object obj) throws SQLException {
 
-		String query = "SELECT COUNT(graduacao) FROM graduacoes WHERE modalidade = ?";
+		String query = "SELECT COUNT(graduacao) FROM graduacoes WHERE modalidade = ? AND graduacao = ?";
 
 		// build query
 		pst_select = connection.prepareStatement(query);
 
 		// fill query
-		Set(pst_select, 1, ((Graduacao) obj).getModalidade());
+		int pos = 0;
+		Set(pst_select, ++pos, ((Graduacao) obj).getModalidade());
+		Set(pst_select, ++pos, ((Graduacao) obj).getGraduacao());
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -128,6 +130,11 @@ public class GraduacaoDAO extends MasterDAO {
 
 	@Override
 	public void insert(Object obj) throws SQLException {
+
+		if (this.contains(obj)) {
+			System.err.println("GraduacaoDAO: " + obj);
+			return;
+		}
 
 		String query = "INSERT INTO graduacoes(modalidade, graduacao) VALUES (?, ?)";
 

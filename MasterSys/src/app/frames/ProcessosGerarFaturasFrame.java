@@ -48,7 +48,7 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
         JLabel dataLabel = new JLabel("Data da Fatura:", JLabel.RIGHT);
 
         monthChooser = new MonthChooser();
-        monthChooser.setSize(new Dimension(200, 25));
+        // monthChooser.setSize(new Dimension(200, 25));
 
         submitButton = new JButton("Gerar Faturas");
         submitButton.addActionListener(this);

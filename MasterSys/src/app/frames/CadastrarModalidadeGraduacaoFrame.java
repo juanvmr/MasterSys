@@ -33,7 +33,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     /* attributes: */
     private ModalidadeDAO modalidadeDAO;
     private GraduacaoDAO graduacaoDAO;
-    private List<Graduacao> list;
+    private List<Graduacao> graduacaoList;
     private boolean insertEnabled = false;
     private boolean updateEnabled = false;
 
@@ -127,10 +127,10 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
 
     private JScrollPane createTable() {
 
-        list = new ArrayList<Graduacao>();
+        graduacaoList = new ArrayList<Graduacao>();
 
         table = new JTable();
-        table.setModel(new GraduacaoTableModel(list));
+        table.setModel(new GraduacaoTableModel(graduacaoList));
         table.setPreferredScrollableViewportSize(new Dimension(500, 80));
         table.setFillsViewportHeight(true);
 
@@ -151,6 +151,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         }
         graduacaoField.setEnabled(enabled);
         okButton.setEnabled(enabled);
+        table.setEnabled(enabled);
     }
 
     private Modalidade getModalidadeInput() {
@@ -178,8 +179,8 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
             for (String s : v) {
                 if (!s.trim().isEmpty()) {
                     Graduacao tmp = new Graduacao(m, s.trim());
-                    if (!list.contains(tmp)) {
-                        list.add(tmp);
+                    if (!graduacaoList.contains(tmp)) {
+                        graduacaoList.add(tmp);
                     }
                 }
             }
@@ -187,17 +188,23 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     }
 
     private void resetTable() {
-        list.clear();
-        table.setModel(new GraduacaoTableModel(list));
+        graduacaoList.clear();
+        table.setModel(new GraduacaoTableModel(graduacaoList));
     }
 
     private void updateTable() {
-        if ((list != null) && (list.size() > 0)) {
-            table.setModel(new GraduacaoTableModel(list));
+        if ((graduacaoList != null) && (graduacaoList.size() > 0)) {
+            table.setModel(new GraduacaoTableModel(graduacaoList));
         } else {
-            list = new ArrayList<>();
+            graduacaoList = new ArrayList<>();
             resetTable();
         }
+    }
+
+    private void resetInput() {
+        modalidadeField.setText("");
+        graduacaoField.setText("");
+        resetTable();
     }
 
     private void addButtonAction() {
@@ -214,20 +221,17 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     private void saveButtonAction() {
         // INSERT
         if (this.insertEnabled) {
-            for (Graduacao g : list) {
-                Modalidade m = new Modalidade(g.getModalidade());
-                try {
-                    if (!modalidadeDAO.contains(m)) {
-                        modalidadeDAO.insert(m);
-                    }
-                    if (!graduacaoDAO.contains(g)) {
-                        graduacaoDAO.insert(g);
-                    }
-                } catch (SQLException e) {
-                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            try {
+                for (Graduacao g : graduacaoList) {
+                    Modalidade m = new Modalidade(g.getModalidade());
+                    modalidadeDAO.insert(m);
+                    graduacaoDAO.insert(g);
                 }
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
             this.insertEnabled = false;
+            resetInput();
         }
         // UPDATE
         else if (this.updateEnabled) {
@@ -258,8 +262,8 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
                 getMultGraducaoInput();
             } else {
                 Graduacao g = getGraduacaoInput();
-                if ((g != null) && (!list.contains(g))) {
-                    list.add(g);
+                if ((g != null) && (!graduacaoList.contains(g))) {
+                    graduacaoList.add(g);
                 }
             }
             updateTable();
@@ -279,18 +283,16 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     @Override
     public void keyTyped(KeyEvent event) {
         if (event.getSource() == modalidadeField) {
-            Modalidade m = getModalidadeInput();
-            if (m != null) {
-                resetTable();
-                Graduacao g = new Graduacao();
-                g.setModalidade(m.toString());
-                try {
-                    for (Object obj : graduacaoDAO.select(g)) {
-                        list.add((Graduacao) obj);
+            try {
+                Modalidade m = getModalidadeInput();
+                if (m != null) {
+                    resetTable();
+                    for (Object obj : graduacaoDAO.select(m)) {
+                        graduacaoList.add((Graduacao) obj);
                     }
-                } catch (SQLException e) {
-                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
                 }
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
         }
     }

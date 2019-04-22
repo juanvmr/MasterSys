@@ -14,6 +14,7 @@ public class MonthChooser extends JPanel implements ActionListener, MouseListene
             "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
     private static final int TIME_FROZEN = 3;
     private int timerFlag = 0;
+    private static Dimension minSize = new Dimension(185, 24);
 
     /* components: */
     private GregorianCalendar gregorianCalendar;
@@ -25,8 +26,9 @@ public class MonthChooser extends JPanel implements ActionListener, MouseListene
         // super();
         this.initComponents();
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.setSize(new Dimension(183,24));
-        this.setMinimumSize(new Dimension(183,24));
+        this.setSize(minSize);
+        this.setMinimumSize(minSize);
+        this.setPreferredSize(minSize);
         this.setDaysAndFill();
     }
 

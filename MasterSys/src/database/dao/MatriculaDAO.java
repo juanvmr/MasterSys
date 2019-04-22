@@ -114,8 +114,8 @@ public class MatriculaDAO extends MasterDAO {
 	@Override
 	public void insert(Object obj) throws SQLException {
 
-		String query = "INSERT INTO matriculas(codigo_matricula, codigo_aluno, data_matricula," +
-			" dia_vencimento, data_encerramento) VALUES (DEFAULT, ?, ?, ?, ?)";
+//		String query = "INSERT INTO matriculas(codigo_matricula, codigo_aluno, data_matricula, dia_vencimento, data_encerramento) VALUES (DEFAULT, ?, ?, ?, ?)";
+		String query = "INSERT INTO matriculas(codigo_aluno, data_matricula, dia_vencimento, data_encerramento) VALUES (?, ?, ?, ?)";
 
 		// build query
 		pst_insert = connection.prepareStatement(query);

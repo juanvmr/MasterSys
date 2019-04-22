@@ -34,6 +34,8 @@ public class MenuFrame extends JFrame {
     private JInternalFrame frameCadastrarAlunos, frameCadastrarModalidades, frameCadastrarPlanos;
     // Processos
     private JInternalFrame frameMatricularAluno, frameGerarFaturas, frameConsultarFaturas, frameRealizarPagamentos;
+    // Relatorio
+    private JInternalFrame frameRelatorioMatricula;
 
     /* constructor: */
     public MenuFrame(Connection connection, Usuario user) {
@@ -110,16 +112,16 @@ public class MenuFrame extends JFrame {
         menuCadastro.add(itemCadastroAlunos);
         menuCadastro.add(itemCadastroModalidades);
         menuCadastro.add(itemCadastroPlanos);
-        menuProcessos.add(menuProcessoFaturamento);
         menuProcessos.add(menuProcessoMatricular);
+        menuProcessos.add(menuProcessoFaturamento);
         menuRelatorios.add(itemRelatorioMatricula);
         menuRelatorios.add(menuRelatorioFatura);
         menuAjuda.add(itemAjudaSobre);
 
+        menuProcessoMatricular.add(itemProcessoMatriculaAluno);
         menuProcessoFaturamento.add(itemProcessoGerarFaturas);
         menuProcessoFaturamento.add(itemProcessoConsultarFaturas);
-        menuProcessoFaturamento.add(itemProcessoRealizarPagamentos);
-        menuProcessoMatricular.add(itemProcessoMatriculaAluno);
+        // menuProcessoFaturamento.add(itemProcessoRealizarPagamentos);
         menuRelatorioFatura.add(itemRelatorioFaturaAberto);
         menuRelatorioFatura.add(itemRelatorioFaturaPago);
 
@@ -213,19 +215,6 @@ public class MenuFrame extends JFrame {
             }
         });
 
-        itemProcessoRealizarPagamentos.setAction(new AbstractAction(itemProcessoRealizarPagamentos.getText()){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (checkFrame(ProcessosRealizarPagamentoFrame.class.getName())) {
-                    focusFrame(frameRealizarPagamentos);
-                } else {
-                    frameRealizarPagamentos = new ProcessosRealizarPagamentoFrame(connection);
-                    frameRealizarPagamentos.setName(ProcessosRealizarPagamentoFrame.class.getName());
-                    desktop.add(frameRealizarPagamentos);
-                }
-            }
-        });
-
         itemProcessoConsultarFaturas.setAction(new AbstractAction(itemProcessoConsultarFaturas.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -270,7 +259,13 @@ public class MenuFrame extends JFrame {
         itemRelatorioMatricula.setAction(new AbstractAction(itemRelatorioMatricula.getText()){
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (checkFrame(RelatoriosMatriculasFrame.class.getName())) {
+                    focusFrame(frameRelatorioMatricula);
+                } else {
+                    frameRelatorioMatricula = new RelatoriosMatriculasFrame(connection);
+                    frameRelatorioMatricula.setName(RelatoriosMatriculasFrame.class.getName());
+                    desktop.add(frameRelatorioMatricula);
+                }
             }
         });
 

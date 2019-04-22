@@ -20,7 +20,6 @@ public class AdicionarModalidadesDialog extends JDialog implements ActionListene
 
     /* attributes:"*/
     private MatriculaModalidade matricula_modalidade;
-    private MatriculaModalidadeDAO matricula_modalidadeDAO;
     private ModalidadeDAO modalidadeDAO;
     private GraduacaoDAO graduacaoDAO;
     private PlanoDAO planoDAO;
@@ -33,11 +32,9 @@ public class AdicionarModalidadesDialog extends JDialog implements ActionListene
 
     /* constructor: */
 
-    public AdicionarModalidadesDialog(JFrame parent, Connection connection, MatriculaModalidade matricula_modalidade) {
+    public AdicionarModalidadesDialog(JFrame parent, Connection connection) {
         super(parent, "Adicionar Modalidades", true);
 
-        this.matricula_modalidade = matricula_modalidade;
-        this.matricula_modalidadeDAO = new MatriculaModalidadeDAO(connection);
         this.modalidadeDAO = new ModalidadeDAO(connection);
         this.graduacaoDAO = new GraduacaoDAO(connection);
         this.planoDAO = new PlanoDAO(connection);
@@ -174,10 +171,6 @@ public class AdicionarModalidadesDialog extends JDialog implements ActionListene
 
     public MatriculaModalidade getValue() {
         return matricula_modalidade;
-    }
-
-    private void closing() {
-        matricula_modalidade = null;
     }
 
     @Override

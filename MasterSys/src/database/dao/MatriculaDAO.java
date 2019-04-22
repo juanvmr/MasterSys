@@ -79,6 +79,7 @@ public class MatriculaDAO extends MasterDAO {
 
 	@Override
 	public Object find(Object obj) throws SQLException {
+		if (obj == null) return null;
 
 		String query = "SELECT m.*, a.* FROM matriculas m INNER JOIN alunos a ON (m.codigo_aluno = a.codigo_aluno) " +
 			"WHERE a.codigo_aluno = ?";
@@ -92,6 +93,10 @@ public class MatriculaDAO extends MasterDAO {
 			Set(pst_select, ++pos, ((Matricula) obj).getCodigoAluno());
 		} else if (obj instanceof Aluno) {
 			Set(pst_select, ++pos, ((Aluno) obj).getCodigoAluno());
+		} else if (obj instanceof Integer) {
+			Set(pst_select, ++pos, obj);
+		} else if (obj instanceof String) {
+			Set(pst_select, ++pos, Integer.parseInt((String) obj));
 		}
 
 		// run query
@@ -166,16 +171,17 @@ public class MatriculaDAO extends MasterDAO {
 	@Override
 	public void delete(Object obj) throws SQLException {
 
-		String query = "DELETE FROM matriculas WHERE codigo_matricula = ? AND codigo_aluno = ?";
+		String query = "DELETE FROM matriculas WHERE codigo_aluno = ?";
 
 		// clear previous query
 		pst_delete = connection.prepareStatement(query);
 		
 		// fill query
-		Matricula tmp = (Matricula) obj;
-
-		Set(pst_delete, 1, tmp.getCodigoMatricula());
-		Set(pst_delete, 2, tmp.getCodigoAluno());
+		if (obj instanceof Matricula) {
+			Set(pst_delete, 1, ((Matricula) obj).getCodigoAluno());
+		} else if (obj instanceof Integer) {
+			Set(pst_delete, 1, obj);
+		}
 		
 		// run query
 		pst_delete.execute();

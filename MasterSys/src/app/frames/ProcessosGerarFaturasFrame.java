@@ -31,12 +31,12 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
     /* constructors: */
     public ProcessosGerarFaturasFrame(Connection connection) {
         super("Gerar Faturas", isResizable, isClosable, isMaximizable, isIconifiable);
-        this.setSize(new Dimension(300, 150));
+        //this.setSize(new Dimension(300, 150));
         this.faturaDAO = new FaturaDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents();
-        //this.pack();
+        this.pack();
         this.setVisible(true);
     }
 
@@ -48,7 +48,6 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
         JLabel dataLabel = new JLabel("Data da Fatura:", JLabel.RIGHT);
 
         monthChooser = new MonthChooser();
-        // monthChooser.setSize(new Dimension(200, 25));
 
         submitButton = new JButton("Gerar Faturas");
         submitButton.addActionListener(this);
@@ -66,14 +65,14 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
         constraints.weightx = 0;
         content.add(dataLabel, constraints);
         constraints.gridx++;
-        constraints.gridwidth = 1;
+        constraints.gridwidth = 2;
         constraints.weightx = 1;
         content.add(monthChooser, constraints);
 
         constraints.gridx = 0;
         constraints.gridy++;
+        constraints.gridwidth = 3;
         constraints.weightx = 0;
-        constraints.gridwidth = 2;
         content.add(submitButton, constraints);
 
         this.setContentPane(content);

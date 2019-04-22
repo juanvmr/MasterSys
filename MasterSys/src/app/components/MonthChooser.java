@@ -26,7 +26,7 @@ public class MonthChooser extends JPanel implements ActionListener, MouseListene
         // super();
         this.initComponents();
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.setSize(minSize);
+        //this.setSize(minSize);
         this.setMinimumSize(minSize);
         this.setPreferredSize(minSize);
         this.setDaysAndFill();

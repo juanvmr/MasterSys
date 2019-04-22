@@ -54,7 +54,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
-        this.enableInput();
+        this.setupInput();
         this.pack();
         this.setVisible(true);
     }
@@ -131,7 +131,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
 
         table = new JTable();
         table.setModel(new GraduacaoTableModel(graduacaoList));
-        table.setPreferredScrollableViewportSize(new Dimension(500, 80));
+        table.setPreferredScrollableViewportSize(new Dimension(500, 200));
         table.setFillsViewportHeight(true);
 
         //Create the scroll pane and add the table to it.
@@ -140,7 +140,22 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         return scrollPane;
     }
 
-    private void enableInput() {
+    private void updateTable() {
+        if (graduacaoList == null) {
+            graduacaoList = new ArrayList<>();
+        } else {
+            table.setModel(new GraduacaoTableModel(graduacaoList));
+        }
+    }
+
+    private void resetTable() {
+        if (graduacaoList != null) {
+            graduacaoList.clear();
+        }
+        this.updateTable();
+    }
+
+    private void setupInput() {
         boolean enabled = (this.insertEnabled) || (this.updateEnabled);
         toolbar.setMode(this.insertEnabled, this.updateEnabled);
         modalidadeField.setEnabled(enabled);
@@ -152,6 +167,12 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         graduacaoField.setEnabled(enabled);
         okButton.setEnabled(enabled);
         table.setEnabled(enabled);
+    }
+
+    private void resetInput() {
+        modalidadeField.setText("");
+        graduacaoField.setText("");
+        resetTable();
     }
 
     private Modalidade getModalidadeInput() {
@@ -187,34 +208,12 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         }
     }
 
-    private void resetTable() {
-        graduacaoList.clear();
-        table.setModel(new GraduacaoTableModel(graduacaoList));
-    }
-
-    private void updateTable() {
-        if ((graduacaoList != null) && (graduacaoList.size() > 0)) {
-            table.setModel(new GraduacaoTableModel(graduacaoList));
-        } else {
-            graduacaoList = new ArrayList<>();
-            resetTable();
-        }
-    }
-
-    private void resetInput() {
-        modalidadeField.setText("");
-        graduacaoField.setText("");
-        resetTable();
-    }
-
     private void addButtonAction() {
         this.insertEnabled = true;
-        enableInput();
     }
 
     private void searchButtonAction() {
         this.updateEnabled = true;
-        enableInput();
         resetTable();
     }
 
@@ -267,17 +266,24 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
                 }
             }
             updateTable();
-        } else if (event.getSource() == toolbar.getAddButton()) {
+        }
+        // INSERT
+        else if (event.getSource() == toolbar.getAddButton()) {
             this.addButtonAction();
-        } else if (event.getSource() == toolbar.getSaveButton()) {
+        }
+        // UPDATE
+        else if (event.getSource() == toolbar.getSaveButton()) {
             this.saveButtonAction();
-        } else if (event.getSource() == toolbar.getSearchButton()) {
+        }
+        // SELECT
+        else if (event.getSource() == toolbar.getSearchButton()) {
             this.searchButtonAction();
-        } else if (event.getSource() == toolbar.getRemoveButton()) {
+        }
+        // DELETE
+        else if (event.getSource() == toolbar.getRemoveButton()) {
             this.removeButtonAction();
         }
-
-        enableInput();
+        setupInput();
     }
 
     @Override

@@ -179,24 +179,28 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         Plano p = getPlanoInput();
         // INSERT
         if (this.insertEnabled) {
-            try {
-                planoDAO.insert(p);
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            if (p != null) {
+                try {
+                    planoDAO.insert(p);
+                } catch (SQLException e) {
+                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+                }
             }
             this.insertEnabled = false;
         }
         // UPDATE
         else if (this.updateEnabled) {
-            try {
-                planoDAO.update(p);
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            if (p != null) {
+                try {
+                    planoDAO.update(p);
+                } catch (SQLException e) {
+                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+                }
             }
             this.updateEnabled = false;
         }
-        // clear fields
-        resetInput();
+
+        this.resetInput();
     }
 
     private void removeButtonAction() {
@@ -212,17 +216,24 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == toolbar.getAddButton()) {
-            addButtonAction();
-        } else if (e.getSource() == toolbar.getSaveButton()) {
-            saveButtonAction();
-        } else if (e.getSource() == toolbar.getSearchButton()) {
-            searchButtonAction();
-        } else if (e.getSource() == toolbar.getRemoveButton()) {
-            removeButtonAction();
+    public void actionPerformed(ActionEvent event) {
+        // INSERT
+        if (event.getSource() == toolbar.getAddButton()) {
+            this.addButtonAction();
         }
-        setupInput();
+        // UPDATE
+        else if (event.getSource() == toolbar.getSaveButton()) {
+            this.saveButtonAction();
+        }
+        // SELECT
+        else if (event.getSource() == toolbar.getSearchButton()) {
+            this.searchButtonAction();
+        }
+        // DELETE
+        else if (event.getSource() == toolbar.getRemoveButton()) {
+            this.removeButtonAction();
+        }
+        this.setupInput();
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.models.Matricula;
 import database.models.MatriculaModalidade;
 
 public class MatriculaModalidadeDAO extends MasterDAO {
@@ -76,10 +77,19 @@ public class MatriculaModalidadeDAO extends MasterDAO {
 	public List<Object> select(Object obj) throws SQLException {
 
 		String query = "SELECT codigo_matricula, modalidade, graduacao, plano, data_inicio, data_fim FROM " +
-				"matriculas_modalidades WHERE modalidade = ? AND graduacao = ? AND plano = ? ORDER BY data_inicio";
+				"matriculas_modalidades WHERE codigo_matricula = ? ORDER BY data_inicio, modalidade, graduacao";
 
 		// build query
 		pst_select = connection.prepareStatement(query);
+
+		// fill query
+		if (obj instanceof MatriculaModalidade) {
+			Set(pst_select, 1, ((MatriculaModalidade) obj).getCodigoMatricula());
+		} else if (obj instanceof Matricula) {
+			Set(pst_select, 1, ((Matricula) obj).getCodigoMatricula());
+		} else if (obj instanceof Integer) {
+			Set(pst_select, 1, obj);
+		}
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();

@@ -60,6 +60,7 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
+        this.setupInput();
         this.pack();
         this.setVisible(true);
     }
@@ -76,8 +77,6 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         content.add(toolbar, BorderLayout.NORTH);
         content.add(createPanel(), BorderLayout.CENTER);
         content.add(createTable(), BorderLayout.SOUTH);
-
-        enableInput();
     }
 
     private JPanel createPanel() {
@@ -176,11 +175,13 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
     }
 
     private void resetTable() {
-        list = new ArrayList<>();
-        table.setModel(new MatriculaTableModel(list));
+        if (list != null) {
+            list.clear();
+        }
+        this.updateTable();
     }
 
-    private void enableInput() {
+    private void setupInput() {
         boolean isEnabled = (this.insertEnabled || this.updateEnabled);
         toolbar.setMode(this.insertEnabled, this.updateEnabled);
         // matricularField.setEnabled(isEnabled);
@@ -189,89 +190,93 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         diaVencimentoField.setEnabled(isEnabled);
         adicionarModalidadeButton.setEnabled(isEnabled);
         table.setEnabled(isEnabled);
-    }
 
-    private Matricula getInput() {
-
-        int dia_vencimento = (!diaVencimentoField.getText().trim().isEmpty()) ? Integer.parseInt(diaVencimentoField.getText().trim()) : 0;
-        Date data_matricula = (dataMatriculaField.getDate() != null) ? dataMatriculaField.getDate() : new Date();
-        Date data_encarramento = new Date(data_matricula.getYear(), data_matricula.getMonth(), dia_vencimento);
-
-        if (aluno != null) {
-            return new Matricula(aluno.getCodigoAluno(), data_matricula, dia_vencimento, data_encarramento);
-        }
-        return null;
+        this.enableAction((aluno != null) && (matricula != null)&& (matricula.getCodigoMatricula() > 0));
     }
 
     private void updateInput() {
         if (matricula != null) {
             matricularField.setText((matricula.getCodigoMatricula() > 0) ? String.valueOf(matricula.getCodigoMatricula()) : "");
-            diaVencimentoField.setText((matricula.getDiaVencimento() > 0) ? String.valueOf(matricula.getDiaVencimento()) : "");
+            diaVencimentoField.setText((matricula.getDiaVencimento() > 0) ? String.valueOf(matricula.getDiaVencimento()) : String.valueOf(new Date().getDay()));
             dataMatriculaField.setValue((matricula.getDataMatricula() != null) ? matricula.getDataMatricula() : new Date());
-        } else {
-            matricularField.setText("");
-            diaVencimentoField.setText("");
-            dataMatriculaField.setValue(new Date());
         }
     }
 
     private void resetInput() {
         alunoField.setText("");
         matricularField.setText("");
-        diaVencimentoField.setText("");
+        diaVencimentoField.setText(String.valueOf(new Date().getDay()));
         dataMatriculaField.setValue(new Date());
     }
 
+    private Matricula getInput() {
+
+        int codigo_aluno = ((aluno != null) && (aluno.getCodigoAluno() > 0)) ? aluno.getCodigoAluno() : 0;
+        Date data_matricula = (dataMatriculaField.getDate() != null) ? dataMatriculaField.getDate() : new Date();
+        int dia_vencimento = (!diaVencimentoField.getText().trim().isEmpty()) ? Integer.parseInt(diaVencimentoField.getText().trim()) : 0;
+
+        if ((matricula != null) && (matricula.getCodigoMatricula() > 0)) {
+            // update values
+            if (!matricula.getDataMatricula().equals(data_matricula)) matricula.setDataMatricula(data_matricula);
+            if (matricula.getDiaVencimento() != dia_vencimento) matricula.setDiaVencimento(dia_vencimento);
+
+        } else {
+            // create a new variable
+            matricula = new Matricula(0, codigo_aluno, data_matricula, dia_vencimento, null);
+        }
+        return matricula;
+    }
+
     private void addButtonAction() {
-        this.insertEnabled = true;
-        resetInput();
+        this.insertEnabled = !this.insertEnabled;
+        this.resetInput();
     }
 
     private void searchButtonAction() {
-        this.updateEnabled = true;
-        updateInput();
+        this.updateEnabled = !this.updateEnabled;
+        this.resetInput();
     }
 
     private void removeButtonAction() {
-        resetInput();
     }
 
     private void saveButtonAction() {
         // INSERT
         if (this.insertEnabled) {
-
             try {
-                Matricula tmp = getInput();
+                // update matricula variable changes.
+                matricula = getInput();
 
-                if (tmp != null) {
-                    matriculaDAO.insert(tmp);
+                // if (!matriculaDAO.contains(matricula)) {
+                if (matricula.getCodigoMatricula() == 0) {
+                    matriculaDAO.insert(matricula);
+                    matricula = (Matricula) matriculaDAO.find(matricula);
                 }
 
-                if ((list != null) && (list.size() > 0)) {
+                if ((list != null) && (list.size() > 0) && (matricula.getCodigoMatricula() > 0)) {
                     for (MatriculaModalidade v : list) {
+                        v.setCodigoMatricula(matricula.getCodigoMatricula());
                         matriculaModalidadeDAO.insert(v);
                     }
                 }
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
-
             this.insertEnabled = false;
+            this.resetInput();
         }
-        // clear all fields
-        resetInput();
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == adicionarModalidadeButton) {
-
-            dialog = new AdicionarModalidadesDialog(new JFrame(), connection, matricula_modalidade);
+            // open dialog to input information.
+            dialog = new AdicionarModalidadesDialog(new JFrame(), connection);
+            // return data from dialog form
             matricula_modalidade = dialog.getValue();
-
             if (matricula_modalidade != null) {
                 list.add(matricula_modalidade);
-                updateTable();
+                this.updateTable();
             }
         }
         // INSERT
@@ -290,7 +295,7 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         else if (event.getSource() == toolbar.getRemoveButton()) {
             this.removeButtonAction();
         }
-        enableInput();
+        this.setupInput();
     }
 
     @Override
@@ -298,6 +303,7 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
 
     @Override
     public void keyPressed(KeyEvent event) {
+        /*
         if (event.getSource() == alunoField) {
             if ((event.getKeyCode() == KeyEvent.VK_F9) && (!alunoField.getText().trim().isEmpty())) {
                 resetTable();
@@ -311,9 +317,38 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
                 }
             }
         }
+        */
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {}
+    public void keyReleased(KeyEvent event) {
+        if (event.getSource() == alunoField) {
+            try {
+                // get aluno name and check if aluno has already been registered.
+                aluno = (Aluno) alunoDAO.find(alunoField.getText());
+                // get aluno and check if aluno has already been registered.
+                matricula = (Matricula) matriculaDAO.find(aluno);
+                if ((matricula != null) && (matricula.getCodigoMatricula() > 0)) {
+                    // convert a list of objects into a list of MatriculaModalidade
+                    for (Object obj : matriculaModalidadeDAO.select(matricula)) {
+                        list.add((MatriculaModalidade) obj);
+                    }
+                    this.updateTable();
+                    this.updateInput();
+                    this.enableAction(true);
+                } else {
+                    this.resetTable();
+                    this.enableAction(false);
+                }
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
+        }
+    }
+
+    private void enableAction(boolean b) {
+        this.adicionarModalidadeButton.setEnabled(b);
+        this.toolbar.getSaveButton().setEnabled(b);
+    }
 
 }

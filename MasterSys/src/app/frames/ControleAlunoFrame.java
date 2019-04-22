@@ -4,19 +4,29 @@ import app.components.MonthChooser;
 import app.tables.AssiduidadeTableModel;
 import app.tables.FaturasTableModel;
 import app.tables.MatriculaTableModel;
-import database.models.Assiduidade;
-import database.models.Fatura;
-import database.models.MatriculaModalidade;
+import database.ConnectionFactory;
+import database.dao.AlunoDAO;
+import database.dao.MatriculaDAO;
+import database.models.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.Document;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ControleAlunoFrame extends JFrame {
+public class ControleAlunoFrame extends JInternalFrame implements ActionListener {
 
     /* config: */
     private static int inset = 5;
@@ -27,6 +37,10 @@ public class ControleAlunoFrame extends JFrame {
     private static boolean isIconifiable = false;
 
     /* attributes: */
+    private Matricula matricula;
+    private Aluno aluno;
+    private MatriculaDAO matriculaDAO;
+    private AlunoDAO alunoDAO;
     private List<MatriculaModalidade> modaldiadeList;
     private List<Fatura> faturaList;
     private List<Assiduidade> assiduidadeList;
@@ -38,8 +52,10 @@ public class ControleAlunoFrame extends JFrame {
     private JTable modaldiadeTable, faturaTable, assiduidadeTable;
 
     /* constructors: */
-    public ControleAlunoFrame() {
-        super("Controle de Alunos"); //, isResizable, isClosable, isMaximizable, isIconifiable);
+    public ControleAlunoFrame(Connection connection) {
+        super("Controle de Alunos", isResizable, isClosable, isMaximizable, isIconifiable);
+
+        this.matriculaDAO = new MatriculaDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents();
@@ -50,8 +66,12 @@ public class ControleAlunoFrame extends JFrame {
     private void initComponents() {
 
         monthChooser = new MonthChooser();
+
         alunoButton = new JButton("Acessar Dados Aluno");
+        alunoButton.addActionListener(this);
+
         matriculaButton = new JButton("Acessar Dados Matricula");
+        matriculaButton.addActionListener(this);
 
         JPanel panel_A = createPanelA();
         JScrollPane panel_B = createPanelB();
@@ -128,12 +148,16 @@ public class ControleAlunoFrame extends JFrame {
         matriculaField = new JTextField(16);
         matriculaField.setText("Matricula");
         matriculaField.setHorizontalAlignment(SwingConstants.CENTER);
+        matriculaField.getDocument().addDocumentListener(new MatriculaListerner());
 
         alunoField = new JTextField(32);
-        alunoField.setEnabled(false);
         alunoField.setText("Aluno");
+        alunoField.setEditable(false);
 
         statusField = new JTextField(32);
+        statusField.setText("Status");
+        statusField.setEditable(false);
+        statusField.setHorizontalAlignment(SwingConstants.CENTER);
 
         JPanel panel = new JPanel(new GridBagLayout());
 
@@ -159,16 +183,7 @@ public class ControleAlunoFrame extends JFrame {
         constraints.gridy++;
         panel.add(statusField, constraints);
 
-//        constraints.gridx = 0;
-//        constraints.gridy++;
-//        constraints.gridwidth = 2;
-//        constraints.weightx = 1;
-//        panel.add(alunoButton, constraints);
-//        constraints.gridx += 2;
-//        panel.add(matriculaButton, constraints);
-
         return panel;
-
     }
 
     private JScrollPane createPanelD() {
@@ -194,6 +209,7 @@ public class ControleAlunoFrame extends JFrame {
         modaldiadeTable.setFillsViewportHeight(true);
 
         JScrollPane scrollPane = new JScrollPane(modaldiadeTable);
+        // scrollPane.setBorder(new EmptyBorder(inset, inset, inset, inset));
         return scrollPane;
     }
 
@@ -201,9 +217,60 @@ public class ControleAlunoFrame extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ControleAlunoFrame();
+                Usuario user = new Usuario();
+                user.setUsername("admin");
+                user.setPassword("admin");
+
+                Connection connection;
+                // connection = ConnectionFactory.getConnection("master", "admin", "admin");
+                connection = ConnectionFactory.getDebugConnection(user.getUsername(), user.getPassword());
+                new ControleAlunoFrame(connection);
             }
         });
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == alunoButton) {
+            // CODE
+        } else if (e.getSource() == matriculaButton) {
+            // CODE
+        }
+    }
+
+    class MatriculaListerner implements DocumentListener {
+
+        final String newline = "\n";
+
+        public void insertUpdate(DocumentEvent e) {
+            updateLog(e, "inserted into");
+            int codigo_matricula = (!matriculaField.getText().trim().isEmpty()) ? Integer.parseInt(matriculaField.getText()) : 0;
+            try {
+                matricula = (Matricula) matriculaDAO.find(codigo_matricula);
+                updateLog(e, matricula.toString());
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        public void removeUpdate(DocumentEvent e) {
+            updateLog(e, "removed from");
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+
+        }
+
+        public void updateLog(DocumentEvent e, String action) {
+            Document doc = (Document)e.getDocument();
+            int changeLength = e.getLength();
+            statusField.setText(
+                    changeLength + " character"
+                            + ((changeLength == 1) ? " " : "s ")
+                            + action + " " + doc.getProperty("name") + "."
+                            + newline
+                            + "  Text length = " + doc.getLength() + newline);
+            statusField.setCaretPosition(statusField.getDocument().getLength());
+        }
+    }
 }

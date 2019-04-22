@@ -24,8 +24,9 @@ public class MenuFrame extends JFrame {
     private JMenu menuProcessoFaturamento, menuProcessoMatricular, menuRelatorioFatura;
     private JMenuItem itemSistemaSair, itemSistemaUsuarios, itemCadastroAlunos, itemCadastroModalidades;
     private JMenuItem itemCadastroPlanos, itemProcessoMatriculaAluno;
-    private JMenuItem itemProcessoGerarFaturas, itemProcessoConsultarFaturas, itemProcessoRealizarPagamentos;
-    private JMenuItem itemRelatorioMatricula, itemRelatorioFaturaAberto, itemRelatorioFaturaPago, itemAjudaSobre;
+    private JMenuItem itemProcessoGerarFaturas, itemProcessoConsultarFaturas;
+    private JMenuItem itemRelatorioMatricula, itemRelatorioFaturaAberto, itemRelatorioFaturaPago;
+    private JMenuItem itemUtilitariosControleAluno, itemAjudaSobre;
     private JDesktopPane desktop;
 
     // Sistema
@@ -36,6 +37,8 @@ public class MenuFrame extends JFrame {
     private JInternalFrame frameMatricularAluno, frameGerarFaturas, frameConsultarFaturas, frameRealizarPagamentos;
     // Relatorio
     private JInternalFrame frameRelatorioMatricula;
+    // Utilitarios
+    private JInternalFrame frameControleAluno;
 
     /* constructor: */
     public MenuFrame(Connection connection, Usuario user) {
@@ -95,7 +98,7 @@ public class MenuFrame extends JFrame {
         menuProcessoFaturamento = new JMenu("Faturamento");
             itemProcessoGerarFaturas = new JMenuItem("Gerar Faturas");
             itemProcessoConsultarFaturas = new JMenuItem("Consultar Faturas");
-            itemProcessoRealizarPagamentos = new JMenuItem("Realizar Pagamento");
+            // itemProcessoRealizarPagamentos = new JMenuItem("Realizar Pagamento");
 
         menuProcessoMatricular = new JMenu("Matrícula");
             itemProcessoMatriculaAluno = new JMenuItem("Aluno");
@@ -104,6 +107,8 @@ public class MenuFrame extends JFrame {
             itemRelatorioFaturaAberto = new JMenuItem("Em Aberto");
             itemRelatorioFaturaPago = new JMenuItem("Pagas");
             itemRelatorioMatricula = new JMenuItem("Matrículas");
+
+        itemUtilitariosControleAluno = new JMenuItem("Controle de Alunos");
 
         itemAjudaSobre = new JMenuItem("Sobre");
 
@@ -116,6 +121,7 @@ public class MenuFrame extends JFrame {
         menuProcessos.add(menuProcessoFaturamento);
         menuRelatorios.add(itemRelatorioMatricula);
         menuRelatorios.add(menuRelatorioFatura);
+        menuUtilitarios.add(itemUtilitariosControleAluno);
         menuAjuda.add(itemAjudaSobre);
 
         menuProcessoMatricular.add(itemProcessoMatriculaAluno);
@@ -265,6 +271,20 @@ public class MenuFrame extends JFrame {
                     frameRelatorioMatricula = new RelatoriosMatriculasFrame(connection);
                     frameRelatorioMatricula.setName(RelatoriosMatriculasFrame.class.getName());
                     desktop.add(frameRelatorioMatricula);
+                }
+            }
+        });
+
+        // Utilitarios
+        itemUtilitariosControleAluno.setAction(new AbstractAction(itemUtilitariosControleAluno.getText()) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (checkFrame(ControleAlunoFrame.class.getName())) {
+                    focusFrame(frameControleAluno);
+                } else {
+                    frameControleAluno = new ControleAlunoFrame(connection);
+                    frameControleAluno.setName(ControleAlunoFrame.class.getName());
+                    desktop.add(frameControleAluno);
                 }
             }
         });

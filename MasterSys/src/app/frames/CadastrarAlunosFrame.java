@@ -5,25 +5,23 @@ import app.panels.*;
 import database.dao.*;
 import database.models.Aluno;
 import database.models.Local;
-import database.models.Matricula;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
-public class CadastrarAlunosFrame extends JInternalFrame implements ActionListener, ItemListener, KeyListener {
+public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionListener, ItemListener, KeyListener {
 
     /* config: */
     private static String[] sexoList = { "M", "F" };
-    private static int inset = 5;
-    private static boolean isResizable = false;
-    private static boolean isClosable = true;
-    private static boolean isMaximizable = false;
-    private static boolean isIconifiable = false;
+//    private static int inset = 5;
+//    private static boolean isResizable = false;
+//    private static boolean isClosable = true;
+//    private static boolean isMaximizable = false;
+//    private static boolean isIconifiable = false;
 
     /* attributes: */
     private LocalDAO localDAO;
@@ -43,7 +41,7 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
 
     /* constructors: */
     public CadastrarAlunosFrame(Connection connection) {
-        super("Cadastrar Aluno", isResizable, isClosable, isMaximizable, isIconifiable);
+        super("Cadastrar Aluno");//, isResizable, isClosable, isMaximizable, isIconifiable);
 
         this.localDAO = new LocalDAO(connection);
         this.alunoDAO = new AlunoDAO(connection);
@@ -52,13 +50,17 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
-        this.setupInput();
+        this.setupData();
         this.pack();
         this.setVisible(true);
     }
 
     /* methods: */
-    private void initComponents(Container content) {
+    @Override
+    public void initComponents() {}
+
+    @Override
+    public void initComponents(Container container) {
 
         toolbar = new ToolBarPanel();
         toolbar.getAddButton().addActionListener(this);
@@ -69,10 +71,10 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         JPanel infoPanel = createInfoPanel();
         JPanel addressPanel = createAddressPanel();
 
-        content.setLayout(new BorderLayout());
-        content.add(toolbar, BorderLayout.NORTH);
-        content.add(infoPanel, BorderLayout.CENTER);
-        content.add(addressPanel, BorderLayout.SOUTH);
+        container.setLayout(new BorderLayout());
+        container.add(toolbar, BorderLayout.NORTH);
+        container.add(infoPanel, BorderLayout.CENTER);
+        container.add(addressPanel, BorderLayout.SOUTH);
     }
 
     private JPanel createInfoPanel() {
@@ -314,30 +316,7 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         }
     }
 
-    private void setupInput() {
-
-        boolean state = (this.insertEnabled || this.searchEnabled);
-
-        toolbar.setMode(insertEnabled, searchEnabled);
-
-        alunoField.setEditable(state);
-        telefoneField.setEditable(state);
-        celularField.setEditable(state);
-        emailField.setEditable(state);
-        obsField.setEditable(state);
-        enderecoField.setEditable(state);
-        numeroField.setEditable(state);
-        complementoField.setEditable(state);
-        bairroField.setEditable(state);
-        cepField.setEditable(state);
-        dataNascField.setEditable(state);
-        sexoComboBox.setEnabled(state);
-        cidadeComboBox.setEnabled(state);
-        estadoComboBox.setEnabled(state);
-        paisComboBox.setEnabled(state);
-    }
-
-    private Aluno getInput(Aluno tmp) {
+    private Aluno getData(Aluno tmp) {
 
         if (!alunoField.getText().isEmpty()) tmp.setAluno(alunoField.getText().trim());
         if (dataNascField.getDate() != null) tmp.setDataNascimento(dataNascField.getDate());
@@ -367,11 +346,16 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         return tmp;
     }
 
-    private Aluno getInput() {
-        return getInput(new Aluno());
+    @Override
+    public Object getData() {
+        return getData(new Aluno());
     }
 
-    private void updateInput(Aluno tmp) {
+    @Override
+    public void updateData(Object obj) {
+
+        Aluno tmp = (Aluno) obj;
+
         if (tmp != null) {
             if (!tmp.getAluno().isEmpty()) alunoField.setText(tmp.getAluno());
             if (tmp.getDataNascimento() != null) dataNascField.setValue(tmp.getDataNascimento());
@@ -394,26 +378,51 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         }
     }
 
-    private void resetInput() {
-        alunoField.setText("");
-        dataNascField.setText("");
+    @Override
+    public void resetData() {
+        alunoField.setText(null);
+        dataNascField.setText(null);
+        telefoneField.setText(null);
+        celularField.setText(null);
+        emailField.setText(null);
+        obsField.setText(null);
+        enderecoField.setText(null);
+        numeroField.setText(null);
+        complementoField.setText(null);
+        bairroField.setText(null);
+        cepField.setText(null);
         sexoComboBox.setSelectedIndex(0);
-        telefoneField.setText("");
-        celularField.setText("");
-        emailField.setText("");
-        obsField.setText("");
-        enderecoField.setText("");
-        numeroField.setText("");
-        complementoField.setText("");
-        bairroField.setText("");
-        cepField.setText("");
         paisComboBox.setSelectedIndex(0);
         estadoComboBox.setSelectedIndex(0);
         cidadeComboBox.setSelectedIndex(0);
     }
 
+    @Override
+    public void setupData() {
+
+        boolean state = (this.insertEnabled || this.searchEnabled);
+
+        toolbar.setMode(insertEnabled, searchEnabled);
+
+        alunoField.setEditable(state);
+        telefoneField.setEditable(state);
+        celularField.setEditable(state);
+        emailField.setEditable(state);
+        obsField.setEditable(state);
+        enderecoField.setEditable(state);
+        numeroField.setEditable(state);
+        complementoField.setEditable(state);
+        bairroField.setEditable(state);
+        cepField.setEditable(state);
+        dataNascField.setEditable(state);
+        sexoComboBox.setEnabled(state);
+        cidadeComboBox.setEnabled(state);
+        estadoComboBox.setEnabled(state);
+        paisComboBox.setEnabled(state);
+    }
+
     private void addButtonAction() {
-        this.insertEnabled = true;
+        this.insertEnabled = !this.insertEnabled;
         this.aluno = null;
     }
 
@@ -421,14 +430,16 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         // INSERT INTO DATABASE
         if (insertEnabled) {
             try {
-                aluno = this.getInput();
-                if ((aluno != null) && (!alunoDAO.contains(aluno))) {
-                    // insert into database
-                    alunoDAO.insert(aluno);
-                    // get codigo_aluno
-                    aluno = (Aluno) alunoDAO.find(aluno);
-                } else {
-                    JOptionPane.showMessageDialog(null,  String.format("Aluno %s already exists on database.", aluno.getAluno()));
+                aluno = (Aluno) this.getData();
+                if (aluno != null) {
+                    if (!alunoDAO.contains(aluno)) {
+                        // insert into database
+                        alunoDAO.insert(aluno);
+                        // get codigo_aluno
+                        aluno = (Aluno) alunoDAO.find(aluno);
+                    } else {
+                        JOptionPane.showMessageDialog(null,  String.format("Aluno %s already exists on database.", aluno.getAluno()));
+                    }
                 }
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
@@ -439,7 +450,7 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         else if (searchEnabled) {
             try {
                 // apply modifications to aluno variable
-                getInput(aluno);
+                getData(aluno);
                 // update database
                 alunoDAO.update(aluno);
             } catch (SQLException e) {
@@ -449,17 +460,17 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
             this.aluno = null;
         }
 
-        this.resetInput();
+        this.resetData();
     }
 
     private void searchButtonAction() {
-        if (!this.searchEnabled) {
+        this.searchEnabled = !this.searchEnabled;
+        if (this.searchEnabled) {
             this.alunoField.addKeyListener(this);
         } else {
             this.alunoField.removeActionListener(this);
-            this.resetInput();
+            this.resetData();
         }
-        this.searchEnabled = !this.searchEnabled;
     }
 
     private void removeButtonAction() {
@@ -467,13 +478,13 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
             if (aluno != null) {
                 // matriculaDAO.delete(aluno.getCodigoAluno());
                 alunoDAO.delete(aluno);
-                resetInput();
+                resetData();
+                this.searchEnabled = false;
+                this.aluno = null;
             }
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
         }
-        this.searchEnabled = false;
-        this.aluno = null;
     }
 
     @Override
@@ -494,7 +505,7 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
         else if (event.getSource() == toolbar.getRemoveButton()) {
             this.removeButtonAction();
         }
-        this.setupInput();
+        this.setupData();
     }
 
     @Override
@@ -514,7 +525,7 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
     public void keyTyped(KeyEvent event) {
         if (event.getSource() == alunoField) {
             if (alunoField.getText().isEmpty()) {
-                this.resetInput();
+                this.resetData();
                 // this.aluno = null;
             }
         }
@@ -529,8 +540,8 @@ public class CadastrarAlunosFrame extends JInternalFrame implements ActionListen
     public void keyReleased(KeyEvent event) {
         if (event.getSource() == alunoField) {
             try {
-                aluno = (Aluno) alunoDAO.find(getInput());
-                this.updateInput(aluno);
+                aluno = (Aluno) alunoDAO.find(getData());
+                this.updateData(aluno);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }

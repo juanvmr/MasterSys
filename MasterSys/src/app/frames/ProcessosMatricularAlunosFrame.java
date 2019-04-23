@@ -10,6 +10,7 @@ import app.tables.MatriculaTableModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
@@ -60,7 +61,7 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
-        this.setupInput();
+        this.setupData();
         this.pack();
         this.setVisible(true);
     }
@@ -156,10 +157,15 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
 
     private JScrollPane createTable() {
 
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);
+
         table = new JTable();
         table.setPreferredScrollableViewportSize(new Dimension(500, 80));
         table.setFillsViewportHeight(true);
-        updateTable();
+        table.setDefaultRenderer(String.class, renderer);
+        table.setDefaultRenderer(Date.class, renderer);
+        this.updateTable();
 
         //Create the scroll pane and add the table to it.
         JScrollPane scrollPane = new JScrollPane(table);
@@ -181,9 +187,13 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         this.updateTable();
     }
 
-    private void setupInput() {
+    private void setupData() {
+
         boolean isEnabled = (this.insertEnabled || this.updateEnabled);
+
         toolbar.setMode(this.insertEnabled, this.updateEnabled);
+        toolbar.getSearchButton().setEnabled(false);
+
         // matricularField.setEnabled(isEnabled);
         alunoField.setEnabled(isEnabled);
         dataMatriculaField.setEnabled(isEnabled);
@@ -194,22 +204,25 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         this.enableAction((aluno != null) && (matricula != null)&& (matricula.getCodigoMatricula() > 0));
     }
 
-    private void updateInput() {
+    private void updateData() {
         if (matricula != null) {
-            matricularField.setText((matricula.getCodigoMatricula() > 0) ? String.valueOf(matricula.getCodigoMatricula()) : "");
-            diaVencimentoField.setText((matricula.getDiaVencimento() > 0) ? String.valueOf(matricula.getDiaVencimento()) : String.valueOf(new Date().getDay()));
-            dataMatriculaField.setValue((matricula.getDataMatricula() != null) ? matricula.getDataMatricula() : new Date());
+            Date currentDate = new Date();
+            matricularField.setText((matricula.getCodigoMatricula() > 0) ? String.valueOf(matricula.getCodigoMatricula()) : null);
+            diaVencimentoField.setText((matricula.getDiaVencimento() > 0) ? String.valueOf(matricula.getDiaVencimento()) : String.valueOf(currentDate.getDate()));
+            dataMatriculaField.setValue((matricula.getDataMatricula() != null) ? matricula.getDataMatricula() : currentDate);
         }
     }
 
-    private void resetInput() {
-        alunoField.setText("");
-        matricularField.setText("");
-        diaVencimentoField.setText(String.valueOf(new Date().getDay()));
-        dataMatriculaField.setValue(new Date());
+    private void resetData() {
+        Date currentDate = new Date();
+        alunoField.setText(null);
+        matricularField.setText(null);
+        diaVencimentoField.setText(String.valueOf(currentDate.getDate()));
+        dataMatriculaField.setValue(currentDate);
+        this.resetTable();
     }
 
-    private Matricula getInput() {
+    private Matricula getData() {
 
         int codigo_aluno = ((aluno != null) && (aluno.getCodigoAluno() > 0)) ? aluno.getCodigoAluno() : 0;
         Date data_matricula = (dataMatriculaField.getDate() != null) ? dataMatriculaField.getDate() : new Date();
@@ -229,12 +242,12 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
 
     private void addButtonAction() {
         this.insertEnabled = !this.insertEnabled;
-        this.resetInput();
+        this.resetData();
     }
 
     private void searchButtonAction() {
         this.updateEnabled = !this.updateEnabled;
-        this.resetInput();
+        this.resetData();
     }
 
     private void removeButtonAction() {
@@ -245,7 +258,7 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         if (this.insertEnabled) {
             try {
                 // update matricula variable changes.
-                matricula = getInput();
+                matricula = getData();
 
                 // if (!matriculaDAO.contains(matricula)) {
                 if (matricula.getCodigoMatricula() == 0) {
@@ -255,15 +268,18 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
 
                 if ((list != null) && (list.size() > 0) && (matricula.getCodigoMatricula() > 0)) {
                     for (MatriculaModalidade v : list) {
-                        v.setCodigoMatricula(matricula.getCodigoMatricula());
-                        matriculaModalidadeDAO.insert(v);
+                        if (v.getCodigoMatricula() == 0) {
+                            v.setCodigoMatricula(matricula.getCodigoMatricula());
+                            System.out.println("Inserting " + v);
+                            matriculaModalidadeDAO.insert(v);
+                        }
                     }
                 }
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
             this.insertEnabled = false;
-            this.resetInput();
+            this.resetData();
         }
     }
 
@@ -295,30 +311,14 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         else if (event.getSource() == toolbar.getRemoveButton()) {
             this.removeButtonAction();
         }
-        this.setupInput();
+        this.setupData();
     }
 
     @Override
     public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent event) {
-        /*
-        if (event.getSource() == alunoField) {
-            if ((event.getKeyCode() == KeyEvent.VK_F9) && (!alunoField.getText().trim().isEmpty())) {
-                resetTable();
-                try {
-                    // read aluno input and search for it
-                    aluno = (Aluno) alunoDAO.find(alunoField.getText().trim());
-                    matricula = (Matricula) matriculaDAO.find(aluno);
-                    updateInput();
-                } catch (SQLException e) {
-                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-                }
-            }
-        }
-        */
-    }
+    public void keyPressed(KeyEvent event) {}
 
     @Override
     public void keyReleased(KeyEvent event) {
@@ -334,7 +334,7 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
                         list.add((MatriculaModalidade) obj);
                     }
                     this.updateTable();
-                    this.updateInput();
+                    this.updateData();
                     this.enableAction(true);
                 } else {
                     this.resetTable();

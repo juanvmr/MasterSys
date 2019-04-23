@@ -25,6 +25,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     /* attributes: */
     private ModalidadeDAO modalidadeDAO;
     private PlanoDAO planoDAO;
+    private Plano plano;
     private List<Object> modalidadeList;
     private boolean insertEnabled = false;
     private boolean updateEnabled = false;
@@ -43,7 +44,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
-        this.setupInput();
+        this.setupData();
         this.pack();
         this.setVisible(true);
     }
@@ -72,6 +73,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         JLabel valorLabel = new JLabel("Valor:", JLabel.RIGHT);
 
         planoField = new JTextField();
+        // planoField.addKeyListener(this);
 
         valorField = new JTextField();
         valorField.setText("0.00");
@@ -122,7 +124,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         }
     }
 
-    private void setupInput() {
+    private void setupData() {
         boolean state = (this.insertEnabled || this.updateEnabled);
 
         toolbar.setMode(this.insertEnabled, this.updateEnabled);
@@ -144,21 +146,21 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         valorField.setEnabled(state);
     }
 
-    private void resetInput() {
+    private void resetData() {
         modalidadeComboBox.setSelectedIndex(0);
-        planoField.setText("");
+        planoField.setText(null);
         valorField.setText("0.00");
     }
 
-    private void updateInput(Plano p) {
+    private void updateData(Plano p) {
         if (p != null) {
             modalidadeComboBox.setSelectedItem(p.getModalidade());
             planoField.setText(p.getPlano());
-            valorField.setText(String.format("%.2f", p.getValor()));
+            valorField.setText(String.valueOf(p.getValor()));
         }
     }
 
-    private Plano getPlanoInput() {
+    private Plano getData() {
         Plano p = new Plano();
         Modalidade m = (Modalidade) modalidadeComboBox.getSelectedItem();
         if (m != null) p.setModalidade(m);
@@ -172,11 +174,16 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     }
 
     private void searchButtonAction() {
-        this.updateEnabled = true;
+        this.updateEnabled = !this.updateEnabled;
+        if (this.updateEnabled) {
+            planoField.addKeyListener(this);
+        } else {
+            planoField.removeKeyListener(this);
+        }
     }
 
     private void saveButtonAction() {
-        Plano p = getPlanoInput();
+        Plano p = getData();
         // INSERT
         if (this.insertEnabled) {
             if (p != null) {
@@ -200,11 +207,11 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
             this.updateEnabled = false;
         }
 
-        this.resetInput();
+        this.resetData();
     }
 
     private void removeButtonAction() {
-        Plano p = getPlanoInput();
+        Plano p = getData();
         try {
             planoDAO.delete(p);
         } catch (SQLException e) {
@@ -212,7 +219,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         }
         this.updateEnabled = false;
         // clear fields
-        resetInput();
+        resetData();
     }
 
     @Override
@@ -233,22 +240,13 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         else if (event.getSource() == toolbar.getRemoveButton()) {
             this.removeButtonAction();
         }
-        this.setupInput();
+        this.setupData();
     }
 
     @Override
     public void keyTyped(KeyEvent event) {
-        if ((event.getSource() == modalidadeComboBox) || (event.getSource() == planoField)) {
-            Plano p = getPlanoInput();
-            try {
-                Plano tmp = (Plano) planoDAO.find(p);
-                updateInput(tmp);
-                // event.consume();
-            } catch (SQLException e) {
-                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
-            }
-        } else if (event.getSource() == valorField) {
-            String characters = "0987654321";
+        if (event.getSource() == valorField) {
+            String characters = "0987654321.";
             if (!characters.contains(event.getKeyChar() + "")) {
                 event.consume();
             }
@@ -256,19 +254,31 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
+    public void keyPressed(KeyEvent event) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent event) {
+        if (event.getSource() == planoField) {
+            if (!planoField.getText().isEmpty()) {
+                try {
+                    plano = (Plano) planoDAO.find(getData());
 
+                    if (plano != null) {
+                        this.updateData(plano);
+                    }
+                } catch (SQLException e) {
+                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+                }
+            } else {
+                valorField.setText("0.00");
+            }
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == valorField) {
-            valorField.setText("");
+            valorField.setText("0.00");
         }
     }
 

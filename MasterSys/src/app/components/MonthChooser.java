@@ -143,6 +143,10 @@ public class MonthChooser extends JPanel implements ActionListener, MouseListene
         return gregorianCalendar.getTime();
     }
 
+    public void setDate(Date date) {
+        gregorianCalendar.setTime(date);
+    }
+
     public void stopTimer() {
         if (timer != null) {
             timer.stop();
@@ -154,19 +158,13 @@ public class MonthChooser extends JPanel implements ActionListener, MouseListene
      * este objeto, afim de executar alguma ação quando
      * a data for alterada.
      */
-    public void ExecuteSomething() {
-
-    }
+    public void ExecuteSomething() {}
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    public void actionPerformed(ActionEvent e) {}
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     @Override
     public void mousePressed(MouseEvent evt) {
@@ -239,12 +237,8 @@ public class MonthChooser extends JPanel implements ActionListener, MouseListene
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
+    public void mouseExited(MouseEvent e) {}
 }

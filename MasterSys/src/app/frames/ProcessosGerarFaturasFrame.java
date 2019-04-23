@@ -3,6 +3,11 @@ package app.frames;
 import app.components.DateField;
 import app.components.MonthChooser;
 import database.dao.FaturaDAO;
+import database.dao.MatriculaDAO;
+import database.dao.MatriculaModalidadeDAO;
+import database.models.Fatura;
+import database.models.Matricula;
+import database.models.MatriculaModalidade;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -10,9 +15,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
-public class ProcessosGerarFaturasFrame extends JInternalFrame implements ActionListener {
+public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements ActionListener {
 
     /* config: */
     private static boolean isResizable = false;
@@ -21,7 +28,8 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private Connection connection;
+    private MatriculaDAO matriculaDAO;
+    private MatriculaModalidadeDAO matriculaModalidadeDAO;
     private FaturaDAO faturaDAO;
 
     /* components: */
@@ -30,21 +38,19 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
 
     /* constructors: */
     public ProcessosGerarFaturasFrame(Connection connection) {
-        super("Gerar Faturas", isResizable, isClosable, isMaximizable, isIconifiable);
-        //this.setSize(new Dimension(300, 150));
+        super("Gerar Faturas");
+
+        this.matriculaDAO = new MatriculaDAO(connection);
+        this.matriculaModalidadeDAO = new MatriculaModalidadeDAO(connection);
         this.faturaDAO = new FaturaDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents();
-        this.pack();
         this.setVisible(true);
     }
 
-    private void initComponents() {
-
-        int inset = 5;
-        int border = 10;
-
+    @Override
+    public void initComponents() {
         JLabel dataLabel = new JLabel("Data da Fatura:", JLabel.RIGHT);
 
         monthChooser = new MonthChooser();
@@ -53,7 +59,7 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
         submitButton.addActionListener(this);
 
         JPanel content = new JPanel(new GridBagLayout());
-        content.setBorder(new EmptyBorder(border, border, border, border));
+        content.setBorder(new EmptyBorder(inset, inset, inset, inset));
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(inset, inset, inset, inset);
@@ -76,13 +82,68 @@ public class ProcessosGerarFaturasFrame extends JInternalFrame implements Action
         content.add(submitButton, constraints);
 
         this.setContentPane(content);
+        this.pack();
+    }
+
+    @Override
+    public void initComponents(Container container) {}
+
+    @Override
+    public void setupData() {
+        monthChooser.setEnabled(true);
+    }
+
+    @Override
+    public Object getData() {
+        return monthChooser.getDate();
+    }
+
+    @Override
+    public void resetData() {
+        monthChooser.setDate(new Date());
+    }
+
+    @Override
+    public void updateData(Object obj) {
+        Date date = (Date) obj;
+        monthChooser.setDate(date);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == submitButton) {
-            Date date = monthChooser.getDate();
-            System.err.println("Date: " + date.toString());
+
+            try {
+
+                Date currentDate = monthChooser.getDate();
+                Date lastDate = new Date(currentDate.getYear(), currentDate.getMonth(), 30);
+                List<MatriculaModalidade> list;
+
+                List<Object> matriculaList = matriculaDAO.select();
+                for (Object obj : matriculaList) {
+                    Matricula m = (Matricula) obj;
+
+                    int codigo_matricula = m.getCodigoMatricula();
+                    Date data_vecimento = new Date(currentDate.getYear(), currentDate.getMonth(), m.getDiaVencimento());
+
+                    System.out.println("Current Date: " + currentDate + ", Expire Date: " + data_vecimento);
+
+                    Fatura f = new Fatura(
+                        codigo_matricula,
+                        data_vecimento,
+                        faturaDAO.getFaturaValue(codigo_matricula, data_vecimento),
+                        null,
+                        null
+                    );
+
+                    if ((f.getValor() > 0) && (m.getDataEncerramento() == null)) {
+                        System.out.println("Fatura: " + f);
+                        faturaDAO.insert(f);
+                    }
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

@@ -120,7 +120,7 @@ public class AssiduidadeDAO extends MasterDAO {
 	@Override
 	public void insert(Object obj) throws SQLException {
 
-		String query = "INSERT INTO assiduidade(codigo_matricula, data_entrada) VALUES (?, ?)";
+		String query = "INSERT INTO assiduidade(codigo_matricula) VALUES (?)";
 		
 		// build query
 		pst_insert = conn.prepareStatement(query);
@@ -129,7 +129,6 @@ public class AssiduidadeDAO extends MasterDAO {
 		Assiduidade tmp = (Assiduidade) obj;
 
 		Set(pst_insert, 1, tmp.getCodigoMatricula());
-		Set(pst_insert, 2, tmp.getDataEntrada());
 		
 		// run query
 		pst_insert.execute();

@@ -5,7 +5,12 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 public class ToolBarPanel extends JPanel {
 
+    /* attributes: */
     private static int inset = 2;
+    private boolean insert = false;
+    private boolean update = false;
+    private boolean delete = false;
+    private boolean save = false;
 
     /* components: */
     private JButton addButton;

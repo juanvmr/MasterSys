@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import database.models.Assiduidade;
@@ -130,7 +131,7 @@ public class FaturaDAO extends MasterDAO {
 	}
 
 	@Override
-	public void update(Object obj) throws SQLException {
+	public void insert(Object obj) throws SQLException {
 
 		String query = "INSERT INTO faturas_matriculas(codigo_matricula, data_vencimento, valor, " +
 			"data_pagamento, data_cancelamento) VALUES (?, ?, ?, ?, ?)";
@@ -141,11 +142,12 @@ public class FaturaDAO extends MasterDAO {
 		// fill query
 		Fatura tmp = (Fatura) obj;
 
-		Set(pst_update, 1, tmp.getCodigoMatricula());
-		Set(pst_update, 2, tmp.getDataVencimento());
-		Set(pst_update, 3, tmp.getValor());
-		Set(pst_update, 4, tmp.getDataPagamento());
-		Set(pst_update, 5, tmp.getDataCancelamento());
+		int pos = 0;
+		Set(pst_update, ++pos, tmp.getCodigoMatricula());
+		Set(pst_update, ++pos, tmp.getDataVencimento());
+		Set(pst_update, ++pos, tmp.getValor());
+		Set(pst_update, ++pos, tmp.getDataPagamento());
+		Set(pst_update, ++pos, tmp.getDataCancelamento());
 		
 		// run query
 		pst_update.execute();
@@ -157,7 +159,7 @@ public class FaturaDAO extends MasterDAO {
 	}
 
 	@Override
-	public void insert(Object obj) throws SQLException {
+	public void update(Object obj) throws SQLException {
 
 		String query = "UPDATE faturas_matriculas SET data_vencimento = ?, valor = ?, data_pagamento = ?, " +
 			"data_cancelamento = ? WHERE codigo_matricula = ?";
@@ -203,6 +205,39 @@ public class FaturaDAO extends MasterDAO {
 		if (pst_delete.getUpdateCount() > 0) {
 			this.connection.commit();
 		}
+	}
+
+	public double getFaturaValue(int codigo_matricula, Date data_vencimento) throws SQLException {
+		String query = "SELECT SUM(c.valor_mensal) FROM ((matriculas a " +
+			"INNER JOIN matriculas_modalidades b ON a.codigo_matricula = b.codigo_matricula) " +
+			"INNER JOIN planos c ON b.modalidade = c.modalidade AND b.plano = c.plano) " +
+			"WHERE a.codigo_matricula = ? " +
+			"AND a.data_matricula < ? " +
+			"AND b.data_inicio < ? " +
+			"AND b.data_fim > ? " +
+			"AND isNull(a.data_encerramento) " +
+			"OR a.data_encerramento > ?";
+
+		// build query
+		pst_select = connection.prepareStatement(query);
+
+		// fill query
+		int pos = 0;
+		Set(pst_select, ++pos, codigo_matricula);
+		Set(pst_select, ++pos, data_vencimento);
+		Set(pst_select, ++pos, data_vencimento);
+		Set(pst_select, ++pos, data_vencimento);
+		Set(pst_select, ++pos, data_vencimento);
+
+		// run query and store the result
+		ResultSet rst = pst_select.executeQuery();
+
+		// check if query return a result
+		double value = 0;
+		if (rst.next()) {
+			value = rst.getDouble(1);
+		}
+		return value;
 	}
 	
 }

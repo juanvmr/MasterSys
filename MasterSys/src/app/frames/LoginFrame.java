@@ -117,11 +117,7 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
                     try {
                         // check if connection is open
                         if ((connection != null) && (!connection.isClosed())) {
-                            // close login frame
-                            this.dispose();
-                            // open main frame
-                            MenuFrame frame = new MenuFrame(connection, user);
-                            frame.setVisible(true);
+                            this.openMainWindow(connection, user);
                         }
                     } catch (SQLException e) {
                         System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
@@ -150,5 +146,15 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    //Função fora do bloco try-catch
+    //Abre a janela principal
+    private void openMainWindow(Connection connection, Usuario user){
+        // close login frame
+        this.dispose();
+        // open main frame
+        MenuFrame frame = new MenuFrame(connection, user);
+        frame.setVisible(true);
     }
 }

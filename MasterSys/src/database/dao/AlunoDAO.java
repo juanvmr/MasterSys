@@ -9,6 +9,8 @@ import java.util.List;
 
 import database.models.Aluno;
 import database.models.Local;
+import database.models.Matricula;
+import image.MasterImage;
 
 public class AlunoDAO extends MasterDAO {
 	
@@ -112,15 +114,19 @@ public class AlunoDAO extends MasterDAO {
 	@Override
 	public Object find(Object obj) throws SQLException {
 
-		String query = "SELECT * FROM alunos WHERE aluno = ?";
-
-		pst_select = conn.prepareStatement(query);
+		// build query
+		pst_select = conn.prepareStatement("SELECT * FROM alunos WHERE aluno = ?");
 
 		// fill statement
 		if (obj instanceof Aluno) {
 			Set(pst_select, 1, ((Aluno) obj).getAluno());
 		} else if (obj instanceof String) {
 			Set(pst_select, 1, (String) obj);
+		} else if (obj instanceof Integer) {
+			// build query
+			pst_select = conn.prepareStatement("SELECT * FROM alunos WHERE codigo_aluno = ?");
+
+			Set(pst_select, 1,  obj);
 		}
 		
 		// receive query result

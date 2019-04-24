@@ -19,6 +19,8 @@ import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.sql.Connection;
@@ -26,7 +28,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ControleAlunoFrame extends JInternalFrame implements ActionListener {
+public class ControleAlunoFrame extends JInternalFrame implements ActionListener, KeyListener {
 
     /* config: */
     private static int inset = 5;
@@ -148,7 +150,7 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         matriculaField = new JTextField(16);
         matriculaField.setText("Matricula");
         matriculaField.setHorizontalAlignment(SwingConstants.CENTER);
-        matriculaField.getDocument().addDocumentListener(new MatriculaListerner());
+        matriculaField.addKeyListener(this);
 
         alunoField = new JTextField(32);
         alunoField.setText("Aluno");
@@ -213,6 +215,11 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         return scrollPane;
     }
 
+    private void updateData(Matricula m) {
+
+    }
+
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -238,39 +245,30 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         }
     }
 
-    class MatriculaListerner implements DocumentListener {
+    @Override
+    public void keyTyped(KeyEvent event) {
 
-        final String newline = "\n";
+    }
 
-        public void insertUpdate(DocumentEvent e) {
-            updateLog(e, "inserted into");
-            int codigo_matricula = (!matriculaField.getText().trim().isEmpty()) ? Integer.parseInt(matriculaField.getText()) : 0;
+    @Override
+    public void keyPressed(KeyEvent event) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent event) {
+        if (event.getSource() == matriculaField) {
             try {
+                int codigo_matricula = (!matriculaField.getText().trim().isEmpty()) ? Integer.parseInt(matriculaField.getText()) : 0;
                 matricula = (Matricula) matriculaDAO.find(codigo_matricula);
-                updateLog(e, matricula.toString());
+                if (matricula != null) {
+                    aluno = (Aluno) alunoDAO.find(matricula.getCodigoAluno());
+                    this.updateData(matricula);
+                }
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         }
-        public void removeUpdate(DocumentEvent e) {
-            updateLog(e, "removed from");
-        }
-
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-
-        }
-
-        public void updateLog(DocumentEvent e, String action) {
-            Document doc = (Document)e.getDocument();
-            int changeLength = e.getLength();
-            statusField.setText(
-                    changeLength + " character"
-                            + ((changeLength == 1) ? " " : "s ")
-                            + action + " " + doc.getProperty("name") + "."
-                            + newline
-                            + "  Text length = " + doc.getLength() + newline);
-            statusField.setCaretPosition(statusField.getDocument().getLength());
-        }
     }
+
 }

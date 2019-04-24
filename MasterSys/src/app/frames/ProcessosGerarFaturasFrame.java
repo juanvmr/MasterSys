@@ -1,11 +1,10 @@
 package app.frames;
 
-import app.components.DateField;
 import app.components.MonthChooser;
-import database.dao.FaturaDAO;
+import database.dao.FaturaMatriculaDAO;
 import database.dao.MatriculaDAO;
 import database.dao.MatriculaModalidadeDAO;
-import database.models.Fatura;
+import database.models.FaturaMatricula;
 import database.models.Matricula;
 import database.models.MatriculaModalidade;
 
@@ -30,7 +29,7 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
     /* attributes: */
     private MatriculaDAO matriculaDAO;
     private MatriculaModalidadeDAO matriculaModalidadeDAO;
-    private FaturaDAO faturaDAO;
+    private FaturaMatriculaDAO faturaMatriculaDAO;
 
     /* components: */
     private MonthChooser monthChooser;
@@ -42,7 +41,7 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
 
         this.matriculaDAO = new MatriculaDAO(connection);
         this.matriculaModalidadeDAO = new MatriculaModalidadeDAO(connection);
-        this.faturaDAO = new FaturaDAO(connection);
+        this.faturaMatriculaDAO = new FaturaMatriculaDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents();
@@ -51,7 +50,7 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
 
     @Override
     public void initComponents() {
-        JLabel dataLabel = new JLabel("Data da Fatura:", JLabel.RIGHT);
+        JLabel dataLabel = new JLabel("Data da FaturaMatricula:", JLabel.RIGHT);
 
         monthChooser = new MonthChooser();
 
@@ -110,11 +109,9 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == submitButton) {
-
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == submitButton) {
             try {
-
                 Date currentDate = monthChooser.getDate();
                 Date lastDate = new Date(currentDate.getYear(), currentDate.getMonth(), 30);
                 List<MatriculaModalidade> list;
@@ -128,21 +125,25 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
 
                     System.out.println("Current Date: " + currentDate + ", Expire Date: " + data_vecimento);
 
-                    Fatura f = new Fatura(
+                    FaturaMatricula f = new FaturaMatricula(
                         codigo_matricula,
                         data_vecimento,
-                        faturaDAO.getFaturaValue(codigo_matricula, data_vecimento),
+                        faturaMatriculaDAO.getFaturaValue(codigo_matricula, data_vecimento),
                         null,
                         null
                     );
 
-                    if ((f.getValor() > 0) && (m.getDataEncerramento() == null)) {
-                        System.out.println("Fatura: " + f);
-                        faturaDAO.insert(f);
+                    if (faturaMatriculaDAO.contains(f)) {
+                        System.err.println("contains: " + f + " (" + faturaMatriculaDAO.count(f) + ")");
+                    }
+
+                    if ((f.getValor() > 0) && (m.getDataEncerramento() == null) && !faturaMatriculaDAO.contains(f)) {
+                        System.out.println("FaturaMatricula: " + f);
+                        faturaMatriculaDAO.insert(f);
                     }
                 }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
         }
     }

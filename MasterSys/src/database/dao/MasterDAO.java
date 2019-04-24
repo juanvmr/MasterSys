@@ -23,8 +23,8 @@ public abstract class MasterDAO {
 	public abstract void delete(Object obj) throws SQLException;
 
 	public boolean contains(Object obj) throws SQLException {
-		return count(obj) > 0;
-	};
+		return this.count(obj) > 0;
+	}
 	
 	public void Set(PreparedStatement pst, int position, Object parameter) throws SQLException {
 		if (parameter == null) {

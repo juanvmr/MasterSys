@@ -1,17 +1,20 @@
 package app.frames;
 
 import app.components.DateField;
+import app.tables.ColorRender;
 import database.dao.AlunoDAO;
-import database.dao.FaturaDAO;
+import database.dao.FaturaMatriculaDAO;
 import database.models.*;
 import app.tables.FaturasTableModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,21 +31,21 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private FaturaDAO faturaDAO;
+    private FaturaMatriculaDAO faturaMatriculaDAO;
     private AlunoDAO alunoDAO;
 
     /* components: */
     private DateField fromDateField, toDateField;
     private JComboBox<String> statusComboBox;
     private JButton searchButton;
-    private JTable table;
-    private List<Fatura> list;
+    private JTable faturasTable;
+    private List<FaturaMatricula> faturaMatriculaList;
 
     /* constructors: */
     public ProcessosConsultarFaturasFrame(Connection connection) {
         super("Consultar Faturas", isResizable, isClosable, isMaximizable, isIconifiable);
 
-        this.faturaDAO = new FaturaDAO(connection);
+        this.faturaMatriculaDAO = new FaturaMatriculaDAO(connection);
         this.alunoDAO = new AlunoDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -108,29 +111,63 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
 
     private JScrollPane createTable() {
 
-        list = new ArrayList<Fatura>();
-        list.add(new Fatura(1, new Date(2019,4,30), 150.0, new Date(2019, 5, 30), null));
-        list.add(new Fatura(2, new Date(2019,3,30), 150.0, new Date(2019, 7, 30), null));
-        list.add(new Fatura(3, new Date(2019,5,30), 150.0, new Date(2019, 8, 30), new Date(2019, 6, 21)));
+        faturaMatriculaList = new ArrayList<>();
 
-        table = new JTable();
-        table.setModel(new FaturasTableModel(list));
-        table.setPreferredScrollableViewportSize(new Dimension(500, 200));
-        table.setFillsViewportHeight(true);
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setHorizontalAlignment(JLabel.CENTER);
+        renderer.setBackground(Color.RED);
 
-        //Create the scroll pane and add the table to it.
-        JScrollPane scrollPane = new JScrollPane(table);
+        faturasTable = new JTable();
+        faturasTable.setModel(new FaturasTableModel());
+        faturasTable.setPreferredScrollableViewportSize(new Dimension(500, 200));
+        faturasTable.setFillsViewportHeight(true);
+
+        faturasTable.setDefaultRenderer(Date.class, renderer);
+        faturasTable.setDefaultRenderer(String.class, renderer);
+        faturasTable.setDefaultRenderer(Double.class, renderer);
+        faturasTable.setDefaultRenderer(Integer.class, renderer);
+
+        faturasTable.setDefaultRenderer(Date.class, new ColorRender());
+
+        //Create the scroll pane and add the faturasTable to it.
+        JScrollPane scrollPane = new JScrollPane(faturasTable);
         return scrollPane;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == searchButton) {
-            Date fromDate = fromDateField.getDate();
-            Date toDate = toDateField.getDate();
-            String status = (String) statusComboBox.getSelectedItem();
+    private void updateTable() {
+        if ((faturaMatriculaList != null)) {
+            faturasTable.setModel(new FaturasTableModel(faturaMatriculaList));
+        } else {
+            faturaMatriculaList = new ArrayList<FaturaMatricula>();
+        }
+    }
 
-            System.out.println("Search - from: " + fromDate + ", to: " + toDate + ", status: " + status);
+    private void clearTable() {
+        if ((faturaMatriculaList != null) && (faturaMatriculaList.size() > 0)) {
+            faturaMatriculaList.clear();
+            this.updateTable();
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == searchButton) {
+            this.clearTable();
+            try {
+                Date fromDate = fromDateField.getDate();
+                Date toDate = toDateField.getDate();
+                String status = (String) statusComboBox.getSelectedItem();
+                System.out.println("Search - from: " + fromDate + ", to: " + toDate + ", status: " + status);
+
+                for (Object obj : faturaMatriculaDAO.select(fromDate, toDate, status)) {
+                    System.out.println(obj);
+                    FaturaMatricula f = (FaturaMatricula) obj;
+                    faturaMatriculaList.add(f);
+                    this.updateTable();
+                }
+            } catch (SQLException e) {
+                System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            }
         }
     }
 }

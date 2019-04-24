@@ -1,6 +1,6 @@
 package app.tables;
 
-import database.models.Fatura;
+import database.models.FaturaMatricula;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -11,14 +11,14 @@ public class FaturasTableModel extends AbstractTableModel {
 
     /* attributes: */
     private static String[] columnNames = { "Matrícula", "Aluno", "Vencimento", "Valor", "Pagamento", "Cancelamento" };
-    private List<Fatura> list;
+    private List<FaturaMatricula> list;
 
     /* constructor: */
     public FaturasTableModel() {
-        list = new ArrayList<Fatura>();
+        list = new ArrayList<FaturaMatricula>();
     }
 
-    public FaturasTableModel(List<Fatura> list) {
+    public FaturasTableModel(List<FaturaMatricula> list) {
         this.list = list;
     }
 
@@ -60,7 +60,7 @@ public class FaturasTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Fatura tmp = this.getRow(rowIndex);
+        FaturaMatricula tmp = this.getRow(rowIndex);
         switch (columnIndex) {
             case 0: return tmp.getCodigoMatricula();
             case 1:
@@ -76,7 +76,7 @@ public class FaturasTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
-        Fatura tmp = this.getRow(rowIndex);
+        FaturaMatricula tmp = this.getRow(rowIndex);
         switch (columnIndex) {
             case 0:
                 tmp.setCodigoMatricula((int) value);
@@ -100,15 +100,15 @@ public class FaturasTableModel extends AbstractTableModel {
         fireTableCellUpdated(rowIndex, columnIndex);
     }
 
-    private Fatura getRow(int rowIndex) {
+    public FaturaMatricula getRow(int rowIndex) {
         return list.get(rowIndex);
     }
 
-    public void addFatura(Fatura obj) {
+    public void insert(FaturaMatricula obj) {
         this.insert(obj, getRowCount());
     }
 
-    public void insert(Fatura obj, int rowIndex) {
+    public void insert(FaturaMatricula obj, int rowIndex) {
         list.add(rowIndex, obj);
         fireTableRowsInserted(rowIndex, rowIndex);
     }
@@ -117,4 +117,5 @@ public class FaturasTableModel extends AbstractTableModel {
         list.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
+
 }

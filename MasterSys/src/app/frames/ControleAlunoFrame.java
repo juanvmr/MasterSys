@@ -12,17 +12,11 @@ import database.models.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -44,7 +38,7 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
     private MatriculaDAO matriculaDAO;
     private AlunoDAO alunoDAO;
     private List<MatriculaModalidade> modaldiadeList;
-    private List<Fatura> faturaList;
+    private List<FaturaMatricula> faturaMatriculaList;
     private List<Assiduidade> assiduidadeList;
 
     /* components: */
@@ -189,10 +183,10 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
     }
 
     private JScrollPane createPanelD() {
-        faturaList = new ArrayList<>();
+        faturaMatriculaList = new ArrayList<>();
 
         faturaTable = new JTable();
-        faturaTable.setModel(new FaturasTableModel(faturaList));
+        faturaTable.setModel(new FaturasTableModel(faturaMatriculaList));
         faturaTable.setPreferredScrollableViewportSize(new Dimension(500, 200));
         faturaTable.setFillsViewportHeight(true);
 

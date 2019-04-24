@@ -52,6 +52,9 @@ public class MenuFrame extends JFrame {
         this.setJMenuBar(createMenuBar());
         this.setContentPane(createDesktop());
         this.setVisible(true);
+
+        // debug
+        this.itemProcessoConsultarFaturas.doClick();
     }
 
     private void updateUser() {
@@ -103,7 +106,7 @@ public class MenuFrame extends JFrame {
         menuProcessoMatricular = new JMenu("Matrícula");
             itemProcessoMatriculaAluno = new JMenuItem("Aluno");
 
-        menuRelatorioFatura = new JMenu("Fatura");
+        menuRelatorioFatura = new JMenu("FaturaMatricula");
             itemRelatorioFaturaAberto = new JMenuItem("Em Aberto");
             itemRelatorioFaturaPago = new JMenuItem("Pagas");
             itemRelatorioMatricula = new JMenuItem("Matrículas");

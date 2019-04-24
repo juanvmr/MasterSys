@@ -85,7 +85,7 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
         JLabel matriculaLabel = new JLabel("Matrícula:", JLabel.RIGHT);
         JLabel alunoLabel = new JLabel("Aluno:", JLabel.RIGHT);
         JLabel dataMatriculaLabel = new JLabel("Data Matrícula:", JLabel.RIGHT);
-        JLabel diaVencimentoLabel = new JLabel("Dia do Vencimento da Fatura:", JLabel.RIGHT);
+        JLabel diaVencimentoLabel = new JLabel("Dia do Vencimento da FaturaMatricula:", JLabel.RIGHT);
 
         matricularField = new JTextField(8);
         matricularField.setHorizontalAlignment(SwingConstants.CENTER);

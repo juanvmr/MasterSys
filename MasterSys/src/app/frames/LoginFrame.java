@@ -78,6 +78,17 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
         content.add(loginButton, c);
     }
 
+    private Usuario getData() {
+        String password = new String(passwordField.getPassword());
+        if ((!usernameField.getText().isEmpty()) && (!password.isEmpty())) {
+            Usuario tmp = new Usuario();
+            tmp.setUsername(usernameField.getText());
+            tmp.setPassword(new String(passwordField.getPassword()));
+            return tmp;
+        }
+        return null;
+    }
+
     /**
      * Sets frame size and position it in the center of the screen.
      * @param width         -- frame width
@@ -106,27 +117,22 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == loginButton) {
 
-            Usuario user = new Usuario();
-            user.setUsername(usernameField.getText());
-            user.setPassword(new String(passwordField.getPassword()));
+            Usuario user = this.getData();
 
             Connection connection = null;
-            if (!user.getUsername().isEmpty()) {
-                if (!user.getPassword().isEmpty()) {
-                    connection = ConnectionFactory.getConnection("master", user.getUsername(), user.getPassword());
-                    try {
-                        // check if connection is open
-                        if ((connection != null) && (!connection.isClosed())) {
-                            this.openMainWindow(connection, user);
-                        }
-                    } catch (SQLException e) {
-                        System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
+            if (user != null) {
+                connection = ConnectionFactory.getConnection("master", user.getUsername(), user.getPassword());
+                try {
+                    // check if connection is open
+                    if ((connection != null) && (!connection.isClosed())) {
+                        this.openMainWindow(connection, user);
                     }
-                } else {
-                    passwordField.setText("*");
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "WARNING: Invalid Username or Password.");
+                    System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
                 }
             } else {
-                usernameField.setText("*");
+                JOptionPane.showMessageDialog(null, "WARNING: Username or Password not filled.");
             }
         }
     }
@@ -148,8 +154,6 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
 
     }
 
-    //Função fora do bloco try-catch
-    //Abre a janela principal
     private void openMainWindow(Connection connection, Usuario user){
         // close login frame
         this.dispose();
@@ -157,4 +161,5 @@ public class LoginFrame extends JFrame implements ActionListener, KeyListener {
         MenuFrame frame = new MenuFrame(connection, user);
         frame.setVisible(true);
     }
+
 }

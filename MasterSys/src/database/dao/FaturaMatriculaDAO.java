@@ -8,17 +8,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import database.models.Assiduidade;
-import database.models.Fatura;
+import database.models.FaturaMatricula;
 
-public class FaturaDAO extends MasterDAO {
+public class FaturaMatriculaDAO extends MasterDAO {
 	
 	/* attributes: */
 	private Connection connection;
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public FaturaDAO(Connection connection) {
+	public FaturaMatriculaDAO(Connection connection) {
 		this.connection = connection;
 	}
 
@@ -26,13 +25,15 @@ public class FaturaDAO extends MasterDAO {
 	@Override
 	public int count(Object obj) throws SQLException {
 
-		String query = "SELECT COUNT(*) FROM faturas_matriculas WHERE codigo_matricula = ?";
+		String query = "SELECT COUNT(*) FROM faturas_matriculas WHERE codigo_matricula = ? AND data_vencimento = ?";
 
 		// clear previous query
 		pst_select = connection.prepareStatement(query);
 
 		// fill query
-		Set(pst_select, 1, ((Assiduidade) obj).getCodigoMatricula());
+		int pos = 0;
+		Set(pst_select, ++pos, ((FaturaMatricula) obj).getCodigoMatricula());
+		Set(pst_select, ++pos, ((FaturaMatricula) obj).getDataVencimento());
 
 		// run query and store the result
 		ResultSet rst = pst_select.executeQuery();
@@ -58,7 +59,7 @@ public class FaturaDAO extends MasterDAO {
 		// check result
 		List<Object> list = new ArrayList<Object>();
 		while (rst.next()) {
-			Fatura tmp = new Fatura(
+			FaturaMatricula tmp = new FaturaMatricula(
 				rst.getInt("codigo_matricula"),
 				rst.getDate("data_vencimento"),
 				rst.getDouble("valor"),
@@ -80,7 +81,11 @@ public class FaturaDAO extends MasterDAO {
 		pst_select = connection.prepareStatement(query);
 
 		// fill query
-		Set(pst_select, 1, ((Fatura) obj).getCodigoMatricula());
+		if (obj instanceof FaturaMatricula) {
+			Set(pst_select, 1, ((FaturaMatricula) obj).getCodigoMatricula());
+		} else if (obj instanceof Integer) {
+			Set(pst_select, 1, obj);
+		}
 
 		// run query
 		ResultSet rst = pst_select.executeQuery();
@@ -88,12 +93,12 @@ public class FaturaDAO extends MasterDAO {
 		// check result
 		List<Object> list = new ArrayList<Object>();
 		while (rst.next()) {
-			Fatura tmp = new Fatura(
-					rst.getInt("codigo_matricula"),
-					rst.getDate("data_vencimento"),
-					rst.getDouble("valor"),
-					rst.getDate("data_pagamento"),
-					rst.getDate("data_cancelamento")
+			FaturaMatricula tmp = new FaturaMatricula(
+				rst.getInt("codigo_matricula"),
+				rst.getDate("data_vencimento"),
+				rst.getDouble("valor"),
+				rst.getDate("data_pagamento"),
+				rst.getDate("data_cancelamento")
 			);
 			list.add(tmp);
 		}
@@ -104,13 +109,15 @@ public class FaturaDAO extends MasterDAO {
 	@Override
 	public Object find(Object obj) throws SQLException {
 
-		String query = "SELECT * FROM faturas_matriculas WHERE codigo_matricula = ?";
+		String query = "SELECT * FROM faturas_matriculas WHERE codigo_matricula = ? AND data_vencimento = ?";
 
 		// clear previous query
 		pst_select = connection.prepareStatement(query);
 		
 		// fill query
-		Set(pst_select, 1, ((Assiduidade) obj).getCodigoMatricula());
+		int pos = 0;
+		Set(pst_select, ++pos, ((FaturaMatricula) obj).getCodigoMatricula());
+		Set(pst_select, ++pos, ((FaturaMatricula) obj).getDataVencimento());
 		
 		// run query and store the result
 		ResultSet rst = pst_select.executeQuery();
@@ -118,7 +125,7 @@ public class FaturaDAO extends MasterDAO {
 		// check if query return a result
 		Object tmp = null;
 		if (rst.next()) {
-			tmp = new Fatura(
+			tmp = new FaturaMatricula(
 				rst.getInt("codigo_matricula"),
 				rst.getDate("data_vencimento"),
 				rst.getDouble("valor"),
@@ -140,7 +147,7 @@ public class FaturaDAO extends MasterDAO {
 		pst_update = connection.prepareStatement(query);
 		
 		// fill query
-		Fatura tmp = (Fatura) obj;
+		FaturaMatricula tmp = (FaturaMatricula) obj;
 
 		int pos = 0;
 		Set(pst_update, ++pos, tmp.getCodigoMatricula());
@@ -168,7 +175,7 @@ public class FaturaDAO extends MasterDAO {
 		pst_insert = connection.prepareStatement(query);
 		
 		// fill query
-		Fatura tmp = (Fatura) obj;
+		FaturaMatricula tmp = (FaturaMatricula) obj;
 
 		Set(pst_insert, 1, tmp.getDataVencimento());
 		Set(pst_insert, 2, tmp.getValor());
@@ -188,15 +195,17 @@ public class FaturaDAO extends MasterDAO {
 	@Override
 	public void delete(Object obj) throws SQLException {
 
-		String query = "DELETE FROM faturas_matriculas WHERE codigo_matricula = ?";
+		String query = "DELETE FROM faturas_matriculas WHERE codigo_matricula = ? AND data_vencimento = ?";
 
 		// build query
 		pst_delete = connection.prepareStatement(query);
 		
 		// fill query
-		Fatura tmp = (Fatura) obj;
+		FaturaMatricula tmp = (FaturaMatricula) obj;
 
-		Set(pst_delete, 1, tmp.getCodigoMatricula());
+		int pos = 0;
+		Set(pst_select, ++pos, tmp.getCodigoMatricula());
+		Set(pst_select, ++pos, tmp.getDataVencimento());
 		
 		// run query
 		pst_delete.execute();
@@ -239,5 +248,50 @@ public class FaturaDAO extends MasterDAO {
 		}
 		return value;
 	}
-	
+
+	public List<Object> select(Date fromDate, Date toDate, String type) throws SQLException {
+
+		String query = "SELECT a.*, b.codigo_aluno, c.aluno FROM ((faturas_matriculas a " +
+			"INNER JOIN matriculas b ON a.codigo_matricula = b.codigo_matricula) " +
+			"INNER JOIN alunos c ON b.codigo_aluno = c.codigo_aluno) " +
+			"WHERE a.data_vencimento >= ? AND a.data_vencimento <= ?";
+
+		switch (type) {
+			case "Todas":
+				break;
+			case "Em Aberto":
+				query += " AND isNull(a.data_pagamento)";        // EM ABERTO
+				break;
+			case "Pagas":
+				query += " AND !isNull(a.data_pagamento)";        // PAGAS
+				break;
+			case "Canceladas":
+				query += " AND !isNull(a.data_cancelamento)";    // CANCELADAS
+				break;
+		}
+
+		pst_select = connection.prepareStatement(query);
+
+		int pos = 0;
+		Set(pst_select, ++pos, fromDate);
+		Set(pst_select, ++pos, toDate);
+
+		// run query
+		ResultSet rst = pst_select.executeQuery();
+
+		// check result
+		List<Object> list = new ArrayList<Object>();
+		while (rst.next()) {
+			FaturaMatricula tmp = new FaturaMatricula(
+					rst.getInt("codigo_matricula"),
+					rst.getDate("data_vencimento"),
+					rst.getDouble("valor"),
+					rst.getDate("data_pagamento"),
+					rst.getDate("data_cancelamento")
+			);
+			list.add(tmp);
+		}
+
+		return list;
+	}
 }

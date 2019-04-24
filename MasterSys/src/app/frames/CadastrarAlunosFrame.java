@@ -24,9 +24,6 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
 //    private static boolean isIconifiable = false;
 
     /* attributes: */
-    private LocalDAO localDAO;
-    private AlunoDAO alunoDAO;
-    private MatriculaDAO matriculaDAO;
     private Aluno aluno;
     private List<String> cidadeList, estadoList, paisList;
     private boolean insertEnabled = false;
@@ -40,13 +37,8 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
     private JComboBox<String> sexoComboBox, cidadeComboBox, estadoComboBox, paisComboBox;
 
     /* constructors: */
-    public CadastrarAlunosFrame(Connection connection) {
+    public CadastrarAlunosFrame() {
         super("Cadastrar Aluno");//, isResizable, isClosable, isMaximizable, isIconifiable);
-
-        this.localDAO = new LocalDAO(connection);
-        this.alunoDAO = new AlunoDAO(connection);
-        this.matriculaDAO = new MatriculaDAO(connection);
-
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
@@ -253,7 +245,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
     private void updatePaisComboBox() {
         try {
             // get a distinct list of paises from database
-            paisList = localDAO.selectPaises();
+            paisList = MenuFrame.localDAO.selectPaises();
             // check database result
             if ((paisList != null) && (paisList.size() > 0)) {
                 // insert result into combobox
@@ -277,7 +269,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
 
         try {
             // get a distinct list of estados from database
-            estadoList = localDAO.selectEstados(paisComboBox.getSelectedItem().toString());
+            estadoList = MenuFrame.localDAO.selectEstados(paisComboBox.getSelectedItem().toString());
             // check database result
             if ((estadoList != null) && (estadoList.size() > 0)) {
                 // insert result into combobox
@@ -302,7 +294,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
 
         try {
             // get a list of cidades based on estado and pais.
-            cidadeList = localDAO.selectCidades(estadoComboBox.getSelectedItem().toString(), paisComboBox.getSelectedItem().toString());
+            cidadeList = MenuFrame.localDAO.selectCidades(estadoComboBox.getSelectedItem().toString(), paisComboBox.getSelectedItem().toString());
             // check database result
             if ((cidadeList != null) && (cidadeList.size() > 0)) {
                 // insert result into combobox
@@ -432,11 +424,11 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
             try {
                 aluno = (Aluno) this.getData();
                 if (aluno != null) {
-                    if (!alunoDAO.contains(aluno)) {
+                    if (!MenuFrame.alunoDAO.contains(aluno)) {
                         // insert into database
-                        alunoDAO.insert(aluno);
+                        MenuFrame.alunoDAO.insert(aluno);
                         // get codigo_aluno
-                        aluno = (Aluno) alunoDAO.find(aluno);
+                        aluno = (Aluno) MenuFrame.alunoDAO.find(aluno);
                     } else {
                         JOptionPane.showMessageDialog(null,  String.format("Aluno %s already exists on database.", aluno.getAluno()));
                     }
@@ -452,7 +444,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
                 // apply modifications to aluno variable
                 getData(aluno);
                 // update database
-                alunoDAO.update(aluno);
+                MenuFrame.alunoDAO.update(aluno);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
@@ -477,7 +469,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
         try {
             if (aluno != null) {
                 // matriculaDAO.delete(aluno.getCodigoAluno());
-                alunoDAO.delete(aluno);
+                MenuFrame.alunoDAO.delete(aluno);
                 resetData();
                 this.searchEnabled = false;
                 this.aluno = null;
@@ -540,7 +532,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
     public void keyReleased(KeyEvent event) {
         if (event.getSource() == alunoField) {
             try {
-                aluno = (Aluno) alunoDAO.find(getData());
+                aluno = (Aluno) MenuFrame.alunoDAO.find(getData());
                 this.updateData(aluno);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());

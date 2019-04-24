@@ -16,7 +16,7 @@ public class AssiduidadeDAO extends MasterDAO {
 	private PreparedStatement pst_select, pst_insert, pst_update, pst_delete;
 	
 	/* constructor: */
-	public AssiduidadeDAO(Connection conn) throws SQLException {
+	public AssiduidadeDAO(Connection conn) {
 		this.conn = conn;
 	}
 

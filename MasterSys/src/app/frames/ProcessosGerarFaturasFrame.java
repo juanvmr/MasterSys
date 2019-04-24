@@ -142,6 +142,7 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
                         faturaMatriculaDAO.insert(f);
                     }
                 }
+
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }

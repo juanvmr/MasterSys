@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ControleAlunoFrame extends JInternalFrame implements ActionListener, KeyListener {
+public class ControleAlunoFrame extends JFrame implements ActionListener, KeyListener {
 
     /* config: */
     private static int inset = 5;
@@ -49,7 +49,7 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
 
     /* constructors: */
     public ControleAlunoFrame(Connection connection) {
-        super("Controle de Alunos", isResizable, isClosable, isMaximizable, isIconifiable);
+        super("Controle de Alunos");//, isResizable, isClosable, isMaximizable, isIconifiable);
 
         this.matriculaDAO = new MatriculaDAO(connection);
 

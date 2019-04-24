@@ -22,7 +22,6 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private UsuariosDAO usuarioDAO;
     private boolean insertEnabled = false;
     private boolean searchEnabled = false;
 
@@ -32,12 +31,8 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
     private JTextField usuarioField;
     private JPasswordField passwordField, passwordCheckField;
 
-    public SistemaUsuariosFrame(Connection connection) {
+    public SistemaUsuariosFrame() {
         super("Usuários", isResizable, isClosable, isMaximizable, isIconifiable);
-
-        /* attributes: */
-        this.usuarioDAO = new UsuariosDAO(connection);
-
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
         this.pack();
@@ -175,10 +170,10 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
                 Usuario tmp = new Usuario(usuarioField.getText().trim());
 
                 // check if usuário exists
-                if (usuarioDAO.contains(tmp)) {
+                if (MenuFrame.usuarioDAO.contains(tmp)) {
 
                     // insert data into fields
-                    this.updateInputs((Usuario) usuarioDAO.find(tmp));
+                    this.updateInputs((Usuario) MenuFrame.usuarioDAO.find(tmp));
                     this.searchEnabled = true;
 
                     // enable actions
@@ -199,7 +194,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
     private void removeButtonAction() {
         if (!usuarioField.getText().trim().isEmpty()) {
             try {
-                usuarioDAO.delete(new Usuario(usuarioField.getText().trim()));
+                MenuFrame.usuarioDAO.delete(new Usuario(usuarioField.getText().trim()));
                 this.clear();
                 this.searchEnabled = false;
             } catch (SQLException e) {
@@ -217,7 +212,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         // INSERT INTO DATABASE
         if (this.insertEnabled) {
             try {
-                usuarioDAO.insert(tmp);
+                MenuFrame.usuarioDAO.insert(tmp);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
@@ -226,7 +221,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         // UPDATE DATABASE
         else if (searchEnabled) {
             try {
-                usuarioDAO.update(tmp);
+                MenuFrame.usuarioDAO.update(tmp);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }

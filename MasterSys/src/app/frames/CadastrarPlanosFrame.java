@@ -23,8 +23,6 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private ModalidadeDAO modalidadeDAO;
-    private PlanoDAO planoDAO;
     private Plano plano;
     private List<Object> modalidadeList;
     private boolean insertEnabled = false;
@@ -36,12 +34,8 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     private JComboBox<Object> modalidadeComboBox;
 
     /* constructors: */
-    public CadastrarPlanosFrame(Connection connection) {
+    public CadastrarPlanosFrame() {
         super("Planos", isResizable, isClosable, isMaximizable, isIconifiable);
-
-        this.modalidadeDAO = new ModalidadeDAO(connection);
-        this.planoDAO = new PlanoDAO(connection);
-
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
         this.setupData();
@@ -115,7 +109,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
 
     private void updateModalidadeComboBox() {
         try {
-            modalidadeList = modalidadeDAO.select();
+            modalidadeList = MenuFrame.modalidadeDAO.select();
             modalidadeComboBox.setModel(new DefaultComboBoxModel<>(modalidadeList.toArray()));
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
@@ -188,7 +182,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         if (this.insertEnabled) {
             if (p != null) {
                 try {
-                    planoDAO.insert(p);
+                    MenuFrame.planoDAO.insert(p);
                 } catch (SQLException e) {
                     System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
                 }
@@ -199,7 +193,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         else if (this.updateEnabled) {
             if (p != null) {
                 try {
-                    planoDAO.update(p);
+                    MenuFrame.planoDAO.update(p);
                 } catch (SQLException e) {
                     System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
                 }
@@ -213,7 +207,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
     private void removeButtonAction() {
         Plano p = getData();
         try {
-            planoDAO.delete(p);
+            MenuFrame.planoDAO.delete(p);
         } catch (SQLException e) {
             System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
         }
@@ -261,7 +255,7 @@ public class CadastrarPlanosFrame extends JInternalFrame implements ActionListen
         if (event.getSource() == planoField) {
             if (!planoField.getText().isEmpty()) {
                 try {
-                    plano = (Plano) planoDAO.find(getData());
+                    plano = (Plano) MenuFrame.planoDAO.find(getData());
 
                     if (plano != null) {
                         this.updateData(plano);

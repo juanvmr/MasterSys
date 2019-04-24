@@ -31,8 +31,6 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     private static String SPACE_TOKEN = ";";
 
     /* attributes: */
-    private ModalidadeDAO modalidadeDAO;
-    private GraduacaoDAO graduacaoDAO;
     private List<Graduacao> graduacaoList;
     private boolean insertEnabled = false;
     private boolean updateEnabled = false;
@@ -45,12 +43,8 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     private JTable table;
 
     /* constructors: */
-    public CadastrarModalidadeGraduacaoFrame(Connection connection) {
+    public CadastrarModalidadeGraduacaoFrame() {
         super("Cadastrar Modalidade e Graduação", isResizable, isClosable, isMaximizable, isIconifiable);
-
-        this.modalidadeDAO = new ModalidadeDAO(connection);
-        this.graduacaoDAO = new GraduacaoDAO(connection);
-
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
@@ -223,8 +217,8 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
             try {
                 for (Graduacao g : graduacaoList) {
                     Modalidade m = new Modalidade(g.getModalidade());
-                    modalidadeDAO.insert(m);
-                    graduacaoDAO.insert(g);
+                    MenuFrame.modalidadeDAO.insert(m);
+                    MenuFrame.graduacaoDAO.insert(g);
                 }
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
@@ -236,7 +230,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         else if (this.updateEnabled) {
             Graduacao g = getGraduacaoInput();
             try {
-                graduacaoDAO.update(g);
+                MenuFrame.graduacaoDAO.update(g);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
@@ -293,7 +287,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
                 Modalidade m = getModalidadeInput();
                 if (m != null) {
                     resetTable();
-                    for (Object obj : graduacaoDAO.select(m)) {
+                    for (Object obj : MenuFrame.graduacaoDAO.select(m)) {
                         graduacaoList.add((Graduacao) obj);
                     }
                 }

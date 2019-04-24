@@ -7,16 +7,25 @@ import java.beans.PropertyVetoException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import database.dao.*;
 import database.models.Usuario;
-import database.dao.UsuariosDAO;
 
 
 public class MenuFrame extends JFrame {
 
     /* attributes: */
     private Connection connection;
-    private UsuariosDAO usuariosDAO;
     private Usuario user;
+    public static AlunoDAO alunoDAO;
+    public static AssiduidadeDAO assiduidadeDAO;
+    public static FaturaMatriculaDAO faturaMatriculaDAO;
+    public static GraduacaoDAO graduacaoDAO;
+    public static LocalDAO localDAO;
+    public static MatriculaDAO matriculaDAO;
+    public static MatriculaModalidadeDAO matriculaModalidadeDAO;
+    public static ModalidadeDAO modalidadeDAO;
+    public static PlanoDAO planoDAO;
+    public static UsuariosDAO usuarioDAO;
 
     /* components: */
     private JMenuBar menuBar;
@@ -29,15 +38,10 @@ public class MenuFrame extends JFrame {
     private JMenuItem itemUtilitariosControleAluno, itemAjudaSobre;
     private JDesktopPane desktop;
 
-    // Sistema
     private JInternalFrame frameUsuario;
-    // Cadastro
     private JInternalFrame frameCadastrarAlunos, frameCadastrarModalidades, frameCadastrarPlanos;
-    // Processos
     private JInternalFrame frameMatricularAluno, frameGerarFaturas, frameConsultarFaturas, frameRealizarPagamentos;
-    // Relatorio
     private JInternalFrame frameRelatorioMatricula;
-    // Utilitarios
     private JInternalFrame frameControleAluno;
 
     /* constructor: */
@@ -45,7 +49,7 @@ public class MenuFrame extends JFrame {
         super("MasterSys");
         this.setDefaultSize(0.75);
 
-        this.connection = connection;
+        this.initDAO(connection);
         this.user = user;
 
         this.updateUser();
@@ -57,13 +61,26 @@ public class MenuFrame extends JFrame {
         this.itemProcessoConsultarFaturas.doClick();
     }
 
+    private void initDAO(Connection connection) {
+        alunoDAO = new AlunoDAO(connection);
+        assiduidadeDAO = new AssiduidadeDAO(connection);
+        faturaMatriculaDAO = new FaturaMatriculaDAO(connection);
+        graduacaoDAO = new GraduacaoDAO(connection);
+        localDAO = new LocalDAO(connection);
+        matriculaDAO = new MatriculaDAO(connection);
+        matriculaModalidadeDAO = new MatriculaModalidadeDAO(connection);
+        modalidadeDAO = new ModalidadeDAO(connection);
+        planoDAO = new PlanoDAO(connection);
+    }
+
+
     private void updateUser() {
         if (this.user == null) return;
 
         if (this.user.getPerfil().isEmpty()) {
-            this.usuariosDAO = new UsuariosDAO(connection);
+            this.usuarioDAO = new UsuariosDAO(connection);
             try {
-                this.user = (Usuario) usuariosDAO.find(user);
+                this.user = (Usuario) usuarioDAO.find(user);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
@@ -156,7 +173,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(SistemaUsuariosFrame.class.getName())) {
                     focusFrame(frameUsuario);
                 } else {
-                    frameUsuario = new SistemaUsuariosFrame(connection);
+                    frameUsuario = new SistemaUsuariosFrame();
                     frameUsuario.setName(SistemaUsuariosFrame.class.getName());
                     desktop.add(frameUsuario);
                 }
@@ -177,7 +194,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(CadastrarAlunosFrame.class.getName())) {
                     focusFrame(frameCadastrarAlunos);
                 } else {
-                    frameCadastrarAlunos = new CadastrarAlunosFrame(connection);
+                    frameCadastrarAlunos = new CadastrarAlunosFrame();
                     frameCadastrarAlunos.setName(CadastrarAlunosFrame.class.getName());
                     desktop.add(frameCadastrarAlunos);
                 }
@@ -190,7 +207,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(CadastrarModalidadeGraduacaoFrame.class.getName())) {
                     focusFrame(frameCadastrarModalidades);
                 } else {
-                    frameCadastrarModalidades = new CadastrarModalidadeGraduacaoFrame(connection);
+                    frameCadastrarModalidades = new CadastrarModalidadeGraduacaoFrame();
                     frameCadastrarModalidades.setName(CadastrarModalidadeGraduacaoFrame.class.getName());
                     desktop.add(frameCadastrarModalidades);
                 }
@@ -203,7 +220,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(CadastrarPlanosFrame.class.getName())) {
                     focusFrame(frameCadastrarPlanos);
                 } else {
-                    frameCadastrarPlanos = new CadastrarPlanosFrame(connection);
+                    frameCadastrarPlanos = new CadastrarPlanosFrame();
                     frameCadastrarPlanos.setName(CadastrarPlanosFrame.class.getName());
                     desktop.add(frameCadastrarPlanos);
                 }
@@ -282,6 +299,7 @@ public class MenuFrame extends JFrame {
         itemUtilitariosControleAluno.setAction(new AbstractAction(itemUtilitariosControleAluno.getText()) {
             @Override
             public void actionPerformed(ActionEvent e) {
+                /*
                 if (checkFrame(ControleAlunoFrame.class.getName())) {
                     focusFrame(frameControleAluno);
                 } else {
@@ -289,6 +307,7 @@ public class MenuFrame extends JFrame {
                     frameControleAluno.setName(ControleAlunoFrame.class.getName());
                     desktop.add(frameControleAluno);
                 }
+                */
             }
         });
 

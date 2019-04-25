@@ -10,6 +10,8 @@ public class FaturaMatricula {
 	private Date data_vencimento;
 	private Date data_pagamento;
 	private Date data_cancelamento;
+
+	// used only on table model
 	private String aluno;
 	private boolean matricula_encerrada;
 	

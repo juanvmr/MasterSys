@@ -106,10 +106,8 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
             try {
                 Date currentDate = monthChooser.getDate();
                 Date lastDate = new Date(currentDate.getYear(), currentDate.getMonth(), 30);
-                List<MatriculaModalidade> list;
 
-                List<Object> matriculaList = matriculaDAO.select();
-                for (Object obj : matriculaList) {
+                for (Object obj : matriculaDAO.select()) {
                     Matricula m = (Matricula) obj;
 
                     int codigo_matricula = m.getCodigoMatricula();

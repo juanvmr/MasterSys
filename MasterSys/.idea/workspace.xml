@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e3730e8-0fcc-488b-88bf-f88f9c09b8c9" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/Debug.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/frames/MenuFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/MenuFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/tables/ColorRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/tables/ColorRender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/tables/FaturasTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/tables/FaturasTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/database/models/FaturaMatricula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/models/FaturaMatricula.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -23,49 +32,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/frames/Debug.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/frames/MenuFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="249" column="79" selection-start-line="249" selection-start-column="79" selection-end-line="249" selection-end-column="79" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="115" column="10" selection-start-line="115" selection-start-column="10" selection-end-line="115" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="120" column="33" lean-forward="true" selection-start-line="120" selection-start-column="33" selection-end-line="120" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="414">
+              <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="679">
+              <caret line="179" column="46" selection-start-line="179" selection-start-column="46" selection-end-line="179" selection-end-column="46" />
+              <folding>
+                <element signature="method#createSearchBar#0;class#ProcessosConsultarFaturasFrame#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/tables/ColorRender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+            <state relative-caret-position="770">
+              <caret line="54" column="25" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -76,42 +67,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/tables/FaturasTableModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="82" column="45" lean-forward="true" selection-start-line="82" selection-start-column="45" selection-end-line="82" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/database/models/FaturaMatricula.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/database/dao/MatriculaDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="31" />
+            <state relative-caret-position="555">
+              <caret line="119" column="41" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
               <folding>
-                <element signature="method#count#0;class#MatriculaDAO#0" />
-                <element signature="method#find#0;class#MatriculaDAO#0" />
-                <element signature="method#insert#0;class#MatriculaDAO#0" />
-                <element signature="method#update#0;class#MatriculaDAO#0" />
-                <element signature="method#delete#0;class#MatriculaDAO#0" />
+                <element signature="e#2804#2805#0" expanded="true" />
+                <element signature="e#2845#2846#0" expanded="true" />
+                <element signature="e#2892#2893#0" expanded="true" />
+                <element signature="e#2939#2940#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="291" column="49" lean-forward="true" selection-start-line="291" selection-start-column="49" selection-end-line="291" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -127,14 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>newjava.awt.event.</find>
-      <find>ava.util.logging.</find>
-      <find>java.util.logging.</find>
-      <find>testesjanelas</find>
-      <find>java.awt.event.</find>
-      <find>getContentPane()</find>
-      <find>JInternalFrame(</find>
-      <find>Label</find>
       <find>false</find>
       <find>.setEditable(state);</find>
       <find>.setText(&quot;&quot;);</find>
@@ -155,6 +110,16 @@
       <find>getInput</find>
       <find>resetTable</find>
       <find>usuarioDAO</find>
+      <find>MenuFrame.usuarioDAO</find>
+      <find>matricula_modalidade</find>
+      <find>MenuFrame</find>
+      <find>MenuFrame.faturaMatriculaDAO</find>
+      <find>MenuFrame.modalidadeDAO</find>
+      <find>MenuFrame.graduacaoDAO</find>
+      <find>MenuFrame.alunoDAO</find>
+      <find>MenuFrame.</find>
+      <find>MenuFrame.localDAO</find>
+      <find>paisList</find>
     </findStrings>
     <replaceStrings>
       <replace>new</replace>
@@ -170,6 +135,12 @@
       <replace>plano</replace>
       <replace>(</replace>
       <replace>Assiduidade</replace>
+      <replace>usuariosDAO</replace>
+      <replace>faturaMatriculaDAO</replace>
+      <replace>modalidadeDAO</replace>
+      <replace>graduacaoDAO</replace>
+      <replace>alunoDAO</replace>
+      <replace>localDAO</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -179,7 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/app/components/DateFormattedTextField.java" />
         <option value="$PROJECT_DIR$/src/app/components/Debug.java" />
         <option value="$PROJECT_DIR$/src/app/components/EmailField.java" />
         <option value="$PROJECT_DIR$/src/app/components/PhoneField.java" />
@@ -199,44 +169,45 @@
         <option value="$PROJECT_DIR$/src/app/components/MasterMonthChooser.java" />
         <option value="$PROJECT_DIR$/src/app/components/MonthChooser2.java" />
         <option value="$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java" />
         <option value="$PROJECT_DIR$/src/app/panels/SearchBarPanel.java" />
         <option value="$PROJECT_DIR$/src/app/tables/AssiduidadeTableModel.java" />
         <option value="$PROJECT_DIR$/src/app/components/CustomTextField.java" />
         <option value="$PROJECT_DIR$/src/database/dao/MatriculaDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/MatriculaModalidadeDAO.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java" />
         <option value="$PROJECT_DIR$/src/app/panels/ToolBarPanel.java" />
         <option value="$PROJECT_DIR$/src/app/frames/BasicFrame.java" />
         <option value="$PROJECT_DIR$/src/app/frames/BasicInternalFrame.java" />
         <option value="$PROJECT_DIR$/src/app/components/MonthChooser.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" />
         <option value="$PROJECT_DIR$/src/database/dao/AlunoDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/FaturaDAO.java" />
         <option value="$PROJECT_DIR$/src/database/dao/MasterDAO.java" />
         <option value="$PROJECT_DIR$/src/app/tables/FaturasTableRender.java" />
         <option value="$PROJECT_DIR$/src/app/frames/LoginFrame.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/Debug.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java" />
         <option value="$PROJECT_DIR$/src/database/dao/AssiduidadeDAO.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/MenuFrame.java" />
         <option value="$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java" />
-        <option value="$PROJECT_DIR$/src/app/tables/FaturasTableModel.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/Debug.java" />
         <option value="$PROJECT_DIR$/src/database/models/FaturaMatricula.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/MenuFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java" />
         <option value="$PROJECT_DIR$/src/app/tables/ColorRender.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/TablePopupMenu.java" />
+        <option value="$PROJECT_DIR$/src/app/tables/FaturasTableModel.java" />
         <option value="$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="952" />
-    <option name="width" value="975" />
-    <option name="height" value="1058" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1057" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -246,6 +217,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -328,7 +300,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -487,10 +458,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26174498" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23614073" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -499,7 +470,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3226152" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2472067" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.244373" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3952514" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -507,7 +478,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3290461" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3290461" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.31424582" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.31277058" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -547,32 +518,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/database/dao/ModalidadeDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="26" column="73" selection-start-line="26" selection-start-column="63" selection-end-line="26" selection-end-column="73" />
-          <folding>
-            <element signature="method#select#0;class#ModalidadeDAO#0" />
-            <element signature="method#find#0;class#ModalidadeDAO#0" />
-            <element signature="method#delete#0;class#ModalidadeDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/GraduacaoDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="35" column="61" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="61" />
-          <folding>
-            <element signature="method#select#0;class#GraduacaoDAO#0" />
-            <element signature="method#select#1;class#GraduacaoDAO#0" />
-            <element signature="method#find#0;class#GraduacaoDAO#0" />
-            <element signature="method#update#0;class#GraduacaoDAO#0" />
-            <element signature="method#delete#0;class#GraduacaoDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/panels/SearchBarPanel.java" />
     <entry file="file://$PROJECT_DIR$/src/database/models/Assiduidade.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -617,18 +562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="102" column="11" selection-start-line="102" selection-start-column="11" selection-end-line="102" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-181">
-          <caret line="26" column="49" lean-forward="true" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initComponents#0;class#RelatoriosMatriculasFrame#0" />
-            <element signature="method#createPeriodPanel#0;class#RelatoriosMatriculasFrame#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -706,23 +639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="344">
           <caret line="757" column="49" selection-start-line="757" selection-start-column="28" selection-end-line="757" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="173" column="5" selection-start-line="173" selection-start-column="5" selection-end-line="173" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initComponents#0;class#AdicionarModalidadesDialog#0" />
-            <element signature="method#updateModalidadeComboBox#0;class#AdicionarModalidadesDialog#0" />
-            <element signature="method#updateGraduacaoComboBox#0;class#AdicionarModalidadesDialog#0" />
-            <element signature="method#updatePlanoComboBox#0;class#AdicionarModalidadesDialog#0" />
-            <element signature="method#readInput#0;class#AdicionarModalidadesDialog#0" />
-            <element signature="method#actionPerformed#0;class#AdicionarModalidadesDialog#0" />
-            <element signature="method#itemStateChanged#0;class#AdicionarModalidadesDialog#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -854,13 +770,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5559">
-          <caret line="344" column="13" selection-start-line="342" selection-start-column="12" selection-end-line="344" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/java/util/Date.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -876,13 +785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="45" column="25" lean-forward="true" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -904,27 +806,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="24" column="42" lean-forward="true" selection-start-line="24" selection-start-column="42" selection-end-line="24" selection-end-column="42" />
+        <state relative-caret-position="289">
+          <caret line="272" selection-start-line="272" selection-end-line="272" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/app/frames/Debug.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="525" column="13" lean-forward="true" selection-start-line="525" selection-start-column="13" selection-end-line="525" selection-end-column="13" />
+        <state relative-caret-position="289">
+          <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/models/FaturaMatricula.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="25" lean-forward="true" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/database/dao/MatriculaDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="51" column="31" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="31" />
+          <folding>
+            <element signature="method#count#0;class#MatriculaDAO#0" />
+            <element signature="method#find#0;class#MatriculaDAO#0" />
+            <element signature="method#insert#0;class#MatriculaDAO#0" />
+            <element signature="method#update#0;class#MatriculaDAO#0" />
+            <element signature="method#delete#0;class#MatriculaDAO#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#initComponents#0;class#RelatoriosMatriculasFrame#0" />
+            <element signature="method#createPeriodPanel#0;class#RelatoriosMatriculasFrame#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="24" column="50" selection-start-line="24" selection-start-column="50" selection-end-line="24" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#initComponents#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#updateModalidadeComboBox#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#updateGraduacaoComboBox#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#updatePlanoComboBox#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#readInput#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#actionPerformed#0;class#AdicionarModalidadesDialog#0" />
+            <element signature="method#itemStateChanged#0;class#AdicionarModalidadesDialog#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="285" column="30" lean-forward="true" selection-start-line="285" selection-start-column="30" selection-end-line="285" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1679">
+          <caret line="27" column="42" selection-start-line="27" selection-start-column="32" selection-end-line="27" selection-end-column="42" />
+          <folding>
+            <element signature="method#initComponents#0;class#CadastrarPlanosFrame#0" />
+            <element signature="method#createPanel#0;class#CadastrarPlanosFrame#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="178" lean-forward="true" selection-start-line="178" selection-end-line="178" />
+        <state relative-caret-position="259">
+          <caret line="291" column="50" selection-start-line="291" selection-start-column="50" selection-end-line="291" selection-end-column="50" />
           <folding>
             <element signature="method#initComponents#0;class#CadastrarModalidadeGraduacaoFrame#0" />
             <element signature="method#createInfoPanel#0;class#CadastrarModalidadeGraduacaoFrame#0" />
@@ -940,89 +921,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java">
+    <entry file="file://$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-131">
-          <caret line="257" column="46" selection-start-line="257" selection-start-column="46" selection-end-line="257" selection-end-column="46" />
+        <state relative-caret-position="-812">
+          <caret line="29" column="57" selection-start-line="29" selection-start-column="49" selection-end-line="29" selection-end-column="57" />
           <folding>
-            <element signature="method#initComponents#0;class#CadastrarPlanosFrame#0" />
-            <element signature="method#createPanel#0;class#CadastrarPlanosFrame#0" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="121" column="21" lean-forward="true" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/frames/MenuFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="249" column="79" selection-start-line="249" selection-start-column="79" selection-end-line="249" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/MatriculaDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="51" column="31" lean-forward="true" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="31" />
-          <folding>
-            <element signature="method#count#0;class#MatriculaDAO#0" />
-            <element signature="method#find#0;class#MatriculaDAO#0" />
-            <element signature="method#insert#0;class#MatriculaDAO#0" />
-            <element signature="method#update#0;class#MatriculaDAO#0" />
-            <element signature="method#delete#0;class#MatriculaDAO#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="291" column="49" lean-forward="true" selection-start-line="291" selection-start-column="49" selection-end-line="291" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/Debug.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/models/FaturaMatricula.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="13" lean-forward="true" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/tables/FaturasTableModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="82" column="45" lean-forward="true" selection-start-line="82" selection-start-column="45" selection-end-line="82" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="115" column="10" selection-start-line="115" selection-start-column="10" selection-end-line="115" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="120" column="33" lean-forward="true" selection-start-line="120" selection-start-column="33" selection-end-line="120" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="414">
+          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/tables/ColorRender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        <state relative-caret-position="770">
+          <caret line="54" column="25" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/table/AbstractTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="259" column="16" selection-start-line="259" selection-start-column="16" selection-end-line="259" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/tables/FaturasTableModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="119" column="41" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
+          <folding>
+            <element signature="e#2804#2805#0" expanded="true" />
+            <element signature="e#2845#2846#0" expanded="true" />
+            <element signature="e#2892#2893#0" expanded="true" />
+            <element signature="e#2939#2940#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/TablePopupMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="679">
+          <caret line="179" column="46" selection-start-line="179" selection-start-column="46" selection-end-line="179" selection-end-column="46" />
+          <folding>
+            <element signature="method#createSearchBar#0;class#ProcessosConsultarFaturasFrame#0" />
           </folding>
         </state>
       </provider>

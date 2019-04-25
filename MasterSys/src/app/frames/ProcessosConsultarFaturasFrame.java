@@ -13,13 +13,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ProcessosConsultarFaturasFrame extends JInternalFrame implements ActionListener {
+public class ProcessosConsultarFaturasFrame extends JInternalFrame implements ActionListener, MouseListener {
 
     /* config: */
     private static String[] statusList = new String[] { "Todas", "Em Aberto", "Pagas", "Canceladas" };
@@ -112,14 +114,13 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
 
         faturaMatriculaList = new ArrayList<>();
 
-        ColorRender renderer = new ColorRender();
-        //renderer.setHorizontalAlignment(JLabel.CENTER);
-
         faturasTable = new JTable();
         faturasTable.setModel(new FaturasTableModel());
         faturasTable.setPreferredScrollableViewportSize(new Dimension(500, 200));
         faturasTable.setFillsViewportHeight(true);
+        faturasTable.addMouseListener(this);
 
+        ColorRender renderer = new ColorRender();
         faturasTable.setDefaultRenderer(Date.class, renderer);
         faturasTable.setDefaultRenderer(String.class, renderer);
         faturasTable.setDefaultRenderer(Double.class, renderer);
@@ -153,105 +154,48 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
                 Date fromDate = fromDateField.getDate();
                 Date toDate = toDateField.getDate();
                 String status = (String) statusComboBox.getSelectedItem();
-                System.out.println("Search - from: " + fromDate + ", to: " + toDate + ", status: " + status);
 
-                for (Object obj : faturaMatriculaDAO.select(fromDate, toDate, status)) {
-                    System.out.println(obj);
-                    FaturaMatricula f = (FaturaMatricula) obj;
-                    faturaMatriculaList.add(f);
-                    this.updateTable();
+                if ((fromDate != null) && (toDate != null) && (status != null)) {
+                    for (Object obj : faturaMatriculaDAO.select(fromDate, toDate, status)) {
+                        FaturaMatricula f = (FaturaMatricula) obj;
+                        faturaMatriculaList.add(f);
+                        this.updateTable();
+                    }
                 }
-              //  LinhasColorir();
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
         }
     }
 
-    /**
-     Define as cores das linhas da tabela de faturas.
-     */
-    public
-    void			LinhasColorir()
-    {
-        //
-        // Se a tabela realmente possui linhas
-        //
-        if	(
-                faturasTable.getRowCount()
-                        >	0
-        )
-        {
-            //
-            // Define o array de cores da tabela
-            //
-            Color[]
-                    la_color		=	new Color[faturasTable.getRowCount()];
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
-            //
-            // Varre as linhas da tabela
-            //
-            for	(
-                    int
-                    i			=	0
-                    ;
-                    i			<	faturasTable.getRowCount()
-                    ;
-                    i++
-            )
-            {
-                //
-                // Caso seja uma fatura cancelada
-                //
-                if	(
-                        faturasTable.getValueAt(i, 4)
-                                !=	null
-                )
-                {
-                    la_color[i]		=	Color.GREEN;
-                }
-                //
-                // Caso seja uma fatura cancelada
-                //
-                else if	(
-                        faturasTable.getValueAt(i, 5)
-                                !=	null
-                )
-                {
-                    la_color[i]		=	Color.YELLOW;
-                }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if (e.getSource() == faturasTable) {
+            if (e.getButton() == MouseEvent.BUTTON3) {
+                // print out right-clicked row
+                int row = faturasTable.rowAtPoint(e.getPoint());
+                System.err.println(((FaturasTableModel) faturasTable.getModel()).getRow(row));
             }
-
-            //
-            // Varre as colunas e seta a cor nos renderers
-            //
-            for	(
-                    int
-                    i			=	0
-                    ;
-                    i			<	faturasTable.getColumnCount()
-                    ;
-                    i++
-            )
-            {
-                //
-                // Pega o renderer da coluna e ajusta a cor
-                //
-                ColorRender
-                        lo_renderer		=	faturasTable.getColumnModel().getColumn(i).getCellRenderer()
-                        ==	null
-                        ?	(ColorRender) faturasTable.getDefaultRenderer(faturasTable.getColumnClass(i))
-                        :	(ColorRender) faturasTable.getColumnModel().getColumn(i).getCellRenderer()
-                        ;
-
-                lo_renderer.LineColor(la_color);
-            }
-
-            //
-            // Pinta a tabela
-            //
-            faturasTable.repaint();
         }
     }
 
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }

@@ -22,6 +22,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
     private static boolean isIconifiable = false;
 
     /* attributes: */
+    private UsuariosDAO usuariosDAO = MenuFrame.usuarioDAO;
     private boolean insertEnabled = false;
     private boolean searchEnabled = false;
 
@@ -170,10 +171,10 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
                 Usuario tmp = new Usuario(usuarioField.getText().trim());
 
                 // check if usuário exists
-                if (MenuFrame.usuarioDAO.contains(tmp)) {
+                if (usuariosDAO.contains(tmp)) {
 
                     // insert data into fields
-                    this.updateInputs((Usuario) MenuFrame.usuarioDAO.find(tmp));
+                    this.updateInputs((Usuario) usuariosDAO.find(tmp));
                     this.searchEnabled = true;
 
                     // enable actions
@@ -194,7 +195,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
     private void removeButtonAction() {
         if (!usuarioField.getText().trim().isEmpty()) {
             try {
-                MenuFrame.usuarioDAO.delete(new Usuario(usuarioField.getText().trim()));
+                usuariosDAO.delete(new Usuario(usuarioField.getText().trim()));
                 this.clear();
                 this.searchEnabled = false;
             } catch (SQLException e) {
@@ -212,7 +213,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         // INSERT INTO DATABASE
         if (this.insertEnabled) {
             try {
-                MenuFrame.usuarioDAO.insert(tmp);
+                usuariosDAO.insert(tmp);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
@@ -221,7 +222,7 @@ public class SistemaUsuariosFrame extends JInternalFrame implements ActionListen
         // UPDATE DATABASE
         else if (searchEnabled) {
             try {
-                MenuFrame.usuarioDAO.update(tmp);
+                usuariosDAO.update(tmp);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }

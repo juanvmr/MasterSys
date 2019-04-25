@@ -3,7 +3,6 @@ package app.frames;
 import app.components.MonthChooser;
 import database.dao.FaturaMatriculaDAO;
 import database.dao.MatriculaDAO;
-import database.dao.MatriculaModalidadeDAO;
 import database.models.FaturaMatricula;
 import database.models.Matricula;
 import database.models.MatriculaModalidade;
@@ -13,7 +12,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +25,8 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
     private static boolean isIconifiable = false;
 
     /* attributes: */
+    private MatriculaDAO matriculaDAO = MenuFrame.matriculaDAO;
+    private FaturaMatriculaDAO faturaMatriculaDAO = MenuFrame.faturaMatriculaDAO;
 
     /* components: */
     private MonthChooser monthChooser;
@@ -108,7 +108,7 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
                 Date lastDate = new Date(currentDate.getYear(), currentDate.getMonth(), 30);
                 List<MatriculaModalidade> list;
 
-                List<Object> matriculaList = MenuFrame.matriculaDAO.select();
+                List<Object> matriculaList = matriculaDAO.select();
                 for (Object obj : matriculaList) {
                     Matricula m = (Matricula) obj;
 
@@ -120,18 +120,18 @@ public class ProcessosGerarFaturasFrame extends BasicInternalFrame implements Ac
                     FaturaMatricula f = new FaturaMatricula(
                         codigo_matricula,
                         data_vecimento,
-                            MenuFrame.faturaMatriculaDAO.getFaturaValue(codigo_matricula, data_vecimento),
+                        faturaMatriculaDAO.getFaturaValue(codigo_matricula, data_vecimento),
                         null,
                         null
                     );
 
-                    if (MenuFrame.faturaMatriculaDAO.contains(f)) {
-                        System.err.println("contains: " + f + " (" + MenuFrame.faturaMatriculaDAO.count(f) + ")");
+                    if (faturaMatriculaDAO.contains(f)) {
+                        System.err.println("contains: " + f + " (" + faturaMatriculaDAO.count(f) + ")");
                     }
 
-                    if ((f.getValor() > 0) && (m.getDataEncerramento() == null) && !MenuFrame.faturaMatriculaDAO.contains(f)) {
+                    if ((f.getValor() > 0) && (m.getDataEncerramento() == null) && !faturaMatriculaDAO.contains(f)) {
                         System.out.println("FaturaMatricula: " + f);
-                        MenuFrame.faturaMatriculaDAO.insert(f);
+                        faturaMatriculaDAO.insert(f);
                     }
                 }
 

@@ -20,9 +20,9 @@ public class AdicionarModalidadesDialog extends JDialog implements ActionListene
 
     /* attributes:"*/
     private MatriculaModalidade matricula_modalidade;
-    private ModalidadeDAO modalidadeDAO;
-    private GraduacaoDAO graduacaoDAO;
-    private PlanoDAO planoDAO;
+    private ModalidadeDAO modalidadeDAO = MenuFrame.modalidadeDAO;
+    private GraduacaoDAO graduacaoDAO = MenuFrame.graduacaoDAO;
+    private PlanoDAO planoDAO = MenuFrame.planoDAO;
     private List<Object> modalidadeList, graduacaoList, planoList;
 
     /* components: */
@@ -32,13 +32,8 @@ public class AdicionarModalidadesDialog extends JDialog implements ActionListene
 
     /* constructor: */
 
-    public AdicionarModalidadesDialog(JFrame parent, Connection connection) {
+    public AdicionarModalidadesDialog(JFrame parent) {
         super(parent, "Adicionar Modalidades", true);
-
-        this.modalidadeDAO = new ModalidadeDAO(connection);
-        this.graduacaoDAO = new GraduacaoDAO(connection);
-        this.planoDAO = new PlanoDAO(connection);
-
         this.initComponents();
         this.pack();
         this.setResizable(false);

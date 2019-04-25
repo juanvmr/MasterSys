@@ -33,10 +33,10 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
     private static boolean isIconifiable = false;
 
     /* attributes: */
+    private MatriculaDAO matriculaDAO = MenuFrame.matriculaDAO;
+    private AlunoDAO alunoDAO = MenuFrame.alunoDAO;
     private Matricula matricula;
     private Aluno aluno;
-    private MatriculaDAO matriculaDAO;
-    private AlunoDAO alunoDAO;
     private List<MatriculaModalidade> modaldiadeList;
     private List<FaturaMatricula> faturaMatriculaList;
     private List<Assiduidade> assiduidadeList;
@@ -48,19 +48,14 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
     private JTable modaldiadeTable, faturaTable, assiduidadeTable;
 
     /* constructors: */
-    public ControleAlunoFrame(Connection connection) {
+    public ControleAlunoFrame() {
         super("Controle de Alunos", isResizable, isClosable, isMaximizable, isIconifiable);
-
-        this.matriculaDAO = new MatriculaDAO(connection);
-
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents();
-        this.pack();
         this.setVisible(true);
     }
 
     private void initComponents() {
-
         monthChooser = new MonthChooser();
 
         alunoButton = new JButton("Acessar Dados Aluno");
@@ -111,6 +106,7 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         content.add(panel_D, constraints);
 
         this.setContentPane(content);
+        this.pack();
     }
 
     private JPanel createPanelA() {
@@ -140,7 +136,6 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
     }
 
     private JPanel createPanelC() {
-
         matriculaField = new JTextField(16);
         matriculaField.setText("Matricula");
         matriculaField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -196,7 +191,6 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
     }
 
     private JScrollPane createTablePanel() {
-
         modaldiadeList = new ArrayList<>();
 
         modaldiadeTable = new JTable();
@@ -212,7 +206,6 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
     private void updateData(Matricula m) {
 
     }
-
 
     /*public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

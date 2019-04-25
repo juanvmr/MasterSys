@@ -5,13 +5,13 @@ import java.util.Date;
 public class FaturaMatricula {
 	
 	/* attributes: */
-	private Integer codigo_matricula;
-	private Double valor;
+	private int codigo_matricula;
+	private double valor;
 	private Date data_vencimento;
 	private Date data_pagamento;
 	private Date data_cancelamento;
 	private String aluno;
-	private Boolean matricula_encerrada;
+	private boolean matricula_encerrada;
 	
 	/* constructor: */
 	public FaturaMatricula() {}

@@ -71,14 +71,13 @@ public class MenuFrame extends JFrame {
         matriculaModalidadeDAO = new MatriculaModalidadeDAO(connection);
         modalidadeDAO = new ModalidadeDAO(connection);
         planoDAO = new PlanoDAO(connection);
+        usuarioDAO = new UsuariosDAO(connection);
     }
 
 
     private void updateUser() {
         if (this.user == null) return;
-
         if (this.user.getPerfil().isEmpty()) {
-            this.usuarioDAO = new UsuariosDAO(connection);
             try {
                 this.user = (Usuario) usuarioDAO.find(user);
             } catch (SQLException e) {
@@ -91,7 +90,6 @@ public class MenuFrame extends JFrame {
     private JDesktopPane createDesktop() {
         desktop = new JDesktopPane();
         // desktop.setBackground(new Color(210, 210, 210));
-
         return desktop;
     }
 
@@ -260,7 +258,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(ProcessosMatricularAlunosFrame.class.getName())) {
                     focusFrame(frameMatricularAluno);
                 } else {
-                    frameMatricularAluno = new ProcessosMatricularAlunosFrame(connection);
+                    frameMatricularAluno = new ProcessosMatricularAlunosFrame();
                     frameMatricularAluno.setName(ProcessosMatricularAlunosFrame.class.getName());
                     desktop.add(frameMatricularAluno);
                 }
@@ -288,7 +286,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(RelatoriosMatriculasFrame.class.getName())) {
                     focusFrame(frameRelatorioMatricula);
                 } else {
-                    frameRelatorioMatricula = new RelatoriosMatriculasFrame(connection);
+                    frameRelatorioMatricula = new RelatoriosMatriculasFrame();
                     frameRelatorioMatricula.setName(RelatoriosMatriculasFrame.class.getName());
                     desktop.add(frameRelatorioMatricula);
                 }
@@ -302,7 +300,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(ControleAlunoFrame.class.getName())) {
                     focusFrame(frameControleAluno);
                 } else {
-                    frameControleAluno = new ControleAlunoFrame(connection);
+                    frameControleAluno = new ControleAlunoFrame();
                     frameControleAluno.setName(ControleAlunoFrame.class.getName());
                     desktop.add(frameControleAluno);
                 }

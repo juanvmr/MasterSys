@@ -116,4 +116,10 @@ public class FaturasTableModel extends AbstractTableModel {
         fireTableRowsDeleted(rowIndex, rowIndex);
     }
 
+    public void clear() {
+        int lastRow = this.getRowCount();
+        list.clear();
+        fireTableRowsDeleted(0, lastRow);
+    }
+
 }

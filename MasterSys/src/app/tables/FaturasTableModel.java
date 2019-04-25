@@ -63,9 +63,7 @@ public class FaturasTableModel extends AbstractTableModel {
         FaturaMatricula tmp = this.getRow(rowIndex);
         switch (columnIndex) {
             case 0: return tmp.getCodigoMatricula();
-            case 1:
-                // PRECISA RETORNAR NOME DO ALUNO
-                return null;
+            case 1: return tmp.getAluno();
             case 2: return tmp.getDataVencimento();
             case 3: return tmp.getValor();
             case 4: return tmp.getDataPagamento();
@@ -82,7 +80,7 @@ public class FaturasTableModel extends AbstractTableModel {
                 tmp.setCodigoMatricula((int) value);
                 break;
             case 1:
-                // tmp.setName((String) value);
+                tmp.setAluno((String) value);
                 break;
             case 2:
                 tmp.setDataVencimento((Date) value);

@@ -234,7 +234,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(ProcessosGerarFaturasFrame.class.getName())) {
                     focusFrame(frameGerarFaturas);
                 } else {
-                    frameGerarFaturas = new ProcessosGerarFaturasFrame(connection);
+                    frameGerarFaturas = new ProcessosGerarFaturasFrame();
                     frameGerarFaturas.setName(ProcessosGerarFaturasFrame.class.getName());
                     desktop.add(frameGerarFaturas);
                 }
@@ -247,7 +247,7 @@ public class MenuFrame extends JFrame {
                 if (checkFrame(ProcessosConsultarFaturasFrame.class.getName())) {
                     focusFrame(frameConsultarFaturas);
                 } else {
-                    frameConsultarFaturas = new ProcessosConsultarFaturasFrame(connection);
+                    frameConsultarFaturas = new ProcessosConsultarFaturasFrame();
                     frameConsultarFaturas.setName(ProcessosConsultarFaturasFrame.class.getName());
                     desktop.add(frameConsultarFaturas);
                 }

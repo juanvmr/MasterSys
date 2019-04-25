@@ -31,8 +31,8 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private FaturaMatriculaDAO faturaMatriculaDAO;
-    private AlunoDAO alunoDAO;
+    private FaturaMatriculaDAO faturaMatriculaDAO = MenuFrame.faturaMatriculaDAO;
+    private AlunoDAO alunoDAO = MenuFrame.alunoDAO;
 
     /* components: */
     private DateField fromDateField, toDateField;
@@ -42,11 +42,8 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
     private List<FaturaMatricula> faturaMatriculaList;
 
     /* constructors: */
-    public ProcessosConsultarFaturasFrame(Connection connection) {
+    public ProcessosConsultarFaturasFrame() {
         super("Consultar Faturas", isResizable, isClosable, isMaximizable, isIconifiable);
-
-        this.faturaMatriculaDAO = new FaturaMatriculaDAO(connection);
-        this.alunoDAO = new AlunoDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents();
@@ -64,16 +61,18 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
 
     private JPanel  createSearchBar() {
 
+        Date currentDate = new Date();
+
         /* components: */
         JLabel fromLabel = new JLabel("De:", JLabel.RIGHT);
         JLabel toLabel = new JLabel("Até:", JLabel.RIGHT);
         JLabel statusLabel = new JLabel("Situação:", JLabel.RIGHT);
 
         fromDateField = new DateField();
-        fromDateField.setValue(new Date());
+        fromDateField.setValue(new Date(currentDate.getYear(), currentDate.getMonth(), 01));
 
         toDateField = new DateField();
-        toDateField.setValue(new Date());
+        toDateField.setValue(new Date(currentDate.getYear(), currentDate.getMonth() + 1, 30));
 
         statusComboBox = new JComboBox<>();
         statusComboBox.setModel(new DefaultComboBoxModel<>(statusList));
@@ -113,9 +112,8 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
 
         faturaMatriculaList = new ArrayList<>();
 
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setHorizontalAlignment(JLabel.CENTER);
-        renderer.setBackground(Color.RED);
+        ColorRender renderer = new ColorRender();
+        //renderer.setHorizontalAlignment(JLabel.CENTER);
 
         faturasTable = new JTable();
         faturasTable.setModel(new FaturasTableModel());
@@ -126,8 +124,6 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
         faturasTable.setDefaultRenderer(String.class, renderer);
         faturasTable.setDefaultRenderer(Double.class, renderer);
         faturasTable.setDefaultRenderer(Integer.class, renderer);
-
-        faturasTable.setDefaultRenderer(Date.class, new ColorRender());
 
         //Create the scroll pane and add the faturasTable to it.
         JScrollPane scrollPane = new JScrollPane(faturasTable);
@@ -165,9 +161,97 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
                     faturaMatriculaList.add(f);
                     this.updateTable();
                 }
+              //  LinhasColorir();
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
         }
     }
+
+    /**
+     Define as cores das linhas da tabela de faturas.
+     */
+    public
+    void			LinhasColorir()
+    {
+        //
+        // Se a tabela realmente possui linhas
+        //
+        if	(
+                faturasTable.getRowCount()
+                        >	0
+        )
+        {
+            //
+            // Define o array de cores da tabela
+            //
+            Color[]
+                    la_color		=	new Color[faturasTable.getRowCount()];
+
+            //
+            // Varre as linhas da tabela
+            //
+            for	(
+                    int
+                    i			=	0
+                    ;
+                    i			<	faturasTable.getRowCount()
+                    ;
+                    i++
+            )
+            {
+                //
+                // Caso seja uma fatura cancelada
+                //
+                if	(
+                        faturasTable.getValueAt(i, 4)
+                                !=	null
+                )
+                {
+                    la_color[i]		=	Color.GREEN;
+                }
+                //
+                // Caso seja uma fatura cancelada
+                //
+                else if	(
+                        faturasTable.getValueAt(i, 5)
+                                !=	null
+                )
+                {
+                    la_color[i]		=	Color.YELLOW;
+                }
+            }
+
+            //
+            // Varre as colunas e seta a cor nos renderers
+            //
+            for	(
+                    int
+                    i			=	0
+                    ;
+                    i			<	faturasTable.getColumnCount()
+                    ;
+                    i++
+            )
+            {
+                //
+                // Pega o renderer da coluna e ajusta a cor
+                //
+                ColorRender
+                        lo_renderer		=	faturasTable.getColumnModel().getColumn(i).getCellRenderer()
+                        ==	null
+                        ?	(ColorRender) faturasTable.getDefaultRenderer(faturasTable.getColumnClass(i))
+                        :	(ColorRender) faturasTable.getColumnModel().getColumn(i).getCellRenderer()
+                        ;
+
+                lo_renderer.LineColor(la_color);
+            }
+
+            //
+            // Pinta a tabela
+            //
+            faturasTable.repaint();
+        }
+    }
+
 }

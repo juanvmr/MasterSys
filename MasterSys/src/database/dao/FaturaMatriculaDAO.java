@@ -224,7 +224,7 @@ public class FaturaMatriculaDAO extends MasterDAO {
 			"AND a.data_matricula < ? " +
 			"AND b.data_inicio < ? " +
 			"AND b.data_fim > ? " +
-			"AND isNull(a.data_encerramento) " +
+			"AND a.data_encerramento IS NULL " +
 			"OR a.data_encerramento > ?";
 
 		// build query
@@ -251,7 +251,7 @@ public class FaturaMatriculaDAO extends MasterDAO {
 
 	public List<Object> select(Date fromDate, Date toDate, String type) throws SQLException {
 
-		String query = "SELECT a.*, b.codigo_aluno, c.aluno FROM ((faturas_matriculas a " +
+		String query = "SELECT a.*, b.codigo_aluno, b.data_encerramento, c.aluno FROM ((faturas_matriculas a " +
 			"INNER JOIN matriculas b ON a.codigo_matricula = b.codigo_matricula) " +
 			"INNER JOIN alunos c ON b.codigo_aluno = c.codigo_aluno) " +
 			"WHERE a.data_vencimento >= ? AND a.data_vencimento <= ?";
@@ -289,6 +289,8 @@ public class FaturaMatriculaDAO extends MasterDAO {
 					rst.getDate("data_pagamento"),
 					rst.getDate("data_cancelamento")
 			);
+			tmp.setAluno(rst.getString("aluno"));
+			tmp.setMatriculaEncerrada(rst.getDate("data_encerramento") != null);
 			list.add(tmp);
 		}
 

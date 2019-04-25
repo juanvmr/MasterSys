@@ -5,11 +5,13 @@ import java.util.Date;
 public class FaturaMatricula {
 	
 	/* attributes: */
-	private int codigo_matricula;
-	private double valor;
+	private Integer codigo_matricula;
+	private Double valor;
 	private Date data_vencimento;
 	private Date data_pagamento;
 	private Date data_cancelamento;
+	private String aluno;
+	private Boolean matricula_encerrada;
 	
 	/* constructor: */
 	public FaturaMatricula() {}
@@ -42,7 +44,23 @@ public class FaturaMatricula {
 	public Date getDataCancelamento() { return data_cancelamento; }
 
 	public void setDataCancelamento(Date data_cancelamento) { this.data_cancelamento = data_cancelamento; }
-	
+
+	public String getAluno() {
+		return this.aluno;
+	}
+
+	public void setAluno(String aluno) {
+		this.aluno = aluno;
+	}
+
+	public boolean isMatriculaEncerrada() {
+		return this.matricula_encerrada;
+	}
+
+	public void setMatriculaEncerrada(boolean matricula_encerrada) {
+		this.matricula_encerrada = matricula_encerrada;
+	}
+
 	/* methods: */
 	public String toString() {
 		return String.format("%d, R$ %.2f, %s, %s, %s", this.codigo_matricula, this.valor, this.data_vencimento,

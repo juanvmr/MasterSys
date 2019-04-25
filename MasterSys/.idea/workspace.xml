@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e3730e8-0fcc-488b-88bf-f88f9c09b8c9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/frames/TablePopupMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/AdicionarModalidadesDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarAlunosFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarModalidadeGraduacaoFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/CadastrarPlanosFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/Debug.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/Debug.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/MenuFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/MenuFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ProcessosGerarFaturasFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/ProcessosMatricularAlunosFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/RelatoriosMatriculasFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/frames/SistemaUsuariosFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tables/ColorRender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/tables/ColorRender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/tables/FaturasTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/tables/FaturasTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/database/models/FaturaMatricula.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/models/FaturaMatricula.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,19 +21,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/frames/MenuFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
+            <state relative-caret-position="2023">
+              <caret line="127" selection-start-line="127" selection-end-line="127" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="341">
+              <caret line="158" column="71" selection-start-line="158" selection-start-column="71" selection-end-line="158" selection-end-column="71" />
+              <folding>
+                <element signature="method#createSearchBar#0;class#ProcessosConsultarFaturasFrame#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java">
+        <entry file="file://$PROJECT_DIR$/src/app/frames/TablePopupMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="679">
-              <caret line="179" column="46" selection-start-line="179" selection-start-column="46" selection-end-line="179" selection-end-column="46" />
+            <state relative-caret-position="681">
+              <caret line="74" column="22" lean-forward="true" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="22" />
               <folding>
-                <element signature="method#createSearchBar#0;class#ProcessosConsultarFaturasFrame#0" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -55,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/tables/ColorRender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="770">
-              <caret line="54" column="25" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
+            <state relative-caret-position="918">
+              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="56" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/tables/FaturasTableModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
+            <state relative-caret-position="1768">
               <caret line="119" column="41" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
               <folding>
                 <element signature="e#2804#2805#0" expanded="true" />
@@ -75,6 +74,15 @@
                 <element signature="e#2892#2893#0" expanded="true" />
                 <element signature="e#2939#2940#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4454">
+              <caret line="272" selection-start-line="272" selection-end-line="272" />
             </state>
           </provider>
         </entry>
@@ -198,14 +206,14 @@
         <option value="$PROJECT_DIR$/src/app/frames/MenuFrame.java" />
         <option value="$PROJECT_DIR$/src/app/frames/ControleAlunoFrame.java" />
         <option value="$PROJECT_DIR$/src/app/tables/ColorRender.java" />
-        <option value="$PROJECT_DIR$/src/app/frames/TablePopupMenu.java" />
         <option value="$PROJECT_DIR$/src/app/tables/FaturasTableModel.java" />
         <option value="$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java" />
+        <option value="$PROJECT_DIR$/src/app/frames/TablePopupMenu.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="953" />
+    <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1057" />
   </component>
@@ -217,8 +225,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -300,6 +306,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -461,7 +469,7 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23614073" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.4846827" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -470,15 +478,15 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3226152" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.244373" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3952514" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24651662" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39442658" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3290461" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3290461" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3290461" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.31277058" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3108253" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -806,13 +814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="272" selection-start-line="272" selection-end-line="272" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/frames/Debug.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -938,23 +939,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/MenuFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="127" lean-forward="true" selection-start-line="127" selection-end-line="127" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/tables/ColorRender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="54" column="25" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_201/src.zip!/javax/swing/table/AbstractTableModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -962,9 +946,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/MenuFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2023">
+          <caret line="127" selection-start-line="127" selection-end-line="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/tables/ColorRender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="56" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/tables/FaturasTableModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
+        <state relative-caret-position="1768">
           <caret line="119" column="41" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
           <folding>
             <element signature="e#2804#2805#0" expanded="true" />
@@ -975,22 +976,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/frames/TablePopupMenu.java">
+    <entry file="file://$PROJECT_DIR$/src/database/dao/FaturaMatriculaDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="4454">
+          <caret line="272" selection-start-line="272" selection-end-line="272" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/frames/ProcessosConsultarFaturasFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="679">
-          <caret line="179" column="46" selection-start-line="179" selection-start-column="46" selection-end-line="179" selection-end-column="46" />
+        <state relative-caret-position="341">
+          <caret line="158" column="71" selection-start-line="158" selection-start-column="71" selection-end-line="158" selection-end-column="71" />
           <folding>
             <element signature="method#createSearchBar#0;class#ProcessosConsultarFaturasFrame#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/frames/TablePopupMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="681">
+          <caret line="74" column="22" lean-forward="true" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

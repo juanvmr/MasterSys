@@ -9,17 +9,13 @@ import app.tables.FaturasTableModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ProcessosConsultarFaturasFrame extends JInternalFrame implements ActionListener, MouseListener {
 
@@ -41,7 +37,8 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
     private JComboBox<String> statusComboBox;
     private JButton searchButton;
     private JTable faturasTable;
-    private List<FaturaMatricula> faturaMatriculaList;
+    private FaturasTableModel faturasTableModel;
+    private TablePopupMenu faturasPopupMenu;
 
     /* constructors: */
     public ProcessosConsultarFaturasFrame() {
@@ -111,11 +108,10 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
     }
 
     private JScrollPane createTable() {
-
-        faturaMatriculaList = new ArrayList<>();
+        faturasTableModel = new FaturasTableModel();
 
         faturasTable = new JTable();
-        faturasTable.setModel(new FaturasTableModel());
+        faturasTable.setModel(faturasTableModel);
         faturasTable.setPreferredScrollableViewportSize(new Dimension(500, 200));
         faturasTable.setFillsViewportHeight(true);
         faturasTable.addMouseListener(this);
@@ -126,30 +122,17 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
         faturasTable.setDefaultRenderer(Double.class, renderer);
         faturasTable.setDefaultRenderer(Integer.class, renderer);
 
+        faturasPopupMenu = new TablePopupMenu(faturasTable);
+
         //Create the scroll pane and add the faturasTable to it.
         JScrollPane scrollPane = new JScrollPane(faturasTable);
         return scrollPane;
     }
 
-    private void updateTable() {
-        if ((faturaMatriculaList != null)) {
-            faturasTable.setModel(new FaturasTableModel(faturaMatriculaList));
-        } else {
-            faturaMatriculaList = new ArrayList<FaturaMatricula>();
-        }
-    }
-
-    private void clearTable() {
-        if ((faturaMatriculaList != null) && (faturaMatriculaList.size() > 0)) {
-            faturaMatriculaList.clear();
-            this.updateTable();
-        }
-    }
-
     @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == searchButton) {
-            this.clearTable();
+            faturasTableModel.clear();
             try {
                 Date fromDate = fromDateField.getDate();
                 Date toDate = toDateField.getDate();
@@ -158,8 +141,7 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
                 if ((fromDate != null) && (toDate != null) && (status != null)) {
                     for (Object obj : faturaMatriculaDAO.select(fromDate, toDate, status)) {
                         FaturaMatricula f = (FaturaMatricula) obj;
-                        faturaMatriculaList.add(f);
-                        this.updateTable();
+                        faturasTableModel.insert(f);
                     }
                 }
             } catch (SQLException e) {
@@ -170,18 +152,21 @@ public class ProcessosConsultarFaturasFrame extends JInternalFrame implements Ac
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        if (e.getSource() == faturasTable) {
+            if (SwingUtilities.isRightMouseButton(e)) {     //if (e.getButton() == MouseEvent.BUTTON3) {
+                // print out right-clicked row
+                int row = faturasTable.rowAtPoint(e.getPoint());
+                if ((row >= 0) && (row < faturasTable.getRowCount())) {
+                    faturasTable.setRowSelectionInterval(row, row);
+                    faturasPopupMenu.show(faturasTableModel.getRow(row), e.getComponent(), e.getX(), e.getY());
+                }
+            }
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.getSource() == faturasTable) {
-            if (e.getButton() == MouseEvent.BUTTON3) {
-                // print out right-clicked row
-                int row = faturasTable.rowAtPoint(e.getPoint());
-                System.err.println(((FaturasTableModel) faturasTable.getModel()).getRow(row));
-            }
-        }
+
     }
 
     @Override

@@ -299,7 +299,6 @@ public class MenuFrame extends JFrame {
         itemUtilitariosControleAluno.setAction(new AbstractAction(itemUtilitariosControleAluno.getText()) {
             @Override
             public void actionPerformed(ActionEvent e) {
-                /*
                 if (checkFrame(ControleAlunoFrame.class.getName())) {
                     focusFrame(frameControleAluno);
                 } else {
@@ -307,7 +306,6 @@ public class MenuFrame extends JFrame {
                     frameControleAluno.setName(ControleAlunoFrame.class.getName());
                     desktop.add(frameControleAluno);
                 }
-                */
             }
         });
 

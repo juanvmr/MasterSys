@@ -4,5 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="postgresql-42.2.5.jre7.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/MasterImage"/>
+	<classpathentry kind="lib" path="lib/postgresql/postgresql-42.2.5.jre7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

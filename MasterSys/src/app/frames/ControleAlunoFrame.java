@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class ControleAlunoFrame extends JFrame implements ActionListener, KeyListener {
+public class ControleAlunoFrame extends JInternalFrame implements ActionListener, KeyListener {
 
     /* config: */
     private static int inset = 5;
@@ -49,7 +49,7 @@ public class ControleAlunoFrame extends JFrame implements ActionListener, KeyLis
 
     /* constructors: */
     public ControleAlunoFrame(Connection connection) {
-        super("Controle de Alunos");//, isResizable, isClosable, isMaximizable, isIconifiable);
+        super("Controle de Alunos", isResizable, isClosable, isMaximizable, isIconifiable);
 
         this.matriculaDAO = new MatriculaDAO(connection);
 
@@ -214,7 +214,7 @@ public class ControleAlunoFrame extends JFrame implements ActionListener, KeyLis
     }
 
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -228,7 +228,7 @@ public class ControleAlunoFrame extends JFrame implements ActionListener, KeyLis
                 new ControleAlunoFrame(connection);
             }
         });
-    }
+    }*/
 
     @Override
     public void actionPerformed(ActionEvent e) {

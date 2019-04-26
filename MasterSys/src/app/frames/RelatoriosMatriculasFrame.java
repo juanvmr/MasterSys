@@ -27,7 +27,7 @@ public class RelatoriosMatriculasFrame extends JInternalFrame implements ActionL
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private MatriculaDAO matriculaDAO;
+    private MatriculaDAO matriculaDAO = MenuFrame.matriculaDAO;
 
     /* components: */
     private DateField fromDateField;
@@ -36,10 +36,8 @@ public class RelatoriosMatriculasFrame extends JInternalFrame implements ActionL
     private JComboBox<String> typeComboBox;
 
     /* constructor: */
-    public RelatoriosMatriculasFrame(Connection connection) {
+    public RelatoriosMatriculasFrame() {
         super("Relatório de Matriculas", isResizable, isClosable, isMaximizable, isIconifiable);
-
-        this.matriculaDAO = new MatriculaDAO(connection);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents();

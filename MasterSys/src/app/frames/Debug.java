@@ -19,7 +19,7 @@ public class Debug {
 
                 Connection connection;
                 connection = ConnectionFactory.getConnection("master", "admin", "admin");
-                //connection = ConnectionFactory.getDebugConnection(user.getUsername(), user.getPassword());
+                // connection = ConnectionFactory.getDebugConnection(user.getUsername(), user.getPassword());
                 MenuFrame frame = new MenuFrame(connection, user);
             }
         });

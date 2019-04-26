@@ -30,13 +30,11 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
     private static boolean isIconifiable = false;
 
     /* attributes: */
-    private Connection connection;
-    private AlunoDAO alunoDAO;
-    private MatriculaDAO matriculaDAO;
-    private MatriculaModalidadeDAO matriculaModalidadeDAO;
+    private AlunoDAO alunoDAO = MenuFrame.alunoDAO;
+    private MatriculaDAO matriculaDAO = MenuFrame.matriculaDAO;
+    private MatriculaModalidadeDAO matriculaModalidadeDAO = MenuFrame.matriculaModalidadeDAO;
     private Aluno aluno;
     private Matricula matricula;
-    private MatriculaModalidade matricula_modalidade;
     private List<MatriculaModalidade> list;
     private boolean insertEnabled = false;
     private boolean updateEnabled = false;
@@ -50,14 +48,8 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
     private AdicionarModalidadesDialog dialog;
 
     /* constructor: */
-    public ProcessosMatricularAlunosFrame(Connection connection) {
+    public ProcessosMatricularAlunosFrame() {
         super("Matricular Aluno", isResizable, isClosable, isMaximizable, isIconifiable);
-
-        this.connection = connection;
-        this.alunoDAO = new AlunoDAO(connection);
-        this.matriculaDAO = new MatriculaDAO(connection);
-        this.matriculaModalidadeDAO = new MatriculaModalidadeDAO(connection);
-
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.initComponents(this.getContentPane());
@@ -287,11 +279,11 @@ public class ProcessosMatricularAlunosFrame extends JInternalFrame implements Ac
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == adicionarModalidadeButton) {
             // open dialog to input information.
-            dialog = new AdicionarModalidadesDialog(new JFrame(), connection);
+            dialog = new AdicionarModalidadesDialog(new JFrame());
             // return data from dialog form
-            matricula_modalidade = dialog.getValue();
-            if (matricula_modalidade != null) {
-                list.add(matricula_modalidade);
+            MatriculaModalidade tmp = dialog.getValue();
+            if (tmp != null) {
+                list.add(tmp);
                 this.updateTable();
             }
         }

@@ -31,6 +31,8 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
     private static String SPACE_TOKEN = ";";
 
     /* attributes: */
+    private ModalidadeDAO modalidadeDAO = MenuFrame.modalidadeDAO;
+    private GraduacaoDAO graduacaoDAO = MenuFrame.graduacaoDAO;
     private List<Graduacao> graduacaoList;
     private boolean insertEnabled = false;
     private boolean updateEnabled = false;
@@ -217,8 +219,8 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
             try {
                 for (Graduacao g : graduacaoList) {
                     Modalidade m = new Modalidade(g.getModalidade());
-                    MenuFrame.modalidadeDAO.insert(m);
-                    MenuFrame.graduacaoDAO.insert(g);
+                    modalidadeDAO.insert(m);
+                    graduacaoDAO.insert(g);
                 }
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
@@ -230,7 +232,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
         else if (this.updateEnabled) {
             Graduacao g = getGraduacaoInput();
             try {
-                MenuFrame.graduacaoDAO.update(g);
+                graduacaoDAO.update(g);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
@@ -287,7 +289,7 @@ public class CadastrarModalidadeGraduacaoFrame extends JInternalFrame implements
                 Modalidade m = getModalidadeInput();
                 if (m != null) {
                     resetTable();
-                    for (Object obj : MenuFrame.graduacaoDAO.select(m)) {
+                    for (Object obj : graduacaoDAO.select(m)) {
                         graduacaoList.add((Graduacao) obj);
                     }
                 }

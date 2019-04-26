@@ -24,6 +24,8 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
 //    private static boolean isIconifiable = false;
 
     /* attributes: */
+    private AlunoDAO alunoDAO = MenuFrame.alunoDAO;
+    private LocalDAO localDAO = MenuFrame.localDAO;
     private Aluno aluno;
     private List<String> cidadeList, estadoList, paisList;
     private boolean insertEnabled = false;
@@ -245,7 +247,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
     private void updatePaisComboBox() {
         try {
             // get a distinct list of paises from database
-            paisList = MenuFrame.localDAO.selectPaises();
+            paisList = localDAO.selectPaises();
             // check database result
             if ((paisList != null) && (paisList.size() > 0)) {
                 // insert result into combobox
@@ -269,7 +271,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
 
         try {
             // get a distinct list of estados from database
-            estadoList = MenuFrame.localDAO.selectEstados(paisComboBox.getSelectedItem().toString());
+            estadoList = localDAO.selectEstados(paisComboBox.getSelectedItem().toString());
             // check database result
             if ((estadoList != null) && (estadoList.size() > 0)) {
                 // insert result into combobox
@@ -294,7 +296,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
 
         try {
             // get a list of cidades based on estado and pais.
-            cidadeList = MenuFrame.localDAO.selectCidades(estadoComboBox.getSelectedItem().toString(), paisComboBox.getSelectedItem().toString());
+            cidadeList = localDAO.selectCidades(estadoComboBox.getSelectedItem().toString(), paisComboBox.getSelectedItem().toString());
             // check database result
             if ((cidadeList != null) && (cidadeList.size() > 0)) {
                 // insert result into combobox
@@ -424,11 +426,11 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
             try {
                 aluno = (Aluno) this.getData();
                 if (aluno != null) {
-                    if (!MenuFrame.alunoDAO.contains(aluno)) {
+                    if (!alunoDAO.contains(aluno)) {
                         // insert into database
-                        MenuFrame.alunoDAO.insert(aluno);
+                        alunoDAO.insert(aluno);
                         // get codigo_aluno
-                        aluno = (Aluno) MenuFrame.alunoDAO.find(aluno);
+                        aluno = (Aluno) alunoDAO.find(aluno);
                     } else {
                         JOptionPane.showMessageDialog(null,  String.format("Aluno %s already exists on database.", aluno.getAluno()));
                     }
@@ -444,7 +446,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
                 // apply modifications to aluno variable
                 getData(aluno);
                 // update database
-                MenuFrame.alunoDAO.update(aluno);
+                alunoDAO.update(aluno);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());
             }
@@ -469,7 +471,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
         try {
             if (aluno != null) {
                 // matriculaDAO.delete(aluno.getCodigoAluno());
-                MenuFrame.alunoDAO.delete(aluno);
+                alunoDAO.delete(aluno);
                 resetData();
                 this.searchEnabled = false;
                 this.aluno = null;
@@ -532,7 +534,7 @@ public class CadastrarAlunosFrame extends BasicInternalFrame implements ActionLi
     public void keyReleased(KeyEvent event) {
         if (event.getSource() == alunoField) {
             try {
-                aluno = (Aluno) MenuFrame.alunoDAO.find(getData());
+                aluno = (Aluno) alunoDAO.find(getData());
                 this.updateData(aluno);
             } catch (SQLException e) {
                 System.err.printf("SQLException (%d): %s\n", e.getErrorCode(), e.getMessage());

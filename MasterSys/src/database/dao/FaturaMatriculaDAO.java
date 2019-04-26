@@ -260,13 +260,13 @@ public class FaturaMatriculaDAO extends MasterDAO {
 			case "Todas":
 				break;
 			case "Em Aberto":
-				query += " AND isNull(a.data_pagamento)";        // EM ABERTO
+				query += " AND a.data_pagamento IS NULL";        // EM ABERTO
 				break;
 			case "Pagas":
-				query += " AND !isNull(a.data_pagamento)";        // PAGAS
+				query += " AND a.data_pagamento IS NOT NULL";        // PAGAS
 				break;
 			case "Canceladas":
-				query += " AND !isNull(a.data_cancelamento)";    // CANCELADAS
+				query += " AND a.data_cancelamento IS NOT NULL";    // CANCELADAS
 				break;
 		}
 

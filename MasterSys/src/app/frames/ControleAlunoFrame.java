@@ -69,16 +69,10 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         matriculaButton = new JButton("Acessar Dados Matricula");
         matriculaButton.addActionListener(this);
 
-        JPanel panel_A = createPanelA();
-        JScrollPane panel_B = createPanelB();
-        JPanel panel_C = createPanelC();
-        JScrollPane panel_D = createPanelD();
-
-        JPanel content = new JPanel(new GridBagLayout());
-        content.setBorder(new EmptyBorder(inset, inset, inset, inset));
-        content.setMinimumSize(new Dimension(500, 300));
-
         GridBagConstraints constraints = new GridBagConstraints();
+        JPanel content = new JPanel(new GridBagLayout());
+        content.setBorder(new EmptyBorder(border, border, border, border));
+        content.setMinimumSize(new Dimension(500, 300));
         constraints.insets = new Insets(inset, inset, inset, inset);
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
@@ -86,20 +80,24 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         constraints.gridy = 0;
         constraints.gridwidth = 1;
         constraints.weightx = 1;
-        content.add(panel_A, constraints);
+        JPanel panel_A = createPanelA(constraints);
+        
         constraints.gridy++;
         content.add(monthChooser, constraints);
+        
         constraints.gridy++;
-        content.add(panel_B, constraints);
-
+        JScrollPane panel_B = createPanelB(constraints);
+        
         constraints.gridx++;
         constraints.gridy = 0;
         constraints.gridwidth = 2;
         constraints.weightx = 1;
-        content.add(panel_C, constraints);
+        JPanel panel_C = createPanelC(constraints);
+        
         constraints.gridy++;
         constraints.gridwidth = 1;
         content.add(alunoButton, constraints);
+        
         constraints.gridx++;
         constraints.gridwidth = 1;
         content.add(matriculaButton, constraints);
@@ -108,12 +106,17 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         constraints.gridy++;
         constraints.gridwidth = 2;
         constraints.weightx = 1;
-        content.add(panel_D, constraints);
+        JScrollPane panel_D = createPanelD(constraints);
+        
+        content.add(panel_A);
+        content.add(panel_B);
+        content.add(panel_C);
+        content.add(panel_D);
 
         this.setContentPane(content);
     }
 
-    private JPanel createPanelA() {
+    private JPanel createPanelA(GridBagConstraints constraints) {
 
         int width = monthChooser.getWidth();
         int height = (int) (1.5 * width);
@@ -126,7 +129,7 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         return panel;
     }
 
-    private JScrollPane createPanelB() {
+    private JScrollPane createPanelB(GridBagConstraints constraints) {
         assiduidadeList = new ArrayList<>();
 
         assiduidadeTable = new JTable();
@@ -139,7 +142,7 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         return scrollPane;
     }
 
-    private JPanel createPanelC() {
+    private JPanel createPanelC(GridBagConstraints constraints) {
 
         matriculaField = new JTextField(16);
         matriculaField.setText("Matricula");
@@ -157,7 +160,7 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
 
         JPanel panel = new JPanel(new GridBagLayout());
 
-        GridBagConstraints constraints = new GridBagConstraints();
+        //GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(inset, inset, inset, inset);
         constraints.fill = GridBagConstraints.HORIZONTAL;
 
@@ -182,7 +185,7 @@ public class ControleAlunoFrame extends JInternalFrame implements ActionListener
         return panel;
     }
 
-    private JScrollPane createPanelD() {
+    private JScrollPane createPanelD(GridBagConstraints constraints) {
         faturaMatriculaList = new ArrayList<>();
 
         faturaTable = new JTable();
